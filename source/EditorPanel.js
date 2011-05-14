@@ -4,31 +4,16 @@ enyo.kind({
 	kind: enyo.HFlexBox,
 	components: [
 		{name: "slidingPane", kind: "HSlidingPane", flex: 1, components: [
-			{name: "top", height: "320px", kind:"HSlidingView", components: [
-					{kind: "Header", content:"Panel 1"},
-					{kind: "Scroller", flex: 1, components: [
+			{name: "top", height: "100%", kind:"HSlidingView", components: [
+					{kind: "Header", content:"Editor", },
+					{kind: "Scroller", components: [
 						//Insert your components here
-					]},
-					{kind: "Toolbar", components: [
-						{kind: "GrabButton"}
 					]}
 			]},
-			{name: "middle", height: "320px", kind:"HSlidingView", peekHeight: 50, components: [
-					{kind: "Header", content:"Panel 2"},
-					{kind: "Scroller", flex: 1, components: [
+			{name: "bottom", kind:"HSlidingView", height: "54px", flex:0, components: [
+					{kind: "Header", content:"Preview", className: "enyo-toolbar"},
+					{kind: "Scroller", components: [
 						//Insert your components here
-					]},
-					{kind: "Toolbar", components: [
-						{kind: "GrabButton"}
-					]}
-			]},
-			{name: "bottom", kind:"HSlidingView", flex: 1, components: [
-					{kind: "Header", content:"Panel 3"},
-					{kind: "Scroller", flex: 1, components: [
-						//Insert your components here
-					]},
-					{kind: "Toolbar", components: [
-						{kind: "GrabButton"}
 					]}
 			]}
 		]}
