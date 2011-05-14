@@ -4,18 +4,23 @@ enyo.kind({
 	kind: enyo.HFlexBox,
 	components: [
 		{name: "slidingPane", kind: "HSlidingPane", flex: 1, components: [
-			{name: "top", height: "100%", kind:"HSlidingView", components: [
+			{name: "top", height: "100%", kind:"HSlidingView",
+				components: [
 					{kind: "Header", content:"Editor", },
-					{kind: "Scroller", components: [
-						//Insert your components here
-					]}
+					{kind: "BasicRichText", hint: "type something here", richContent: false }
 			]},
-			{name: "bottom", kind:"HSlidingView", height: "54px", flex:0, components: [
+			{name: "bottom", kind:"HSlidingView", height: "54px", flex:0,
+				onResize: "generateMarkdown",
+				components: [
 					{kind: "Header", content:"Preview", className: "enyo-toolbar"},
-					{kind: "Scroller", components: [
-						//Insert your components here
+					{kind: "BasicScroller", autoHorizontal: false, horizontal: false, components: [
+						{kind: "HtmlContent", content: "This is some short text"}
 					]}
 			]}
 		]}
-	]
+	],
+	generateMarkdown: function() {
+		var converter = new Showdown.converter();
+		this.$.htmlContent.setContent(converter.makeHtml(this.$.basicRichText.value));
+	}
 });
