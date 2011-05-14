@@ -8,7 +8,7 @@ PACKAGE = de.obsessive-media.webos.typewriter
 .PHONY: web
 
 web:
-	chromium-browser --allow-file-access-from-files index.html &
+	chromium-browser --disable-web-security --allow-file-access-from-files index.html &
 	
 help:
-	chromium-browser --allow-file-access-from-files ../Enyo/0.9/support/docs/api/index.html &
+	chromium-browser --disable-web-security --allow-file-access-from-files ../Enyo/0.9/support/docs/api/index.html &
