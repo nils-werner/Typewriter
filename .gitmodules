@@ -1,3 +1,6 @@
 [submodule "source/showdown"]
 	path = source/showdown
 	url = git@codebasehq.com:obsessive/typewriter/showdown.git
+[submodule "source/hsliders"]
+	path = source/hsliders
+	url = git@codebasehq.com:obsessive/typewriter/hsliders.git
