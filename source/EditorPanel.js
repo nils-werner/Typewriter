@@ -7,21 +7,39 @@ enyo.kind({
 			{name: "top", height: "100%", kind:"HSlidingView",
 				components: [
 					{kind: "Header", content:"Editor", },
-					{kind: "BasicScroller", autoHorizontal: false, horizontal: false, className: "editor-scroller", components: [
-						{kind: "BasicRichText",
-							hint: "type something here",
-							richContent: false,
-							className: "editor-input",
-							onblur: "generateMarkdown"
-						}
-					]}
+					{kind: "BasicScroller",
+						autoHorizontal: false,
+						horizontal: false,
+						className: "editor-scroller",
+						components: [
+							{kind: "BasicRichText",
+								hint: "type something here",
+								richContent: false,
+								className: "editor-input",
+								onblur: "generateMarkdown"
+							}
+						]
+					}
 			]},
-			{name: "bottom", kind:"HSlidingView", height: "54px", flex:0, peekHeight: 54,
+			{name: "bottom", kind:"HSlidingView", height: "62px", flex:0, //peekHeight: 54,
 				components: [
-					{kind: "Header", content:"Preview", className: "enyo-toolbar fake-toolbar"},
-					{kind: "BasicScroller", autoHorizontal: false, horizontal: false, className: "output-scroller", components: [
-						{kind: "HtmlContent", content: "This is some short text", className: "output-preview"}
-					]}
+					{kind: "Header", pack: "center", className: "enyo-toolbar fake-toolbar", components: [
+						{kind: "GrabButton", className: "HGrabButton"},
+						{kind: "ToolButtonGroup", className: "enyo-toolbutton-dark", components: [
+							{caption: "Headline"},
+							{caption: "List"},
+							{caption: "Image"},
+							{caption: "Link"}
+						]}
+					]},
+					{kind: "BasicScroller",
+						autoHorizontal: false,
+						horizontal: false,
+						className: "output-scroller",
+						components: [
+							{kind: "HtmlContent", className: "output-preview"}
+						]
+					}
 			]}
 		]}
 	],

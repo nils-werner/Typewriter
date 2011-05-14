@@ -8,16 +8,23 @@
 .editor-input {
 	font-family: Courier, monospace;
 	background-color: #ffffff;
-	height: 100%;
-	display: block;
 }
 
 .output-preview {
-	background-color: #ffffff;
-	height: 100%;
 	margin: 0px;
+	margin-top: -20px;
+}
+
+.output-scroller {
+	background-color: #ffffff;
 }
 
 .fake-toolbar {
 	color: #ffffff;
+}
+
+.HGrabButton {
+	position: absolute;
+	top: 5px;
+	-webkit-transform: rotate(90deg);
 }
