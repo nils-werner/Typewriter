@@ -7,14 +7,14 @@ enyo.kind({
 			{name: "top", height: "100%", kind:"HSlidingView",
 				components: [
 					{kind: "Header", content:"Editor", },
-					{kind: "BasicRichText", hint: "type something here", richContent: false }
+					{kind: "BasicRichText", hint: "type something here", richContent: false, className: "markdown-editor"}
 			]},
 			{name: "bottom", kind:"HSlidingView", height: "54px", flex:0,
 				onResize: "generateMarkdown",
 				components: [
 					{kind: "Header", content:"Preview", className: "enyo-toolbar"},
 					{kind: "BasicScroller", autoHorizontal: false, horizontal: false, components: [
-						{kind: "HtmlContent", content: "This is some short text"}
+						{kind: "HtmlContent", content: "This is some short text", className: "markdown-preview"}
 					]}
 			]}
 		]}

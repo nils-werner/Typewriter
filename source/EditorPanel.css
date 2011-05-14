@@ -1,2 +1,19 @@
 /* Copyright 2009-2011 Hewlett-Packard Development Company, L.P. All rights reserved. */
 /*Your CSS here*/
+
+.markdown-editor {
+	font-family: Courier, monospace;
+	background-color: #ffffff;
+	height: 100%;
+	display: block;
+}
+
+.markdown-preview {
+	background-color: #ffffff;
+	height: 100%;
+	margin: 0px;
+}
+
+.enyo-scroller {
+	padding: 0px;
+}
