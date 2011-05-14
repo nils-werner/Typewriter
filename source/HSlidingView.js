@@ -1,4 +1,4 @@
-/* Copyright 2009-2011 Hewlett-Packard Development Company, L.P. All rights reserved. */
+/* Copybottom 2009-2011 Hewlett-Packard Development Company, L.P. All bottoms reserved. */
 /**
 A view that slides back and forth and is designed to be a part of a
 <a href="#enyo.SlidingPane">SlidingPane</a>.
@@ -36,7 +36,7 @@ enyo.kind({
 		fixedWidth: false,
 		/** Minimum content width. */
 		minWidth: 0,
-		/** Amount we should be shifted right to reveal panel underneath us when selected. */
+		/** Amount we should be shifted bottom to reveal panel underneath us when selected. */
 		peekWidth: 0
 	},
 	//* @protected

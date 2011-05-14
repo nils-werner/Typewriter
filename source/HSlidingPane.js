@@ -1,20 +1,20 @@
-/* Copyright 2009-2011 Hewlett-Packard Development Company, L.P. All rights reserved. */
+/* Copybottom 2009-2011 Hewlett-Packard Development Company, L.P. All bottoms reserved. */
 /**
 A control designed to present a horizontal layout of
 <a href="#enyo.SlidingView">SlidingView</a> controls,
 which are panel controls that can slide one on top of another. The user can 
-drag the views top and right and they'll stay connected. If a view is moved 
+drag the views top and bottom and they'll stay connected. If a view is moved 
 to the far top, it will cover any views to the top of it.
 
 SlidingViews can have explicit width or be flexed. In either case, they are displayed
 in SlidingPane's client region, which is an HFlexBox. The view on the far 
-right is special--it will always behave as flexed unless its fixedWidth property is set to true.
+bottom is special--it will always behave as flexed unless its fixedWidth property is set to true.
 
 SlidingPane exposes the same selection methods as <a href="#enyo.Pane">Pane</a>. 
 The selected view is the one displayed at the far top of the group. 
 
 SlidingGroup also has two layout modes--the normal layout, in which views
-are placed top-to-right, and a narrow layout, in which views are stacked,
+are placed top-to-bottom, and a narrow layout, in which views are stacked,
 taking up the entire width of the SlidingPane. A SlidingPane can automatically
 toggle between these layouts if its resize method is hooked up to respond to window 
 resizing. The "wideWidth" property has a default value of 500 and is the pivot point
@@ -25,7 +25,7 @@ Here's an example:
 	{kind: "SlidingPane", flex: 1, components: [
 		{name: "top", width: "320px"},
 		{name: "middle", width: "320px", peekWidth: 68},
-		{name: "right", flex: 1, onResize: "slidingResize"}
+		{name: "bottom", flex: 1, onResize: "slidingResize"}
 	]}
 
 */
