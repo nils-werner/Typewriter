@@ -36,8 +36,9 @@ enyo.kind({
 						{kind: "ToolButtonGroup", className: "enyo-toolbutton-dark", components: [
 							{caption: "Headline"},
 							{caption: "List"},
+							{caption: "Link"},
+							{caption: "Quote"},
 							{caption: "Image"},
-							{caption: "Link"}
 						]}
 					]},
 					{kind: "VFlexBox", flex: 1, components: [
