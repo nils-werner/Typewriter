@@ -18,7 +18,6 @@ enyo.kind({
 								components: [
 									{kind: "BasicRichText",
 										flex: 10,
-										hint: "type something here",
 										richContent: false,
 										className: "editor-input",
 										onblur: "generateMarkdown"
@@ -30,6 +29,7 @@ enyo.kind({
 					]}
 			]},
 			{name: "bottom", kind:"HSlidingView", height: "62px", flex:0, //peekHeight: 54,
+				onResize: "barMoved",
 				components: [
 					{kind: "Header", pack: "center", className: "enyo-toolbar fake-toolbar", components: [
 						{kind: "GrabButton", className: "HGrabButton"},
@@ -62,5 +62,9 @@ enyo.kind({
 	generateMarkdown: function() {
 		var converter = new Showdown.converter();
 		this.$.htmlContent.setContent(converter.makeHtml(this.$.basicRichText.value));
+	},
+	barMoved: function(event) {
+		if(event.slidePosition == 0)
+			this.$.basicRichText.forceFocus();
 	}
 });
