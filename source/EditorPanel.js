@@ -4,19 +4,29 @@ enyo.kind({
 	kind: enyo.HFlexBox,
 	components: [
 		{name: "slidingPane", kind: "HSlidingPane", flex: 1, multiViewMinHeight:1, components: [
-			{name: "top", height: "100%", kind:"HSlidingView",
+			{name: "top", height: "100%", kind:"HSlidingView", 
 				components: [
 					{kind: "Header", content:"Editor", },
-					{kind: "HFlexBox", components: [
-						{className: "desk-left", flex: 1},
-						{kind: "BasicRichText",
-							flex: 10,
-							hint: "type something here",
-							richContent: false,
-							className: "editor-input",
-							onblur: "generateMarkdown"
-						},
-						{className: "desk-right", flex: 1}
+					{kind: "VFlexBox", flex: 1, components: [
+						{kind: "HFlexBox", flex: 1, components: [
+							{className: "desk-left", flex: 1},
+							{kind: "BasicScroller",
+								flex: 10,
+								autoHorizontal: false,
+								horizontal: false,
+								className: "output-scroller",
+								components: [
+									{kind: "BasicRichText",
+										flex: 10,
+										hint: "type something here",
+										richContent: false,
+										className: "editor-input",
+										onblur: "generateMarkdown"
+									}
+								]
+							},
+							{className: "desk-right", flex: 1}
+						]}
 					]}
 			]},
 			{name: "bottom", kind:"HSlidingView", height: "62px", flex:0, //peekHeight: 54,
@@ -30,18 +40,20 @@ enyo.kind({
 							{caption: "Link"}
 						]}
 					]},
-					{kind: "HFlexBox", components: [
-						{className: "desk-left", flex: 1},
-						{kind: "BasicScroller",
-							flex: 10,
-							autoHorizontal: false,
-							horizontal: false,
-							className: "output-scroller",
-							components: [
-								{kind: "HtmlContent", className: "output-preview"}
-							]
-						},
-						{className: "desk-right", flex: 1}
+					{kind: "VFlexBox", flex: 1, components: [
+						{kind: "HFlexBox", flex: 1, components: [
+							{className: "desk-left", flex: 1},
+							{kind: "BasicScroller",
+								flex: 10,
+								autoHorizontal: false,
+								horizontal: false,
+								className: "output-scroller",
+								components: [
+									{kind: "HtmlContent", className: "output-preview"}
+								]
+							},
+							{className: "desk-right", flex: 1}
+						]}
 					]}
 			]}
 		]}

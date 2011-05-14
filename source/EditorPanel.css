@@ -16,10 +16,10 @@
 	font-family: Georgia, serif;
 	padding: 10px;
 	margin: 0px;
-	background-color: #ffffff;
 }
 
 .output-scroller {
+	background-color: #ffffff;
 }
 
 .fake-toolbar {
