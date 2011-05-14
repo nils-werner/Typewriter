@@ -12,7 +12,7 @@
 	margin: 25px;
 	margin-top: 0px;
 	margin-bottom: 0px;
-	-webkit-box-shadow: 0 0 15px 15px rgba(128,128,128,0.5);
+	box-shadow: 0 0 15px 15px rgba(128,128,128,0.5);
 }
 
 .output-preview {
@@ -21,7 +21,7 @@
 	margin: 25px;
 	margin-top: 0px;
 	margin-bottom: 0px;
-	-webkit-box-shadow: 0 0 15px 15px rgba(128,128,128,0.5);
+	box-shadow: 0 0 15px 15px rgba(128,128,128,0.5);
 	background-color: #ffffff;
 }
 
