@@ -43,3 +43,16 @@
 	background-position: right;
 	background-repeat: repeat-y;
 }
+
+blockquote {
+	margin-left: 0px;
+	padding: 1px;
+	padding-left: 10px;
+	border-left: 5px solid #CACACA;
+	background-color: #DADADA;
+}
+
+blockquote blockquote {
+	border-left: 5px solid #BABABA;
+	background-color: #CACACA;
+}
