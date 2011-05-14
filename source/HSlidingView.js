@@ -23,7 +23,7 @@ enyo.kind({
 	name: "enyo.HSlidingView",
 	kind: enyo.Control,
 	className: "enyo-sliding-view",
-	layoutKind: "HFlexLayout",
+	layoutKind: "VFlexLayout",
 	events: {
 		onResize: ""
 	},
