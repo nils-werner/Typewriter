@@ -1,10 +1,10 @@
 {
-	"id": "com.yourcompany.multipanel",
+	"id": "de.obsessive-media.webos.typewriter",
 	"version": "1.0.0",
-	"vendor": "Your Company",
+	"vendor": "Obsessive Media",
 	"type": "web",
 	"main": "index.html",
-	"title": "Multi Panel Layout ",
+	"title": "Typewriter",
 	"icon": "icon.png",
 	"uiRevision":2
 }

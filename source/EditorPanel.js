@@ -1,6 +1,6 @@
 /* Copyright 2009-2011 Hewlett-Packard Development Company, L.P. All rights reserved. */
 enyo.kind({
-	name: "MultiPanel",
+	name: "EditorPanel",
 	kind: enyo.VFlexBox,
 	components: [
 		{name: "slidingPane", kind: "SlidingPane", flex: 1, components: [
