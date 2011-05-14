@@ -1,0 +1,3 @@
+[submodule "source/showdown"]
+	path = source/showdown
+	url = git@codebasehq.com:obsessive/typewriter/showdown.git
