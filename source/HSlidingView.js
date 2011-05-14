@@ -192,7 +192,7 @@ enyo.kind({
 			this.slidePosition = inSlide;
 			if (this.hasNode()) {
 				//this.log(this.id, inSlide);
-				var t = inSlide !== null ? "translate3d(" + inSlide + "px,0,0)" : "";
+				var t = inSlide !== null ? "translate3d(0," + inSlide + "px,0)" : "";
 				this.domStyles["-webkit-transform"] = this.node.style.webkitTransform = t;
 			}
 		}
