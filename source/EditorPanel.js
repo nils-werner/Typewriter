@@ -11,10 +11,10 @@ enyo.kind({
 						{kind: "BasicRichText", hint: "type something here", richContent: false, className: "editor-input"}
 					]}
 			]},
-			{name: "bottom", kind:"HSlidingView", height: "54px", flex:0,
+			{name: "bottom", kind:"HSlidingView", height: "54px", flex:0, peekHeight: 54,
 				onResize: "generateMarkdown",
 				components: [
-					{kind: "Header", content:"Preview", className: "enyo-toolbar"},
+					{kind: "Header", content:"Preview", className: "enyo-toolbar fake-toolbar"},
 					{kind: "BasicScroller", autoHorizontal: false, horizontal: false, className: "output-scroller", components: [
 						{kind: "HtmlContent", content: "This is some short text", className: "output-preview"}
 					]}
