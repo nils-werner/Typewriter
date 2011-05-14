@@ -3,7 +3,7 @@ enyo.kind({
 	name: "EditorPanel",
 	kind: enyo.HFlexBox,
 	components: [
-		{name: "slidingPane", kind: "HSlidingPane", flex: 1, components: [
+		{name: "slidingPane", kind: "HSlidingPane", flex: 1, multiViewMinHeight:1, components: [
 			{name: "top", height: "100%", kind:"HSlidingView",
 				components: [
 					{kind: "Header", content:"Editor", },
