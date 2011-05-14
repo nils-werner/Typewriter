@@ -8,12 +8,12 @@ the user to drag the view from any point inside the panel that is not already a
 draggable region (e.g., a Scroller). If dragAnywhere is set to false, then the view
 can still be dragged via any control inside it whose "slidingHandler" property is set to true.
 
-The "peekWidth" property specifies the amount the paneview should be offset from the top
+The "peekHeight" property specifies the amount the paneview should be offset from the top
 when it is selected. This allows controls on the underlying view object to the top
 of the selected one to be partially revealed.
 
-SlidingView has some other published properties that are less frequently used. The "minWidth" 
-property specifies a minimum width for view content, and "edgeDragging" lets the user 
+SlidingView has some other published properties that are less frequently used. The "minHeight" 
+property specifies a minimum height for view content, and "edgeDragging" lets the user 
 drag the view from its top edge. (The default value of edgeDragging is false.)
 
 The last view in a SlidingPane is special, it is resized to fit the available space. 
@@ -32,12 +32,12 @@ enyo.kind({
 		dragAnywhere: true,
 		/** Can drag/toggle by dragging on top edge of sliding panel. */
 		edgeDragging: false,
-		/** Whether content width should or should not be adjusted based on size changes. */
-		fixedWidth: false,
-		/** Minimum content width. */
-		minWidth: 0,
+		/** Whether content height should or should not be adjusted based on size changes. */
+		fixedHeight: false,
+		/** Minimum content height. */
+		minHeight: 0,
 		/** Amount we should be shifted bottom to reveal panel underneath us when selected. */
-		peekWidth: 0
+		peekHeight: 0
 	},
 	//* @protected
 	chrome: [
@@ -51,7 +51,7 @@ enyo.kind({
 		this.inherited(arguments);
 		this.layout = new enyo.VFlexLayout();
 		this.edgeDraggingChanged();
-		this.minWidthChanged();
+		this.minHeightChanged();
 	},
 	// Add slide position to control offset calculation
 	calcControlOffset: function(inControl) {
@@ -103,7 +103,7 @@ enyo.kind({
 	slideFromOutOfView: function() {
 		if (this.hasNode() && !this.manager.dragging && !this.manager.isAnimating()) {
 			this.show();
-			this.applySlideToNode(this.calcSlideMax() + this.node.offsetWidth);
+			this.applySlideToNode(this.calcSlideMax() + this.node.offsetHeight);
 			this.moveAlone = true;
 			this.manager.playAnimation(this);
 		}
@@ -117,11 +117,11 @@ enyo.kind({
 				p.flex = 1;
 				p.applyStyle("-webkit-box-flex", "1");
 				p.parent.removeClass("enyo-hflexbox");
-				var w = p.node.offsetWidth;
+				var w = p.node.offsetHeight;
 				enyo.asyncMethod(this, function() {
 					p.parent.addClass("enyo-hflexbox");
 					if (p.hasNode()) {
-						var d = p.node.offsetWidth - w;
+						var d = p.node.offsetHeight - w;
 						this.applySlideToNode(this.slidePosition - d);
 						this.moveAlone = true;
 						this.manager.playAnimation(this);
@@ -148,7 +148,7 @@ enyo.kind({
 	},
 	calcSlideMin: function() {
 		var x = -this.getTopOffset();
-		return this.peekWidth + x;
+		return this.peekHeight + x;
 	},
 	calcSlideMax: function() {
 		var c = this.getPreviousSibling();
@@ -274,35 +274,35 @@ enyo.kind({
 		return this.shouldDragSelect ? this : this.getPreviousSibling();
 	},
 	// sizing
-	// don't auto-adjust width if fixedWidth is true
-	fixedWidthChanged: function() {
-		if (this.fixedWidth) {
-			this.$.client.applyStyle("width", null);
+	// don't auto-adjust height if fixedHeight is true
+	fixedHeightChanged: function() {
+		if (this.fixedHeight) {
+			this.$.client.applyStyle("height", null);
 		}
 	},
-	minWidthChanged: function() {
-		this.$.client.applyStyle("min-width", this.minWidth || null);
+	minHeightChanged: function() {
+		this.$.client.applyStyle("min-height", this.minHeight || null);
 	},
 	// FIXME: refactor, pretty ugly way to force last sibling to resize
 	resizeLastSibling: function() {
 		if (!this.manager.dragging) {
 			var f = this.getLastSibling();
-			if (f && !f.fixedWidth) {
+			if (f && !f.fixedHeight) {
 				var t = f.calcSlide();
-				f.adjustWidth(t);
+				f.adjustHeight(t);
 			}
 		}
 	},
-	adjustWidth: function(inDelta) {
+	adjustHeight: function(inDelta) {
 		// FIXME: attempting to make this smooth based on ipad performance
 		// adjusting client as opposed to this node lessens artifacts 
 		// generated when resizing our node. This appears to be due to 
 		// our node being transformed.
 		if (this.hasNode() && this.$.client.hasNode()) {
-			var ow = this.node.offsetWidth;
+			var ow = this.node.offsetHeight;
 			var w = Math.max(ow, ow - inDelta);
 			if (w) {
-				this.$.client.domStyles.width = this.$.client.node.style.width = w + "px";
+				this.$.client.domStyles.height = this.$.client.node.style.height = w + "px";
 				this.doResize();
 			}
 		}

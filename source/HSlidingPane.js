@@ -6,25 +6,25 @@ which are panel controls that can slide one on top of another. The user can
 drag the views top and bottom and they'll stay connected. If a view is moved 
 to the far top, it will cover any views to the top of it.
 
-SlidingViews can have explicit width or be flexed. In either case, they are displayed
+SlidingViews can have explicit height or be flexed. In either case, they are displayed
 in SlidingPane's client region, which is an HFlexBox. The view on the far 
-bottom is special--it will always behave as flexed unless its fixedWidth property is set to true.
+bottom is special--it will always behave as flexed unless its fixedHeight property is set to true.
 
 SlidingPane exposes the same selection methods as <a href="#enyo.Pane">Pane</a>. 
 The selected view is the one displayed at the far top of the group. 
 
 SlidingGroup also has two layout modes--the normal layout, in which views
 are placed top-to-bottom, and a narrow layout, in which views are stacked,
-taking up the entire width of the SlidingPane. A SlidingPane can automatically
+taking up the entire height of the SlidingPane. A SlidingPane can automatically
 toggle between these layouts if its resize method is hooked up to respond to window 
-resizing. The "wideWidth" property has a default value of 500 and is the pivot point
+resizing. The "wideHeight" property has a default value of 500 and is the pivot point
 between the two layouts.
 
 Here's an example:
 
 	{kind: "SlidingPane", flex: 1, components: [
-		{name: "top", width: "320px"},
-		{name: "middle", width: "320px", peekWidth: 68},
+		{name: "top", height: "320px"},
+		{name: "middle", height: "320px", peekHeight: 68},
 		{name: "bottom", flex: 1, onResize: "slidingResize"}
 	]}
 
@@ -34,7 +34,7 @@ enyo.kind({
 	kind: enyo.Pane,
 	published: {
 		multiView: true,
-		multiViewMinWidth: 500,
+		multiViewMinHeight: 500,
 		canAnimate: true
 	},
 	className: "enyo-sliding-pane",
@@ -220,7 +220,7 @@ enyo.kind({
 	resize: function() {
 		// if no layout change, make sure to validate to ensure proper sizing
 		// otherwise apply layout change
-		var multiView = this.multiViewMinWidth > 0 && window.innerWidth > this.multiViewMinWidth;
+		var multiView = this.multiViewMinHeight > 0 && window.innerHeight > this.multiViewMinHeight;
 		this.setMultiView(multiView);
 		this.validate();
 	},
@@ -242,11 +242,11 @@ enyo.kind({
 	applySingleViewLayout: function() {
 		for (var i=0, s$=this.views, s; s=s$[i]; i++) {
 			this.cacheSliding(s, i);
-			s.setFixedWidth(true);
-			s.peekWidth = 0;
+			s.setFixedHeight(true);
+			s.peekHeight = 0;
 			s.flex = 0;
 			// defeat auto flex at "100%"
-			s.applyStyle("width", "100.0%");
+			s.applyStyle("height", "100.0%");
 		}
 		this.showHideShadows(false);
 	},
@@ -261,18 +261,18 @@ enyo.kind({
 	cacheSliding: function(inSliding, inIndex) {
 		this.slidingCache[inIndex] = {
 			flex: inSliding.flex,
-			width: inSliding.domStyles.width,
-			peekWidth: inSliding.peekWidth,
-			fixedWidth: inSliding.fixedWidth
+			height: inSliding.domStyles.height,
+			peekHeight: inSliding.peekHeight,
+			fixedHeight: inSliding.fixedHeight
 		}
 	},
 	uncacheSliding: function(inSliding, inIndex) {
 		var s = this.slidingCache[inIndex];
 		if (s) {
 			inSliding.flex = s.flex;
-			inSliding.peekWidth = s.peekWidth;
-			inSliding.setFixedWidth(s.fixedWidth);
-			inSliding.applyStyle("width", s.width);
+			inSliding.peekHeight = s.peekHeight;
+			inSliding.setFixedHeight(s.fixedHeight);
+			inSliding.applyStyle("height", s.height);
 		}
 	},
 	validate: function() {
