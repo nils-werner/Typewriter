@@ -20,7 +20,7 @@ var example = ""+
 	"> looking like it's been marked up with tags\n"+
 	"> or formatting instructions.\n"+
 	"\n"+
-	"This document is written in Markdown; you can see the plain-text version on the left.  To get a feel for Markdown's syntax, type some text into the left window and watch the results in the right.  You can see a Markdown syntax guide by switching the right-hand window from *Preview* to *Syntax Guide*.\n"+
+	"This document is written in Markdown; you are currently seeing the plaintext version. To get a feel for Markdown's syntax, type some text into the window and *pull up the toolbar*.\n"+
 	"\n"+
 	"  [john gruber]: http://daringfireball.net/\n"+
 	"  [1]: http://daringfireball.net/projects/markdown/";
@@ -77,7 +77,10 @@ enyo.kind({
 								horizontal: false,
 								className: "output-scroller",
 								components: [
-									{kind: "HtmlContent", className: "output-preview"}
+									{kind: "HtmlContent",
+										className: "output-preview",
+										onLinkClick: "htmlContentLinkClick"
+									}
 								]
 							},
 							{className: "desk-right", flex: 1}
@@ -94,5 +97,11 @@ enyo.kind({
 /*		if(event.slidePosition == 0) // buggy with on screen keyboard
 			this.$.basicRichText.forceFocus();
 */
+	},
+	htmlContentLinkClick: function(sender, url) {
+		var r = new enyo.PalmService();
+		r.service = "palm://com.palm.applicationManager/";
+		r.method = "open";
+		r.call({target: url});
 	}
 });
