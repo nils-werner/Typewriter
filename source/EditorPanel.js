@@ -1,4 +1,30 @@
 /* Copyright 2009-2011 Hewlett-Packard Development Company, L.P. All rights reserved. */
+var example = ""+
+	"Typewriter\n"+
+	"==========\n"+
+	"\n"+
+	"Welcome to Typewriter, a Markdown editor for the HP TouchPad.\n"+
+	"\n"+
+	"Markdown lets you create HTML by entering text in a simple format that's easy to read and write.\n"+
+	"\n"+
+	" - Type Markdown text in the left window\n"+
+	" - See the HTML in the right\n"+
+	" \n"+
+	"Markdown is a lightweight markup language based on the formatting conventions that people naturally use in email.  As [John Gruber] writes on the [Markdown site] [1]:\n"+
+	"\n"+
+	"> The overriding design goal for Markdown's\n"+
+	"> formatting syntax is to make it as readable \n"+
+	"> as possible. The idea is that a\n"+
+	"> Markdown-formatted document should be\n"+
+	"> publishable as-is, as plain text, without\n"+
+	"> looking like it's been marked up with tags\n"+
+	"> or formatting instructions.\n"+
+	"\n"+
+	"This document is written in Markdown; you can see the plain-text version on the left.  To get a feel for Markdown's syntax, type some text into the left window and watch the results in the right.  You can see a Markdown syntax guide by switching the right-hand window from *Preview* to *Syntax Guide*.\n"+
+	"\n"+
+	"  [john gruber]: http://daringfireball.net/\n"+
+	"  [1]: http://daringfireball.net/projects/markdown/";
+
 enyo.kind({
 	name: "EditorPanel",
 	kind: enyo.HFlexBox,
@@ -18,6 +44,7 @@ enyo.kind({
 								components: [
 									{kind: "BasicRichText",
 										flex: 10,
+										value: example,
 										richContent: false,
 										className: "editor-input",
 										onblur: "generateMarkdown"
