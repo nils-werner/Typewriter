@@ -9,19 +9,13 @@
 	font-family: Courier, monospace;
 	background-color: #ffffff;
 	padding: 10px;
-	margin: 25px;
-	margin-top: 0px;
-	margin-bottom: 0px;
-	box-shadow: 0 0 15px 15px rgba(128,128,128,0.5);
+	margin: 0px;
 }
 
 .output-preview {
 	font-family: Georgia, serif;
 	padding: 10px;
-	margin: 25px;
-	margin-top: 0px;
-	margin-bottom: 0px;
-	box-shadow: 0 0 15px 15px rgba(128,128,128,0.5);
+	margin: 0px;
 	background-color: #ffffff;
 }
 
@@ -39,5 +33,13 @@
 }
 
 .desk-right {
+	background-image: url(../images/desk-right.png);
+	background-position: left;
+	background-repeat: repeat-y;
+}
 
+.desk-left {
+	background-image: url(../images/desk-left.png);
+	background-position: right;
+	background-repeat: repeat-y;
 }

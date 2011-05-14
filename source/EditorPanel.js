@@ -9,19 +9,12 @@ enyo.kind({
 					{kind: "Header", content:"Editor", },
 					{kind: "HFlexBox", components: [
 						{className: "desk-left", flex: 1},
-						{kind: "BasicScroller",
+						{kind: "BasicRichText",
 							flex: 10,
-							autoHorizontal: false,
-							horizontal: false,
-							className: "editor-scroller",
-							components: [
-								{kind: "BasicRichText",
-									hint: "type something here",
-									richContent: false,
-									className: "editor-input",
-									onblur: "generateMarkdown"
-								}
-							]
+							hint: "type something here",
+							richContent: false,
+							className: "editor-input",
+							onblur: "generateMarkdown"
 						},
 						{className: "desk-right", flex: 1}
 					]}
