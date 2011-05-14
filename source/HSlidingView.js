@@ -3,7 +3,7 @@
 A view that slides back and forth and is designed to be a part of a
 <a href="#enyo.SlidingPane">SlidingPane</a>.
 
-SlidingView objects have a "dragAnywhere" property, whose default value is true. This allows
+HSlidingView objects have a "dragAnywhere" property, whose default value is true. This allows
 the user to drag the view from any point inside the panel that is not already a
 draggable region (e.g., a Scroller). If dragAnywhere is set to false, then the view
 can still be dragged via any control inside it whose "slidingHandler" property is set to true.
@@ -12,7 +12,7 @@ The "peekHeight" property specifies the amount the paneview should be offset fro
 when it is selected. This allows controls on the underlying view object to the top
 of the selected one to be partially revealed.
 
-SlidingView has some other published properties that are less frequently used. The "minHeight" 
+HSlidingView has some other published properties that are less frequently used. The "minHeight" 
 property specifies a minimum height for view content, and "edgeDragging" lets the user 
 drag the view from its top edge. (The default value of edgeDragging is false.)
 
@@ -20,7 +20,7 @@ The last view in a SlidingPane is special, it is resized to fit the available sp
 The onResize event is fired when this occurs.
 */
 enyo.kind({
-	name: "enyo.SlidingView",
+	name: "enyo.HSlidingView",
 	kind: enyo.Control,
 	className: "enyo-sliding-view",
 	layoutKind: "HFlexLayout",

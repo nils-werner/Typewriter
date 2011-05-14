@@ -1,28 +1,28 @@
 /* Copybottom 2009-2011 Hewlett-Packard Development Company, L.P. All bottoms reserved. */
 /**
 A control designed to present a horizontal layout of
-<a href="#enyo.SlidingView">SlidingView</a> controls,
+<a href="#enyo.HSlidingView">HSlidingView</a> controls,
 which are panel controls that can slide one on top of another. The user can 
 drag the views top and bottom and they'll stay connected. If a view is moved 
 to the far top, it will cover any views to the top of it.
 
-SlidingViews can have explicit height or be flexed. In either case, they are displayed
-in SlidingPane's client region, which is an VFlexBox. The view on the far 
+HSlidingViews can have explicit height or be flexed. In either case, they are displayed
+in HSlidingPane's client region, which is an VFlexBox. The view on the far 
 bottom is special--it will always behave as flexed unless its fixedHeight property is set to true.
 
-SlidingPane exposes the same selection methods as <a href="#enyo.Pane">Pane</a>. 
+HSlidingPane exposes the same selection methods as <a href="#enyo.Pane">Pane</a>. 
 The selected view is the one displayed at the far top of the group. 
 
 SlidingGroup also has two layout modes--the normal layout, in which views
 are placed top-to-bottom, and a narrow layout, in which views are stacked,
-taking up the entire height of the SlidingPane. A SlidingPane can automatically
+taking up the entire height of the HSlidingPane. A HSlidingPane can automatically
 toggle between these layouts if its resize method is hooked up to respond to window 
 resizing. The "wideHeight" property has a default value of 500 and is the pivot point
 between the two layouts.
 
 Here's an example:
 
-	{kind: "SlidingPane", flex: 1, components: [
+	{kind: "HSlidingPane", flex: 1, components: [
 		{name: "top", height: "320px"},
 		{name: "middle", height: "320px", peekHeight: 68},
 		{name: "bottom", flex: 1, onResize: "slidingResize"}
@@ -30,7 +30,7 @@ Here's an example:
 
 */
 enyo.kind({
-	name: "enyo.SlidingPane",
+	name: "enyo.HSlidingPane",
 	kind: enyo.Pane,
 	published: {
 		multiView: true,
@@ -42,7 +42,7 @@ enyo.kind({
 		onSlideComplete: ""
 	},
 	layoutKind: "",
-	defaultKind: "SlidingView",
+	defaultKind: "HSlidingView",
 	//* @protected
 	chrome: [
 		{kind: "Animator", duration: 700, onAnimate: "stepAnimation", onEnd: "endAnimation"},
@@ -66,7 +66,7 @@ enyo.kind({
 		enyo.Control.prototype.flow.call(this);
 	},
 	controlIsView: function(inControl) {
-		return this.inherited(arguments) && (inControl instanceof enyo.SlidingView);
+		return this.inherited(arguments) && (inControl instanceof enyo.HSlidingView);
 	},
 	// maintain an explicit list of Sliding controls to manipulate
 	addView: function(inControl) {

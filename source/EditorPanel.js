@@ -1,10 +1,10 @@
 /* Copyright 2009-2011 Hewlett-Packard Development Company, L.P. All rights reserved. */
 enyo.kind({
 	name: "EditorPanel",
-	kind: enyo.VFlexBox,
+	kind: enyo.HFlexBox,
 	components: [
-		{name: "slidingPane", kind: "SlidingPane", flex: 1, components: [
-			{name: "left", width: "320px", kind:"SlidingView", components: [
+		{name: "slidingPane", kind: "HSlidingPane", flex: 1, components: [
+			{name: "top", height: "320px", kind:"HSlidingView", components: [
 					{kind: "Header", content:"Panel 1"},
 					{kind: "Scroller", flex: 1, components: [
 						//Insert your components here
@@ -13,7 +13,7 @@ enyo.kind({
 						{kind: "GrabButton"}
 					]}
 			]},
-			{name: "middle", width: "320px", kind:"SlidingView", peekWidth: 50, components: [
+			{name: "middle", height: "320px", kind:"HSlidingView", peekHeight: 50, components: [
 					{kind: "Header", content:"Panel 2"},
 					{kind: "Scroller", flex: 1, components: [
 						//Insert your components here
@@ -22,7 +22,7 @@ enyo.kind({
 						{kind: "GrabButton"}
 					]}
 			]},
-			{name: "right", kind:"SlidingView", flex: 1, components: [
+			{name: "bottom", kind:"HSlidingView", flex: 1, components: [
 					{kind: "Header", content:"Panel 3"},
 					{kind: "Scroller", flex: 1, components: [
 						//Insert your components here
