@@ -8,11 +8,15 @@ enyo.kind({
 				components: [
 					{kind: "Header", content:"Editor", },
 					{kind: "BasicScroller", autoHorizontal: false, horizontal: false, className: "editor-scroller", components: [
-						{kind: "BasicRichText", hint: "type something here", richContent: false, className: "editor-input"}
+						{kind: "BasicRichText",
+							hint: "type something here",
+							richContent: false,
+							className: "editor-input",
+							onblur: "generateMarkdown"
+						}
 					]}
 			]},
 			{name: "bottom", kind:"HSlidingView", height: "54px", flex:0, peekHeight: 54,
-				onResize: "generateMarkdown",
 				components: [
 					{kind: "Header", content:"Preview", className: "enyo-toolbar fake-toolbar"},
 					{kind: "BasicScroller", autoHorizontal: false, horizontal: false, className: "output-scroller", components: [
