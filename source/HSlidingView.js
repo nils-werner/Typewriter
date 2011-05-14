@@ -8,13 +8,13 @@ the user to drag the view from any point inside the panel that is not already a
 draggable region (e.g., a Scroller). If dragAnywhere is set to false, then the view
 can still be dragged via any control inside it whose "slidingHandler" property is set to true.
 
-The "peekWidth" property specifies the amount the paneview should be offset from the left
-when it is selected. This allows controls on the underlying view object to the left
+The "peekWidth" property specifies the amount the paneview should be offset from the top
+when it is selected. This allows controls on the underlying view object to the top
 of the selected one to be partially revealed.
 
 SlidingView has some other published properties that are less frequently used. The "minWidth" 
 property specifies a minimum width for view content, and "edgeDragging" lets the user 
-drag the view from its left edge. (The default value of edgeDragging is false.)
+drag the view from its top edge. (The default value of edgeDragging is false.)
 
 The last view in a SlidingPane is special, it is resized to fit the available space. 
 The onResize event is fired when this occurs.
@@ -30,7 +30,7 @@ enyo.kind({
 	published: {
 		/** Can drag panel from anywhere (note: does not work if there's another drag surface (e.g. scroller)). */
 		dragAnywhere: true,
-		/** Can drag/toggle by dragging on left edge of sliding panel. */
+		/** Can drag/toggle by dragging on top edge of sliding panel. */
 		edgeDragging: false,
 		/** Whether content width should or should not be adjusted based on size changes. */
 		fixedWidth: false,
@@ -43,7 +43,7 @@ enyo.kind({
 	chrome: [
 		{name: "shadow", className: "enyo-sliding-view-shadow"},
 		{name: "client", className: "enyo-bg", kind: enyo.Control, flex: 1},
-		// NOTE: used only as a hidden surface to move sliding from the left edge
+		// NOTE: used only as a hidden surface to move sliding from the top edge
 		{name: "edgeDragger", slidingHandler: true, kind: enyo.Control, className: "enyo-sliding-view-nub"}
 	],
 	slidePosition: 0,
@@ -56,7 +56,7 @@ enyo.kind({
 	// Add slide position to control offset calculation
 	calcControlOffset: function(inControl) {
 		var o = this.inherited(arguments);
-		o.left += this.slidePosition;
+		o.top += this.slidePosition;
 		return o;
 	},
 	layoutKindChanged: function() {
@@ -139,15 +139,15 @@ enyo.kind({
 		return this["calcSlide" + state]();
 	},
 	// FIXME: re-consider offset caching, pita: required to reset on resize.
-	getLeftOffset: function() {
+	getTopOffset: function() {
 		if (this.hasNode()) {
 			this._offset = undefined;
-			return this._offset !== undefined ? this._offset : (this._offset = this.node.offsetLeft);
+			return this._offset !== undefined ? this._offset : (this._offset = this.node.offsetTop);
 		}
 		return 0;
 	},
 	calcSlideMin: function() {
-		var x = -this.getLeftOffset();
+		var x = -this.getTopOffset();
 		return this.peekWidth + x;
 	},
 	calcSlideMax: function() {
