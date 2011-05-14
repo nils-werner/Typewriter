@@ -7,7 +7,7 @@ drag the views top and bottom and they'll stay connected. If a view is moved
 to the far top, it will cover any views to the top of it.
 
 SlidingViews can have explicit height or be flexed. In either case, they are displayed
-in SlidingPane's client region, which is an HFlexBox. The view on the far 
+in SlidingPane's client region, which is an VFlexBox. The view on the far 
 bottom is special--it will always behave as flexed unless its fixedHeight property is set to true.
 
 SlidingPane exposes the same selection methods as <a href="#enyo.Pane">Pane</a>. 
@@ -46,7 +46,7 @@ enyo.kind({
 	//* @protected
 	chrome: [
 		{kind: "Animator", duration: 700, onAnimate: "stepAnimation", onEnd: "endAnimation"},
-		{name: "client", flex: 1, kind: enyo.Control, className: "enyo-view enyo-sliding-pane-client", layoutKind: "HFlexLayout"},
+		{name: "client", flex: 1, kind: enyo.Control, className: "enyo-view enyo-sliding-pane-client", layoutKind: "VFlexLayout"},
 	],
 	constructor: function() {
 		this.inherited(arguments);

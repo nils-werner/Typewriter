@@ -23,7 +23,7 @@ enyo.kind({
 	name: "enyo.SlidingView",
 	kind: enyo.Control,
 	className: "enyo-sliding-view",
-	layoutKind: "VFlexLayout",
+	layoutKind: "HFlexLayout",
 	events: {
 		onResize: ""
 	},
@@ -49,7 +49,7 @@ enyo.kind({
 	slidePosition: 0,
 	create: function() {
 		this.inherited(arguments);
-		this.layout = new enyo.VFlexLayout();
+		this.layout = new enyo.HFlexLayout();
 		this.edgeDraggingChanged();
 		this.minHeightChanged();
 	},
