@@ -166,7 +166,7 @@ enyo.kind({
 	// dragging
 	dragstartHandler: function(inSender, inEvent) {
 		var s = this.dragStartSliding = inEvent.sliding;
-		var d = s && s.isDraggableEvent(inEvent) && this.findDraggable(inEvent.dx);
+		var d = s && s.isDraggableEvent(inEvent) && this.findDraggable(inEvent.dy);
 		if (d) {
 			if (!this.wideLayout) {
 				this.showHideShadows(true);
@@ -194,10 +194,10 @@ enyo.kind({
 			var next = s.drag(inEvent);
 			if (next) {
 				this.selectView(next, true);
-				var dx = s.isAtDragMax() ? 1 : -1;
-				var nd = this.findDraggable(dx);
+				var dy = s.isAtDragMax() ? 1 : -1;
+				var nd = this.findDraggable(dy);
 				if (nd) {
-					this.dragSliding(nd, inEvent, inEvent.dx);
+					this.dragSliding(nd, inEvent, inEvent.dy);
 				}
 			}
 		}

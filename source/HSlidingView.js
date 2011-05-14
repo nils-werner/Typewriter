@@ -258,7 +258,7 @@ enyo.kind({
 		this.dragStart = this.slidePosition - inDx;
 	},
 	drag: function(e) {
-		var x0 = e.dx + this.dragStart;
+		var x0 = e.dy + this.dragStart;
 		var x = Math.max(this.dragMin, Math.min(x0, this.dragMax));
 		this.shouldDragSelect = x0 < this.slidePosition;
 		this.move(x);
