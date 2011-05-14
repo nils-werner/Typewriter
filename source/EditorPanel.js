@@ -91,7 +91,8 @@ enyo.kind({
 		this.$.htmlContent.setContent(converter.makeHtml(this.$.basicRichText.value));
 	},
 	barMoved: function(event) {
-		if(event.slidePosition == 0)
+/*		if(event.slidePosition == 0) // buggy with on screen keyboard
 			this.$.basicRichText.forceFocus();
+*/
 	}
 });
