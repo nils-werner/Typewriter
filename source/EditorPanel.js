@@ -7,19 +7,24 @@ enyo.kind({
 			{name: "top", height: "100%", kind:"HSlidingView",
 				components: [
 					{kind: "Header", content:"Editor", },
-					{kind: "BasicScroller",
-						autoHorizontal: false,
-						horizontal: false,
-						className: "editor-scroller",
-						components: [
-							{kind: "BasicRichText",
-								hint: "type something here",
-								richContent: false,
-								className: "editor-input",
-								onblur: "generateMarkdown"
-							}
-						]
-					}
+					{kind: "HFlexBox", components: [
+						{className: "desk-left", flex: 1},
+						{kind: "BasicScroller",
+							flex: 10,
+							autoHorizontal: false,
+							horizontal: false,
+							className: "editor-scroller",
+							components: [
+								{kind: "BasicRichText",
+									hint: "type something here",
+									richContent: false,
+									className: "editor-input",
+									onblur: "generateMarkdown"
+								}
+							]
+						},
+						{className: "desk-right", flex: 1}
+					]}
 			]},
 			{name: "bottom", kind:"HSlidingView", height: "62px", flex:0, //peekHeight: 54,
 				components: [
@@ -32,14 +37,19 @@ enyo.kind({
 							{caption: "Link"}
 						]}
 					]},
-					{kind: "BasicScroller",
-						autoHorizontal: false,
-						horizontal: false,
-						className: "output-scroller",
-						components: [
-							{kind: "HtmlContent", className: "output-preview"}
-						]
-					}
+					{kind: "HFlexBox", components: [
+						{className: "desk-left", flex: 1},
+						{kind: "BasicScroller",
+							flex: 10,
+							autoHorizontal: false,
+							horizontal: false,
+							className: "output-scroller",
+							components: [
+								{kind: "HtmlContent", className: "output-preview"}
+							]
+						},
+						{className: "desk-right", flex: 1}
+					]}
 			]}
 		]}
 	],

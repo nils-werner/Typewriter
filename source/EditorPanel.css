@@ -8,15 +8,24 @@
 .editor-input {
 	font-family: Courier, monospace;
 	background-color: #ffffff;
+	padding: 10px;
+	margin: 25px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	-webkit-box-shadow: 0 0 15px 15px rgba(128,128,128,0.5);
 }
 
 .output-preview {
-	margin: 0px;
+	font-family: Georgia, serif;
+	padding: 10px;
+	margin: 25px;
 	margin-top: -20px;
+	margin-bottom: 0px;
+	-webkit-box-shadow: 0 0 15px 15px rgba(128,128,128,0.5);
+	background-color: #ffffff;
 }
 
 .output-scroller {
-	background-color: #ffffff;
 }
 
 .fake-toolbar {
@@ -27,4 +36,8 @@
 	position: absolute;
 	top: 5px;
 	-webkit-transform: rotate(90deg);
+}
+
+.desk-right {
+
 }
