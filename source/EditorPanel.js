@@ -93,7 +93,8 @@ enyo.kind({
 						]}
 					]}
 			]}
-		]}
+		]},
+		{name:'filePicker', kind: "FilePicker", fileType:["image"], allowMultiSelect:false, onPickFile: "handleFile"},
 	],
 	generateMarkdown: function() {
 		var converter = new Showdown.converter();
@@ -109,5 +110,11 @@ enyo.kind({
 		r.service = "palm://com.palm.applicationManager/";
 		r.method = "open";
 		r.call({target: url});
+	},
+	openFile: function() {
+		this.$.filePicker.pickFile();
+	},
+	handleFile: function(inSender, msg) {
+		this.$.basicRichText.value = enyo.json.stringify(msg);
 	}
 });
