@@ -32,7 +32,13 @@ enyo.kind({
 		{name: "slidingPane", kind: "HSlidingPane", flex: 1, multiViewMinHeight:1, components: [
 			{name: "top", height: "100%", kind:"HSlidingView", 
 				components: [
-					{kind: "Header", content:"Editor", },
+					{kind: "Header", components: [
+						{content: "Typewriter", flex: 1},
+						{kind: "ToolButtonGroup", components: [
+							{caption: "Save File", onclick: "saveFile"},
+							{caption: "Open File...", onclick: "openFile"}
+						]}
+					]},
 					{kind: "VFlexBox", flex: 1, components: [
 						{kind: "HFlexBox", flex: 1, components: [
 							{className: "desk-left", flex: 1},
