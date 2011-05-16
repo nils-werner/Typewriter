@@ -38,6 +38,10 @@
 	right: 0px;
 }
 
+.InvisibleGrabButton {
+	background-image: none;
+}
+
 .desk-right {
 	background-image: url(../images/desk-right.png);
 	background-position: left;

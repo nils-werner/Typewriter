@@ -109,7 +109,9 @@ enyo.kind({
 									}
 								]
 							},
-							{className: "desk-right", flex: 1}
+							{className: "desk-right", flex: 1, components: [
+								{kind: "GrabButton", className: "InvisibleGrabButton"}
+							]}
 						]}
 					]}
 			]}
