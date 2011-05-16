@@ -66,14 +66,19 @@ enyo.kind({
 			{name: "bottom", kind:"HSlidingView", height: "62px", flex:0, //peekHeight: 54,
 				onResize: "barMoved",
 				components: [
-					{kind: "Header", pack: "center", className: "enyo-toolbar fake-toolbar", components: [
+					{kind: "Header", className: "enyo-toolbar fake-toolbar", components: [
 						{kind: "GrabButton", className: "HGrabButton"},
+						{kind: "Spacer"},
 						{kind: "ToolButtonGroup", className: "enyo-toolbutton-dark", components: [
 							{caption: "Headline"},
 							{caption: "List"},
 							{caption: "Link"},
 							{caption: "Quote"},
 							{caption: "Image"},
+						]},
+						{kind: "Spacer"},
+						{kind: "ToolButtonGroup", className: "enyo-toolbutton-dark", components: [
+							{caption: "Print", name:"print"}
 						]}
 					]},
 					{kind: "VFlexBox", flex: 1, components: [
@@ -107,9 +112,14 @@ enyo.kind({
 		//this.$.htmlContent.setContent(converter.makeHtml(example));
 	},
 	barMoved: function(event) {
-/*		if(event.slidePosition == 0) // buggy with on screen keyboard
-			this.$.editor.forceFocus();
-*/
+		if(event.slidePosition == 0) { // buggy with on screen keyboard
+			//this.$.editor.forceFocus();
+			this.$.print.disabled = true;
+		}
+		else {
+			this.$.print.disabled = false;
+		}
+
 		this.generateMarkdown();
 	},
 	htmlContentLinkClick: function(sender, url) {
