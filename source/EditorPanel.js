@@ -34,7 +34,7 @@ enyo.kind({
 			{name: "top", height: "100%", kind:"HSlidingView", 
 				components: [
 					{kind: "Header", components: [
-						{kind:"Image", "src":"http://a2.twimg.com/profile_images/1322166698/IMG_0295res_normal.jpg"},
+						{kind:"Image", "src":"images/icon.png"},
 						{content: "Typewriter", "style": "padding-left: 10px;"},
 						{kind: "Spacer"},
 						{kind: "ToolButtonGroup", components: [
