@@ -8,9 +8,8 @@ var example = ""+
 	"Markdown lets you create HTML by entering text in a  \n"+
 	"simple format that's easy to read and write.\n"+
 	"\n"+
-	" - Type Markdown text in the left window\n"+
-	" - See the HTML in the right\n"+
-	"   - See the HTML in the right\n"+
+	" - Type Markdown text in the window\n"+
+	" - See the HTML after dragging up the toolbar\n"+
 	" \n"+
 	"Markdown is a lightweight markup language based on the formatting conventions that people naturally use in email.  As [John Gruber] writes on the [Markdown site] [1]:\n"+
 	"\n"+
@@ -111,6 +110,7 @@ enyo.kind({
 /*		if(event.slidePosition == 0) // buggy with on screen keyboard
 			this.$.editor.forceFocus();
 */
+		this.generateMarkdown();
 	},
 	htmlContentLinkClick: function(sender, url) {
 		var r = new enyo.PalmService();
