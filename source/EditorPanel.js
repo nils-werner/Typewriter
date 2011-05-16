@@ -87,6 +87,7 @@ enyo.kind({
 								className: "output-scroller",
 								components: [
 									{kind: "HtmlContent",
+										name: "preview",
 										className: "output-preview",
 										onLinkClick: "htmlContentLinkClick"
 									}
@@ -103,7 +104,7 @@ enyo.kind({
 		var converter = new Showdown.converter();
 		
 		var value = this.$.editor.getValue();
-		this.$.htmlContent.setContent(converter.makeHtml(value));
+		this.$.preview.setContent(converter.makeHtml(value));
 		//this.$.htmlContent.setContent(converter.makeHtml(example));
 	},
 	barMoved: function(event) {
