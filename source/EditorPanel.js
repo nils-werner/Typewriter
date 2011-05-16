@@ -139,7 +139,7 @@ enyo.kind({
 		}
 		else {  // up position
 			this.position = "up";
-			this.$.previewScroller.setScrollTop(this.$.editorScroller.scrollTop);
+			this.$.previewScroller.setScrollTop(this.$.editorScroller.scrollTop/this.$.editorScroller.getBoundaries().bottom*this.$.previewScroller.getBoundaries().bottom);
 			this.$.print.removeClass("enyo-button-disabled");
 			this.$.print.disabled = false;
 			
