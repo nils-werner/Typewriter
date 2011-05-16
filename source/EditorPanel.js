@@ -123,5 +123,8 @@ enyo.kind({
 	},
 	handleFile: function(inSender, msg) {
 		this.$.editor.value = enyo.json.stringify(msg);
+	},
+	ready: function() {
+		this.$.editor.forceFocus();
 	}
 });
