@@ -5,10 +5,12 @@ var example = ""+
 	"\n"+
 	"Welcome to Typewriter, a Markdown editor for the HP TouchPad.\n"+
 	"\n"+
-	"Markdown lets you create HTML by entering text in a simple format that's easy to read and write.\n"+
+	"Markdown lets you create HTML by entering text in a  \n"+
+	"simple format that's easy to read and write.\n"+
 	"\n"+
 	" - Type Markdown text in the left window\n"+
 	" - See the HTML in the right\n"+
+	"   - See the HTML in the right\n"+
 	" \n"+
 	"Markdown is a lightweight markup language based on the formatting conventions that people naturally use in email.  As [John Gruber] writes on the [Markdown site] [1]:\n"+
 	"\n"+
@@ -49,6 +51,7 @@ enyo.kind({
 								className: "output-scroller",
 								components: [
 									{kind: "BasicRichText",
+										name: "editor",
 										flex: 10,
 										value: example,
 										richContent: false,
@@ -98,11 +101,15 @@ enyo.kind({
 	],
 	generateMarkdown: function() {
 		var converter = new Showdown.converter();
-		this.$.htmlContent.setContent(converter.makeHtml(this.$.basicRichText.value));
+		var value = this.$.editor.getText();
+		//value = value.replace(/ /g,'-');
+		console.log(value);
+		this.$.htmlContent.setContent(converter.makeHtml(value));
+		//this.$.htmlContent.setContent(converter.makeHtml(example));
 	},
 	barMoved: function(event) {
 /*		if(event.slidePosition == 0) // buggy with on screen keyboard
-			this.$.basicRichText.forceFocus();
+			this.$.editor.forceFocus();
 */
 	},
 	htmlContentLinkClick: function(sender, url) {
@@ -115,6 +122,6 @@ enyo.kind({
 		this.$.filePicker.pickFile();
 	},
 	handleFile: function(inSender, msg) {
-		this.$.basicRichText.value = enyo.json.stringify(msg);
+		this.$.editor.value = enyo.json.stringify(msg);
 	}
 });
