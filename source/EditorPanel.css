@@ -10,6 +10,7 @@
 	background-color: #ffffff;
 	padding: 10px;
 	margin: 0px;
+	white-space: pre-wrap;
 }
 
 .output-preview {
@@ -44,7 +45,8 @@
 	background-repeat: repeat-y;
 }
 
-blockquote {
+.output-preview blockquote {
+	margin: 0px;
 	margin-left: 0px;
 	padding: 1px;
 	padding-left: 10px;
@@ -52,7 +54,16 @@ blockquote {
 	background-color: #DADADA;
 }
 
-blockquote blockquote {
+.output-preview blockquote blockquote {
 	border-left: 5px solid #BABABA;
 	background-color: #CACACA;
+}
+
+.output-preview pre {
+	font-family: Courier, monospace;
+	font-size: 80%;
+	white-space: pre-wrap;
+	padding: 10px;
+	border-top: 5px solid #DADADA;
+	background-color: #EAEAEA;
 }

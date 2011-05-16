@@ -101,9 +101,8 @@ enyo.kind({
 	],
 	generateMarkdown: function() {
 		var converter = new Showdown.converter();
-		var value = this.$.editor.getText();
-		//value = value.replace(/ /g,'-');
-		console.log(value);
+		
+		var value = this.$.editor.getValue();
 		this.$.htmlContent.setContent(converter.makeHtml(value));
 		//this.$.htmlContent.setContent(converter.makeHtml(example));
 	},
