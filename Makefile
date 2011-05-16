@@ -9,10 +9,10 @@ DEVICE = tcp
 .PHONY: web
 
 web:
-	chromium-browser --disable-web-security --allow-file-access-from-files index.html &
+	chromium-browser --disable-web-security --allow-file-access-from-files index.html &> /dev/null &
 	
 help:
-	chromium-browser --disable-web-security --allow-file-access-from-files ../Enyo/0.9/support/docs/api/index.html &
+	chromium-browser --disable-web-security --allow-file-access-from-files ../Enyo/0.9/support/docs/api/index.html &> /dev/null &
 	
 	
 %.ipk:
