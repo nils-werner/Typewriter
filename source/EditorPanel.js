@@ -131,6 +131,7 @@ enyo.kind({
 	barMoved: function(event) {
 		if(event.slidePosition == 0) { // down position
 			this.position = "down";
+			this.$.editorScroller.setScrollTop(this.$.previewScroller.scrollTop/this.$.previewScroller.getBoundaries().bottom*this.$.editorScroller.getBoundaries().bottom);
 			//this.$.editor.forceFocus(); // buggy with on screen keyboard
 			this.$.print.addClass("enyo-button-disabled");
 			this.$.print.disabled = true;
