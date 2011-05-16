@@ -51,6 +51,7 @@ enyo.kind({
 						{kind: "HFlexBox", flex: 1, components: [
 							{className: "desk-left", flex: 1},
 							{kind: "BasicScroller",
+								name:"editorScroller",
 								flex: 10,
 								autoHorizontal: false,
 								horizontal: false,
@@ -92,6 +93,7 @@ enyo.kind({
 						{kind: "HFlexBox", flex: 1, components: [
 							{className: "desk-left", flex: 1},
 							{kind: "BasicScroller",
+								name:"previewScroller",
 								flex: 10,
 								autoHorizontal: false,
 								horizontal: false,
@@ -137,6 +139,7 @@ enyo.kind({
 		}
 		else {  // up position
 			this.position = "up";
+			this.$.previewScroller.setScrollTop(this.$.editorScroller.scrollTop);
 			this.$.print.removeClass("enyo-button-disabled");
 			this.$.print.disabled = false;
 			
