@@ -72,15 +72,15 @@ enyo.kind({
 						{kind: "GrabButton", className: "HGrabButton"},
 						{kind: "Spacer"},
 						{kind: "ToolButtonGroup", className: "enyo-toolbutton-dark", components: [
-							{caption: "Headline"},
-							{caption: "List"},
-							{caption: "Link"},
-							{caption: "Quote"},
-							{caption: "Image"},
+							{caption: "Headline", className: "markuphelper"},
+							{caption: "List", className: "markuphelper"},
+							{caption: "Link", className: "markuphelper"},
+							{caption: "Quote", className: "markuphelper"},
+							{caption: "Image", className: "markuphelper"},
 						]},
 						{kind: "Spacer"},
 						{kind: "ToolButtonGroup", className: "enyo-toolbutton-dark", components: [
-							{caption: "Print", name:"print"}
+							{caption: "Print", name:"print", onclick: "printDocument"}
 						]}
 					]},
 					{kind: "VFlexBox", flex: 1, components: [
@@ -114,12 +114,26 @@ enyo.kind({
 		//this.$.htmlContent.setContent(converter.makeHtml(example));
 	},
 	barMoved: function(event) {
-		if(event.slidePosition == 0) { // buggy with on screen keyboard
-			//this.$.editor.forceFocus();
+		if(event.slidePosition == 0) { // down position
+			this.position = "down";
+			//this.$.editor.forceFocus(); // buggy with on screen keyboard
+			this.$.print.addClass("enyo-button-disabled");
 			this.$.print.disabled = true;
+			
+			//this.$$.select(".markuphelper").each(function(item) {
+			//	item.removeClass("enyo-button-disabled");
+			//	item.disabled = false;
+			//});
 		}
-		else {
+		else {  // up position
+			this.position = "up";
+			this.$.print.removeClass("enyo-button-disabled");
 			this.$.print.disabled = false;
+			
+			//this.$$.select(".markuphelper").each(function(item) {
+			//	item.addClass("enyo-button-disabled");
+			//	item.disabled = true;
+			//});
 		}
 
 		this.generateMarkdown();
@@ -129,6 +143,14 @@ enyo.kind({
 		r.service = "palm://com.palm.applicationManager/";
 		r.method = "open";
 		r.call({target: url});
+	},
+	printDocument: function() {
+		if(this.position == "down") {
+			alert("Preview first!");
+		}
+		else {
+			alert("Printing");
+		}
 	},
 	openFile: function() {
 		this.$.filePicker.pickFile();
