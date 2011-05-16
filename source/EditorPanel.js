@@ -41,11 +41,12 @@ enyo.kind({
 					{kind: "Header", components: [
 						{kind:"Image", "src":"images/icon.png"},
 						{content: "Typewriter", "style": "padding-left: 10px;"},
-						{kind: "Spacer"},
+						{kind: "Spacer", flex: 11},
 						{kind: "ToolButtonGroup", components: [
 							{caption: "Save File", onclick: "saveFile"},
 							{caption: "Open File...", onclick: "openFile"}
-						]}
+						]},
+						{kind: "Spacer"}
 					]},
 					{kind: "VFlexBox", flex: 1, components: [
 						{kind: "HFlexBox", flex: 1, components: [
@@ -84,10 +85,12 @@ enyo.kind({
 							{caption: "Quote", className: "markuphelper"},
 							{caption: "Image", className: "markuphelper"},
 						]},
-						{kind: "Spacer"},
+						{kind: "Spacer", flex: 10},
 						{kind: "ToolButtonGroup", className: "enyo-toolbutton-dark", components: [
 							{caption: "Print", name:"print", onclick: "printDocument"}
-						]}
+						]},
+						{kind: "Spacer"},
+						{kind: "GrabButton", className: "HGrabButton Right"},
 					]},
 					{kind: "VFlexBox", flex: 1, components: [
 						{kind: "HFlexBox", flex: 1, components: [

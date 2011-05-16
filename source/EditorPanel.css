@@ -33,6 +33,11 @@
 	-webkit-transform: rotate(90deg);
 }
 
+.HGrabButton.Right {
+	left: auto;
+	right: 0px;
+}
+
 .desk-right {
 	background-image: url(../images/desk-right.png);
 	background-position: left;
