@@ -29,7 +29,7 @@
 
 .HGrabButton {
 	position: absolute;
-	top: 5px;
+	top: 3px;
 	-webkit-transform: rotate(90deg);
 }
 
