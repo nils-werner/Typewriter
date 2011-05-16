@@ -105,6 +105,11 @@ enyo.kind({
 			]}
 		]},
 		{name:'filePicker', kind: "FilePicker", fileType:["image"], allowMultiSelect:false, onPickFile: "handleFile"},
+		{kind: "PrintDialog", 
+			duplexOption: true,
+			frameToPrint: {name:"preview", landscape:false},
+			appName: "Typewriter"
+		}
 	],
 	generateMarkdown: function() {
 		var converter = new Showdown.converter();
@@ -149,7 +154,7 @@ enyo.kind({
 			alert("Preview first!");
 		}
 		else {
-			alert("Printing");
+			this.$.printDialog.openAtCenter();
 		}
 	},
 	openFile: function() {
