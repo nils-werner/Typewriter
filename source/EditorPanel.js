@@ -8,8 +8,8 @@ var example = ""+
 	"Markdown lets you create HTML by entering text in a  \n"+
 	"simple format that's easy to read and write.\n"+
 	"\n"+
-	" - Type Markdown text in the window\n"+
-	" - See the HTML after dragging up the toolbar\n"+
+	" - Type Markdown text [in the window][editor]\n"+
+	" - See the HTML after [dragging up the toolbar][preview]\n"+
 	" \n"+
 	"Markdown is a lightweight markup language based on the formatting conventions that people naturally use in email.  As [John Gruber] writes on the [Markdown site] [1]:\n"+
 	"\n"+
@@ -23,8 +23,13 @@ var example = ""+
 	"\n"+
 	"This document is written in Markdown; you are currently seeing the plaintext version. To get a feel for Markdown's syntax, type some text into the window and *pull up the toolbar*.\n"+
 	"\n"+
+	"Or go right ahead, [clear the editor][clear] and start typing.\n"+
+	"\n"+
 	"  [john gruber]: http://daringfireball.net/\n"+
-	"  [1]: http://daringfireball.net/projects/markdown/";
+	"  [1]: http://daringfireball.net/projects/markdown/\n"+
+	"  [editor]: #about:editor\n"+
+	"  [preview]: #about:preview\n"+
+	"  [clear]: #about:clear";
 
 enyo.kind({
 	name: "EditorPanel",
@@ -144,10 +149,24 @@ enyo.kind({
 		this.generateMarkdown();
 	},
 	htmlContentLinkClick: function(sender, url) {
-		var r = new enyo.PalmService();
-		r.service = "palm://com.palm.applicationManager/";
-		r.method = "open";
-		r.call({target: url});
+		var splits = url.split(/#/).slice(-1).pop();
+		switch(splits) {
+			case "about:clear":
+				this.$.editor.value = "";
+			case "about:editor":
+				this.$.top.slideFromOutOfView();
+				return false;
+				break;
+			case "about:preview":
+				this.$.bottom.slideFromOutOfView();
+				return false;
+				break;
+			default:
+				var r = new enyo.PalmService();
+				r.service = "palm://com.palm.applicationManager/";
+				r.method = "open";
+				r.call({target: url});
+		}
 	},
 	printDocument: function() {
 		if(this.position == "down") {
