@@ -79,11 +79,11 @@ enyo.kind({
 						{kind: "GrabButton", className: "HGrabButton"},
 						{kind: "Spacer"},
 						{kind: "ToolButtonGroup", className: "enyo-toolbutton-dark", components: [
-							{caption: "Headline", className: "markuphelper"},
-							{caption: "List", className: "markuphelper"},
-							{caption: "Link", className: "markuphelper"},
-							{caption: "Quote", className: "markuphelper"},
-							{caption: "Image", className: "markuphelper"},
+							{caption: "Headline", name:"markupheadline", className: "markuphelper"},
+							{caption: "List", name:"markuplist", className: "markuphelper"},
+							{caption: "Link", name:"markuplink", className: "markuphelper"},
+							{caption: "Quote", name:"markupquote", className: "markuphelper"},
+							{caption: "Image", name:"markupimage", className: "markuphelper"},
 						]},
 						{kind: "Spacer", flex: 10},
 						{kind: "ToolButtonGroup", className: "enyo-toolbutton-dark", components: [
@@ -140,6 +140,17 @@ enyo.kind({
 			//	item.removeClass("enyo-button-disabled");
 			//	item.disabled = false;
 			//});
+			
+			this.$.markupheadline.removeClass("enyo-button-disabled");
+			this.$.markuplist.removeClass("enyo-button-disabled");
+			this.$.markuplink.removeClass("enyo-button-disabled");
+			this.$.markupquote.removeClass("enyo-button-disabled");
+			this.$.markupimage.removeClass("enyo-button-disabled");
+			this.$.markupheadline.disabled = false;
+			this.$.markuplist.disabled = false;
+			this.$.markuplink.disabled = false;
+			this.$.markupquote.disabled = false;
+			this.$.markupimage.disabled = false;
 		}
 		else {  // up position
 			this.position = "up";
@@ -151,6 +162,17 @@ enyo.kind({
 			//	item.addClass("enyo-button-disabled");
 			//	item.disabled = true;
 			//});
+			
+			this.$.markupheadline.addClass("enyo-button-disabled");
+			this.$.markuplist.addClass("enyo-button-disabled");
+			this.$.markuplink.addClass("enyo-button-disabled");
+			this.$.markupquote.addClass("enyo-button-disabled");
+			this.$.markupimage.addClass("enyo-button-disabled");
+			this.$.markupheadline.disabled = true;
+			this.$.markuplist.disabled = true;
+			this.$.markuplink.disabled = true;
+			this.$.markupquote.disabled = true;
+			this.$.markupimage.disabled = true;
 		}
 
 		this.generateMarkdown();
