@@ -82,8 +82,8 @@ enyo.kind({
 				components: [
 					{kind: "Header", className: "enyo-toolbar fake-toolbar", components: [
 						{kind: "GrabButton", className: "HGrabButton"},
-						{kind: "Spacer"},
-						{kind: "ToolButtonGroup", className: "enyo-toolbutton-dark", components: [
+						{kind: "Spacer", flex: 18},
+						/*{kind: "ToolButtonGroup", className: "enyo-toolbutton-dark", components: [
 							{caption: "Headline", name:"markupheadline", className: "markuphelper", onclick:"markupHeadline" },
 							{caption: "List", name:"markuplist", className: "markuphelper", onclick:"markupList" },
 							{caption: "Link", name:"markuplink", className: "markuphelper", onclick:"markupLink" },
@@ -92,6 +92,7 @@ enyo.kind({
 							{caption: "Image", name:"markupimage", className: "markuphelper", onclick:"markupImage" },
 						]},
 						{kind: "Spacer", flex: 10},
+						*/
 						{kind: "ToolButtonGroup", className: "enyo-toolbutton-dark", components: [
 							{caption: "Print", name:"print", onclick: "printDocument"}
 						]},
@@ -143,6 +144,7 @@ enyo.kind({
 			//	item.disabled = false;
 			//});
 			
+			/*
 			this.$.markupheadline.removeClass("enyo-button-disabled");
 			this.$.markuplist.removeClass("enyo-button-disabled");
 			this.$.markuplink.removeClass("enyo-button-disabled");
@@ -155,6 +157,7 @@ enyo.kind({
 			this.$.markupquote.disabled = false;
 			this.$.markupcode.disabled = false;
 			this.$.markupimage.disabled = false;
+			*/
 		}
 		else {  // up position
 			this.position = "up";
@@ -167,6 +170,7 @@ enyo.kind({
 			//	item.disabled = true;
 			//});
 			
+			/*
 			this.$.markupheadline.addClass("enyo-button-disabled");
 			this.$.markuplist.addClass("enyo-button-disabled");
 			this.$.markuplink.addClass("enyo-button-disabled");
@@ -179,6 +183,7 @@ enyo.kind({
 			this.$.markupquote.disabled = true;
 			this.$.markupcode.disabled = true;
 			this.$.markupimage.disabled = true;
+			*/
 		}
 
 		this.generateMarkdown();
