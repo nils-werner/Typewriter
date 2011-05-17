@@ -84,11 +84,12 @@ enyo.kind({
 						{kind: "GrabButton", className: "HGrabButton"},
 						{kind: "Spacer"},
 						{kind: "ToolButtonGroup", className: "enyo-toolbutton-dark", components: [
-							{caption: "Headline", name:"markupheadline", className: "markuphelper"},
-							{caption: "List", name:"markuplist", className: "markuphelper"},
-							{caption: "Link", name:"markuplink", className: "markuphelper"},
-							{caption: "Quote", name:"markupquote", className: "markuphelper"},
-							{caption: "Image", name:"markupimage", className: "markuphelper"},
+							{caption: "Headline", name:"markupheadline", className: "markuphelper", onclick:"markupHeadline" },
+							{caption: "List", name:"markuplist", className: "markuphelper", onclick:"markupList" },
+							{caption: "Link", name:"markuplink", className: "markuphelper", onclick:"markupLink" },
+							{caption: "Quote", name:"markupquote", className: "markuphelper", onclick:"markupQuote" },
+							{caption: "Code", name:"markupcode", className: "markuphelper", onclick:"markupCode" },
+							{caption: "Image", name:"markupimage", className: "markuphelper", onclick:"markupImage" },
 						]},
 						{kind: "Spacer", flex: 10},
 						{kind: "ToolButtonGroup", className: "enyo-toolbutton-dark", components: [
@@ -126,13 +127,9 @@ enyo.kind({
 			appName: "Typewriter"
 		}
 	],
-	generateMarkdown: function() {
-		var converter = new Showdown.converter();
-		
-		var value = this.$.editor.getValue();
-		this.$.preview.setContent(converter.makeHtml(value));
-		//this.$.htmlContent.setContent(converter.makeHtml(example));
-	},
+	
+	/* PREVIEW HANDLING */
+	
 	barMoved: function(event) {
 		if(event.slidePosition == 0) { // down position
 			this.position = "down";
@@ -150,11 +147,13 @@ enyo.kind({
 			this.$.markuplist.removeClass("enyo-button-disabled");
 			this.$.markuplink.removeClass("enyo-button-disabled");
 			this.$.markupquote.removeClass("enyo-button-disabled");
+			this.$.markupcode.removeClass("enyo-button-disabled");
 			this.$.markupimage.removeClass("enyo-button-disabled");
 			this.$.markupheadline.disabled = false;
 			this.$.markuplist.disabled = false;
 			this.$.markuplink.disabled = false;
 			this.$.markupquote.disabled = false;
+			this.$.markupcode.disabled = false;
 			this.$.markupimage.disabled = false;
 		}
 		else {  // up position
@@ -172,15 +171,24 @@ enyo.kind({
 			this.$.markuplist.addClass("enyo-button-disabled");
 			this.$.markuplink.addClass("enyo-button-disabled");
 			this.$.markupquote.addClass("enyo-button-disabled");
+			this.$.markupcode.addClass("enyo-button-disabled");
 			this.$.markupimage.addClass("enyo-button-disabled");
 			this.$.markupheadline.disabled = true;
 			this.$.markuplist.disabled = true;
 			this.$.markuplink.disabled = true;
 			this.$.markupquote.disabled = true;
+			this.$.markupcode.disabled = true;
 			this.$.markupimage.disabled = true;
 		}
 
 		this.generateMarkdown();
+	},
+	generateMarkdown: function() {
+		var converter = new Showdown.converter();
+		
+		var value = this.$.editor.getValue();
+		this.$.preview.setContent(converter.makeHtml(value));
+		//this.$.htmlContent.setContent(converter.makeHtml(example));
 	},
 	htmlContentLinkClick: function(sender, url) {
 		var splits = url.split(/#/).slice(-1).pop();
@@ -202,6 +210,9 @@ enyo.kind({
 				r.call({target: url});
 		}
 	},
+	
+	/* PRINT HANDLING */
+	
 	printDocument: function() {
 		if(this.position == "down") {
 			alert("Preview first!");
@@ -210,12 +221,35 @@ enyo.kind({
 			this.$.printDialog.openAtCenter();
 		}
 	},
+	
+	/* FILE HANDLING */
+	
 	openFile: function() {
 		this.$.filePicker.pickFile();
 	},
 	handleFile: function(inSender, msg) {
 		this.$.editor.setValue(enyo.json.stringify(msg));
 	},
+	
+	/* MARKUP CALLBACKS */
+	
+	markupHeadline: function() {
+	},
+	markupList: function() {
+	},
+	markupLink: function() {
+	},
+	markupQuote: function() {
+	},
+	markupCode: function() {
+	},
+	markupImage: function() {
+	},
+	
+	
+	
+	/* CONSTRUCTOR */
+	
 	ready: function() {
 		this.$.editor.forceFocus();
 	}
