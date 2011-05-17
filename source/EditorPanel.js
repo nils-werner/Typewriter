@@ -185,11 +185,11 @@ enyo.kind({
 			case "about:clear":
 				this.$.editor.value = "";
 			case "about:editor":
-				this.$.top.slideFromOutOfView();
+				this.$.slidingPane.selectView(this.$.top);
 				return false;
 				break;
 			case "about:preview":
-				this.$.bottom.slideFromOutOfView();
+				this.$.slidingPane.selectView(this.$.bottom);
 				return false;
 				break;
 			default:
