@@ -27,9 +27,9 @@ var example = ""+
 	"\n"+
 	"  [john gruber]: http://daringfireball.net/\n"+
 	"  [1]: http://daringfireball.net/projects/markdown/\n"+
-	"  [editor]: #about:editor\n"+
-	"  [preview]: #about:preview\n"+
-	"  [clear]: #about:clear";
+	"  [editor]: #editor\n"+
+	"  [preview]: #preview\n"+
+	"  [clear]: #clear";
 
 enyo.kind({
 	name: "EditorPanel",
@@ -180,13 +180,13 @@ enyo.kind({
 	htmlContentLinkClick: function(sender, url) {
 		var splits = url.split(/#/).slice(-1).pop();
 		switch(splits) {
-			case "about:clear":
+			case "clear":
 				this.$.editor.setValue("");
-			case "about:editor":
+			case "editor":
 				this.$.slidingPane.selectView(this.$.top);
 				return false;
 				break;
-			case "about:preview":
+			case "preview":
 				this.$.slidingPane.selectView(this.$.bottom);
 				return false;
 				break;
