@@ -3,14 +3,17 @@ var example = ""+
 	"Typewriter\n"+
 	"==========\n"+
 	"\n"+
-	"Welcome to Typewriter, a Markdown editor for the HP TouchPad.\n"+
+	"Welcome to *Typewriter*, a Markdown editor for the HP TouchPad.\n"+
 	"\n"+
-	"Markdown lets you create HTML by entering text in a  \n"+
-	"simple format that's easy to read and write.\n"+
+	"Markdown lets you create HTML documents by entering text in a simple format that's easy to read and write. No bells and whistles, just you and your text.\n"+
 	"\n"+
-	" - Type Markdown text [in the window][editor]\n"+
-	" - See the HTML after [dragging up the toolbar][preview]\n"+
+	"To create a document simply do:\n"+
+	"\n"+
+	" 1. Type Markdown text [in the editor][editor]\n"+
+	" 2. Preview the document after [dragging up the toolbar][preview]\n"+
 	" \n"+
+	"Markdown\n"+
+	"--------\n"+
 	"Markdown is a lightweight markup language based on the formatting conventions that people naturally use in email.  As [John Gruber] writes on the [Markdown site] [1]:\n"+
 	"\n"+
 	"> The overriding design goal for Markdown's\n"+
@@ -23,7 +26,9 @@ var example = ""+
 	"\n"+
 	"This document is written in Markdown; you are currently seeing the plaintext version. To get a feel for Markdown's syntax, type some text into the window and *pull up the toolbar*.\n"+
 	"\n"+
-	"Or go right ahead, [clear the editor][clear] and start typing.\n"+
+	"What next?\n"+
+	"----------\n"+
+	"Go right ahead, [clear the editor][clear] and start typing.\n"+
 	"\n"+
 	"  [john gruber]: http://daringfireball.net/\n"+
 	"  [1]: http://daringfireball.net/projects/markdown/\n"+
