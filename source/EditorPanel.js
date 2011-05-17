@@ -181,7 +181,7 @@ enyo.kind({
 		var splits = url.split(/#/).slice(-1).pop();
 		switch(splits) {
 			case "about:clear":
-				this.$.editor.value = "";
+				this.$.editor.setValue("");
 			case "about:editor":
 				this.$.slidingPane.selectView(this.$.top);
 				return false;
@@ -209,7 +209,7 @@ enyo.kind({
 		this.$.filePicker.pickFile();
 	},
 	handleFile: function(inSender, msg) {
-		this.$.editor.value = enyo.json.stringify(msg);
+		this.$.editor.setValue(enyo.json.stringify(msg));
 	},
 	ready: function() {
 		this.$.editor.forceFocus();
