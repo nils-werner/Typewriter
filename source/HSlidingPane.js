@@ -145,6 +145,8 @@ enyo.kind({
 			this.showHideShadows(true);
 		}
 		//
+		if(s.slidePosition - s.calcSlide() > 0)
+			this.view.resizeLastSibling();
 		this.$.animator.play(s.slidePosition, s.calcSlide());
 	},
 	stepAnimation: function(inSender, inValue) {
