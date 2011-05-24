@@ -6,11 +6,18 @@
 }
 
 .editor-input {
-	font-family: Courier, monospace;
 	background-color: #ffffff;
 	padding: 10px;
 	margin: 0px;
+}
+
+.editor-input, .markdownHelper {
+	font-family: Courier, monospace;
 	white-space: pre-wrap;
+}
+
+.markdownHelper {
+	font-size: 12pt;
 }
 
 .output-preview {

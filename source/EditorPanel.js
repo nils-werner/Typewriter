@@ -27,9 +27,10 @@ var example = ""+
 	"\n"+
 	"This document is written in Markdown; you are currently seeing the plaintext version. To get a feel for Markdown's syntax, type some text into the window and *pull up the toolbar*.\n"+
 	"\n"+
-	"What next?\n"+
+	"What's next?\n"+
 	"----------\n"+
-	"Go right ahead, [clear the editor][clear] and start typing.\n"+
+	"\n"+
+	"Go right ahead, [clear the editor][clear] and start typing. And don't mind the style, just mind your words. It'll come out alright by itself.\n"+
 	"\n"+
 	"  [john gruber]: http://daringfireball.net/\n"+
 	"  [markdown]: http://daringfireball.net/projects/markdown/\n"+
@@ -95,6 +96,7 @@ enyo.kind({
 						{kind: "Spacer", flex: 10},
 						*/
 						{kind: "ToolButtonGroup", className: "enyo-toolbutton-dark", components: [
+							{caption: "Syntax", name:"help", onclick: "showHelp"},
 							{caption: "Print", name:"print", onclick: "printDocument"}
 						]},
 						{kind: "Spacer"},
@@ -127,7 +129,40 @@ enyo.kind({
 			duplexOption: true,
 			frameToPrint: {name:"preview", landscape:false},
 			appName: "Typewriter"
-		}
+		},
+		{name: 'markdownHelper', kind: "Popup", components: [
+				{kind: "Item", className: "markdownHelper enyo-first", content: ""+
+					"Headline 1\n" + 
+					"==========\n" + 
+					"Headline 2\n" + 
+					"----------\n" +
+					"### Headline 3"
+				},
+				{kind: "Item", className: "markdownHelper", content: ""+
+					"Paragraphs are separated by an empty line\n" + 
+					"\n" + 
+					"Linebreaks are preceded by two spaces at the end of the line"
+				},
+				{kind: "Item", className: "markdownHelper", content: ""+
+					" 1. Numbered Listitem\n" + 
+					" 2. Numbered Listitem \n" + 
+					"   * Nested unordered List"
+				},
+				{kind: "Item", className: "markdownHelper", content: ""+
+					"> A Quote\n" +
+					"> > A nested Quote"
+				},
+				{kind: "Item", className: "markdownHelper", content: ""+
+					"[link name][alias]\n" + 
+					"\n" + 
+					"  [alias]: http://www.google.de/"
+				},
+				{kind: "Item", className: "markdownHelper enyo-last", content: ""+
+					"    /* code */\n"+
+					"    function(x,y)..."
+				},
+
+		]}
 	],
 	
 	/* PREVIEW HANDLING */
@@ -250,6 +285,10 @@ enyo.kind({
 	markupCode: function() {
 	},
 	markupImage: function() {
+	},
+	
+	showHelp: function() {
+		this.$.markdownHelper.openAtControl(this.$.help, {left: 175});
 	},
 	
 	
