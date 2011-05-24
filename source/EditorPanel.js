@@ -5,6 +5,9 @@ var example = ""+
 	"\n"+
 	"Welcome to *Typewriter*, a Markdown editor for the HP TouchPad.\n"+
 	"\n"+
+	"Markdown\n"+
+	"--------\n"+
+	" \n"+
 	"Markdown lets you create HTML documents by entering text in a simple format that's easy to read and write. No bells and whistles, just you and your text.\n"+
 	"\n"+
 	"To create a document simply\n"+
@@ -12,8 +15,6 @@ var example = ""+
 	" 1. Type Markdown text [in the editor][editor]\n"+
 	" 2. Preview the document after [dragging up the toolbar][preview]\n"+
 	" \n"+
-	"Markdown\n"+
-	"--------\n"+
 	"Markdown is a lightweight markup language based on the formatting conventions that people naturally use in email.  As [John Gruber] writes on the [Markdown site][markdown]:\n"+
 	"\n"+
 	"> The overriding design goal for Markdown's\n"+
