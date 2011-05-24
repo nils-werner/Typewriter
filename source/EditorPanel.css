@@ -72,10 +72,16 @@
 
 .output-preview h1 ~ p {
 	text-align: center;
+	font-size: 13pt;
+}
+
+.output-preview h1 + p {
+	font-size: 16pt;
 }
 
 .output-preview h2 ~ p {
 	text-align: left;
+	font-size: 14pt;
 }
 
 .output-preview h1 ~ h2 {
