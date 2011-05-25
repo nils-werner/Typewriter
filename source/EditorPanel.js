@@ -8,7 +8,7 @@ var example = ""+
 	"Markdown\n"+
 	"--------\n"+
 	" \n"+
-	"Markdown lets you create HTML documents by entering text in a simple format that's easy to read and write. No bells and whistles, just you and your text.\n"+
+	"Markdown lets you create richtext documents by entering text in a simple format that's easy to read and write. No bells and whistles, just you and your text.\n"+
 	"\n"+
 	"To create a document simply\n"+
 	"\n"+
@@ -139,7 +139,6 @@ enyo.kind({
 							"==========\n" + 
 							"\n" +
 							"Headline 2\n" + 
-							"\n" +
 							"----------\n" +
 							"\n" +
 							"### Headline 3"
@@ -297,7 +296,7 @@ enyo.kind({
 			*/
 		}
 
-		this.generateMarkdown();
+		//this.generateMarkdown();
 	},
 	generateMarkdown: function() {
 		var converter = new Showdown.converter();
@@ -375,6 +374,7 @@ enyo.kind({
 	/* CONSTRUCTOR */
 	
 	ready: function() {
+		this.generateMarkdown();
 		this.$.editor.forceFocus();
 	}
 });
