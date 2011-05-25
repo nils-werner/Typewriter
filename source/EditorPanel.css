@@ -127,3 +127,11 @@
 	border-top: 5px solid #DADADA;
 	background-color: #EAEAEA;
 }
+
+.output-preview hr {
+	border: none;
+	height: 1px;
+	background-image: url(../images/h1-border.png);
+	background-repeat: no-repeat;
+	background-position: 50% 0%;
+}
