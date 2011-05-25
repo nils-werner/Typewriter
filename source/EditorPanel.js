@@ -96,7 +96,8 @@ enyo.kind({
 						{kind: "Spacer", flex: 10},
 						*/
 						{kind: "ToolButtonGroup", className: "enyo-toolbutton-dark", components: [
-							{caption: "Syntax", name:"help", onclick: "showHelp"},
+							{caption: "Syntax", name:"helpmarkdown", onclick: "helpMarkdown"},
+							{caption: "Typewriter", name:"helptypewriter", onclick: "helpTypewriter"},
 							{caption: "Print", name:"print", onclick: "printDocument"}
 						]},
 						{kind: "Spacer"},
@@ -130,38 +131,112 @@ enyo.kind({
 			frameToPrint: {name:"preview", landscape:false},
 			appName: "Typewriter"
 		},
-		{name: 'markdownHelper', kind: "Popup", components: [
-				{kind: "Item", className: "markdownHelper enyo-first", content: ""+
-					"Headline 1\n" + 
-					"==========\n" + 
-					"Headline 2\n" + 
-					"----------\n" +
-					"### Headline 3"
-				},
-				{kind: "Item", className: "markdownHelper", content: ""+
-					"Paragraphs are separated by an empty line\n" + 
-					"\n" + 
-					"Linebreaks are preceded by two spaces at the end of the line"
-				},
-				{kind: "Item", className: "markdownHelper", content: ""+
-					" 1. Numbered Listitem\n" + 
-					" 2. Numbered Listitem \n" + 
-					"   * Nested unordered List"
-				},
-				{kind: "Item", className: "markdownHelper", content: ""+
-					"> A Quote\n" +
-					"> > A nested Quote"
-				},
-				{kind: "Item", className: "markdownHelper", content: ""+
-					"[link name][alias]\n" + 
-					"\n" + 
-					"  [alias]: http://www.google.de/"
-				},
-				{kind: "Item", className: "markdownHelper enyo-last", content: ""+
-					"    /* code */\n"+
-					"    function(x,y)..."
-				},
+		{name: 'markdownHelper', kind: "Popup", defaultKind: "Item", components: [
+				{className: "enyo-first", components: [
+					{kind: "HFlexBox", components: [
+						{className: "markdownHelper", flex: 1, content: ""+
+							"Headline 1\n" + 
+							"==========\n" + 
+							"\n" +
+							"Headline 2\n" + 
+							"\n" +
+							"----------\n" +
+							"\n" +
+							"### Headline 3"
+						},
+						{kind: "Label", content:"Headlines"}
+					]}
+				]},
+				{components: [
+					{kind: "HFlexBox", components: [
+						{className: "markdownHelper", flex: 1, content: ""+
+							"Paragraphs are separated by an empty line\n" + 
+							"\n" + 
+							"Linebreaks are preceded by two spaces at the end of the line"
+						},
+						{kind: "Label", content:"Paragraphs"}
+					]}
+				]},
+				{components: [
+					{kind: "HFlexBox", components: [
+						{className: "markdownHelper", flex: 1, content: ""+
+							" 1. Numbered Listitem\n" + 
+							" 2. Numbered Listitem \n" + 
+							"   * Nested unordered List"
+						},
+						{kind: "Label", content:"Lists"}
+					]}
+				]},
+				{components: [
+					{kind: "HFlexBox", components: [
+						{className: "markdownHelper", flex: 1, content: ""+
+							"> A Quote\n" +
+							"> > A nested Quote"
+						},
+						{kind: "Label", content:"Quotes"}
+					]}
+				]},
+				{components: [
+					{kind: "HFlexBox", components: [
+						{className: "markdownHelper", flex: 1, content: ""+
+							"----"
+						},
+						{kind: "Label", content:"Horizontal Rules"}
+					]}
+				]},
+				{components: [
+					{kind: "HFlexBox", components: [
+						{className: "markdownHelper", flex: 1, content: ""+
+							"[link name][alias]\n" + 
+							"\n" + 
+							"  [alias]: http://www.google.de/"
+						},
+						{kind: "Label", content:"Links"}
+					]}
+				]},
+				{className: "enyo-last", components: [
+					{kind: "HFlexBox", components: [
+						{className: "markdownHelper", flex: 1, content: ""+
+							"    /* indented by 4 or more spaces */\n"+
+							"    function(x,y)..."
+						},
+						{kind: "Label", content:"Code"}
+					]}
+				]},
 
+		]},
+		{name: 'typewriterHelper', kind: "Popup", defaultKind:"Item", components: [
+				{className: "enyo-first", components: [
+					{kind: "HFlexBox", components: [
+						{className: "markdownHelper", flex: 1, content: ""+
+							"Title of Work\n" + 
+							"=============\n" +
+							"\n" +
+							"This text is styled to resemble a cover page\n" +
+							"\n" +
+							"----\n" +
+							"\n" +
+							"The horizontal ruler (above) makes this become regular text"
+						},
+						{kind: "Label", content:"Cover Page"}
+					]}
+				]},
+				{className: "enyo-last", components: [
+					{kind: "HFlexBox", components: [
+						{className: "markdownHelper", flex: 1, content: ""+
+					"Title of Work\n" + 
+					"=============\n" +
+					"\n" +
+					"This text is styled to resemble a cover page\n" +
+					"\n" +
+					"First Chapter\n" +
+					"-------------\n" +
+					"\n" +
+					"This text is not on the cover page but the first chapter"
+						},
+						{kind: "Label", content:"Cover Page"}
+					]}
+				]},
 		]}
 	],
 	
@@ -287,9 +362,13 @@ enyo.kind({
 	markupImage: function() {
 	},
 	
-	showHelp: function() {
-		this.$.markdownHelper.openAtControl(this.$.help, {left: 175});
+	helpMarkdown: function() {
+		this.$.markdownHelper.openAtControl(this.$.helpmarkdown, {left: 170});
 	},
+	helpTypewriter: function() {
+		this.$.typewriterHelper.openAtControl(this.$.helptypewriter, {left: 220});
+	},
+
 	
 	
 	

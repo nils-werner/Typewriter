@@ -2,6 +2,7 @@
 enyo.depends(
 	"source/HSlidingPane.js",
 	"source/HSlidingView.js",
+	"source/kinds/Label.js",
 	"source/showdown/compressed/showdown.js",
 	"$enyo-lib/printdialog/",
 	"source/EditorPanel.js",
