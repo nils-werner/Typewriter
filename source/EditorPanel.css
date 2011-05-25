@@ -86,7 +86,7 @@
 	font-size: 16pt;
 }
 
-.output-preview h2 ~ p {
+.output-preview h2 ~ p, .output-preview hr ~ p {
 	text-align: left;
 	font-size: 14pt;
 }
@@ -99,10 +99,28 @@
 	background-position: 50% 0%;
 }
 
-.output-preview h2 ~ h2 {
+.output-preview h2 ~ h2, .output-preview hr ~ h2 {
 	margin-top: 24px;
 	padding-top: 0px;
 	background-image: none;
+}
+
+.output-preview hr {
+	border: none;
+	height: 1px;
+	background-image: url(../images/h1-border.png);
+	background-repeat: no-repeat;
+	background-position: 50% 0%;
+}
+
+.output-preview h1 ~ hr {
+	margin-top: 60px;
+	margin-bottom: 80px;
+}
+
+.output-preview h2 ~ hr, .output-preview hr ~ hr {
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 .output-preview blockquote {
@@ -126,12 +144,4 @@
 	padding: 10px;
 	border-top: 5px solid #DADADA;
 	background-color: #EAEAEA;
-}
-
-.output-preview hr {
-	border: none;
-	height: 1px;
-	background-image: url(../images/h1-border.png);
-	background-repeat: no-repeat;
-	background-position: 50% 0%;
 }
