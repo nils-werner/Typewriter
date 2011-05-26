@@ -43,7 +43,7 @@ enyo.kind({
 	kind: enyo.HFlexBox,
 	components: [
 		{name: "slidingPane", kind: "HSlidingPane", flex: 1, multiViewMinHeight:1, components: [
-			{name: "top", height: "100%", kind:"HSlidingView", 
+			{name: "top",flex: 1, kind:"HSlidingView", 
 				components: [
 					{kind: "Header", components: [
 						{kind:"Image", "src":"images/icon.png"},
