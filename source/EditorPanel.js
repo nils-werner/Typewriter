@@ -71,7 +71,8 @@ enyo.kind({
 										value: example,
 										richContent: false,
 										className: "editor-input",
-										onblur: "generateMarkdown"
+										onblur: "generateMarkdown",
+										onfocus: "showKeyboard"
 									}
 								]
 							},
@@ -367,6 +368,9 @@ enyo.kind({
 	helpTypewriter: function() {
 		this.$.typewriterHelper.openAtControl(this.$.helptypewriter, {left: 220});
 	},
+	showKeyboard: function() {
+		enyo.keyboard.show();
+	},
 
 	
 	
@@ -374,6 +378,8 @@ enyo.kind({
 	/* CONSTRUCTOR */
 	
 	ready: function() {
+		enyo.keyboard.setManualMode(true);
+		enyo.keyboard.show();
 		this.generateMarkdown();
 		this.$.editor.forceFocus();
 	}
