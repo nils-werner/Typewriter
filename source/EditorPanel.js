@@ -41,6 +41,7 @@ enyo.kind({
 					]}
 			]},
 			{name: "bottom", kind:"HSlidingView", height: "62px", flex:0, //peekHeight: 54,
+				duringAnimation: function() { this.pane.validateViews(); },
 				onResize: "barMoved",
 				components: [
 					{kind: "Header", className: "enyo-toolbar fake-toolbar", components: [
