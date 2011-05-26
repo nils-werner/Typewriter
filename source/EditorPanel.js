@@ -19,18 +19,17 @@ enyo.kind({
 						{kind: "Spacer"}
 					]},
 					{kind: "VFlexBox", flex: 1, components: [
-						{kind: "HFlexBox", flex: 1, components: [
-							{className: "desk-left", flex: 1},
+						{kind: "HFlexBox", flex: 1, pack: "center", components: [
+							{className: "desk-left", flex: 1, overflow: "hidden" },
 							{kind: "BasicScroller",
 								name:"editorScroller",
-								flex: 10,
+								width: "760px",
 								autoHorizontal: false,
 								horizontal: false,
 								className: "output-scroller",
 								components: [
 									{kind: "BasicRichText",
 										name: "editor",
-										flex: 10,
 										richContent: false,
 										className: "editor-input",
 										onblur: "generateMarkdown",
@@ -38,7 +37,7 @@ enyo.kind({
 									}
 								]
 							},
-							{className: "desk-right", flex: 1}
+							{className: "desk-right", flex: 1, overflow: "hidden" }
 						]}
 					]}
 			]},
@@ -67,11 +66,11 @@ enyo.kind({
 						{kind: "GrabButton", className: "HGrabButton Right"},
 					]},
 					{kind: "VFlexBox", flex: 1, components: [
-						{kind: "HFlexBox", flex: 1, components: [
-							{className: "desk-left", flex: 1},
+						{kind: "HFlexBox", flex: 1, pack: "center", components: [
+							{className: "desk-left", flex: 1, overflow: "hidden" },
 							{kind: "BasicScroller",
 								name:"previewScroller",
-								flex: 10,
+								width: "760px",
 								autoHorizontal: false,
 								horizontal: false,
 								className: "output-scroller",
@@ -83,7 +82,7 @@ enyo.kind({
 									}
 								]
 							},
-							{className: "desk-right", flex: 1}
+							{className: "desk-right", flex: 1, overflow: "hidden" }
 						]}
 					]}
 			]}
