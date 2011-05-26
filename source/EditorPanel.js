@@ -4,7 +4,6 @@ enyo.kind({
 	name: "EditorPanel",
 	kind: enyo.HFlexBox,
 	components: [
-		{ kind:"Demotext", name:"Demotext" },
 		{name: "slidingPane", kind: "HSlidingPane", flex: 1, multiViewMinHeight:1, components: [
 			{name: "top",flex: 1, kind:"HSlidingView", 
 				components: [
@@ -94,7 +93,8 @@ enyo.kind({
 			appName: "Typewriter"
 		},
 		{name: "markdownHelper", kind:"markdownHelper"},
-		{name: "typewriterHelper", kind:"typewriterHelper"}
+		{name: "typewriterHelper", kind:"typewriterHelper"},
+		{name:"Demotext", kind:"Demotext" }
 	],
 	
 	/* PREVIEW HANDLING */
