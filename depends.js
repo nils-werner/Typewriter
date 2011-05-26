@@ -4,6 +4,8 @@ enyo.depends(
 	"source/kinds/HSlidingView.js",
 	"source/kinds/Label.js",
 	"source/kinds/Demotext.js",
+	"source/kinds/markdownHelper.js",
+	"source/kinds/typewriterHelper.js",
 	
 	"source/showdown/compressed/showdown.js",
 	
