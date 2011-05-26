@@ -1,26 +1,26 @@
-/* Copyright 2009-2011 Hewlett-Packard Development Company, L.P. All rights reserved. */
+/* Copybottom 2009-2011 Hewlett-Packard Development Company, L.P. All bottoms reserved. */
 /**
 A view that slides back and forth and is designed to be a part of a
-<a href="#enyo.SlidingPane">SlidingPane</a>.
+<a href="#enyo.HSlidingPane">SlidingPane</a>.
 
-SlidingView objects have a "dragAnywhere" property, whose default value is true. This allows
+HSlidingView objects have a "dragAnywhere" property, whose default value is true. This allows
 the user to drag the view from any point inside the panel that is not already a
 draggable region (e.g., a Scroller). If dragAnywhere is set to false, then the view
 can still be dragged via any control inside it whose "slidingHandler" property is set to true.
 
-The "peekWidth" property specifies the amount the paneview should be offset from the left
-when it is selected. This allows controls on the underlying view object to the left
+The "peekHeight" property specifies the amount the paneview should be offset from the top
+when it is selected. This allows controls on the underlying view object to the top
 of the selected one to be partially revealed.
 
-SlidingView has some other published properties that are less frequently used. The "minWidth" 
-property specifies a minimum width for view content, and "edgeDragging" lets the user 
-drag the view from its left edge. (The default value of edgeDragging is false.)
+HSlidingView has some other published properties that are less frequently used. The "minHeight" 
+property specifies a minimum height for view content, and "edgeDragging" lets the user 
+drag the view from its top edge. (The default value of edgeDragging is false.)
 
-The last view in a SlidingPane is special, it is resized to fit the available space. 
+The last view in a HSlidingPane is special, it is resized to fit the available space. 
 The onResize event is fired when this occurs.
 */
 enyo.kind({
-	name: "enyo.SlidingView",
+	name: "enyo.HSlidingView",
 	kind: enyo.Control,
 	className: "enyo-sliding-view",
 	layoutKind: "VFlexLayout",
@@ -30,35 +30,35 @@ enyo.kind({
 	published: {
 		/** Can drag panel from anywhere (note: does not work if there's another drag surface (e.g. scroller)). */
 		dragAnywhere: true,
-		/** Can drag/toggle by dragging on left edge of sliding panel. */
+		/** Can drag/toggle by dragging on top edge of sliding panel. */
 		edgeDragging: false,
-		/** Whether content width should or should not be adjusted based on size changes. */
-		fixedWidth: false,
-		/** Minimum content width. */
-		minWidth: 0,
-		/** Amount we should be shifted right to reveal panel underneath us when selected. */
-		peekWidth: 0,
-		/** Whether or not the view may be dragged right to dismiss it */
+		/** Whether content height should or should not be adjusted based on size changes. */
+		fixedHeight: false,
+		/** Minimum content height. */
+		minHeight: 0,
+		/** Amount we should be shifted bottom to reveal panel underneath us when selected. */
+		peekHeight: 0,
+		/** Whether or not the view may be dragged bottom to dismiss it */
 		dismissible: false
 	},
 	//* @protected
 	chrome: [
 		{name: "shadow", className: "enyo-sliding-view-shadow"},
 		{name: "client", className: "enyo-bg", kind: enyo.Control, flex: 1},
-		// NOTE: used only as a hidden surface to move sliding from the left edge
+		// NOTE: used only as a hidden surface to move sliding from the top edge
 		{name: "edgeDragger", slidingHandler: true, kind: enyo.Control, className: "enyo-sliding-view-nub"}
 	],
 	slidePosition: 0,
 	create: function() {
 		this.inherited(arguments);
-		this.layout = new enyo.VFlexLayout();
+		this.layout = new enyo.HFlexLayout();
 		this.edgeDraggingChanged();
-		this.minWidthChanged();
+		this.minHeightChanged();
 	},
 	// Add slide position to control offset calculation
 	calcControlOffset: function(inControl) {
 		var o = this.inherited(arguments);
-		o.left += this.slidePosition;
+		o.top += this.slidePosition;
 		return o;
 	},
 	layoutKindChanged: function() {
@@ -133,16 +133,16 @@ enyo.kind({
 		return this["calcSlide" + state]();
 	},
 	// FIXME: re-consider offset caching, pita: required to reset on resize.
-	getLeftOffset: function() {
+	getTopOffset: function() {
 		if (this.hasNode()) {
 			this._offset = undefined;
-			return this._offset !== undefined ? this._offset : (this._offset = this.node.offsetLeft);
+			return this._offset !== undefined ? this._offset : (this._offset = this.node.offsetTop);
 		}
 		return 0;
 	},
 	calcSlideMin: function() {
-		var x = -this.getLeftOffset();
-		return this.peekWidth + x;
+		var x = -this.getTopOffset();
+		return this.peekHeight + x;
 	},
 	calcSlideMax: function() {
 		var c = this.getPreviousSibling();
@@ -174,7 +174,7 @@ enyo.kind({
 		}
 	},
 	calcSlideHidden: function() {
-		var x = this.hasNode() && this.parent.hasNode() ? this.parent.node.offsetWidth - this.getLeftOffset() : 0;
+		var x = this.hasNode() && this.parent.hasNode() ? this.parent.node.offsetHeight - this.getTopOffset() : 0;
 		//this.log(this.slidePosition, x);
 		return x;
 	},
@@ -202,7 +202,7 @@ enyo.kind({
 			this.slidePosition = inSlide;
 			if (this.hasNode()) {
 				//this.log(this.id, inSlide);
-				var t = inSlide !== null ? "translate3d(" + inSlide + "px,0,0)" : "";
+				var t = inSlide !== null ? "translate3d(0," + inSlide + "px,0)" : "";
 				this.domStyles["-webkit-transform"] = this.node.style.webkitTransform = t;
 			}
 		}
@@ -277,7 +277,7 @@ enyo.kind({
 	},
 	drag: function(e) {
 		// bail if we are waiting for an animation or not moving
-		var x0 = e.dx + this.dragStart;
+		var x0 = e.dy + this.dragStart;
 		if (this.pendingDragMove || (x0 == this.slidePosition)) {
 			return;
 		}
@@ -307,36 +307,36 @@ enyo.kind({
 		}
 	},
 	// sizing
-	// don't auto-adjust width if fixedWidth is true
-	fixedWidthChanged: function() {
-		if (this.fixedWidth) {
+	// don't auto-adjust height if fixedHeight is true
+	fixedHeightChanged: function() {
+		if (this.fixedHeight) {
 			this.applySize();
 		}
 	},
-	minWidthChanged: function() {
-		this.$.client.applyStyle("min-width", this.minWidth || null);
+	minHeightChanged: function() {
+		this.$.client.applyStyle("min-height", this.minHeight || null);
 	},
 	applySize: function(inSuggestFit) {
 		var w;
-		if (inSuggestFit && !this.fixedWidth) {
-			w = this.calcFitWidth();
-		} else if (this.$.client.domStyles.width) {
+		if (inSuggestFit && !this.fixedHeight) {
+			w = this.calcFitHeight();
+		} else if (this.$.client.domStyles.height) {
 			w = null;
 		}
 		if (w !== undefined) {
 			w = (w ? w + "px" : null);
 			// apply fast-like
 			if (this.$.client.hasNode()) {
-				this.$.client.domStyles.width = this.$.client.node.style.width = w;
+				this.$.client.domStyles.height = this.$.client.node.style.height = w;
 				this.doResize(w);
 			}
 		}
 	},
-	calcFitWidth: function() {
+	calcFitHeight: function() {
 		var w = null;
 		if (this.hasNode() && this.$.client.hasNode()) {
-			var pw = this.parent.getBounds().width;
-			var l = this.getLeftOffset();
+			var pw = this.parent.getBounds().height;
+			var l = this.getTopOffset();
 			w = Math.max(0, Math.min(pw, pw - l - (this.slidePosition||0)));
 		}
 		return w;

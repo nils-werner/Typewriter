@@ -1,40 +1,40 @@
-/* Copyright 2009-2011 Hewlett-Packard Development Company, L.P. All rights reserved. */
+/* Copybottom 2009-2011 Hewlett-Packard Development Company, L.P. All bottoms reserved. */
 /**
 A control designed to present a horizontal layout of
-<a href="#enyo.SlidingView">SlidingView</a> controls,
+<a href="#enyo.HSlidingView">SlidingView</a> controls,
 which are panel controls that can slide one on top of another. The user can 
-drag the views left and right and they'll stay connected. If a view is moved 
-to the far left, it will cover any views to the left of it.
+drag the views top and bottom and they'll stay connected. If a view is moved 
+to the far top, it will cover any views to the top of it.
 
-SlidingViews can have explicit width or be flexed. In either case, they are displayed
-in SlidingPane's client region, which is an HFlexBox. The view on the far 
-right is special--it will always behave as flexed unless its fixedWidth property is set to true.
+HSlidingViews can have explicit height or be flexed. In either case, they are displayed
+in HSlidingPane's client region, which is an HFlexBox. The view on the far 
+bottom is special--it will always behave as flexed unless its fixedHeight property is set to true.
 
-SlidingPane exposes the same selection methods as <a href="#enyo.Pane">Pane</a>. 
-The selected view is the one displayed at the far left of the group. 
+HSlidingPane exposes the same selection methods as <a href="#enyo.Pane">Pane</a>. 
+The selected view is the one displayed at the far top of the group. 
 
 SlidingGroup also has two layout modes--the normal layout, in which views
-are placed left-to-right, and a narrow layout, in which views are stacked,
-taking up the entire width of the SlidingPane. A SlidingPane can automatically
+are placed top-to-bottom, and a narrow layout, in which views are stacked,
+taking up the entire height of the HSlidingPane. A SlidingPane can automatically
 toggle between these layouts if its resize method is hooked up to respond to window 
-resizing. The "wideWidth" property has a default value of 500 and is the pivot point
+resizing. The "wideHeight" property has a default value of 500 and is the pivot point
 between the two layouts.
 
 Here's an example:
 
-	{kind: "SlidingPane", flex: 1, components: [
-		{name: "left", width: "320px"},
-		{name: "middle", width: "320px", peekWidth: 68},
-		{name: "right", flex: 1, onResize: "slidingResize"}
+	{kind: "HSlidingPane", flex: 1, components: [
+		{name: "top", height: "320px"},
+		{name: "middle", height: "320px", peekHeight: 68},
+		{name: "bottom", flex: 1, onResize: "slidingResize"}
 	]}
 
 */
 enyo.kind({
-	name: "enyo.SlidingPane",
+	name: "enyo.HSlidingPane",
 	kind: enyo.Pane,
 	published: {
 		multiView: true,
-		multiViewMinWidth: 500,
+		multiViewMinHeight: 500,
 		canAnimate: true,
 		dismissDistance: 100
 	},
@@ -43,11 +43,11 @@ enyo.kind({
 		onSlideComplete: ""
 	},
 	layoutKind: "",
-	defaultKind: "SlidingView",
+	defaultKind: "HSlidingView",
 	//* @protected
 	chrome: [
 		{kind: "Animator", duration: 700, onAnimate: "animationStep", onStop: "slideComplete"},
-		{name: "client", flex: 1, kind: enyo.Control, className: "enyo-view enyo-sliding-pane-client", layoutKind: "HFlexLayout"}
+		{name: "client", flex: 1, kind: enyo.Control, className: "enyo-view enyo-sliding-pane-client", layoutKind: "VFlexLayout"}
 	],
 	constructor: function() {
 		this.inherited(arguments);
@@ -67,7 +67,7 @@ enyo.kind({
 		enyo.Control.prototype.flow.call(this);
 	},
 	controlIsView: function(inControl) {
-		return this.inherited(arguments) && (inControl instanceof enyo.SlidingView);
+		return this.inherited(arguments) && (inControl instanceof enyo.HSlidingView);
 	},
 	// maintain an explicit list of Sliding controls to manipulate
 	addView: function(inControl) {
@@ -165,9 +165,9 @@ enyo.kind({
 		if (inEvent.sliding) {
 			var s = this.dragStartSliding = inEvent.sliding;
 			this.stopAnimation();
-			var d = s && s.isDraggableEvent(inEvent) && this.findDraggable(inEvent.dx);
+			var d = s && s.isDraggableEvent(inEvent) && this.findDraggable(inEvent.dy);
 			//this.log(d ? d.id : "nothing to drag");
-			this.dx0 = 0;
+			this.dy0 = 0;
 			if (d) {
 				this.dragSliding(d, inEvent, 0);
 				return true;
@@ -199,20 +199,20 @@ enyo.kind({
 				if (b.select) {
 					this.selectView(b.select, true);
 				}
-				var dx = inEvent.dx - this.dx0;
+				var dy = inEvent.dy - this.dy0;
 				// ensure some change
-				var dx = dx || (s.isMovingToSelect() ? -1 : 1);
-				var nd = this.findDraggable(dx);
+				var dy = dy || (s.isMovingToSelect() ? -1 : 1);
+				var nd = this.findDraggable(dy);
 				/*
-				this.log("boundary, select", inEvent.dx, b.select ? b.select.id : "none", "next:", nd ? nd.id : "none", 
+				this.log("boundary, select", inEvent.dy, b.select ? b.select.id : "none", "next:", nd ? nd.id : "none", 
 					"is overSliding", nd.overSliding);
 				*/
 				if (nd) {
-					this.dragSliding(nd, inEvent, inEvent.dx);
+					this.dragSliding(nd, inEvent, inEvent.dy);
 				}
 			}
 		}
-		this.dx0 = inEvent.dx;
+		this.dy0 = inEvent.dy;
 	},
 	dragfinishHandler: function(inSender, inEvent) {
 		if (this.dragging) {
@@ -237,7 +237,7 @@ enyo.kind({
 	// resizing and "layout modes"
 	// event handler for resize; if we're the root component, we'll automatically resize
 	resizeHandler: function() {
-		if (this.getBounds().height) {
+		if (this.getBounds().width) {
 			this.resize();
 			this.inherited(arguments);
 		}
@@ -246,7 +246,7 @@ enyo.kind({
 	resize: function() {
 		// if no layout change, make sure to validate to ensure proper sizing
 		// otherwise apply layout change
-		var multiView = this.multiViewMinWidth > 0 && window.innerWidth > this.multiViewMinWidth;
+		var multiView = this.multiViewMinHeight > 0 && window.innerHeight > this.multiViewMinHeight;
 		this.setMultiView(multiView);
 		this.validateViews();
 	},
@@ -267,28 +267,28 @@ enyo.kind({
 	applySingleViewLayout: function() {
 		for (var i=0, s$=this.views, s; s=s$[i]; i++) {
 			this.cacheSliding(s, i);
-			s.setFixedWidth(true);
-			s.peekWidth = 0;
+			s.setFixedHeight(true);
+			s.peekHeight = 0;
 			s.flex = 0;
 			// defeat auto flex at "100%"
-			s.applyStyle("width", "100.0%");
+			s.applyStyle("height", "100.0%");
 		}
 	},
 	cacheSliding: function(inSliding, inIndex) {
 		this.slidingCache[inIndex] = {
 			flex: inSliding.flex,
-			width: inSliding.domStyles.width,
-			peekWidth: inSliding.peekWidth,
-			fixedWidth: inSliding.fixedWidth
+			height: inSliding.domStyles.height,
+			peekHeight: inSliding.peekHeight,
+			fixedHeight: inSliding.fixedHeight
 		};
 	},
 	uncacheSliding: function(inSliding, inIndex) {
 		var s = this.slidingCache[inIndex];
 		if (s) {
 			inSliding.flex = s.flex;
-			inSliding.peekWidth = s.peekWidth;
-			inSliding.setFixedWidth(s.fixedWidth);
-			inSliding.applyStyle("width", s.width);
+			inSliding.peekHeight = s.peekHeight;
+			inSliding.setFixedHeight(s.fixedHeight);
+			inSliding.applyStyle("height", s.height);
 		}
 	},
 	validateViews: function() {
