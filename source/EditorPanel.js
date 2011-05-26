@@ -57,8 +57,6 @@ enyo.kind({
 						{kind: "Spacer", flex: 10},
 						*/
 						{kind: "ToolButtonGroup", className: "enyo-toolbutton-dark", components: [
-							{caption: "Syntax", name:"helpmarkdown", onclick: "helpMarkdown"},
-							{caption: "Typewriter", name:"helptypewriter", onclick: "helpTypewriter"},
 							{caption: "Print", name:"print", onclick: "printDocument"}
 						]},
 						{kind: "Spacer"},
@@ -94,7 +92,11 @@ enyo.kind({
 		},
 		{name: "markdownHelper", kind:"markdownHelper"},
 		{name: "typewriterHelper", kind:"typewriterHelper"},
-		{name:"Demotext", kind:"Demotext" }
+		{name:"Demotext", kind:"Demotext" },
+		{kind: "AppMenu", components: [
+			{caption: "Markdown Syntax Help", onclick: "helpMarkdown"},
+			{caption: "Typewriter Syntax Help", onclick: "helpTypewriter"},
+		]}
 	],
 	
 	/* PREVIEW HANDLING */
@@ -220,10 +222,10 @@ enyo.kind({
 	},
 	
 	helpMarkdown: function() {
-		this.$.markdownHelper.openAtControl(this.$.helpmarkdown, {left: 170});
+		this.$.markdownHelper.openAtCenter(this.$.helpmarkdown);
 	},
 	helpTypewriter: function() {
-		this.$.typewriterHelper.openAtControl(this.$.helptypewriter, {left: 220});
+		this.$.typewriterHelper.openAtCenter(this.$.helptypewriter);
 	},
 	showKeyboard: function() {
 		enyo.keyboard.show();
