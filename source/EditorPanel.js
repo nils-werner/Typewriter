@@ -7,16 +7,6 @@ enyo.kind({
 		{name: "slidingPane", kind: "HSlidingPane", flex: 1, multiViewMinHeight:1, components: [
 			{name: "top",flex: 1, kind:"HSlidingView", 
 				components: [
-					{kind: "Header", components: [
-						{kind:"Image", "src":"images/icon.png"},
-						{content: "Typewriter", "style": "padding-left: 10px;"},
-						{kind: "Spacer", flex: 11},
-						{kind: "ToolButtonGroup", components: [
-							{caption: "Save File", onclick: "saveFile"},
-							{caption: "Open File...", onclick: "openFile"}
-						]},
-						{kind: "Spacer"}
-					]},
 					{kind: "VFlexBox", flex: 1, components: [
 						{kind: "HFlexBox", flex: 1, pack: "center", components: [
 							{className: "desk-left", flex: 1, overflow: "hidden" },
