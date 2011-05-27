@@ -137,16 +137,6 @@ enyo.kind({
 			this.$.printDialog.openAtCenter();
 		}
 	},
-	
-	/* FILE HANDLING */
-	
-	openFile: function() {
-		this.$.filePicker.pickFile();
-	},
-	handleFile: function(inSender, msg) {
-		this.$.editor.setValue(enyo.json.stringify(msg));
-	},
-	
 	/* MARKUP CALLBACKS */
 	helpMarkdown: function() {
 		this.$.markdownHelper.openAtCenter(this.$.helpmarkdown);
@@ -157,9 +147,6 @@ enyo.kind({
 	showKeyboard: function() {
 		enyo.keyboard.show();
 	},
-
-	
-	
 	
 	/* CONSTRUCTOR */
 	
