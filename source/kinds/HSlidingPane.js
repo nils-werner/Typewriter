@@ -31,7 +31,7 @@ Here's an example:
 */
 enyo.kind({
 	name: "enyo.HSlidingPane",
-	kind: enyo.Pane,
+	kind: enyo.SlidingPane,
 	published: {
 		multiView: true,
 		multiViewMinHeight: 500,

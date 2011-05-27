@@ -21,7 +21,7 @@ The onResize event is fired when this occurs.
 */
 enyo.kind({
 	name: "enyo.HSlidingView",
-	kind: enyo.Control,
+	kind: enyo.SlidingView,
 	className: "enyo-sliding-view",
 	layoutKind: "VFlexLayout",
 	events: {
