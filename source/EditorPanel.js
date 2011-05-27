@@ -37,16 +37,6 @@ enyo.kind({
 					{kind: "Header", className: "enyo-toolbar fake-toolbar", components: [
 						{kind: "GrabButton", className: "HGrabButton"},
 						{kind: "Spacer", flex: 18},
-						/*{kind: "ToolButtonGroup", className: "enyo-toolbutton-dark", components: [
-							{caption: "Headline", name:"markupheadline", className: "markuphelper", onclick:"markupHeadline" },
-							{caption: "List", name:"markuplist", className: "markuphelper", onclick:"markupList" },
-							{caption: "Link", name:"markuplink", className: "markuphelper", onclick:"markupLink" },
-							{caption: "Quote", name:"markupquote", className: "markuphelper", onclick:"markupQuote" },
-							{caption: "Code", name:"markupcode", className: "markuphelper", onclick:"markupCode" },
-							{caption: "Image", name:"markupimage", className: "markuphelper", onclick:"markupImage" },
-						]},
-						{kind: "Spacer", flex: 10},
-						*/
 						{kind: "ToolButtonGroup", className: "enyo-toolbutton-dark", components: [
 							{caption: "Print", name:"print", onclick: "printDocument"}
 						]},
@@ -99,52 +89,12 @@ enyo.kind({
 			//this.$.editor.forceFocus(); // buggy with on screen keyboard
 			this.$.print.addClass("enyo-button-disabled");
 			this.$.print.disabled = true;
-			
-			//this.$$.select(".markuphelper").each(function(item) {
-			//	item.removeClass("enyo-button-disabled");
-			//	item.disabled = false;
-			//});
-			
-			/*
-			this.$.markupheadline.removeClass("enyo-button-disabled");
-			this.$.markuplist.removeClass("enyo-button-disabled");
-			this.$.markuplink.removeClass("enyo-button-disabled");
-			this.$.markupquote.removeClass("enyo-button-disabled");
-			this.$.markupcode.removeClass("enyo-button-disabled");
-			this.$.markupimage.removeClass("enyo-button-disabled");
-			this.$.markupheadline.disabled = false;
-			this.$.markuplist.disabled = false;
-			this.$.markuplink.disabled = false;
-			this.$.markupquote.disabled = false;
-			this.$.markupcode.disabled = false;
-			this.$.markupimage.disabled = false;
-			*/
 		}
 		else {  // up position
 			this.position = "up";
 			this.$.previewScroller.setScrollTop(this.$.editorScroller.scrollTop/this.$.editorScroller.getBoundaries().bottom*this.$.previewScroller.getBoundaries().bottom);
 			this.$.print.removeClass("enyo-button-disabled");
 			this.$.print.disabled = false;
-			
-			//this.$$.select(".markuphelper").each(function(item) {
-			//	item.addClass("enyo-button-disabled");
-			//	item.disabled = true;
-			//});
-			
-			/*
-			this.$.markupheadline.addClass("enyo-button-disabled");
-			this.$.markuplist.addClass("enyo-button-disabled");
-			this.$.markuplink.addClass("enyo-button-disabled");
-			this.$.markupquote.addClass("enyo-button-disabled");
-			this.$.markupcode.addClass("enyo-button-disabled");
-			this.$.markupimage.addClass("enyo-button-disabled");
-			this.$.markupheadline.disabled = true;
-			this.$.markuplist.disabled = true;
-			this.$.markuplink.disabled = true;
-			this.$.markupquote.disabled = true;
-			this.$.markupcode.disabled = true;
-			this.$.markupimage.disabled = true;
-			*/
 		}
 
 		//this.generateMarkdown();
@@ -198,20 +148,6 @@ enyo.kind({
 	},
 	
 	/* MARKUP CALLBACKS */
-	
-	markupHeadline: function() {
-	},
-	markupList: function() {
-	},
-	markupLink: function() {
-	},
-	markupQuote: function() {
-	},
-	markupCode: function() {
-	},
-	markupImage: function() {
-	},
-	
 	helpMarkdown: function() {
 		this.$.markdownHelper.openAtCenter(this.$.helpmarkdown);
 	},
