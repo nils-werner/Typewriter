@@ -27,3 +27,6 @@ clean:
 
 install: package
 	palm-install -d $(DEVICE) *.ipk
+	
+log:
+	palm-log -d $(DEVICE) -f $(PACKAGE)
