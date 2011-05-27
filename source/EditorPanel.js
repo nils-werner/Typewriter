@@ -36,6 +36,8 @@ enyo.kind({
 				components: [
 					{kind: "Header", className: "enyo-toolbar fake-toolbar", components: [
 						{kind: "GrabButton", className: "HGrabButton"},
+						{kind: "Spacer", flex: 1},
+						{content:"Typewriter"},
 						{kind: "Spacer", flex: 18},
 						{kind: "ToolButtonGroup", className: "enyo-toolbutton-dark", components: [
 							{caption: "Print", name:"print", onclick: "printDocument"}
