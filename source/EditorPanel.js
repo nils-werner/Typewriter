@@ -4,10 +4,10 @@ enyo.kind({
 	name: "EditorPanel",
 	kind: enyo.HFlexBox,
 	components: [
-		{name: "slidingPane", kind: "HSlidingPane", flex: 1, multiViewMinHeight:1, components: [
-			{name: "top",flex: 1, kind:"HSlidingView", 
+		{name: "slidingPane", kind: "HSlidingPane", wideHeight: 300, flex: 1, multiViewMinHeight:1, overflow: "hidden", components: [
+			{name: "top", kind:"HSlidingView", 
 				components: [
-					{kind: "VFlexBox", flex: 1, components: [
+					{kind: "VFlexBox", height: "450px", flex: 1, components: [
 						{kind: "HFlexBox", flex: 1, pack: "center", components: [
 							{className: "desk-left", flex: 1, overflow: "hidden" },
 							{kind: "BasicScroller",
@@ -21,8 +21,8 @@ enyo.kind({
 										name: "editor",
 										richContent: false,
 										className: "editor-input",
-										onblur: "generateMarkdown",
-										onfocus: "showKeyboard"
+										onblur: "editorBlurred",
+										onfocus: "editorFocussed"
 									}
 								]
 							},
@@ -30,9 +30,8 @@ enyo.kind({
 						]}
 					]}
 			]},
-			{name: "bottom", kind:"HSlidingView", height: "62px", flex:0, //peekHeight: 54,
-				duringAnimation: function() { this.pane.validateViews(); },
-				onResize: "barMoved",
+			{name: "bottom", kind:"HSlidingView", fixedHeight: true, style: "z-index: 1000;", //peekHeight: 54,
+				//onResize: "barMoved",
 				components: [
 					{kind: "Header", className: "enyo-toolbar fake-toolbar", components: [
 						{kind: "GrabButton", className: "HGrabButton"},
@@ -45,7 +44,7 @@ enyo.kind({
 						{kind: "Spacer"},
 						{kind: "GrabButton", className: "HGrabButton Right"},
 					]},
-					{kind: "VFlexBox", flex: 1, components: [
+					{kind: "VFlexBox", flex: 1, height: "700px", components: [
 						{kind: "HFlexBox", flex: 1, pack: "center", components: [
 							{className: "desk-left", flex: 1, overflow: "hidden" },
 							{kind: "BasicScroller",
@@ -87,6 +86,7 @@ enyo.kind({
 	barMoved: function(event) {
 		if(event.slidePosition == 0) { // down position
 			this.position = "down";
+			enyo.keyboard.show();
 			this.$.editorScroller.setScrollTop(this.$.previewScroller.scrollTop/this.$.previewScroller.getBoundaries().bottom*this.$.editorScroller.getBoundaries().bottom);
 			//this.$.editor.forceFocus(); // buggy with on screen keyboard
 			this.$.print.addClass("enyo-button-disabled");
@@ -94,19 +94,13 @@ enyo.kind({
 		}
 		else {  // up position
 			this.position = "up";
+			enyo.keyboard.hide();
 			this.$.previewScroller.setScrollTop(this.$.editorScroller.scrollTop/this.$.editorScroller.getBoundaries().bottom*this.$.previewScroller.getBoundaries().bottom);
 			this.$.print.removeClass("enyo-button-disabled");
 			this.$.print.disabled = false;
 		}
 
 		//this.generateMarkdown();
-	},
-	generateMarkdown: function() {
-		var converter = new Showdown.converter();
-		
-		var value = this.$.editor.getValue();
-		this.$.preview.setContent(converter.makeHtml(value));
-		//this.$.htmlContent.setContent(converter.makeHtml(example));
 	},
 	htmlContentLinkClick: function(sender, url) {
 		var splits = url.split(/#/).slice(-1).pop();
@@ -139,24 +133,30 @@ enyo.kind({
 			this.$.printDialog.openAtCenter();
 		}
 	},
-	/* MARKUP CALLBACKS */
+	/* EDITOR CALLBACKS */
 	helpMarkdown: function() {
 		this.$.markdownHelper.openAtCenter(this.$.helpmarkdown);
 	},
 	helpTypewriter: function() {
 		this.$.typewriterHelper.openAtCenter(this.$.helptypewriter);
 	},
-	showKeyboard: function() {
-		enyo.keyboard.show();
+	
+	editorBlurred: function() {
+		var converter = new Showdown.converter();
+		
+		var value = this.$.editor.getValue();
+		this.$.preview.setContent(converter.makeHtml(value));
+		//this.$.htmlContent.setContent(converter.makeHtml(example));
+	},
+	editorFocussed: function() {
+		//enyo.keyboard.show();
+		this.$.bottom.height = "200px";
 	},
 	
 	/* CONSTRUCTOR */
 	
 	ready: function() {
-		enyo.keyboard.setManualMode(true);
-		enyo.keyboard.show();
+		enyo.keyboard.setResizesWindow(false);
 		this.$.editor.setValue(this.$.Demotext.text);
-		this.generateMarkdown();
-		this.$.editor.forceFocus();
 	}
 });
