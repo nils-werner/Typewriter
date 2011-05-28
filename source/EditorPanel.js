@@ -167,9 +167,10 @@ enyo.kind({
 		}
 	},
 	adjustSlidingSize: function() {
+		this.$.bottom.style.height = enyo.fetchControlSize(this).h-700;
 		var s = enyo.fetchControlSize(this);
 		var pcs = enyo.fetchControlSize(this.$.bottom.$.client);
-		this.$.top.node.style.height = (s.h - 66) + "px";
+		this.$.top.node.style.height = (s.h - 64) + "px";
 		this.$.bottom.setPeekHeight(s.h - pcs.h);
 	},
 });
