@@ -7,7 +7,7 @@ enyo.kind({
 		{name: "slidingPane", kind: "HSlidingPane", flex: 1, components: [
 			{name: "top", kind:"HSlidingView", 
 				components: [
-					{kind: "HFlexBox", height: "450px", flex: 1, pack: "center", components: [
+					{kind: "HFlexBox", pack: "center", components: [
 						{className: "desk-left", flex: 1, overflow: "hidden" },
 						{kind: "BasicScroller",
 							name:"editorScroller",
@@ -153,5 +153,23 @@ enyo.kind({
 	ready: function() {
 		enyo.keyboard.setResizesWindow(false);
 		this.$.editor.setValue(this.$.Demotext.text);
-	}
+	},
+	
+	rendered: function() {
+		this.inherited(arguments);
+		this.adjustSlidingSize();
+	},
+	resizeHandler: function() {
+		this.adjustSlidingSize();
+		var v = this.$.slidingPane.view;
+		if (v && v.resizeHandler) {
+			v.resizeHandler();
+		}
+	},
+	adjustSlidingSize: function() {
+		var s = enyo.fetchControlSize(this);
+		var pcs = enyo.fetchControlSize(this.$.bottom.$.client);
+		this.$.top.node.style.height = (s.h - 66) + "px";
+		this.$.bottom.setPeekHeight(s.h - pcs.h + 26);
+	},
 });
