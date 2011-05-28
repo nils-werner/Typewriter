@@ -28,7 +28,7 @@ enyo.kind({
 						{className: "desk-right", flex: 1, overflow: "hidden" }
 					]}
 			]},
-			{name: "bottom", kind:"HSlidingView", fixedHeight: true, style: "z-index: 1000;",
+			{name: "bottom", kind:"HSlidingView", height: "740px", fixedHeight: true, style: "z-index: 1000;",
 				//onResize: "barMoved",
 				components: [
 					{kind: "Header", className: "enyo-toolbar fake-toolbar", components: [
@@ -42,7 +42,7 @@ enyo.kind({
 						{kind: "Spacer"},
 						{kind: "GrabButton", className: "HGrabButton Right"},
 					]},
-					{kind: "VFlexBox", flex: 1, height: "700px", components: [
+					{kind: "VFlexBox", flex: 1, components: [
 						{kind: "HFlexBox", flex: 1, pack: "center", components: [
 							{className: "desk-left", flex: 1, overflow: "hidden" },
 							{kind: "BasicScroller",
@@ -170,6 +170,6 @@ enyo.kind({
 		var s = enyo.fetchControlSize(this);
 		var pcs = enyo.fetchControlSize(this.$.bottom.$.client);
 		this.$.top.node.style.height = (s.h - 66) + "px";
-		this.$.bottom.setPeekHeight(s.h - pcs.h + 26);
+		this.$.bottom.setPeekHeight(s.h - pcs.h);
 	},
 });
