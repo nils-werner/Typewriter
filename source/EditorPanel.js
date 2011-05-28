@@ -4,33 +4,31 @@ enyo.kind({
 	name: "EditorPanel",
 	kind: enyo.HFlexBox,
 	components: [
-		{name: "slidingPane", kind: "HSlidingPane", wideHeight: 300, flex: 1, multiViewMinHeight:1, overflow: "hidden", components: [
+		{name: "slidingPane", kind: "HSlidingPane", flex: 1, components: [
 			{name: "top", kind:"HSlidingView", 
 				components: [
-					{kind: "VFlexBox", height: "450px", flex: 1, components: [
-						{kind: "HFlexBox", flex: 1, pack: "center", components: [
-							{className: "desk-left", flex: 1, overflow: "hidden" },
-							{kind: "BasicScroller",
-								name:"editorScroller",
-								width: "760px",
-								autoHorizontal: false,
-								horizontal: false,
-								className: "output-scroller",
-								components: [
-									{kind: "BasicRichText",
-										name: "editor",
-										richContent: false,
-										className: "editor-input",
-										onblur: "editorBlurred",
-										onfocus: "editorFocussed"
-									}
-								]
-							},
-							{className: "desk-right", flex: 1, overflow: "hidden" }
-						]}
+					{kind: "HFlexBox", height: "450px", flex: 1, pack: "center", components: [
+						{className: "desk-left", flex: 1, overflow: "hidden" },
+						{kind: "BasicScroller",
+							name:"editorScroller",
+							width: "760px",
+							autoHorizontal: false,
+							horizontal: false,
+							className: "output-scroller",
+							components: [
+								{kind: "BasicRichText",
+									name: "editor",
+									richContent: false,
+									className: "editor-input",
+									onblur: "editorBlurred",
+									onfocus: "editorFocussed"
+								}
+							]
+						},
+						{className: "desk-right", flex: 1, overflow: "hidden" }
 					]}
 			]},
-			{name: "bottom", kind:"HSlidingView", fixedHeight: true, style: "z-index: 1000;", //peekHeight: 54,
+			{name: "bottom", kind:"HSlidingView", fixedHeight: true, style: "z-index: 1000;",
 				//onResize: "barMoved",
 				components: [
 					{kind: "Header", className: "enyo-toolbar fake-toolbar", components: [
@@ -146,11 +144,8 @@ enyo.kind({
 		
 		var value = this.$.editor.getValue();
 		this.$.preview.setContent(converter.makeHtml(value));
-		//this.$.htmlContent.setContent(converter.makeHtml(example));
 	},
 	editorFocussed: function() {
-		//enyo.keyboard.show();
-		this.$.bottom.height = "200px";
 	},
 	
 	/* CONSTRUCTOR */
