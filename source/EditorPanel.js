@@ -171,6 +171,7 @@ enyo.kind({
 	rendered: function() {
 		this.inherited(arguments);
 		this.adjustSlidingSize();
+		this.syncViews();
 		this.setSchedule();
 	},
 	resizeHandler: function() {
