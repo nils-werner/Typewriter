@@ -140,12 +140,23 @@ enyo.kind({
 	},
 	
 	editorBlurred: function() {
+	},
+	editorFocussed: function() {
+	},
+	
+	makePreview: function() {
 		var converter = new Showdown.converter();
-		
 		var value = this.$.editor.getValue();
 		this.$.preview.setContent(converter.makeHtml(value));
 	},
-	editorFocussed: function() {
+	
+	setSchedule: function() {
+		this.scheduleID = setInterval(enyo.bind(this,function() {
+			this.makePreview();
+		}), 1000);
+	},
+	clearSchedule: function() {
+		clearInterval(this.scheduleID);
 	},
 	
 	/* CONSTRUCTOR */
@@ -159,8 +170,8 @@ enyo.kind({
 	
 	rendered: function() {
 		this.inherited(arguments);
-		this.editorBlurred();
 		this.adjustSlidingSize();
+		this.setSchedule();
 	},
 	resizeHandler: function() {
 		this.adjustSlidingSize();
