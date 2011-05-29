@@ -4,7 +4,9 @@ enyo.kind({
 	name: "EditorPanel",
 	kind: enyo.HFlexBox,
 	components: [
-		{name: "slidingPane", kind: "HSlidingPane", flex: 1, components: [
+		{name: "slidingPane", kind: "HSlidingPane", flex: 1, multiViewMinHeight: 0, 
+			onSlideComplete: "barMoved",
+			components: [
 			{name: "top", kind:"HSlidingView", 
 				components: [
 					{kind: "HFlexBox", pack: "center", components: [
@@ -28,8 +30,7 @@ enyo.kind({
 						{className: "desk-right", flex: 1, overflow: "hidden" }
 					]}
 			]},
-			{name: "bottom", kind:"HSlidingView", height: "200px", fixedHeight: true, style: "z-index: 1000;",
-				onResize: "barMoved",
+			{name: "bottom", kind:"HSlidingView", height: "100px", fixedHeight: true, style: "z-index: 1000;",
 				components: [
 					{kind: "Header", name: "header", className: "enyo-toolbar fake-toolbar", components: [
 						{kind: "GrabButton", className: "HGrabButton"},
@@ -82,19 +83,13 @@ enyo.kind({
 	/* PREVIEW HANDLING */
 	
 	barMoved: function(event) {
-		return;
-		if(event.slidePosition == 0) { // down position
+		if(event.view == this.$.top) {
 			this.position = "down";
-			//enyo.keyboard.show();
-			this.$.editorScroller.setScrollTop(this.$.previewScroller.scrollTop/this.$.previewScroller.getBoundaries().bottom*this.$.editorScroller.getBoundaries().bottom);
-			//this.$.editor.forceFocus(); // buggy with on screen keyboard
 			this.$.print.addClass("enyo-button-disabled");
 			this.$.print.disabled = true;
 		}
-		else {  // up position
+		else {
 			this.position = "up";
-			//enyo.keyboard.hide();
-			this.$.previewScroller.setScrollTop(this.$.editorScroller.scrollTop/this.$.editorScroller.getBoundaries().bottom*this.$.previewScroller.getBoundaries().bottom);
 			this.$.print.removeClass("enyo-button-disabled");
 			this.$.print.disabled = false;
 		}
@@ -145,6 +140,19 @@ enyo.kind({
 	editorFocussed: function() {
 	},
 	
+	syncViews: function() {
+		if(this.position == "up") {
+			//enyo.keyboard.hide();
+			this.$.editorScroller.setScrollTop(this.$.previewScroller.scrollTop/this.$.previewScroller.getBoundaries().bottom*this.$.editorScroller.getBoundaries().bottom);
+		}
+		else {
+			this.makePreview();
+			//enyo.keyboard.show();
+			this.$.previewScroller.setScrollTop(this.$.editorScroller.scrollTop/this.$.editorScroller.getBoundaries().bottom*this.$.previewScroller.getBoundaries().bottom);
+			//this.$.editor.forceFocus(); // buggy with on screen keyboard
+		}
+	},
+	
 	makePreview: function() {
 		var converter = new Showdown.converter();
 		var value = this.$.editor.getValue();
@@ -153,8 +161,8 @@ enyo.kind({
 	
 	setSchedule: function() {
 		this.scheduleID = setInterval(enyo.bind(this,function() {
-			this.makePreview();
-		}), 1000);
+			this.syncViews();
+		}), 3000);
 	},
 	clearSchedule: function() {
 		clearInterval(this.scheduleID);
@@ -163,6 +171,7 @@ enyo.kind({
 	/* CONSTRUCTOR */
 	
 	ready: function() {
+		this.position = "down";
 		enyo.keyboard.setManualMode(true);
 		//enyo.keyboard.setResizesWindow(false);
 		enyo.keyboard.show();
