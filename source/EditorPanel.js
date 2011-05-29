@@ -30,18 +30,14 @@ enyo.kind({
 						{className: "desk-right", flex: 1, overflow: "hidden" }
 					]}
 			]},
-			{name: "bottom", kind:"HSlidingView", height: "100px", fixedHeight: true, style: "z-index: 1000;",
+			{name: "bottom", kind:"HSlidingView", height: "100px", fixedHeight: true,
 				components: [
 					{kind: "Header", name: "header", className: "enyo-toolbar fake-toolbar", components: [
 						{kind: "GrabButton", className: "HGrabButton"},
 						{kind: "Spacer", flex: 1},
 						{content:"Typewriter"},
-						{kind: "Spacer", flex: 18},
-						{kind: "ToolButtonGroup", className: "enyo-toolbutton-dark", components: [
-							{caption: "Print", name:"print", onclick: "printDocument"}
-						]},
-						{kind: "Spacer"},
-						{kind: "GrabButton", className: "HGrabButton Right"},
+						{kind: "Spacer", flex: 25},
+						{kind: "GrabButton", className: "HGrabButton Right"}
 					]},
 					{kind: "VFlexBox", flex: 1, components: [
 						{kind: "HFlexBox", flex: 1, pack: "center", components: [
@@ -77,6 +73,7 @@ enyo.kind({
 		{kind: "AppMenu", components: [
 			{caption: "Markdown Syntax Help", onclick: "helpMarkdown"},
 			{caption: "Typewriter Syntax Help", onclick: "helpTypewriter"},
+			{caption: "Print", name:"print", onclick: "printDocument"}
 		]}
 	],
 	
@@ -85,13 +82,9 @@ enyo.kind({
 	barMoved: function(event) {
 		if(event.view == this.$.top) {
 			this.position = "down";
-			this.$.print.addClass("enyo-button-disabled");
-			this.$.print.disabled = true;
 		}
 		else {
 			this.position = "up";
-			this.$.print.removeClass("enyo-button-disabled");
-			this.$.print.disabled = false;
 		}
 
 		//this.generateMarkdown();
@@ -120,12 +113,8 @@ enyo.kind({
 	/* PRINT HANDLING */
 	
 	printDocument: function() {
-		if(this.position == "down") {
-			alert("Preview first!");
-		}
-		else {
-			this.$.printDialog.openAtCenter();
-		}
+		this.$.slidingPane.selectViewByIndex(1);
+		this.$.printDialog.openAtCenter();
 	},
 	/* EDITOR CALLBACKS */
 	helpMarkdown: function() {
@@ -138,6 +127,7 @@ enyo.kind({
 	editorBlurred: function() {
 	},
 	editorFocussed: function() {
+		enyo.keyboard.show();
 	},
 	
 	syncViews: function() {
@@ -194,7 +184,7 @@ enyo.kind({
 		var s = enyo.fetchControlSize(this);
 		var pcs = enyo.fetchControlSize(this.$.bottom.$.client);
 		
-		this.$.top.node.style.height = (s.h - 64 - enyo.keyboard.height) + "px";
+		this.$.top.node.style.height = (s.h - 55 - enyo.keyboard.height) + "px";
 		this.$.bottom.node.style.height = (s.h - enyo.keyboard.height) + "px";
 		this.$.bottom.setPeekHeight(s.h - pcs.h);
 	},
