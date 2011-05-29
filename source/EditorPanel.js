@@ -28,10 +28,10 @@ enyo.kind({
 						{className: "desk-right", flex: 1, overflow: "hidden" }
 					]}
 			]},
-			{name: "bottom", kind:"HSlidingView", height: "740px", fixedHeight: true, style: "z-index: 1000;",
+			{name: "bottom", kind:"HSlidingView", height: "200px", fixedHeight: true, style: "z-index: 1000;",
 				//onResize: "barMoved",
 				components: [
-					{kind: "Header", className: "enyo-toolbar fake-toolbar", components: [
+					{kind: "Header", name: "header", className: "enyo-toolbar fake-toolbar", components: [
 						{kind: "GrabButton", className: "HGrabButton"},
 						{kind: "Spacer", flex: 1},
 						{content:"Typewriter"},
@@ -84,7 +84,7 @@ enyo.kind({
 	barMoved: function(event) {
 		if(event.slidePosition == 0) { // down position
 			this.position = "down";
-			enyo.keyboard.show();
+			//enyo.keyboard.show();
 			this.$.editorScroller.setScrollTop(this.$.previewScroller.scrollTop/this.$.previewScroller.getBoundaries().bottom*this.$.editorScroller.getBoundaries().bottom);
 			//this.$.editor.forceFocus(); // buggy with on screen keyboard
 			this.$.print.addClass("enyo-button-disabled");
@@ -92,7 +92,7 @@ enyo.kind({
 		}
 		else {  // up position
 			this.position = "up";
-			enyo.keyboard.hide();
+			//enyo.keyboard.hide();
 			this.$.previewScroller.setScrollTop(this.$.editorScroller.scrollTop/this.$.editorScroller.getBoundaries().bottom*this.$.previewScroller.getBoundaries().bottom);
 			this.$.print.removeClass("enyo-button-disabled");
 			this.$.print.disabled = false;
@@ -151,12 +151,15 @@ enyo.kind({
 	/* CONSTRUCTOR */
 	
 	ready: function() {
-		enyo.keyboard.setResizesWindow(false);
+		enyo.keyboard.setManualMode(true);
+		//enyo.keyboard.setResizesWindow(false);
+		enyo.keyboard.show();
 		this.$.editor.setValue(this.$.Demotext.text);
 	},
 	
 	rendered: function() {
 		this.inherited(arguments);
+		this.editorBlurred();
 		this.adjustSlidingSize();
 	},
 	resizeHandler: function() {
@@ -167,10 +170,11 @@ enyo.kind({
 		}
 	},
 	adjustSlidingSize: function() {
-		this.$.bottom.style.height = enyo.fetchControlSize(this).h-700;
 		var s = enyo.fetchControlSize(this);
 		var pcs = enyo.fetchControlSize(this.$.bottom.$.client);
-		this.$.top.node.style.height = (s.h - 64) + "px";
+		
+		this.$.top.node.style.height = (s.h - 64 - enyo.keyboard.height) + "px";
+		this.$.bottom.node.style.height = (s.h - enyo.keyboard.height) + "px";
 		this.$.bottom.setPeekHeight(s.h - pcs.h);
 	},
 });
