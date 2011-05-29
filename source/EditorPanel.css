@@ -2,7 +2,7 @@
 /*Your CSS here*/
 
 .editor-scroller {
-	padding-bottom: 54px;
+	padding-bottom: 74px;
 }
 
 .editor-input {
@@ -26,7 +26,7 @@
 	margin: 0px;
 }
 
-.output-scroller {
+.output-scroller, .editor-scroller {
 	background-color: #ffffff;
 }
 

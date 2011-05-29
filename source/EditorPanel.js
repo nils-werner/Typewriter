@@ -14,7 +14,7 @@ enyo.kind({
 							width: "760px",
 							autoHorizontal: false,
 							horizontal: false,
-							className: "output-scroller",
+							className: "editor-scroller",
 							components: [
 								{kind: "BasicRichText",
 									name: "editor",
