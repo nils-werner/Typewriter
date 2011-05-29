@@ -29,7 +29,7 @@ enyo.kind({
 					]}
 			]},
 			{name: "bottom", kind:"HSlidingView", height: "200px", fixedHeight: true, style: "z-index: 1000;",
-				//onResize: "barMoved",
+				onResize: "barMoved",
 				components: [
 					{kind: "Header", name: "header", className: "enyo-toolbar fake-toolbar", components: [
 						{kind: "GrabButton", className: "HGrabButton"},
@@ -82,6 +82,7 @@ enyo.kind({
 	/* PREVIEW HANDLING */
 	
 	barMoved: function(event) {
+		return;
 		if(event.slidePosition == 0) { // down position
 			this.position = "down";
 			//enyo.keyboard.show();

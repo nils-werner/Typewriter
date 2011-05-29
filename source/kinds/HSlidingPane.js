@@ -148,10 +148,7 @@ enyo.kind({
 	playAnimation: function(inSliding) {
 		var s = inSliding;
 		this.$.animator.sliding = s;
-		
-		
 		this.$.animator.play(s.slidePosition, s.calcSlide());
-		this.view.duringAnimation();
 	},
 	stopAnimation: function() {
 		this.$.animator.stop();

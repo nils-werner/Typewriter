@@ -39,9 +39,7 @@ enyo.kind({
 		/** Amount we should be shifted bottom to reveal panel underneath us when selected. */
 		peekHeight: 0,
 		/** Whether or not the view may be dragged bottom to dismiss it */
-		dismissible: false,
-		
-		duringAnimation: function() {}
+		dismissible: false
 	},
 	//* @protected
 	chrome: [
