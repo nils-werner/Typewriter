@@ -30,16 +30,22 @@ enyo.kind({
 						{className: "desk-right", flex: 1, overflow: "hidden" }
 					]}
 			]},
-			{name: "bottom", kind:"HSlidingView", height: "100px", fixedHeight: true,
+			{name: "bottom", kind:"HSlidingView", height: "100px", fixedHeight: true, pack:"end", style:"overflow: hidden;",
+				applyExtraSlideRules: function(inSlide) {
+					//console.log(this.children[1]);
+					var s = inSlide !== null ? "translate3d(0,"+ (-enyo.fetchControlSize(this).h-inSlide+55) + "px,0)" : "";
+					this.$.client.children[1].node.style.webkitTransform = s;
+				},
 				components: [
-					{kind: "Header", name: "header", className: "enyo-toolbar fake-toolbar", components: [
+					{kind: "Header", name: "header", className: "enyo-toolbar fake-toolbar", style:"z-index: 1000;", components: [
 						{kind: "GrabButton", className: "HGrabButton"},
 						{kind: "Spacer", flex: 1},
 						{content:"Typewriter"},
 						{kind: "Spacer", flex: 25},
 						{kind: "GrabButton", className: "HGrabButton Right"}
 					]},
-					{kind: "VFlexBox", flex: 1, components: [
+					{kind: "VFlexBox", flex: 1,
+						components: [
 						{kind: "HFlexBox", flex: 1, pack: "center", components: [
 							{className: "desk-left", flex: 1, overflow: "hidden" },
 							{kind: "BasicScroller",

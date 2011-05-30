@@ -204,6 +204,8 @@ enyo.kind({
 				//this.log(this.id, inSlide);
 				var t = inSlide !== null ? "translate3d(0," + inSlide + "px,0)" : "";
 				this.domStyles["-webkit-transform"] = this.node.style.webkitTransform = t;
+				if(this.applyExtraSlideRules)
+					this.applyExtraSlideRules(inSlide);
 			}
 		}
 	},
