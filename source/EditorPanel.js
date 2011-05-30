@@ -23,7 +23,8 @@ enyo.kind({
 									richContent: false,
 									className: "editor-input",
 									onblur: "editorBlurred",
-									onfocus: "editorFocussed"
+									onfocus: "editorFocussed",
+									onmouseup: "syncViews"
 								}
 							]
 						},
@@ -71,7 +72,8 @@ enyo.kind({
 									{kind: "HtmlContent",
 										name: "preview",
 										className: "output-preview",
-										onLinkClick: "htmlContentLinkClick"
+										onLinkClick: "htmlContentLinkClick",
+										onmouseup: "syncViews"
 									}
 								]
 							},
