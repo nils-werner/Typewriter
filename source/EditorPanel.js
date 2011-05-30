@@ -31,10 +31,23 @@ enyo.kind({
 					]}
 			]},
 			{name: "bottom", kind:"HSlidingView", height: "100px", fixedHeight: true, pack:"end", style:"overflow: hidden;",
-				applyExtraSlideRules: function(inSlide) {
-					//console.log(this.children[1]);
-					var s = inSlide !== null ? "translate3d(0,"+ (-enyo.fetchControlSize(this).h-inSlide+55) + "px,0)" : "";
-					this.$.client.children[1].node.style.webkitTransform = s;
+				applySlideToNode: function(inSlide) {
+					if (inSlide != this.slidePosition && this.index) {
+						this.lastSlidePosition = this.slidePosition;
+						this.slidePosition = inSlide;
+						if (this.hasNode()) {
+							//this.log(this.id, inSlide);
+							var t = inSlide !== null ? "translate3d(0," + inSlide + "px,0)" : "";
+							this.domStyles["-webkit-transform"] = this.node.style.webkitTransform = t;
+							var s = inSlide !== null ? "translate3d(0,"+ (-enyo.fetchControlSize(this).h-inSlide+55) + "px,0)" : "";
+							this.$.client.children[1].node.style.webkitTransform = s;
+						}
+					}
+				},
+				resizeHandler: function() {
+					//var s = "translate3d(0,1px,0)";
+					var s = "translate3d(0," + (55-enyo.fetchControlSize(this).h) + "px,0)";
+					this.node.style.webkitTransform = s;
 				},
 				components: [
 					{kind: "Header", name: "header", className: "enyo-toolbar fake-toolbar", style:"z-index: 1000;", components: [
