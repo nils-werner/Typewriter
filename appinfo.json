@@ -5,6 +5,7 @@
 	"type": "web",
 	"main": "index.html",
 	"title": "Typewriter",
-	"icon": "images/bigicon.png",
+	"icon": "images/normalicon.png",
+	"icon2": "images/bigicon.png",
 	"uiRevision":2
 }

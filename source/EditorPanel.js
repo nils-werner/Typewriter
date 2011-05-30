@@ -101,8 +101,8 @@ enyo.kind({
 			onWindowDeactivated: "sleep",
 			onWindowActivated: "wakeup"
 		},
-		{kind: "Scrim", name:"scrim", layoutKind: "VFlexLayout", align:"center", pack:"center", style:"background-color: rgba(0,0,0,0.3);", components: [
-			{kind: "Image", src:"images/bigicon.png"}
+		{kind: "Scrim", name:"scrim", layoutKind: "VFlexLayout", align:"end", pack:"end", style:"background-color: transparent; opacity: 1;", components: [
+			{kind: "Image", src:"images/bigicon.png", style: "margin-right: 20px; margin-bottom: 10px;"}
 		]}
 	],
 	
@@ -224,10 +224,10 @@ enyo.kind({
 	/* CONSTRUCTOR */
 	
 	ready: function() {
-		/* enyo.windows.setWindowProperties(window, { // this appears to be broken
+		enyo.windows.assignWindowParams(window, { // this appears to be broken
 			blockScreenTimeout: false,
 			setSubtleLightbar: true
-		}); */
+		});
 		this.position = "down";
 		enyo.keyboard.setManualMode(true);
 		//enyo.keyboard.setResizesWindow(false);
