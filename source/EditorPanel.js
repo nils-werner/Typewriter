@@ -34,6 +34,7 @@ enyo.kind({
 			{name: "bottom", kind:"HSlidingView", height: "100px", fixedHeight: true, pack:"end", style:"overflow: hidden;",
 				applySlideToNode: function(inSlide) {
 					if (inSlide != this.slidePosition && this.index) {
+						inSlide = Math.min(0,inSlide);
 						this.lastSlidePosition = this.slidePosition;
 						this.slidePosition = inSlide;
 						if (this.hasNode()) {
@@ -157,6 +158,8 @@ enyo.kind({
 		var et = this.$.editorScroller.getBoundaries().top;
 		var ec = this.$.editorScroller.scrollTop;
 		var ep = eb!=0 ? ec/eb : 0;
+		ep = Math.max(0,ep);
+		ep = Math.min(1,ep);
 		
 		if(this.position == "up")
 			var pb = this.$.previewScroller.getBoundaries().bottom;
@@ -165,6 +168,8 @@ enyo.kind({
 		var pt = this.$.previewScroller.getBoundaries().top;
 		var pc = this.$.previewScroller.scrollTop;
 		var pp = pb!=0 ? pc/pb : 0;
+		pp = Math.max(0,pp);
+		pp = Math.min(1,pp);
 		
 		if(this.$.bottom.slidePosition == 0 || -enyo.fetchControlSize(this).h == this.$.bottom.slidePosition-55) {
 			if(this.position == "up") {
