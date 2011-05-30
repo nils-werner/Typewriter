@@ -50,10 +50,10 @@ enyo.kind({
 					this.node.style.webkitTransform = s;
 				},
 				components: [
-					{kind: "Header", name: "header", className: "enyo-toolbar fake-toolbar", style:"z-index: 1000;", components: [
+					{kind: "Header", name: "header", height: "55px",className: "enyo-toolbar fake-toolbar", style:"z-index: 1000;", components: [
 						{kind: "GrabButton", className: "HGrabButton"},
 						{kind: "Spacer", flex: 1},
-						{content:"Typewriter"},
+						{kind: "Image", src:"images/title.png"},
 						{kind: "Spacer", flex: 25},
 						{kind: "GrabButton", className: "HGrabButton Right"}
 					]},
@@ -163,7 +163,6 @@ enyo.kind({
 			}
 		}
 		if(this.synccount == 0) {
-			console.log("+");
 			this.makePreview();
 		}
 		this.synccount++;
