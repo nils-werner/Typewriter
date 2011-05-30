@@ -138,20 +138,21 @@ enyo.kind({
 	},
 	
 	syncViews: function() {
-		this.synccount++;
-		this.synccount = this.synccount % 6;
 		if(this.position == "up") {
 			//enyo.keyboard.hide();
 			this.$.editorScroller.setScrollTop(this.$.previewScroller.scrollTop/this.$.previewScroller.getBoundaries().bottom*this.$.editorScroller.getBoundaries().bottom);
 		}
 		else {
-			if(this.synccount == 0) {
-				this.makePreview();
-			}
 			//enyo.keyboard.show();
 			this.$.previewScroller.setScrollTop(this.$.editorScroller.scrollTop/this.$.editorScroller.getBoundaries().bottom*this.$.previewScroller.getBoundaries().bottom);
 			//this.$.editor.forceFocus(); // buggy with on screen keyboard
 		}
+		if(this.synccount == 0) {
+			console.log("+");
+			this.makePreview();
+		}
+		this.synccount++;
+		this.synccount = this.synccount % 6;
 	},
 	
 	makePreview: function() {
@@ -177,12 +178,12 @@ enyo.kind({
 		//enyo.keyboard.setResizesWindow(false);
 		enyo.keyboard.show();
 		this.$.editor.setValue(this.$.Demotext.text);
+		this.syncViews();
 	},
 	
 	rendered: function() {
 		this.inherited(arguments);
 		this.adjustSlidingSize();
-		this.syncViews();
 		this.setSchedule();
 	},
 	resizeHandler: function() {
