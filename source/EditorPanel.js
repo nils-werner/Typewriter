@@ -186,7 +186,7 @@ enyo.kind({
 			this.makePreview();
 		}
 		this.synccount++;
-		this.synccount = this.synccount % 6;
+		this.synccount = this.synccount % 15;
 	},
 	
 	makePreview: function() {
