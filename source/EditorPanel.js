@@ -224,6 +224,10 @@ enyo.kind({
 	/* CONSTRUCTOR */
 	
 	ready: function() {
+		/* enyo.windows.setWindowProperties(window, { // this appears to be broken
+			blockScreenTimeout: false,
+			setSubtleLightbar: true
+		}); */
 		this.position = "down";
 		enyo.keyboard.setManualMode(true);
 		//enyo.keyboard.setResizesWindow(false);
