@@ -96,8 +96,25 @@ enyo.kind({
 			{caption: "Markdown Syntax Help", onclick: "helpMarkdown"},
 			{caption: "Typewriter Syntax Help", onclick: "helpTypewriter"},
 			{caption: "Print", name:"print", onclick: "printDocument"}
+		]},
+		{kind: enyo.ApplicationEvents, 
+			onWindowDeactivated: "sleep",
+			onWindowActivated: "wakeup"
+		},
+		{kind: "Scrim", name:"scrim", layoutKind: "VFlexLayout", align:"center", pack:"center", style:"background-color: rgba(0,0,0,0.3);", components: [
+			{kind: "Image", src:"images/bigicon.png"}
 		]}
 	],
+	
+	sleep: function() {
+		this.$.top.node.style.height = enyo.fetchControlSize(this).h + "px";
+		this.$.scrim.show();
+	},
+	
+	wakeup: function() {
+		this.$.top.node.style.height = (enyo.fetchControlSize(this).h - 55 - enyo.keyboard.height) + "px";
+		this.$.scrim.hide();
+	},
 	
 	/* PREVIEW HANDLING */
 	synccount: 0,
