@@ -102,17 +102,18 @@ enyo.kind({
 			onWindowActivated: "wakeup"
 		},
 		{kind: "Scrim", name:"scrim", layoutKind: "VFlexLayout", align:"end", pack:"end", style:"background-color: transparent; opacity: 1;", components: [
-			{kind: "Image", src:"images/bigicon.png", style: "margin-right: 20px; margin-bottom: 10px;"}
+			{kind: "Image", src:"images/bigicon.png", style: "margin-right: 20px; margin-bottom: 65px;"}
 		]}
 	],
 	
 	sleep: function() {
-		this.$.top.node.style.height = enyo.fetchControlSize(this).h + "px";
+		//if(this.position == "down")
+		//	this.$.top.node.style.height = enyo.fetchControlSize(this).h + "px";
 		this.$.scrim.show();
 	},
 	
 	wakeup: function() {
-		this.$.top.node.style.height = (enyo.fetchControlSize(this).h - 55 - enyo.keyboard.height) + "px";
+		//this.$.top.node.style.height = (enyo.fetchControlSize(this).h - 55 - enyo.keyboard.height) + "px";
 		this.$.scrim.hide();
 	},
 	
