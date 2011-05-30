@@ -151,14 +151,16 @@ enyo.kind({
 	},
 	
 	syncViews: function() {
-		if(this.position == "up") {
-			//enyo.keyboard.hide();
-			this.$.editorScroller.setScrollTop(this.$.previewScroller.scrollTop/this.$.previewScroller.getBoundaries().bottom*this.$.editorScroller.getBoundaries().bottom);
-		}
-		else {
-			//enyo.keyboard.show();
-			this.$.previewScroller.setScrollTop(this.$.editorScroller.scrollTop/this.$.editorScroller.getBoundaries().bottom*this.$.previewScroller.getBoundaries().bottom);
-			//this.$.editor.forceFocus(); // buggy with on screen keyboard
+		if(this.$.bottom.slidePosition == 0 || -enyo.fetchControlSize(this).h == this.$.bottom.slidePosition-55) {
+			if(this.position == "up") {
+				//enyo.keyboard.hide();
+				this.$.editorScroller.setScrollTop(this.$.previewScroller.scrollTop/this.$.previewScroller.getBoundaries().bottom*this.$.editorScroller.getBoundaries().bottom);
+			}
+			else {
+				//enyo.keyboard.show();
+				this.$.previewScroller.setScrollTop(this.$.editorScroller.scrollTop/this.$.editorScroller.getBoundaries().bottom*this.$.previewScroller.getBoundaries().bottom);
+				//this.$.editor.forceFocus(); // buggy with on screen keyboard
+			}
 		}
 		if(this.synccount == 0) {
 			console.log("+");
