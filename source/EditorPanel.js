@@ -84,6 +84,7 @@ enyo.kind({
 	],
 	
 	/* PREVIEW HANDLING */
+	synccount: 0,
 	
 	barMoved: function(event) {
 		if(event.view == this.$.top) {
@@ -137,12 +138,16 @@ enyo.kind({
 	},
 	
 	syncViews: function() {
+		this.synccount++;
+		this.synccount = this.synccount % 6;
 		if(this.position == "up") {
 			//enyo.keyboard.hide();
 			this.$.editorScroller.setScrollTop(this.$.previewScroller.scrollTop/this.$.previewScroller.getBoundaries().bottom*this.$.editorScroller.getBoundaries().bottom);
 		}
 		else {
-			this.makePreview();
+			if(this.synccount == 0) {
+				this.makePreview();
+			}
 			//enyo.keyboard.show();
 			this.$.previewScroller.setScrollTop(this.$.editorScroller.scrollTop/this.$.editorScroller.getBoundaries().bottom*this.$.previewScroller.getBoundaries().bottom);
 			//this.$.editor.forceFocus(); // buggy with on screen keyboard
@@ -158,7 +163,7 @@ enyo.kind({
 	setSchedule: function() {
 		this.scheduleID = setInterval(enyo.bind(this,function() {
 			this.syncViews();
-		}), 3000);
+		}), 500);
 	},
 	clearSchedule: function() {
 		clearInterval(this.scheduleID);
