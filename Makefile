@@ -14,6 +14,9 @@ web:
 help:
 	chromium-browser --disable-web-security --allow-file-access-from-files /opt/PalmSDK/Current/share/refcode/framework/enyo/0.10/support/docs/api/index.html &> /dev/null &
 	
+examples:
+	nautilus /opt/PalmSDK/Current/share/refcode/framework/enyo/0.10/support/
+	
 	
 %.ipk:
 	rm -rf *.ipk
