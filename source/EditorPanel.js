@@ -13,6 +13,7 @@ enyo.kind({
 						{className: "desk-left", flex: 1, overflow: "hidden" },
 						{kind: "BasicScroller",
 							name:"editorScroller",
+							height: "100px",
 							width: "760px",
 							autoHorizontal: false,
 							horizontal: false,
@@ -252,6 +253,8 @@ enyo.kind({
 	adjustSlidingSize: function() {
 		var s = enyo.fetchControlSize(this);
 		var pcs = enyo.fetchControlSize(this.$.bottom.$.client);
+		
+		this.$.editorScroller.node.style.height = (s.h - 55 - 74 - enyo.keyboard.height) + "px";
 		
 		this.$.top.node.style.height = (s.h - 55 - enyo.keyboard.height) + "px";
 		this.$.bottom.node.style.height = (s.h - enyo.keyboard.height) + "px";
