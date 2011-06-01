@@ -254,7 +254,7 @@ enyo.kind({
 		var s = enyo.fetchControlSize(this);
 		var pcs = enyo.fetchControlSize(this.$.bottom.$.client);
 		
-		this.$.editorScroller.node.style.height = (s.h - 55 - 74 - enyo.keyboard.height) + "px";
+		this.$.editorScroller.node.style.height = (s.h - 55 - enyo.keyboard.height) + "px";
 		
 		this.$.top.node.style.height = (s.h - 55 - enyo.keyboard.height) + "px";
 		this.$.bottom.node.style.height = (s.h - enyo.keyboard.height) + "px";
