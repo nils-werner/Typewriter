@@ -23,7 +23,7 @@ enyo.kind({
 									name: "editor",
 									richContent: false,
 									className: "editor-input",
-									onblur: "editorBlurred",
+									onblur: "syncViews",
 									onfocus: "editorFocussed",
 									onmouseup: "syncViews"
 								}
@@ -165,14 +165,12 @@ enyo.kind({
 	helpTypewriter: function() {
 		this.$.typewriterHelper.openAtCenter(this.$.helptypewriter);
 	},
-	
-	editorBlurred: function() {
-	},
 	editorFocussed: function() {
 		enyo.keyboard.show();
 	},
 	
-	syncViews: function() {
+	syncViews: function(inSender, inEvent) {
+
 		var eb = this.$.editorScroller.getBoundaries().bottom;
 		var et = this.$.editorScroller.getBoundaries().top;
 		var ec = this.$.editorScroller.scrollTop;
@@ -201,14 +199,15 @@ enyo.kind({
 				//this.$.editor.forceFocus(); // buggy with on screen keyboard
 			}
 		}
-		if(this.synccount == 0) {
+		if(this.synccount == 0 || inSender.name != "schedule") {
 			this.makePreview();
 		}
 		this.synccount++;
-		this.synccount = this.synccount % 15;
+		this.synccount = this.synccount % 3;
 	},
 	
 	makePreview: function() {
+		console.log("generating Markdown");
 		var converter = new Showdown.converter();
 		var value = this.$.editor.getValue();
 		this.$.preview.setContent(converter.makeHtml(value));
@@ -216,7 +215,7 @@ enyo.kind({
 	
 	setSchedule: function() {
 		this.scheduleID = setInterval(enyo.bind(this,function() {
-			this.syncViews();
+			this.syncViews({name:"schedule"});
 		}), 500);
 	},
 	clearSchedule: function() {
@@ -235,7 +234,7 @@ enyo.kind({
 		//enyo.keyboard.setResizesWindow(false);
 		enyo.keyboard.show();
 		this.$.editor.setValue(this.$.Demotext.text);
-		this.syncViews();
+		this.syncViews({name:"startup"});
 	},
 	
 	rendered: function() {
