@@ -181,7 +181,7 @@ enyo.kind({
 			}
 		}
 		
-		console.log(pp + " " + ep);
+		//console.log(pp + " " + ep);
 		
 		if(this.synccount == 0 || inSender.name != "schedule") {
 			this.makePreview();
@@ -191,7 +191,7 @@ enyo.kind({
 	},
 	
 	makePreview: function() {
-		console.log("generating Markdown");
+		//console.log("generating Markdown");
 		var converter = new Showdown.converter();
 		var value = this.$.editor.getValue();
 		this.$.preview.setContent(converter.makeHtml(value));
