@@ -93,39 +93,8 @@ enyo.kind({
 			frameToPrint: {name:"preview", landscape:false},
 			appName: "Typewriter"
 		},
-		{name: "markdownHelper", kind:"markdownHelper"},
-		{name: "typewriterHelper", kind:"typewriterHelper"},
 		{name:"Demotext", kind:"Demotext" },
-		{kind: "AppMenu", components: [
-			{caption: "Documents", components: [
-				{caption: "Seminar" },
-				{caption: "Studienarbeit" }
-			]},
-			{caption: "Help", components: [
-				{caption: "Markdown Syntax", onclick: "helpMarkdown"},
-				{caption: "Typewriter Syntax", onclick: "helpTypewriter"},
-			]},
-			{caption: "Print", name:"print", onclick: "printDocument"}
-		]},
-		{kind: enyo.ApplicationEvents, 
-			onWindowDeactivated: "sleep",
-			onWindowActivated: "wakeup"
-		},
-		{kind: "Scrim", name:"scrim", layoutKind: "VFlexLayout", align:"end", pack:"end", style:"background-color: transparent; opacity: 1;", components: [
-			{kind: "Image", src:"images/bigicon.png", style: "margin-right: 20px; margin-bottom: 65px;"}
-		]}
 	],
-	
-	sleep: function() {
-		//if(this.position == "down")
-		//	this.$.top.node.style.height = enyo.fetchControlSize(this).h + "px";
-		this.$.scrim.show();
-	},
-	
-	wakeup: function() {
-		//this.$.top.node.style.height = (enyo.fetchControlSize(this).h - 55 - enyo.keyboard.height) + "px";
-		this.$.scrim.hide();
-	},
 	
 	/* PREVIEW HANDLING */
 	synccount: 0,
@@ -177,12 +146,6 @@ enyo.kind({
 		this.$.printDialog.openAtCenter();
 	},
 	/* EDITOR CALLBACKS */
-	helpMarkdown: function() {
-		this.$.markdownHelper.openAtCenter(this.$.helpmarkdown);
-	},
-	helpTypewriter: function() {
-		this.$.typewriterHelper.openAtCenter(this.$.helptypewriter);
-	},
 	editorFocussed: function() {
 		enyo.keyboard.show();
 	},
