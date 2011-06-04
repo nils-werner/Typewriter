@@ -94,8 +94,14 @@ enyo.kind({
 		{name: "typewriterHelper", kind:"typewriterHelper"},
 		{name:"Demotext", kind:"Demotext" },
 		{kind: "AppMenu", components: [
-			{caption: "Markdown Syntax Help", onclick: "helpMarkdown"},
-			{caption: "Typewriter Syntax Help", onclick: "helpTypewriter"},
+			{caption: "Documents", components: [
+				{caption: "Seminar" },
+				{caption: "Studienarbeit" }
+			]},
+			{caption: "Help", components: [
+				{caption: "Markdown Syntax", onclick: "helpMarkdown"},
+				{caption: "Typewriter Syntax", onclick: "helpTypewriter"},
+			]},
 			{caption: "Print", name:"print", onclick: "printDocument"}
 		]},
 		{kind: enyo.ApplicationEvents, 
@@ -199,6 +205,9 @@ enyo.kind({
 				//this.$.editor.forceFocus(); // buggy with on screen keyboard
 			}
 		}
+		
+		console.log(pp + " " + ep);
+		
 		if(this.synccount == 0 || inSender.name != "schedule") {
 			this.makePreview();
 		}
