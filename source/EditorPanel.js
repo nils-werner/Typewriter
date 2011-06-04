@@ -111,9 +111,11 @@ enyo.kind({
 	barMoved: function(event) {
 		if(event.view == this.$.top) {
 			this.position = "down";
+			enyo.keyboard.show();
 		}
 		else {
 			this.position = "up";
+			enyo.keyboard.hide();
 		}
 
 		//this.generateMarkdown();
@@ -236,11 +238,12 @@ enyo.kind({
 	adjustSlidingSize: function() {
 		var s = enyo.fetchControlSize(this);
 		var pcs = enyo.fetchControlSize(this.$.bottom.$.client);
+		var kh = enyo.keyboard.isShowing() ? enyo.keyboard.height : 0;
 		
-		this.$.editorScroller.node.style.height = (s.h - 55 - enyo.keyboard.height) + "px";
+		this.$.editorScroller.node.style.height = (s.h - 55 - kh) + "px";
 		
-		this.$.top.node.style.height = (s.h - 55 - enyo.keyboard.height) + "px";
-		this.$.bottom.node.style.height = (s.h - enyo.keyboard.height) + "px";
+		this.$.top.node.style.height = (s.h - 55 - kh) + "px";
+		this.$.bottom.node.style.height = (s.h - kh) + "px";
 		this.$.bottom.setPeekHeight(s.h - pcs.h);
 	},
 });
