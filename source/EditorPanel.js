@@ -53,7 +53,10 @@ enyo.kind({
 					this.node.style.webkitTransform = s;
 				},
 				components: [
-					{kind: "Header", name: "header", height: "55px",className: "enyo-toolbar fake-toolbar", style:"z-index: 1000;", components: [
+					{kind: "Header", name: "header", height: "55px",className: "enyo-toolbar fake-toolbar", style:"z-index: 1000;", 
+						onmousedown: "sliderclicked",
+						onmouseup: "sliderreleased",
+						components: [
 						{kind: "GrabButton", className: "HGrabButton"},
 						{kind: "Spacer", flex: 1},
 						{kind: "Image", src:"images/title.png"},
@@ -126,6 +129,15 @@ enyo.kind({
 	
 	/* PREVIEW HANDLING */
 	synccount: 0,
+	barBeingDragged: false,
+	
+	sliderclicked: function() {
+		this.barBeingDragged = true;
+	},
+	
+	sliderreleased: function() {
+		this.barBeingDragged = false;
+	},
 	
 	barMoved: function(event) {
 		if(event.view == this.$.top) {
@@ -194,7 +206,7 @@ enyo.kind({
 		pp = Math.max(0,pp);
 		pp = Math.min(1,pp);
 		
-		if(this.$.bottom.slidePosition == 0 || -enyo.fetchControlSize(this).h == this.$.bottom.slidePosition-55) {
+		if(!this.barBeingDragged && (this.$.bottom.slidePosition == 0 || -enyo.fetchControlSize(this).h == this.$.bottom.slidePosition-55)) {
 			if(this.position == "up") {
 				//enyo.keyboard.hide();
 				this.$.editorScroller.setScrollTop(pp * eb);
