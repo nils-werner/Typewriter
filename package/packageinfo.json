@@ -1,0 +1,12 @@
+{
+	"id": "de.obsessive-media.webos.typewriter",
+	"package_format_version": 2,
+	"loc_name": "Typewriter",
+	"version": "1.0.0",
+	"icon": "../images/normalicon.png",
+	"miniicon": "../images/icon.png",
+	"vendor": "Obsessive Media",
+	"vendorurl": "www.obsessive-media.de",
+	"app": "de.obsessive-media.webos.typewriter",
+	"services": ["de.obsessive-media.webos.typewriter.service"]
+}

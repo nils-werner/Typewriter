@@ -1,0 +1,17 @@
+{
+	"id": "de.obsessive-media.webos.typewriter.service",
+	"description": "Hello Service",
+	"services": [
+		{
+			"name": "de.obsessive-media.webos.typewriter.service",
+			"description": "Hello Service",
+			"commands": [
+				{ 
+					"name": "hello", 
+					"assistant": "HelloAssistant",
+					"public": true
+				}
+			]
+		}
+	]
+}

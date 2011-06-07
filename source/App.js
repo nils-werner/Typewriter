@@ -22,7 +22,16 @@ enyo.kind({
 		{name: "typewriterHelper", kind:"typewriterHelper"},
 		{kind: "Scrim", name:"scrim", layoutKind: "VFlexLayout", align:"end", pack:"end", style:"background-color: transparent; opacity: 1;", components: [
 			{kind: "Image", src:"images/bigicon.png", style: "margin-right: 20px; margin-bottom: 65px;"}
-		]}
+		]},
+		{
+			name: "service",
+			kind: "enyo.PalmService",
+			service: "palm://de.obsessive-media.webos.typewriter.service/",
+			method: "hello",
+			subscribe: true,
+			onResponse: "gotResponse",
+			timeout: 2000
+		}
 	],
 	
 	sleep: function() {
@@ -44,5 +53,20 @@ enyo.kind({
 			this.$.markdownHelper.openAtCenter();
 		else
 			this.$.typewriterHelper.openAtCenter();
+	},
+	
+	gotResponse: function(inSender, inResponse) {
+		console.log("!!!!!!!!!!!!! BACK");
+		console.log(inResponse);
+	},
+	
+	callService: function() {
+		console.log("*************** CALLING");
+		this.$.service.call({name: "test"});
+	},
+	
+	ready: function() {
+		console.log("############### STARTING ");
+		enyo.nextTick(enyo.bind(this, "callService"));
 	}
 })

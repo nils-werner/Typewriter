@@ -20,7 +20,7 @@ examples:
 	
 %.ipk:
 	rm -rf *.ipk
-	palm-package .
+	palm-package . package service
 
 package: %.ipk
 
