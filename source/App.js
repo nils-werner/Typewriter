@@ -26,7 +26,7 @@ enyo.kind({
 		{
 			name: "service",
 			kind: "enyo.PalmService",
-			service: "palm://de.obsessive-media.webos.typewriter.service/",
+			service: "palm://de.obsessivemedia.webos.typewriter.service/",
 			method: "hello",
 			subscribe: true,
 			onResponse: "gotResponse",

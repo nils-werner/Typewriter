@@ -1,9 +1,9 @@
 {
-	"id": "de.obsessive-media.webos.typewriter.service",
+	"id": "de.obsessivemedia.webos.typewriter.service",
 	"description": "Hello Service",
 	"services": [
 		{
-			"name": "de.obsessive-media.webos.typewriter.service",
+			"name": "de.obsessivemedia.webos.typewriter.service",
 			"description": "Hello Service",
 			"commands": [
 				{ 
