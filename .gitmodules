@@ -4,3 +4,6 @@
 [submodule "service/lib/dropbox-node"]
 	path = service/lib/dropbox-node
 	url = git://github.com/evnm/dropbox-node.git
+[submodule "service/lib/oauth-node"]
+	path = service/lib/oauth-node
+	url = git://github.com/ciaranj/node-oauth.git
