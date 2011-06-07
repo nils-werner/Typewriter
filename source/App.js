@@ -57,7 +57,7 @@ enyo.kind({
 	
 	gotResponse: function(inSender, inResponse) {
 		console.log("!!!!!!!!!!!!! BACK");
-		console.log(inResponse);
+		console.log(inResponse.reply);
 	},
 	
 	callService: function() {
