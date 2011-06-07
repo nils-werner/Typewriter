@@ -6,16 +6,20 @@ enyo.kind({
 	},
 	components: [
 		{kind: "EditorPanel", flex: 1},
-		{kind: "TypewriterMenu", onFileLoad: "openFile", onFileSave: "writeFile"},
+		{kind: "TypewriterMenu", onFileLoad: "openFile", onFileSave: "writeFile", onFileLoad: "openFile", onPrintDocument: "printDocument"},
 		{kind: enyo.ApplicationEvents, 
 			onWindowDeactivated: "sleep",
 			onWindowActivated: "wakeup"
 		},
 		//{name: "markdownHelper", kind:"markdownHelper"},
 		//{name: "typewriterHelper", kind:"typewriterHelper"},
-		{kind: "Scrim", name:"scrim", layoutKind: "VFlexLayout", align:"end", pack:"end", style:"background-color: transparent; opacity: 1;", components: [
+		{kind: "Scrim", name:"taboutscrim", layoutKind: "VFlexLayout", align:"end", pack:"end", style:"background-color: transparent; opacity: 1;", components: [
 			{kind: "Image", src:"images/bigicon.png", style: "margin-right: 20px; margin-bottom: 65px;"}
 		]},
+		{kind: "Scrim", name:"scrim", layoutKind: "VFlexLayout", align:"center", pack:"center", components: [
+			{kind: "SpinnerLarge"}
+		]},
+		{name:'filePicker', kind: "FilePicker", extensions:["md", "markdown", "txt"], allowMultiSelect:false, onPickFile: "handleFilepicked"},
 		{
 			name: "service",
 			kind: "enyo.PalmService",
@@ -28,17 +32,18 @@ enyo.kind({
 	sleep: function() {
 		//if(this.position == "down")
 		//	this.$.top.node.style.height = enyo.fetchControlSize(this).h + "px";
-		this.$.scrim.show();
+		this.$.taboutscrim.show();
 	},
 	
 	wakeup: function() {
 		//this.$.top.node.style.height = (enyo.fetchControlSize(this).h - 55 - enyo.keyboard.height) + "px";
-		this.$.scrim.hide();
+		this.$.taboutscrim.hide();
 	},
 	
 	printDocument: function() {
 		this.$.editorPanel.printDocument();
 	},
+	
 	displayHelp: function(inSender) {
 		if(inSender.name == "markdownHelp")
 			this.$.markdownHelper.openAtCenter();
@@ -47,25 +52,34 @@ enyo.kind({
 	},
 	
 	readDir: function() {
-		this.$.service.call({}, {method:"readdir", onSuccess: "postFiles"});
-	},
-	
-	postFiles: function(inSender, inResponse) {
-		console.log("posting files");
-		this.$.typewriterMenu.postFiles(inResponse);
+		this.$.service.call({}, {method:"readdir"});
 	},
 	
 	openFile: function(inSender, inEvent) {
-		console.log(inSender);
+		this.$.filePicker.pickFile();
+	},
+	
+	handleFilepicked: function(inSender, result) {
+		this.$.scrim.show();
+		this.$.spinnerLarge.show();
+		this.filename = result[0].fullPath;
+		this.$.service.call({name: this.filename}, {method:"readfile", onSuccess: "handleFileopened"});
+	},
+	
+	handleFileopened: function(inSender, inResponse) {
+		this.$.editorPanel.setContent(inResponse.content);
+		this.$.scrim.hide();
+		this.$.spinnerLarge.hide();
 	},
 	
 	writeFile: function(inSender, inEvent) {
-		console.log(this.filename);
-		console.log(this.$.editorPanel.getContent());
-		this.$.service.call({name: this.filename, content: this.$.editorPanel.getContent()}, {method:"writefile"});
+		this.$.scrim.show();
+		this.$.spinnerLarge.show();
+		this.$.service.call({name: this.filename, content: this.$.editorPanel.getContent()}, {method:"writefile", onSuccess: "handleFilesaved"});
 	},
 	
-	ready: function() {
-		enyo.nextTick(enyo.bind(this, "readDir"));
+	handleFilesaved: function(inSender, inResponse) {
+		this.$.scrim.hide();
+		this.$.spinnerLarge.hide();
 	}
 })

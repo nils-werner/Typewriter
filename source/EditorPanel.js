@@ -252,5 +252,9 @@ enyo.kind({
 	
 	getContent: function() {
 		return this.$.editor.getValue();
+	},
+	
+	setContent: function(inContent) {
+		this.$.editor.setValue(inContent);
 	}
 });

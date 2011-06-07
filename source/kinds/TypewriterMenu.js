@@ -10,36 +10,11 @@ enyo.kind({
 	},
 	components: [
 		{caption: "Save file", onclick: "doFileSave"},
-		{caption: "Open file...", kind:"AppMenuItem", onclick: "loadFiles", name:"docs", components: [
-			{caption:"Test"}
-		]},
+		{caption: "Open file...", kind:"AppMenuItem", onclick: "doFileLoad"},
 		{caption: "Help", components: [
 			{caption: "Markdown Syntax", name:"markdownHelp", onclick: "displayHelp"},
 			{caption: "Typewriter Syntax", name:"typewriterHelp", onclick: "displayHelp"},
 		]},
-		{caption: "Print", name:"print", onclick: "printDocument"}
-	],
-	
-	postFiles: function(inFiles) {
-		this.files = [];
-		for(i in inFiles.files) {
-			this.files.push({
-				caption: inFiles.files[i],
-				onclick: "openFile"
-			});
-		}
-	},
-	
-	loadFiles: function(inSender, inEvent) {
-		console.log(inSender);
-		inSender.destroyControls();
-		for(i in this.files) {
-			inSender.createComponent(this.files[i]);
-		}
-		inSender.render();
-	},
-	
-	openFile: function(inSender, inEvent) {
-		this.doFileLoad(inSender.caption);
-	}
+		{caption: "Print", name:"print", onclick: "printDocument"},
+	]
 });
