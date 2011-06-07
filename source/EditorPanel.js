@@ -249,4 +249,8 @@ enyo.kind({
 		if(this.position == "up")
 			this.$.bottom.slidePosition = this.$.bottom.lastSlidePosition = -(enyo.fetchControlSize(this.$.bottom).h-56);
 	},
+	
+	getContent: function() {
+		return this.$.editor.getValue();
+	}
 });

@@ -7,5 +7,5 @@ WriteFileAssistant.prototype.run = function(future) {
 	//this.controller.args.name
 	//this.controller.args.content
 	
-	future.result = { name: this.controller.args.name, bytes: fs.writeSync("/media/internal/Typewriter/" + this.controller.args.name, this.controller.args.content, 'utf8') };
+	future.result = { name: this.controller.args.name, bytes: fs.writeFileSync("/media/internal/Typewriter/" + this.controller.args.name, this.controller.args.content, 'utf8') };
 }

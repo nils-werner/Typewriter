@@ -1,9 +1,12 @@
 enyo.kind({
 	name: "App",
 	kind: enyo.VFlexBox,
+	published: {
+		filename: "test.md"
+	},
 	components: [
 		{kind: "EditorPanel", flex: 1},
-		{kind: "TypewriterMenu"},
+		{kind: "TypewriterMenu", onFileLoad: "openFile", onFileSave: "writeFile"},
 		{kind: enyo.ApplicationEvents, 
 			onWindowDeactivated: "sleep",
 			onWindowActivated: "wakeup"
@@ -43,13 +46,7 @@ enyo.kind({
 			this.$.typewriterHelper.openAtCenter();
 	},
 	
-	gotResponse: function(inSender, inResponse) {
-		console.log("!!!!!!!!!!!!! BACK");
-		console.log(inResponse.reply);
-	},
-	
 	readDir: function() {
-		console.log("*************** CALLING");
 		this.$.service.call({}, {method:"readdir", onSuccess: "postFiles"});
 	},
 	
@@ -58,8 +55,17 @@ enyo.kind({
 		this.$.typewriterMenu.postFiles(inResponse);
 	},
 	
+	openFile: function(inSender, inEvent) {
+		console.log(inSender);
+	},
+	
+	writeFile: function(inSender, inEvent) {
+		console.log(this.filename);
+		console.log(this.$.editorPanel.getContent());
+		this.$.service.call({name: this.filename, content: this.$.editorPanel.getContent()}, {method:"writefile"});
+	},
+	
 	ready: function() {
-		console.log("############### STARTING ");
 		enyo.nextTick(enyo.bind(this, "readDir"));
 	}
 })

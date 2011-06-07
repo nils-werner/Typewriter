@@ -4,8 +4,13 @@ enyo.kind({
 	published: {
 		files: []
 	},
+	events: {
+		onFileLoad: "",
+		onFileSave: ""
+	},
 	components: [
-		{caption: "Documents", kind:"AppMenuItem", onclick: "loadFiles", name:"docs", components: [
+		{caption: "Save file", onclick: "doFileSave"},
+		{caption: "Open file...", kind:"AppMenuItem", onclick: "loadFiles", name:"docs", components: [
 			{caption:"Test"}
 		]},
 		{caption: "Help", components: [
@@ -32,5 +37,9 @@ enyo.kind({
 			inSender.createComponent(this.files[i]);
 		}
 		inSender.render();
+	},
+	
+	openFile: function(inSender, inEvent) {
+		this.doFileLoad(inSender.caption);
 	}
 });
