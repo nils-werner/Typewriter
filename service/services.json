@@ -1,14 +1,24 @@
 {
-	"id": "de.obsessivemedia.webos.typewriter.service",
-	"description": "Hello Service",
+	"id": "de.obsessivemedia.webos.typewriter.fileio",
+	"description": "FileIO Service",
 	"services": [
 		{
-			"name": "de.obsessivemedia.webos.typewriter.service",
-			"description": "Hello Service",
+			"name": "de.obsessivemedia.webos.typewriter.fileio",
+			"description": "FileIO Service",
 			"commands": [
 				{ 
-					"name": "hello", 
-					"assistant": "HelloAssistant",
+					"name": "readdir", 
+					"assistant": "ReadDirAssistant",
+					"public": true
+				},
+				{ 
+					"name": "writefile", 
+					"assistant": "WriteFileAssistant",
+					"public": true
+				},
+				{ 
+					"name": "readfile", 
+					"assistant": "ReadFileAssistant",
 					"public": true
 				}
 			]

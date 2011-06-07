@@ -6,6 +6,7 @@ enyo.depends(
 	"source/kinds/Demotext.js",
 	"source/kinds/markdownHelper.js",
 	"source/kinds/typewriterHelper.js",
+	"source/kinds/TypewriterMenu.js",
 	
 	"source/showdown/compressed/showdown.js",
 	

@@ -3,33 +3,21 @@ enyo.kind({
 	kind: enyo.VFlexBox,
 	components: [
 		{kind: "EditorPanel", flex: 1},
-		{kind: "AppMenu", components: [
-			{caption: "Documents", components: [
-				{caption: "Seminar" },
-				{caption: "Studienarbeit" }
-			]},
-			{caption: "Help", components: [
-				{caption: "Markdown Syntax", name:"markdownHelp", onclick: "displayHelp"},
-				{caption: "Typewriter Syntax", name:"typewriterHelp", onclick: "displayHelp"},
-			]},
-			{caption: "Print", name:"print", onclick: "printDocument"}
-		]},
+		{kind: "TypewriterMenu"},
 		{kind: enyo.ApplicationEvents, 
 			onWindowDeactivated: "sleep",
 			onWindowActivated: "wakeup"
 		},
-		{name: "markdownHelper", kind:"markdownHelper"},
-		{name: "typewriterHelper", kind:"typewriterHelper"},
+		//{name: "markdownHelper", kind:"markdownHelper"},
+		//{name: "typewriterHelper", kind:"typewriterHelper"},
 		{kind: "Scrim", name:"scrim", layoutKind: "VFlexLayout", align:"end", pack:"end", style:"background-color: transparent; opacity: 1;", components: [
 			{kind: "Image", src:"images/bigicon.png", style: "margin-right: 20px; margin-bottom: 65px;"}
 		]},
 		{
 			name: "service",
 			kind: "enyo.PalmService",
-			service: "palm://de.obsessivemedia.webos.typewriter.service/",
-			method: "hello",
+			service: "palm://de.obsessivemedia.webos.typewriter.fileio/",
 			subscribe: true,
-			onResponse: "gotResponse",
 			timeout: 2000
 		}
 	],
@@ -60,13 +48,18 @@ enyo.kind({
 		console.log(inResponse.reply);
 	},
 	
-	callService: function() {
+	readDir: function() {
 		console.log("*************** CALLING");
-		this.$.service.call({name: "test"});
+		this.$.service.call({}, {method:"readdir", onSuccess: "postFiles"});
+	},
+	
+	postFiles: function(inSender, inResponse) {
+		console.log("posting files");
+		this.$.typewriterMenu.postFiles(inResponse);
 	},
 	
 	ready: function() {
 		console.log("############### STARTING ");
-		enyo.nextTick(enyo.bind(this, "callService"));
+		enyo.nextTick(enyo.bind(this, "readDir"));
 	}
 })

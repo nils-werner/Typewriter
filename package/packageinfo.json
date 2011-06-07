@@ -8,5 +8,5 @@
 	"vendor": "Obsessive Media",
 	"vendorurl": "www.obsessive-media.de",
 	"app": "de.obsessivemedia.webos.typewriter",
-	"services": ["de.obsessivemedia.webos.typewriter.service"]
+	"services": ["de.obsessivemedia.webos.typewriter.fileio"]
 }
