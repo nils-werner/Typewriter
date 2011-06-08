@@ -111,11 +111,11 @@ enyo.kind({
 	barMoved: function(event) {
 		if(event.view == this.$.top) {
 			this.position = "down";
-			enyo.keyboard.show();
+			//enyo.keyboard.show();
 		}
 		else {
 			this.position = "up";
-			enyo.keyboard.hide();
+			//enyo.keyboard.hide();
 		}
 
 		//this.generateMarkdown();
