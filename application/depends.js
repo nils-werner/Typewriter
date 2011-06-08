@@ -12,8 +12,8 @@ enyo.depends(
 	
 	"$enyo-lib/printdialog/",
 	
-	"source/EditorPanel.js",
-	"source/EditorPanel.css",
+	"source/kinds/EditorPanel.js",
+	"stylesheets/EditorPanel.css",
 	
 	"source/App.js"
 );
