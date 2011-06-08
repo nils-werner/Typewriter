@@ -1,0 +1,32 @@
+{
+	"id": "de.obsessivemedia.webos.typewriter.dropbox",
+	"description": "Dropbox Service",
+	"services": [
+		{
+			"name": "de.obsessivemedia.webos.typewriter.dropbox",
+			"description": "Dropbox Service",
+			"commands": [
+				{ 
+					"name": "readdir", 
+					"assistant": "ReadDirAssistant",
+					"public": true
+				},
+				{ 
+					"name": "writefile", 
+					"assistant": "WriteFileAssistant",
+					"public": true
+				},
+				{ 
+					"name": "readfile", 
+					"assistant": "ReadFileAssistant",
+					"public": true
+				},
+				{ 
+					"name": "getaccesstoken", 
+					"assistant": "GetAccessTokenAssistant",
+					"public": true
+				}
+			]
+		}
+	]
+}
