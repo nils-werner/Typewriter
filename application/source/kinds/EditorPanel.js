@@ -59,7 +59,7 @@ enyo.kind({
 						components: [
 						{kind: "GrabButton", className: "HGrabButton"},
 						{kind: "Spacer", flex: 1},
-						{kind: "Image", src:"images/title.png"},
+						{kind: "Image", src:"images/title.png", style:"margin-top: 4px;"},
 						{kind: "Spacer", flex: 25},
 						{kind: "GrabButton", className: "HGrabButton Right"}
 					]},

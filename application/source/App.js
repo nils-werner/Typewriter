@@ -14,7 +14,7 @@ enyo.kind({
 		//{name: "markdownHelper", kind:"markdownHelper"},
 		//{name: "typewriterHelper", kind:"typewriterHelper"},
 		{kind: "Scrim", name:"taboutscrim", layoutKind: "VFlexLayout", align:"end", pack:"end", style:"background-color: transparent; opacity: 1;", components: [
-			{kind: "Image", src:"images/bigicon.png", style: "margin-right: 20px; margin-bottom: 65px;"}
+			{kind: "Image", src:"images/icon256.png", style: "margin-right: 20px; margin-bottom: 65px;"}
 		]},
 		{kind: "Scrim", name:"scrim", layoutKind: "VFlexLayout", align:"center", pack:"center", components: [
 			{kind: "SpinnerLarge"}
