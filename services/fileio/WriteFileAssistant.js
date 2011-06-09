@@ -4,8 +4,8 @@ var WriteFileAssistant = function() {
 WriteFileAssistant.prototype.run = function(future) {
 	var fs = IMPORTS.require("fs");
 	
-	//this.controller.args.name
-	//this.controller.args.content
+	var name = this.controller.args.name
+	var content = this.controller.args.content
 	
-	future.result = { name: this.controller.args.name, bytes: fs.writeFileSync("/media/internal/Typewriter/" + this.controller.args.name, this.controller.args.content, 'utf8') };
+	fs.writeFile("/media/internal/Typewriter/" + name, content, 'utf8', function(err) { future.result = { name: name, bytes: content.length, error: err }; });
 }
