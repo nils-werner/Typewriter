@@ -2,10 +2,7 @@ var WriteFileAssistant = function() {
 }
 
 WriteFileAssistant.prototype.run = function(future) {
-	var fs = IMPORTS.require("fs");
+	var name = this.controller.args.name;
 	
-	var name = this.controller.args.name
-	var content = this.controller.args.content
-	
-	fs.writeFile("/media/internal/Typewriter/" + name, content, 'utf8', function(err) { future.result = { name: name, bytes: content.length, error: err }; });
+	dropbox.putFile("/media/internal/Typewriter/" + name, "/Typewriter/" + name, function (err, data) { future.result = { err: err, data: data}; });
 }
