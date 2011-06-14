@@ -1,5 +1,7 @@
 /* Copyright 2009-2011 Hewlett-Packard Development Company, L.P. All rights reserved. */
 enyo.depends(
+	"source/utilities/strings.js",
+
 	"source/kinds/FileIO.js",
 	"source/kinds/LoginDialog.js",
 	"source/kinds/HSlidingPane.js",

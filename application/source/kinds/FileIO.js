@@ -40,15 +40,16 @@ enyo.kind({
 		{kind: "Scrim", name:"scrim", layoutKind: "VFlexLayout", align:"center", pack:"center", components: [
 			{kind: "SpinnerLarge"}
 		]},
-		{kind: "Popup", name:"fileList", lazy: false, components: [
-			{kind: "VirtualList", onSetupRow: "setupFileListRow", components: [
-				{kind: "Item", layoutKind: "HFlexLayout", components: [
-					{name: "caption", flex: 1, onclick: "handleFileSelected"},
-				]}
-			]}
-		]},
-		{kind: "Popup", name:"login", components: [
-		]}
+		{kind: "PopupList",
+			scrim: true,
+			modal: true,
+			dismissWithClick: false,
+			width: "200px",
+			height: "200px",
+			modal: true,
+			name:"fileDialog",
+			onSelect: "handleFileSelected"
+		}
 	],
 	
 	/*
@@ -62,11 +63,9 @@ enyo.kind({
 		this.$.fileio.call({name: this.filename, content: inContent}, {method:"writefile", onSuccess: "handleSaved"});
 	},
 	
-	handlePushed: function(inEvent, inResponse) {
-		console.log(JSON.stringify(inResponse));
-	},
-	
 	handleSaved: function(inEvent, inResponse) {
+		console.log(JSON.stringify(inResponse));
+		
 		if(this.isLoggedIn()) {
 			console.log("Pushing file " + this.filename);
 			this.$.dropbox.call({name: this.filename, ctoken: this.ctoken, csecret: this.csecret, token: this.token, secret: this.secret}, {method:"writefile", onSuccess: "handlePushed"});
@@ -75,6 +74,10 @@ enyo.kind({
 		this.$.spinnerLarge.hide();
 		this.$.scrim.hide();
 		this.doSaved(inResponse);
+	},
+	
+	handlePushed: function(inEvent, inResponse) {
+		console.log(JSON.stringify(inResponse));
 	},
 	
 	
@@ -104,7 +107,7 @@ enyo.kind({
 		this.$.spinnerLarge.hide();
 		this.$.scrim.hide();
 		
-		this.doOpened(inResponse.content);
+		this.doOpened(inResponse);
 	},
 	
 	
@@ -115,35 +118,44 @@ enyo.kind({
 	listFiles: function() {
 		this.files = [];
 		
+		this.$.fileDialog.openAtCenter();
+		
 		this.$.fileio.call({}, {method:"readdir", onSuccess: "handleLocaldir"});
-		this.$.dropbox.call({ctoken: this.ctoken, csecret: this.csecret, token: this.token, secret: this.secret}, {method:"readdir", onSuccess: "handleRemotedir"});
-		this.$.fileList.openAtCenter();
+		if(this.isLoggedIn()) {
+			this.$.dropbox.call({ctoken: this.ctoken, csecret: this.csecret, token: this.token, secret: this.secret}, {method:"readdir", onSuccess: "handleRemotedir"});
+		}
 	},
 	
 	handleLocaldir: function(inSender, inResponse) {
 		console.log("Local files came back");
 		for(var i in inResponse.files) {
-			this.files.push({ type: "local", filename: inResponse.files[i]});
+			this.files.push({ type: "local", caption: inResponse.files[i]});
 		}
-		this.$.fileList.render();
+		this.refreshList();
 	},
 	
 	handleRemotedir: function(inSender, inResponse) {
 		console.log("Remote files came back");
 		for(var i in inResponse.data.contents) {
-			this.files.push({ type: "dropbox", filename: inResponse.data.contents[i].path });
+			this.files.push({ type: "dropbox", caption: basename(inResponse.data.contents[i].path) });
 		}
-		this.$.fileList.render();
+		this.refreshList();
 	},
 	
-	setupFileListRow: function(inSender, inIndex) {
-		console.log(inIndex + " requested");
-		this.$.caption.setContent(inIndex + " " + this.files[inIndex].filename);
-		return true;
+	refreshList: function(inSender, inIndex) {
+		console.log(JSON.stringify(this.files));
+		this.$.fileDialog.setItems(this.files);
+		this.$.fileDialog.itemsChanged();
 	},
 	
-	handleFileSelected: function(inSender, inEvent) {
-		console.log(inSender.getContent());
+	handleFileSelected: function(inSender, inSelected) {
+		console.log("file selected");
+		this.$.fileDialog.close();
+		this.readFile(this.files[inSelected].caption);
+	},
+	
+	cancelFileSelect: function(inSender, inEvent) {
+		this.$.fileDialog.close();
 	},
 	
 	/*
