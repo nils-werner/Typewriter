@@ -7,12 +7,13 @@ enyo.kind({
 	components: [
 		{kind: "EditorPanel", flex: 1},
 		{kind: "AppMenu", lazy: false, components: [
-			{caption: "Save file", onclick: "doSave"},
-			{caption: "Open file...", name:"fileList", onclick: "doOpen", components: [
-				{kind:"AppMenuItem", caption:""}
+			{caption: "Document", components: [
+				{caption: "New", onclick: "doNew"},
+				{caption: "Save", onclick: "doSave"},
+				{caption: "Open...", onclick: "doOpen"}
 			]},
-			{caption: "Print", name:"print", onclick: "doPrint"},
-			{caption: "Log into Dropbox...", name:"dropboxLogin", onclick: "doLogin"},
+			{caption: "Login...", onclick: "doLogin"},
+			{caption: "Print...", name:"print", onclick: "doPrint"},
 			{caption: "Help", components: [
 				{caption: "Markdown Syntax", name:"markdownHelp", onclick: "displayHelp"},
 				{caption: "Typewriter Syntax", name:"typewriterHelp", onclick: "displayHelp"},
@@ -24,69 +25,61 @@ enyo.kind({
 		{kind: "Scrim", name:"taboutscrim", layoutKind: "VFlexLayout", align:"center", pack:"center", style:"background-color: transparent; opacity: 1;", components: [
 			{kind: "Image", src:"images/icon256.png", style: "opacity: 0.5;"}
 		]},
-		{kind: "Scrim", name:"scrim", layoutKind: "VFlexLayout", align:"center", pack:"center", components: [
-			{kind: "SpinnerLarge"}
-		]},
 		{kind: enyo.ApplicationEvents, 
 			onWindowDeactivated: "sleep",
 			onWindowActivated: "wakeup"
 		},
-		{
-			name: "fileio",
-			kind: "enyo.PalmService",
-			service: "palm://de.obsessivemedia.webos.typewriter.fileio/",
-			subscribe: true,
-			timeout: 2000
-		}
+		{kind: "FileIO",
+			onOpened: "handleOpened",
+			onSaved: "handleSaved",
+			onLogin: "handleLoginResult"
+		},
+		{kind: "LoginDialog", onSubmit: "handleLoginData"},
+		
 	],
 	
 	/* FILE HANDLING */
 	
+	doNew: function(inSender, inResponse) {
+		this.$.fileIO.createNew();
+	},
 	
 	doOpen: function(inSender, inEvent) {
-		console.log("opening dir");
-		this.$.fileio.call({}, {method:"readdir", onSuccess: "handleReaddir"});
-	},
-	
-	handleReaddir: function(inSender, inResponse) {
-		console.log("opened dir" + inResponse.files.length);
-		var files = [];
-		for(i in inResponse.files) {
-			files.push({kind:"AppMenuItem", caption: inResponse.files[i]});
-		}
-		this.$.fileList.destroyControls();
-		this.$.fileList.createComponents(files);
-		this.$.fileList.render();
-		this.$.appMenu.render();
-	},
-	
-	handleFilepicked: function(inSender, result) {
-		this.$.scrim.show();
-		this.$.spinnerLarge.show();
-		this.$.fileio.call({name: this.filename}, {method:"readfile", onSuccess: "handleOpened"});
+		this.$.fileIO.listFiles();
 	},
 	
 	handleOpened: function(inSender, inResponse) {
-		this.$.editorPanel.setContent(inResponse.content);
-		this.$.scrim.hide();
-		this.$.spinnerLarge.hide();
+		this.$.editorPanel.setContent(inResponse.data);
 	},
 	
-	
-	
-	
 	doSave: function(inSender, inEvent) {
-		this.$.scrim.show();
-		this.$.spinnerLarge.show();
-		this.$.fileio.call({name: this.filename, content: this.$.editorPanel.getContent()}, {method:"writefile", onSuccess: "handleSaved"});
+		this.$.fileIO.saveFile(this.$.editorPanel.getContent());
 	},
 	
 	handleSaved: function(inSender, inResponse) {
-		this.$.scrim.hide();
-		this.$.spinnerLarge.hide();
 	},
 	
+	doLogin: function(inSender, inEvent) {
+		this.$.loginDialog.openAtCenter();
+	},
 	
+	handleLoginData: function(inSender, inResponse) {
+		if(inResponse.username == "" && inResponse.password == "") {// reset gedrueckt
+			this.$.loginDialog.setActive(false);
+			this.$.loginDialog.close();
+		}
+		this.$.fileIO.login({username: inResponse.username, password: inResponse.password});
+	},
+	
+	handleLoginResult: function(inSender, inResponse) {
+		if(!inResponse.err) {
+			this.$.loginDialog.close();
+		}
+		else {
+			console.log("error, please re-login");
+			this.$.loginDialog.setActive(false);
+		}
+	},
 	
 	
 	/* BORING EVENTS */

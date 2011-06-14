@@ -1,6 +1,0 @@
-[
-{ "library":	{ "name": "foundations", "version": "1.0" } },
-{ "source":		"ReadDirAssistant.js" },
-{ "source":		"WriteFileAssistant.js" },
-{ "source":		"ReadFileAssistant.js" }
-]
