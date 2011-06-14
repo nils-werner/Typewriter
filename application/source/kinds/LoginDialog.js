@@ -7,7 +7,7 @@ enyo.kind({
 	},
 	components: [
 		{kind:"RowGroup", components: [
-			{kind: "Input", hint: "Username", name:"username", 
+			{kind: "Input", hint: "E-Mail Address", name:"username", 
 				spellcheck: false,
 				autocorrect: false,
 				autoCapitalize: "lowercase",
@@ -18,6 +18,8 @@ enyo.kind({
 				onkeypress: "keypressHandler"
 			}
 		]},
+		{kind:"Spacer", height: "10px"},
+		{content: "Typewriter will not save your emailadress or password. You can always revoke Typewriter's access to you files via your <a href=\"https://www.dropbox.com/account#applications\">Dropbox account preferences</a>.", className: "smallhint"},
 		{kind:"Spacer", height: "20px"},
 		{kind: "HFlexBox", components: [
 			{kind: "Button", flex: 1, caption: "Reset", onclick: "resetHandler"},

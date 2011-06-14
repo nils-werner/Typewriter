@@ -168,3 +168,8 @@
 	text-transform: uppercase;
 	font-size: 16px;
 }
+
+.smallhint {
+	opacity: 0.4;
+	font-size: 80%;
+}
