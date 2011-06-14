@@ -19,12 +19,13 @@ enyo.kind({
 			}
 		]},
 		{kind:"Spacer", height: "10px"},
-		{content: "Typewriter will not save your emailadress or password. You can always revoke Typewriter's access to you files via your <a href=\"https://www.dropbox.com/account#applications\">Dropbox account preferences</a>.", className: "smallhint"},
+		{content: "Typewriter will not save your emailadress or password. You can revoke Typewriter's access to you files at any time via your <a href=\"https://www.dropbox.com/account#applications\">Dropbox account preferences</a>.", className: "smallhint"},
 		{kind:"Spacer", height: "20px"},
 		{kind: "HFlexBox", components: [
-			{kind: "Button", flex: 1, caption: "Reset", onclick: "resetHandler"},
-			{kind: "Button", flex: 1, caption: "Login", className: "enyo-button-dark", default: true, onclick: "buttonHandler"}
+			{kind: "ActivityButton", name: "reset", flex: 1, caption: "Reset", onclick: "resetHandler"},
+			{kind: "ActivityButton", name:"login", flex: 1, caption: "Login", className: "enyo-button-dark", default: true, onclick: "buttonHandler"}
 		]}
+		
 	],
 	keypressHandler: function(inSender, inEvent) {
 		if(inEvent.keyCode == 13) {
@@ -33,9 +34,17 @@ enyo.kind({
 		}
 	},
 	buttonHandler: function() {
+		this.$.login.setActive(true);
+		this.$.login.setDisabled(true);
+		this.$.reset.setDisabled(true);
 		this.doSubmit({ username: this.$.username.getValue(), password: this.$.password.getValue() });
 	},
 	resetHandler: function() {
 		this.doSubmit({ username: "", password: "" });
+	},
+	setActive: function(inValue) {
+		this.$.login.setActive(inValue);
+		this.$.login.setDisabled(inValue);
+		this.$.reset.setDisabled(inValue);
 	}
 });

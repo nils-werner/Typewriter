@@ -7,10 +7,10 @@ enyo.kind({
 	components: [
 		{kind: "EditorPanel", flex: 1},
 		{kind: "AppMenu", lazy: false, components: [
-			{caption: "Save file", onclick: "doSave"},
-			{caption: "Open file...", onclick: "doOpen"},
-			{caption: "Synchronization", onclick: "doLogin"},
-			{caption: "Print", name:"print", onclick: "doPrint"},
+			{caption: "Save Document", onclick: "doSave"},
+			{caption: "Open Document...", onclick: "doOpen"},
+			{caption: "Login...", onclick: "doLogin"},
+			{caption: "Print...", name:"print", onclick: "doPrint"},
 			{caption: "Help", components: [
 				{caption: "Markdown Syntax", name:"markdownHelp", onclick: "displayHelp"},
 				{caption: "Typewriter Syntax", name:"typewriterHelp", onclick: "displayHelp"},
@@ -28,9 +28,10 @@ enyo.kind({
 		},
 		{kind: "FileIO",
 			onOpened: "handleOpened",
-			onSaved: "handleSaved"
+			onSaved: "handleSaved",
+			onLogin: "handleLoginResult"
 		},
-		{kind: "LoginDialog", onSubmit: "handleLogin"}
+		{kind: "LoginDialog", onSubmit: "handleLoginData"}
 	],
 	
 	/* FILE HANDLING */
@@ -55,9 +56,22 @@ enyo.kind({
 		this.$.loginDialog.openAtCenter();
 	},
 	
-	handleLogin: function(inSender, inResponse) {
-		this.$.loginDialog.close();
+	handleLoginData: function(inSender, inResponse) {
+		if(inResponse.username == "" && inResponse.password == "") {// reset gedrueckt
+			this.$.loginDialog.setActive(false);
+			this.$.loginDialog.close();
+		}
 		this.$.fileIO.login({username: inResponse.username, password: inResponse.password});
+	},
+	
+	handleLoginResult: function(inSender, inResponse) {
+		if(!inResponse.err) {
+			this.$.loginDialog.close();
+		}
+		else {
+			console.log("error, please re-login");
+			this.$.loginDialog.setActive(false);
+		}
 	},
 	
 	

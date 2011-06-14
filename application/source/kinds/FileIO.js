@@ -15,7 +15,8 @@ enyo.kind({
 		onSaved: "",
 		onDirRead: "",
 		onPushed: "",
-		onFetched: ""
+		onFetched: "",
+		onLogin: ""
 	},
 	components: [
 		{
@@ -150,16 +151,25 @@ enyo.kind({
 	 */
 	
 	login: function(param) {
+		if(param.username == "" && param.password == "") {
+			this.token = "";
+			this.secret = "";
+		}
 		this.$.dropbox.call({ctoken: this.ctoken, csecret: this.csecret, email: param.username, password: param.password}, {method:"getaccesstoken", onSuccess: "handleToken"});
 	},
 	
 	handleToken: function(inSender, inResponse) {
 		console.log(JSON.stringify(inResponse));
-		this.token = inResponse.token;
-		this.secret = inResponse.secret;
 		
-		enyo.setCookie("token", this.token);
-		enyo.setCookie("secret", this.secret);
+		if(!inResponse.err) {
+			this.token = inResponse.token;
+			this.secret = inResponse.secret;
+			
+			enyo.setCookie("token", this.token);
+			enyo.setCookie("secret", this.secret);
+		}
+		
+		this.doLogin(inResponse);
 	},
 	
 	isLoggedIn: function() {
