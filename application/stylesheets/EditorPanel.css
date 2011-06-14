@@ -41,17 +41,32 @@
 	right: 0px;
 }
 
-.desk-right {
-	background-image: url(../images/desk-right.png);
-	background-position: left;
+.editor-right, .preview-right {
+	background-position: left top;
 	background-repeat: repeat-y;
 }
 
-.desk-left {
-	background-image: url(../images/desk-left.png);
-	background-position: right;
+.editor-left, .preview-left {
+	background-position: right top;
 	background-repeat: repeat-y;
 }
+
+.editor-right {
+	background-image: url(../images/editor-right.jpg);
+}
+
+.editor-left {
+	background-image: url(../images/editor-left.jpg);
+}
+
+.preview-right {
+	background-image: url(../images/preview-right.jpg);
+}
+
+.preview-left {
+	background-image: url(../images/preview-left.jpg);
+}
+
 
 .output-preview p, .output-preview ul, .output-preview ol {
 	font-size: 14pt;

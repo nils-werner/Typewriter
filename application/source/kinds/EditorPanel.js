@@ -10,7 +10,7 @@ enyo.kind({
 			{name: "top", kind:"HSlidingView", 
 				components: [
 					{kind: "HFlexBox", pack: "center", components: [
-						{className: "desk-left", flex: 1, overflow: "hidden" },
+						{className: "editor-left", flex: 1, overflow: "hidden" },
 						{kind: "BasicScroller",
 							name:"editorScroller",
 							height: "100px",
@@ -29,7 +29,7 @@ enyo.kind({
 								}
 							]
 						},
-						{className: "desk-right", flex: 1, overflow: "hidden" }
+						{className: "editor-right", flex: 1, overflow: "hidden" }
 					]}
 			]},
 			{name: "bottom", kind:"HSlidingView", height: "100px", fixedHeight: true, pack:"end", style:"overflow: hidden;",
@@ -66,7 +66,7 @@ enyo.kind({
 					{kind: "VFlexBox", flex: 1,
 						components: [
 						{kind: "HFlexBox", flex: 1, pack: "center", components: [
-							{className: "desk-left", flex: 1, overflow: "hidden" },
+							{className: "preview-left", flex: 1, overflow: "hidden" },
 							{kind: "BasicScroller",
 								name:"previewScroller",
 								width: "760px",
@@ -82,7 +82,7 @@ enyo.kind({
 									}
 								]
 							},
-							{className: "desk-right", flex: 1, overflow: "hidden" }
+							{className: "preview-right", flex: 1, overflow: "hidden" }
 						]}
 					]}
 			]}
