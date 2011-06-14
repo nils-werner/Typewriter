@@ -21,7 +21,7 @@ enyo.kind({
 							components: [
 								{kind: "BasicRichText",
 									name: "editor",
-
+									richContent: true,
 									className: "editor-input",
 									onblur: "syncViews",
 									onfocus: "editorFocussed",
@@ -195,7 +195,7 @@ enyo.kind({
 	makePreview: function() {
 		//console.log("generating Markdown");
 		var converter = new Showdown.converter();
-		var value = this.$.editor.getValue();
+		var value = this.$.editor.getText();
 		this.$.preview.setContent(converter.makeHtml(value));
 	},
 	
@@ -251,7 +251,7 @@ enyo.kind({
 	},
 	
 	getContent: function() {
-		return this.$.editor.getValue();
+		return this.$.editor.getText();
 	},
 	
 	setContent: function(inContent) {
