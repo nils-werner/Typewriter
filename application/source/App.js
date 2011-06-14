@@ -29,17 +29,18 @@ enyo.kind({
 		{kind: "FileIO",
 			onOpened: "handleOpened",
 			onSaved: "handleSaved"
-		}
+		},
+		{kind: "LoginDialog", onSubmit: "handleLogin"}
 	],
 	
 	/* FILE HANDLING */
 	
 	
 	doOpen: function(inSender, inEvent) {
-		this.$.fileIO.readDir();
+		this.$.fileIO.listFiles();
 	},
 	
-	handleOpened: function(inSender, result) {
+	handleOpened: function(inSender, inResponse) {
 		this.$.editorPanel.setContent(inResponse.content);
 	},
 	
@@ -50,7 +51,14 @@ enyo.kind({
 	handleSaved: function(inSender, inResponse) {
 	},
 	
+	doLogin: function(inSender, inEvent) {
+		this.$.loginDialog.openAtCenter();
+	},
 	
+	handleLogin: function(inSender, inResponse) {
+		this.$.loginDialog.close();
+		this.$.fileIO.login({username: inResponse.username, password: inResponse.password});
+	},
 	
 	
 	/* BORING EVENTS */
