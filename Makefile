@@ -12,10 +12,10 @@ web:
 	chromium-browser --disable-web-security --allow-file-access-from-files application/index.html &> /dev/null &
 	
 help:
-	chromium-browser --disable-web-security --allow-file-access-from-files /opt/PalmSDK/Current/share/refcode/framework/enyo/0.10/support/docs/api/index.html &> /dev/null &
+	chromium-browser --disable-web-security --allow-file-access-from-files /opt/PalmSDK/Current/share/refcode/framework/enyo/1.0/support/docs/api/index.html &> /dev/null &
 	
 examples:
-	nautilus /opt/PalmSDK/Current/share/refcode/framework/enyo/0.10/support/
+	nautilus /opt/PalmSDK/Current/share/refcode/framework/enyo/1.0/support/
 	
 	
 %.ipk:
