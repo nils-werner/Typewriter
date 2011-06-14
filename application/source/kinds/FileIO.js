@@ -157,9 +157,17 @@ enyo.kind({
 		console.log(JSON.stringify(inResponse));
 		this.token = inResponse.token;
 		this.secret = inResponse.secret;
+		
+		enyo.setCookie("token", this.token);
+		enyo.setCookie("secret", this.secret);
 	},
 	
 	isLoggedIn: function() {
 		return this.token != "" && this.secret != "";
+	},
+	
+	ready: function() {
+		this.token = enyo.getCookie("token");
+		this.secret = enyo.getCookie("secret");
 	}
 })
