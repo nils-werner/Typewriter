@@ -21,7 +21,7 @@ enyo.kind({
 							components: [
 								{kind: "BasicRichText",
 									name: "editor",
-									richContent: false,
+
 									className: "editor-input",
 									onblur: "syncViews",
 									onfocus: "editorFocussed",
