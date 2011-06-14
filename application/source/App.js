@@ -7,8 +7,11 @@ enyo.kind({
 	components: [
 		{kind: "EditorPanel", flex: 1},
 		{kind: "AppMenu", lazy: false, components: [
-			{caption: "Save Document", onclick: "doSave"},
-			{caption: "Open Document...", onclick: "doOpen"},
+			{caption: "Document", components: [
+				{caption: "New", onclick: "doNew"},
+				{caption: "Save", onclick: "doSave"},
+				{caption: "Open...", onclick: "doOpen"}
+			]},
 			{caption: "Login...", onclick: "doLogin"},
 			{caption: "Print...", name:"print", onclick: "doPrint"},
 			{caption: "Help", components: [
@@ -31,11 +34,15 @@ enyo.kind({
 			onSaved: "handleSaved",
 			onLogin: "handleLoginResult"
 		},
-		{kind: "LoginDialog", onSubmit: "handleLoginData"}
+		{kind: "LoginDialog", onSubmit: "handleLoginData"},
+		
 	],
 	
 	/* FILE HANDLING */
 	
+	doNew: function(inSender, inResponse) {
+		this.$.fileIO.createNew();
+	},
 	
 	doOpen: function(inSender, inEvent) {
 		this.$.fileIO.listFiles();

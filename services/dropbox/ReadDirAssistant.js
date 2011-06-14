@@ -15,7 +15,7 @@ ReadDirAssistant.prototype.run = function(future) {
 	
 	
 	fs.readdir("/media/internal/Typewriter/", function(err, data) {
-		for(var i = 0; i < files.length; i++) {
+		for(var i = 0; i < data.length; i++) {
 			files.push(data[i].basename());
 		}
 		if(sync) {

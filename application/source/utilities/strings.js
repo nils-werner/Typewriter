@@ -20,3 +20,13 @@ String.prototype.basename = function(suffix) {
 
 	return b;
 }
+
+
+String.prototype.repeat = function(n){
+	var a = [];
+	while(a.length < n) {
+		a.push(this);
+	}
+	return a.join('');
+}
+

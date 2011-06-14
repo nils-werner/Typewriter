@@ -11,6 +11,7 @@ enyo.kind({
 	files: [],
 	ctoken: "xr03hokoazn32zx",
 	csecret: "3ej0el462uohasn",
+	isonline: true,
 	events: {
 		onOpened: "",
 		onSaved: "",
@@ -20,6 +21,15 @@ enyo.kind({
 		onLogin: ""
 	},
 	components: [
+		{
+			name: "connectionmanager",
+			kind: "enyo.PalmService",
+			service: "palm://palm.com.connectionmanager/",
+			method: 'getstatus',
+			subscribe: true,
+			timeout: 10000,
+			onresponse: "handleConnectionmanager"
+		},
 		{
 			name: "dropbox",
 			kind: "enyo.PalmService",
@@ -39,8 +49,29 @@ enyo.kind({
 			modal: true,
 			name:"fileDialog",
 			onSelect: "handleFileSelected"
-		}
+		},
+		{kind: "NewFileDialog", onSubmit: "handleNewFile"}
 	],
+	
+	handleConnectionmanager: function(inSender, inResponse) {
+		console.log("################");
+		console.log(JSON.stringify(inResponse));
+		this.isonline = inResponse.isInternetConnectionAvailable;
+	},
+	
+	/*
+	 * NEW DOCUMENT
+	 */
+	 
+	createNew: function(inSender, inEvent) {
+		this.$.newFileDialog.openAtCenter();
+	},
+	
+	handleNewFile: function(inSender, inResponse) {
+		this.$.newFileDialog.close();
+		this.filename = inResponse.filename + ".md";
+		this.doOpened({ err: null, data: inResponse.filename + "\n" + new String("=").repeat(inResponse.filename.length) + "\n\n"});
+	},
 	
 	/*
 	 * WRITING
@@ -143,11 +174,17 @@ enyo.kind({
 	},
 	
 	isLoggedIn: function() {
-		return this.token != "" && this.secret != "";
+		return this.isonline && this.token != "" && this.secret != "";
 	},
 	
 	ready: function() {
 		this.token = enyo.getCookie("token");
 		this.secret = enyo.getCookie("secret");
+		enyo.nextTick(enyo.bind(this, "checkAvailability"));
+	},
+	
+	checkAvailability: function() {
+		console.log("CHHHHHECK");
+		this.$.connectionmanager.call();
 	}
 })
