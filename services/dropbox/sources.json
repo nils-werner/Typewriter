@@ -1,6 +1,8 @@
 [
 { "library":	{ "name": "foundations", "version": "1.0" } },
 { "source":		"modules.js" },
+{ "source":		"utilities/strings.js" },
+{ "source":		"utilities/arrays.js" },
 { "source":		"ReadDirAssistant.js" },
 { "source":		"WriteFileAssistant.js" },
 { "source":		"ReadFileAssistant.js" },

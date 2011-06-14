@@ -42,7 +42,7 @@ enyo.kind({
 	},
 	
 	handleOpened: function(inSender, inResponse) {
-		this.$.editorPanel.setContent(inResponse.content);
+		this.$.editorPanel.setContent(inResponse.data);
 	},
 	
 	doSave: function(inSender, inEvent) {

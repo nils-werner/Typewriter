@@ -20,22 +20,11 @@ enyo.kind({
 	},
 	components: [
 		{
-			name: "fileio",
-			kind: "enyo.PalmService",
-			service: "palm://de.obsessivemedia.webos.typewriter.fileio/",
-			subscribe: true,
-			timeout: 2000
-		},
-		{
 			name: "dropbox",
 			kind: "enyo.PalmService",
 			service: "palm://de.obsessivemedia.webos.typewriter.dropbox/",
 			subscribe: true,
-			timeout: 10000,
-			params: {
-				ctoken: this.ctoken,
-				csecret: this.csecret
-			}
+			timeout: 10000
 		},
 		{kind: "Scrim", name:"scrim", layoutKind: "VFlexLayout", align:"center", pack:"center", components: [
 			{kind: "SpinnerLarge"}
@@ -60,24 +49,15 @@ enyo.kind({
 		this.$.spinnerLarge.show();
 		this.$.scrim.show();
 		
-		this.$.fileio.call({name: this.filename, content: inContent}, {method:"writefile", onSuccess: "handleSaved"});
+		this.$.dropbox.call({sync: false, name: this.filename, content: inContent}, {method:"writefile", onSuccess: "handleSaved"});
 	},
 	
 	handleSaved: function(inEvent, inResponse) {
 		console.log(JSON.stringify(inResponse));
 		
-		if(this.isLoggedIn()) {
-			console.log("Pushing file " + this.filename);
-			this.$.dropbox.call({name: this.filename, ctoken: this.ctoken, csecret: this.csecret, token: this.token, secret: this.secret}, {method:"writefile", onSuccess: "handlePushed"});
-		}
-		
 		this.$.spinnerLarge.hide();
 		this.$.scrim.hide();
-		this.doSaved(inResponse);
-	},
-	
-	handlePushed: function(inEvent, inResponse) {
-		console.log(JSON.stringify(inResponse));
+		this.doSaved({err: inResponse.err});
 	},
 	
 	
@@ -90,24 +70,15 @@ enyo.kind({
 		this.$.scrim.show();
 		
 		this.filename = inName;
-		if(this.isLoggedIn()) {
-			console.log("Pulling file " + this.filename);
-			this.$.dropbox.call({name: this.filename, ctoken: this.ctoken, csecret: this.csecret, token: this.token, secret: this.secret}, {method:"readfile", onSuccess: "handleFetched"});
-		}
-		else {
-			this.handleFetched();
-		}
+		console.log("Pulling file " + this.filename);
+		this.$.dropbox.call({sync: false, name: this.filename, ctoken: this.ctoken, csecret: this.csecret, token: this.token, secret: this.secret}, {method:"readfile", onSuccess: "handleReadFile"});
 	},
 	
-	handleFetched: function() {
-		this.$.fileio.call({name: this.filename}, {method:"readfile", onSuccess: "handleOpened"});
-	},
-	
-	handleOpened: function(inSender, inResponse) {
+	handleReadFile: function(inSender, inResponse) {
 		this.$.spinnerLarge.hide();
 		this.$.scrim.hide();
 		
-		this.doOpened(inResponse);
+		this.doOpened({ err: inResponse.err, data: inResponse.data});
 	},
 	
 	
@@ -119,25 +90,13 @@ enyo.kind({
 		this.files = [];
 		
 		this.$.fileDialog.openAtCenter();
-		
-		this.$.fileio.call({}, {method:"readdir", onSuccess: "handleLocaldir"});
-		if(this.isLoggedIn()) {
-			this.$.dropbox.call({ctoken: this.ctoken, csecret: this.csecret, token: this.token, secret: this.secret}, {method:"readdir", onSuccess: "handleRemotedir"});
-		}
+		this.$.dropbox.call({sync: false, ctoken: this.ctoken, csecret: this.csecret, token: this.token, secret: this.secret}, {method:"readdir", onSuccess: "handleListFiles"});
 	},
 	
-	handleLocaldir: function(inSender, inResponse) {
-		console.log("Local files came back");
+	handleListFiles: function(inSender, inResponse) {
+		console.log("files came back");
 		for(var i in inResponse.files) {
-			this.files.push({ type: "local", caption: inResponse.files[i]});
-		}
-		this.refreshList();
-	},
-	
-	handleRemotedir: function(inSender, inResponse) {
-		console.log("Remote files came back");
-		for(var i in inResponse.data.contents) {
-			this.files.push({ type: "dropbox", caption: basename(inResponse.data.contents[i].path) });
+			this.files.push({caption: inResponse.files[i]});
 		}
 		this.refreshList();
 	},

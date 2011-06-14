@@ -7,7 +7,6 @@ GetAccessTokenAssistant.prototype.run = function(future) {
 	var ctoken = this.controller.args.ctoken;
 	var csecret = this.controller.args.csecret;
 	
-	dropbox = new DropboxClient(ctoken, csecret);
-	
+	var dropbox = new DropboxClient(ctoken, csecret);
 	dropbox.getAccessToken(email, password, function (err, token, secret) { future.result = { err: err, token: token, secret: secret}; });
 }
