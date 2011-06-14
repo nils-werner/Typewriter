@@ -15,7 +15,7 @@ WriteFileAssistant.prototype.run = function(future) {
 	
 	fs.writeFile("/media/internal/Typewriter/" + name, content, 'utf8', function(err) {
 		if(sync) {
-			dropbox = new DropboxClient(ctoken, csecret, token, secret);
+			var dropbox = new DropboxClient(ctoken, csecret, token, secret);
 			dropbox.putFile("/media/internal/Typewriter/" + name, "Typewriter/", function (err, data) { future.result = { err: err }; });
 		}
 		else {

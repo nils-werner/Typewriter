@@ -11,12 +11,18 @@ ReadDirAssistant.prototype.run = function(future) {
 	var token = this.controller.args.token;
 	var secret = this.controller.args.secret;
 	
+	var files = [];
 	
-	fs.readdir("/media/internal/Typewriter/", function(err, files) {
+	
+	fs.readdir("/media/internal/Typewriter/", function(err, data) {
+		for(var i = 0; i < files.length; i++) {
+			files.push(data[i].basename());
+		}
 		if(sync) {
 			var dropbox = new DropboxClient(ctoken, csecret, token, secret);
 			dropbox.getMetadata("Typewriter/", function (err, data) {
-				for(var i in data.contents) {
+				console.log(JSON.stringify(data.contents));
+				for(var i = 0; i < data.contents.length; i++) {
 					files.push(data.contents[i].path.basename());
 				}
 				files = files.unique();

@@ -8,6 +8,7 @@ enyo.kind({
 		localDir: "/media/internal/Typewriter/"
 	},
 	filename: "test.md",
+	files: [],
 	ctoken: "xr03hokoazn32zx",
 	csecret: "3ej0el462uohasn",
 	events: {
@@ -45,11 +46,11 @@ enyo.kind({
 	 * WRITING
 	 */
 	
-	saveFile: function(inContent) {
+	saveFile: function(inContent, sync) {
 		this.$.spinnerLarge.show();
 		this.$.scrim.show();
 		
-		this.$.dropbox.call({sync: false, name: this.filename, content: inContent}, {method:"writefile", onSuccess: "handleSaved"});
+		this.$.dropbox.call({sync: this.isLoggedIn(), name: this.filename, content: inContent, ctoken: this.ctoken, csecret: this.csecret, token: this.token, secret: this.secret}, {method:"writefile", onSuccess: "handleSaved"});
 	},
 	
 	handleSaved: function(inEvent, inResponse) {
@@ -65,13 +66,13 @@ enyo.kind({
 	 * READING
 	 */
 	
-	readFile: function(inName) {
+	readFile: function(inName, sync) {
 		this.$.spinnerLarge.show();
 		this.$.scrim.show();
 		
 		this.filename = inName;
 		console.log("Pulling file " + this.filename);
-		this.$.dropbox.call({sync: false, name: this.filename, ctoken: this.ctoken, csecret: this.csecret, token: this.token, secret: this.secret}, {method:"readfile", onSuccess: "handleReadFile"});
+		this.$.dropbox.call({sync: this.isLoggedIn(), name: this.filename, ctoken: this.ctoken, csecret: this.csecret, token: this.token, secret: this.secret}, {method:"readfile", onSuccess: "handleReadFile"});
 	},
 	
 	handleReadFile: function(inSender, inResponse) {
@@ -86,22 +87,20 @@ enyo.kind({
 	 * FILE LISTING
 	 */
 	
-	listFiles: function() {
+	listFiles: function(sync) {
 		this.files = [];
 		
 		this.$.fileDialog.openAtCenter();
-		this.$.dropbox.call({sync: false, ctoken: this.ctoken, csecret: this.csecret, token: this.token, secret: this.secret}, {method:"readdir", onSuccess: "handleListFiles"});
+		this.$.dropbox.call({sync: this.isLoggedIn(), ctoken: this.ctoken, csecret: this.csecret, token: this.token, secret: this.secret}, {method:"readdir", onSuccess: "handleListFiles"});
 	},
 	
 	handleListFiles: function(inSender, inResponse) {
 		console.log("files came back");
+		
 		for(var i in inResponse.files) {
-			this.files.push({caption: inResponse.files[i]});
+			this.files.push({caption: inResponse.files[i].basename(".md"), filename: inResponse.files[i].basename()});
 		}
-		this.refreshList();
-	},
-	
-	refreshList: function(inSender, inIndex) {
+		
 		console.log(JSON.stringify(this.files));
 		this.$.fileDialog.setItems(this.files);
 		this.$.fileDialog.itemsChanged();
@@ -110,7 +109,7 @@ enyo.kind({
 	handleFileSelected: function(inSender, inSelected) {
 		console.log("file selected");
 		this.$.fileDialog.close();
-		this.readFile(this.files[inSelected].caption);
+		this.readFile(this.files[inSelected].filename);
 	},
 	
 	cancelFileSelect: function(inSender, inEvent) {

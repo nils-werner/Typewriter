@@ -11,10 +11,11 @@ String.prototype.basename = function(suffix) {
 	// *     example 2: basename('ecra.php?p=1');
 	// *     returns 2: 'ecra.php?p=1'
 
+	suffix = suffix || '';
+
 	var b = this.replace(/^.*[\/\\]/g, '');
-	if (typeof(suffix) == 'string' && b.substr(b.length - suffix.length) == suffix) {
+	if (b.substr(b.length - suffix.length) == suffix) {
 		b = b.substr(0, b.length - suffix.length);
 	}
-
 	return b;
 }
