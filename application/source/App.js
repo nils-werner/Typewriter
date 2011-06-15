@@ -23,7 +23,7 @@ enyo.kind({
 		{name: "markdownHelper", kind:"markdownHelper"},
 		{name: "typewriterHelper", kind:"typewriterHelper"},
 		{kind: "Scrim", name:"taboutscrim", layoutKind: "VFlexLayout", align:"center", pack:"center", style:"background-color: transparent; opacity: 1;", components: [
-			{kind: "Image", src:"images/icon256.png", style: "opacity: 0.5;"}
+			{kind: "Image", src:"images/icon256.png", style: "opacity: 0.0;"}
 		]},
 		{kind: enyo.ApplicationEvents, 
 			onWindowDeactivated: "sleep",
