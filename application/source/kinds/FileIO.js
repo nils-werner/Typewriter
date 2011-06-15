@@ -24,7 +24,7 @@ enyo.kind({
 		{
 			name: "connectionmanager",
 			kind: "enyo.PalmService",
-			service: "palm://palm.com.connectionmanager/",
+			service: "palm://com.palm.connectionmanager/",
 			method: 'getstatus',
 			subscribe: true,
 			timeout: 10000,
@@ -129,10 +129,10 @@ enyo.kind({
 		console.log("files came back");
 		
 		for(var i in inResponse.files) {
-			this.files.push({caption: inResponse.files[i].basename(".md"), filename: inResponse.files[i].basename()});
+			this.files.push({caption: inResponse.files[i].type + "/" + inResponse.files[i].filename.basename(".md"), filename: inResponse.files[i].filename.basename()});
 		}
 		
-		console.log(JSON.stringify(this.files));
+		console.log(JSON.stringify(inResponse));
 		this.$.fileDialog.setItems(this.files);
 		this.$.fileDialog.itemsChanged();
 	},

@@ -15,11 +15,19 @@ ReadFileAssistant.prototype.run = function(future) {
 	
 	if(sync) {
 		var dropbox = new DropboxClient(ctoken, csecret, token, secret);
-		dropbox.getFile("Typewriter/" + name, function (err, data) { 
-			fs.writeFile("/media/internal/Typewriter/" + name, data, 'utf8', function(err) { future.result = { err: err, name: name, data: data}; });
+		fs.stat("/media/internal/Typewriter/" + name, function(err, stats) {
+			dropbox.getMetadata("Typewriter/" + name, function (err, data) {
+				var ltime = Date.parse(stats.mtime);
+				var rtime = Date.parse(data.modified);
+				if(ltime < rtime) {
+					dropbox.getFile("Typewriter/" + name, function (err, data) { 
+						fs.writeFile("/media/internal/Typewriter/" + name, data, 'utf8', function(err) { future.result = { err: err, name: name, data: data, ltime: ltime, rtime: rtime}; });
+					});
+				}
+			});
 		});
 	}
 	else {
-		fs.readFile("/media/internal/Typewriter/" + this.controller.args.name, 'utf8', function(err,data) { future.result = { err: err, name: name, data: data }; });
+		fs.readFile("/media/internal/Typewriter/" + name, 'utf8', function(err,data) { future.result = { err: err, name: name, data: data }; });
 	}
 }

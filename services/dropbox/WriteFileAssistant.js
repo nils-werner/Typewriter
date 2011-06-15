@@ -16,7 +16,15 @@ WriteFileAssistant.prototype.run = function(future) {
 	fs.writeFile("/media/internal/Typewriter/" + name, content, 'utf8', function(err) {
 		if(sync) {
 			var dropbox = new DropboxClient(ctoken, csecret, token, secret);
-			dropbox.putFile("/media/internal/Typewriter/" + name, "Typewriter/", function (err, data) { future.result = { err: err }; });
+			fs.stat("/media/internal/Typewriter/" + name, function(err, stats) {
+				dropbox.getMetadata("Typewriter/" + name, function (err, data) {
+					var ltime = Date.parse(stats.mtime);
+					var rtime = Date.parse(data.modified);
+					if(ltime > rtime) {
+						dropbox.putFile("/media/internal/Typewriter/" + name, "Typewriter/", function (err, data) { future.result = { err: err, ltime: ltime, rtime: rtime }; });
+					}
+				});
+			});
 		}
 		else {
 			future.result = { err: err };

@@ -15,17 +15,18 @@ ReadDirAssistant.prototype.run = function(future) {
 	
 	
 	fs.readdir("/media/internal/Typewriter/", function(err, data) {
-		for(var i = 0; i < data.length; i++) {
-			files.push(data[i].basename());
-		}
+		data.forEach(function(filename) {
+			fs.stat("/media/internal/Typewriter/" + filename.basename(), function(err, stats) {
+				files.push({ filename: filename.basename(), type: "local", mtime: Date.parse(stats.mtime) });
+			});
+		});
 		if(sync) {
 			var dropbox = new DropboxClient(ctoken, csecret, token, secret);
 			dropbox.getMetadata("Typewriter/", function (err, data) {
 				console.log(JSON.stringify(data.contents));
-				for(var i = 0; i < data.contents.length; i++) {
-					files.push(data.contents[i].path.basename());
-				}
-				files = files.unique();
+				data.contents.forEach(function(item) {
+					files.push({ filename: item.path.basename(), type: "remote", mtime: Date.parse(item.modified) });
+				});
 				future.result = { err: err, files: files};
 			});
 		}
