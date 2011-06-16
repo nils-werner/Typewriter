@@ -3,8 +3,9 @@
 
 .editor-input {
 	background-color: #ffffff;
-	padding: 10px;
+	padding: 30px;
 	margin: 0px;
+	line-height: 1.2em;
 }
 
 .editor-input, .markdownHelper {
@@ -18,8 +19,9 @@
 
 .output-preview {
 	font-family: Georgia, serif;
-	padding: 10px;
+	padding: 50px;
 	margin: 0px;
+	line-height: 1.5em;
 }
 
 .output-scroller, .editor-scroller {
