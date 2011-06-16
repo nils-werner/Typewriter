@@ -22,15 +22,6 @@ enyo.kind({
 	},
 	components: [
 		{
-			name: "connectionmanager",
-			kind: "enyo.PalmService",
-			service: "palm://com.palm.connectionmanager/",
-			method: 'getstatus',
-			subscribe: true,
-			timeout: 10000,
-			onresponse: "handleConnectionmanager"
-		},
-		{
 			name: "dropbox",
 			kind: "enyo.PalmService",
 			service: "palm://de.obsessivemedia.webos.typewriter.dropbox/",
@@ -42,12 +33,6 @@ enyo.kind({
 		]},
 		{kind: "NewFileDialog", onSubmit: "handleNewFile"}
 	],
-	
-	handleConnectionmanager: function(inSender, inResponse) {
-		console.log("################");
-		console.log(JSON.stringify(inResponse));
-		this.isonline = inResponse.isInternetConnectionAvailable;
-	},
 	
 	/*
 	 * NEW DOCUMENT
@@ -149,11 +134,5 @@ enyo.kind({
 	ready: function() {
 		this.token = enyo.getCookie("token");
 		this.secret = enyo.getCookie("secret");
-		enyo.nextTick(enyo.bind(this, "checkAvailability"));
-	},
-	
-	checkAvailability: function() {
-		console.log("CHHHHHECK");
-		this.$.connectionmanager.call();
 	}
 })
