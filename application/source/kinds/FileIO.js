@@ -53,6 +53,7 @@ enyo.kind({
 	 */
 	
 	saveFile: function(inContent, sync) {
+		console.log("saving " + this.filename);
 		this.$.dropbox.call({name: this.filename, content: inContent}, {method:"writefile", onSuccess: "handleSaved"});
 	},
 	
@@ -92,8 +93,6 @@ enyo.kind({
 	},
 	
 	handleListFiles: function(inSender, inResponse) {
-		console.log("files came back");
-		
 		for(var i in inResponse.files) {
 			this.files.push({caption: inResponse.files[i].basename(".md"), filename: inResponse.files[i].basename()});
 		}
@@ -129,6 +128,10 @@ enyo.kind({
 	
 	isLoggedIn: function() {
 		return this.isonline && this.token != "" && this.secret != "";
+	},
+	
+	getFilename: function() {
+		return this.filename;
 	},
 	
 	ready: function() {

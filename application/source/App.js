@@ -28,7 +28,8 @@ enyo.kind({
 		]},
 		{kind: enyo.ApplicationEvents, 
 			onWindowDeactivated: "sleep",
-			onWindowActivated: "wakeup"
+			onWindowActivated: "wakeup",
+			onUnload: "close"
 		},
 		{kind: "FileIO",
 			onOpened: "handleOpened",
@@ -57,7 +58,6 @@ enyo.kind({
 	},
 	
 	handleLoadFiles: function(inSender, inResponse) {
-		console.log(JSON.stringify(inResponse));
 		this.$.docsMenu.destroyControls();
 		
 		this.$.docsMenu.createComponent({
@@ -80,7 +80,7 @@ enyo.kind({
 	},
 	
 	sendOpen: function(inSender, inEvent) {
-		enyo.windows.openWindow("index.html", "", {wasLaunchedBy: window.name, action:"doOpen", filename: "leer.md"});
+		enyo.windows.openWindow("index.html", "", {wasLaunchedBy: window.name, action:"doOpen", filename: inSender.caption + ".md"});
 	},
 	
 	doOpen: function(inFilename) {
@@ -135,12 +135,13 @@ enyo.kind({
 					console.log("oeffne datei");
 					this.doOpen(enyo.windowParams.filename);
 				}
-				else if(enyo.windowParams.action != "doNew"){
-					// erstes fenster, session wiederherstellen
-				}
 			}
 			else {
-				this.$.editorPanel.setContent(this.$.Demotext.text);
+				var lastfile = enyo.getCookie("lastfile");
+				if(typeof(lastfile) == "undefined")
+					this.$.editorPanel.setContent(this.$.Demotext.text);
+				else
+					this.doOpen(lastfile);
 			}
 		}
 		//setInterval(enyo.hitch(this, "doSave"),5000);
@@ -169,6 +170,11 @@ enyo.kind({
 	wakeup: function() {
 		//this.$.top.node.style.height = (enyo.fetchControlSize(this).h - 55 - enyo.keyboard.height) + "px";
 		this.$.taboutscrim.hide();
+	},
+	
+	close: function() {
+		this.$.fileIO.saveFile(this.$.editorPanel.getContent());
+		enyo.setCookie("lastfile", this.$.fileIO.getFilename());
 	},
 	
 	doPrint: function() {
