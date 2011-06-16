@@ -2,40 +2,23 @@ var SyncFileAssistant = function() {
 }
 
 SyncFileAssistant.prototype.run = function(future) {
-	var fs = IMPORTS.require("fs");
-	var dropbox = new DropboxClient(ctoken, csecret, token, secret);
-	
 	var ctoken = this.controller.args.ctoken;
 	var csecret = this.controller.args.csecret;
 	var token = this.controller.args.token;
 	var secret = this.controller.args.secret;
 	
-	var files = [];
+	var fs = IMPORTS.require("fs");
+	var dropbox = new DropboxClient(ctoken, csecret, token, secret);
 	
-	this.fetchLocalFiles();
-}
+	var name = this.controller.args.name;
+	var action = this.controller.args.action;
 
-SyncFileAssistant.prototype.fetchLocalFiles = function() {
-	fs.readdir("/media/internal/Typewriter/", function(err, data) {
-		data.forEach(function(filename) {
-			fs.stat("/media/internal/Typewriter/" + filename.basename(), function(err, stats) {
-				files.push({ filename: filename.basename(), type: "local", mtime: Date.parse(stats.mtime) });
-			});
+	if(action == "pull") {
+		dropbox.getFile("Typewriter/" + name, function (err, data) { 
+			fs.writeFile("/media/internal/Typewriter/" + name, data, 'utf8', function(err) { future.result = { err: err, action: action }; });
 		});
-	});
-	
-	dropbox.getMetadata("Typewriter/", function (err, data) {
-		console.log(JSON.stringify(data.contents));
-		data.contents.forEach(function(item) {
-			files.push({ filename: item.path.basename(), type: "remote", mtime: Date.parse(item.modified) });
-		});
-	});
-}
-
-SyncFileAssistant.prototype.fetchRemoteFiles = function() {
-
-}
-
-SyncFileAssistant.prototype.findSyncCandidates = function() {
-	files
+	}
+	else if(action == "push") {
+		dropbox.putFile("/media/internal/Typewriter/" + name, "Typewriter/", function (err, data) { future.result = { err: err, action: action }; });
+	}
 }

@@ -7,5 +7,6 @@
 { "source":		"WriteFileAssistant.js" },
 { "source":		"ReadFileAssistant.js" },
 { "source":		"GetAccessTokenAssistant.js" },
-{ "source":		"SyncStatAssistant.js" }
+{ "source":		"SyncStatAssistant.js" },
+{ "source":		"SyncFileAssistant.js" }
 ]

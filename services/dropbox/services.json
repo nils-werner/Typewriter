@@ -27,6 +27,11 @@
 					"public": true
 				},
 				{ 
+					"name": "syncfile", 
+					"assistant": "SyncFileAssistant",
+					"public": true
+				},
+				{ 
 					"name": "getaccesstoken", 
 					"assistant": "GetAccessTokenAssistant",
 					"public": true

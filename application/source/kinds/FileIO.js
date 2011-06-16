@@ -54,7 +54,7 @@ enyo.kind({
 	 * WRITING
 	 */
 	
-	saveFile: function(inContent, sync) {
+	saveFile: function(inContent) {
 		if(this.lastContent != inContent) {
 			console.log("saving " + this.filename);
 			this.$.dropbox.call({name: this.filename, content: inContent}, {method:"writefile", onSuccess: "handleSaved"});
@@ -71,7 +71,7 @@ enyo.kind({
 	 * READING
 	 */
 	
-	readFile: function(inName, sync) {
+	readFile: function(inName) {
 		this.$.spinnerLarge.show();
 		this.$.scrim.show();
 		
@@ -124,24 +124,29 @@ enyo.kind({
 		console.log(inResponse.action);
 		this.$.resolveDialog.close();
 		
-		this.$.spinnerLarge.hide();
-		this.$.scrim.hide();
-		
 		if(inResponse.action != "cancel") {
-			//this.$.dropbox.call({name: this.filename, action: inResponse.action, ctoken: this.ctoken, csecret: this.csecret, token: this.token, secret: this.secret }, {method:"syncfile", onSuccess: "handleSync"});
+			this.$.dropbox.call({name: this.filename, action: inResponse.action, ctoken: this.ctoken, csecret: this.csecret, token: this.token, secret: this.secret }, {method:"syncfile", onSuccess: "handleSync"});
+		}
+		else {
+			this.$.spinnerLarge.hide();
+			this.$.scrim.hide();
 		}
 	},
 	
 	handleSync: function(inSender, inResponse) {
-		this.$.spinnerLarge.hide();
-		this.$.scrim.hide();
+		if(inResponse.action == "pull")
+			this.readFile(this.filename);
+		else {
+			this.$.spinnerLarge.hide();
+			this.$.scrim.hide();
+		}
 	},
 	
 	/*
 	 * FILE LISTING
 	 */
 	
-	listFiles: function(sync) {
+	listFiles: function() {
 		this.files = [];
 		
 		this.$.dropbox.call({}, {method:"readdir", onSuccess: "handleListFiles"});
