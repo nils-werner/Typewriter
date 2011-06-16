@@ -83,6 +83,20 @@ enyo.kind({
 	
 	
 	/*
+	 * FILE SYNCING
+	 */
+	 
+	syncFile: function() {
+
+		this.$.dropbox.call({name: this.filename, ctoken: this.ctoken, csecret: this.csecret, token: this.token, secret: this.secret }, {method:"syncstat", onSuccess: "handleStat"});
+	},
+	
+	handleStat: function(inSender, inResponse) {
+		console.log(JSON.stringify(inResponse));
+	},
+	
+	
+	/*
 	 * FILE LISTING
 	 */
 	
@@ -127,7 +141,7 @@ enyo.kind({
 	},
 	
 	isLoggedIn: function() {
-		return this.isonline && this.token != "" && this.secret != "";
+		return this.token != "" && this.secret != "";
 	},
 	
 	getFilename: function() {
@@ -135,7 +149,7 @@ enyo.kind({
 	},
 	
 	ready: function() {
-		this.token = enyo.getCookie("token");
-		this.secret = enyo.getCookie("secret");
+		this.token = enyo.getCookie("token") || "";
+		this.secret = enyo.getCookie("secret") || "";
 	}
 })

@@ -6,5 +6,6 @@
 { "source":		"ReadDirAssistant.js" },
 { "source":		"WriteFileAssistant.js" },
 { "source":		"ReadFileAssistant.js" },
-{ "source":		"GetAccessTokenAssistant.js" }
+{ "source":		"GetAccessTokenAssistant.js" },
+{ "source":		"SyncStatAssistant.js" }
 ]

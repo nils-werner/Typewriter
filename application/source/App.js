@@ -11,7 +11,7 @@ enyo.kind({
 				{caption: "Create New...", onclick: "sendNew"},
 				{caption: "Open", onclick: "sendOpen"}
 			]},
-			{caption: "Send to", components: [
+			{caption: "Share", components: [
 				{caption: "Dropbox", onclick: "doDropbox"},
 				{caption: "Email", onclick: "doEmail"},
 				{caption: "Print", name:"print", onclick: "doPrint"}
@@ -101,6 +101,15 @@ enyo.kind({
 	},
 	
 	handleSaved: function(inSender, inResponse) {
+	},
+	
+	/* SYNC */
+	
+	doDropbox: function(inSender, inEvent) {
+		if(!this.$.fileIO.isLoggedIn())
+			this.doLogin();
+		else
+			this.$.fileIO.syncFile();
 	},
 	
 	/* LOGIN */

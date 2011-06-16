@@ -22,6 +22,11 @@
 					"public": true
 				},
 				{ 
+					"name": "syncstat", 
+					"assistant": "SyncStatAssistant",
+					"public": true
+				},
+				{ 
 					"name": "getaccesstoken", 
 					"assistant": "GetAccessTokenAssistant",
 					"public": true
