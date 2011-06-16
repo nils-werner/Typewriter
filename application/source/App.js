@@ -8,15 +8,16 @@ enyo.kind({
 		{kind: "EditorPanel", flex: 1},
 		{kind: "AppMenu", lazy: false, components: [
 			{caption: "Document", components: [
-				{caption: "New", onclick: "doNew"},
-				{caption: "Save", onclick: "doSave"},
-				{caption: "Open...", onclick: "doOpen"}
+				{caption: "Create New...", onclick: "doNew"},
+				{caption: "Open", onclick: "doOpen"}
 			]},
-			{caption: "Login...", onclick: "doLogin"},
-			{caption: "Print...", name:"print", onclick: "doPrint"},
+			{caption: "Send to", components: [
+				{caption: "Dropbox", onclick: "doDropbox"},
+				{caption: "Email", onclick: "doEmail"},
+				{caption: "Print", name:"print", onclick: "doPrint"}
+			]},
 			{caption: "Help", components: [
-				{caption: "Markdown Syntax", name:"markdownHelp", onclick: "displayHelp"},
-				{caption: "Typewriter Syntax", name:"typewriterHelp", onclick: "displayHelp"},
+				{caption: "Syntax", onclick: "displayHelp"},
 			]},
 			]
 		},
@@ -53,6 +54,7 @@ enyo.kind({
 	},
 	
 	doSave: function(inSender, inEvent) {
+		console.log("saving file");
 		this.$.fileIO.saveFile(this.$.editorPanel.getContent());
 	},
 	
@@ -92,6 +94,10 @@ enyo.kind({
 	wakeup: function() {
 		//this.$.top.node.style.height = (enyo.fetchControlSize(this).h - 55 - enyo.keyboard.height) + "px";
 		this.$.taboutscrim.hide();
+	},
+	
+	ready: function() {
+		setInterval(enyo.hitch(this, "doSave"),5000);
 	},
 	
 	doPrint: function() {
