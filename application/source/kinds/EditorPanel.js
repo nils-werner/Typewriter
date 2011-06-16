@@ -92,8 +92,7 @@ enyo.kind({
 			duplexOption: true,
 			frameToPrint: {name:"preview", landscape:false},
 			appName: "Typewriter"
-		},
-		{name:"Demotext", kind:"Demotext" },
+		}
 	],
 	
 	/* PREVIEW HANDLING */
@@ -211,15 +210,11 @@ enyo.kind({
 	/* CONSTRUCTOR */
 	
 	ready: function() {
-		enyo.windows.assignWindowParams(window, { // this appears to be broken
-			blockScreenTimeout: false,
-			setSubtleLightbar: true
-		});
 		this.position = "down";
 		enyo.keyboard.setManualMode(true);
 		//enyo.keyboard.setResizesWindow(false);
 		enyo.keyboard.show();
-		this.$.editor.setValue(this.$.Demotext.text);
+		
 		this.syncViews({name:"startup"});
 	},
 	

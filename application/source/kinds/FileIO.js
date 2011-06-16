@@ -78,17 +78,10 @@ enyo.kind({
 	 */
 	
 	saveFile: function(inContent, sync) {
-		this.$.spinnerLarge.show();
-		this.$.scrim.show();
-		
-		this.$.dropbox.call({sync: this.isLoggedIn(), name: this.filename, content: inContent, ctoken: this.ctoken, csecret: this.csecret, token: this.token, secret: this.secret}, {method:"writefile", onSuccess: "handleSaved"});
+		this.$.dropbox.call({name: this.filename, content: inContent}, {method:"writefile", onSuccess: "handleSaved"});
 	},
 	
 	handleSaved: function(inEvent, inResponse) {
-		console.log(JSON.stringify(inResponse));
-		
-		this.$.spinnerLarge.hide();
-		this.$.scrim.hide();
 		this.doSaved({err: inResponse.err});
 	},
 	
@@ -102,8 +95,7 @@ enyo.kind({
 		this.$.scrim.show();
 		
 		this.filename = inName;
-		console.log("Pulling file " + this.filename);
-		this.$.dropbox.call({sync: this.isLoggedIn(), name: this.filename, ctoken: this.ctoken, csecret: this.csecret, token: this.token, secret: this.secret}, {method:"readfile", onSuccess: "handleReadFile"});
+		this.$.dropbox.call({name: this.filename}, {method:"readfile", onSuccess: "handleReadFile"});
 	},
 	
 	handleReadFile: function(inSender, inResponse) {
@@ -122,14 +114,14 @@ enyo.kind({
 		this.files = [];
 		
 		this.$.fileDialog.openAtCenter();
-		this.$.dropbox.call({sync: this.isLoggedIn(), ctoken: this.ctoken, csecret: this.csecret, token: this.token, secret: this.secret}, {method:"readdir", onSuccess: "handleListFiles"});
+		this.$.dropbox.call({}, {method:"readdir", onSuccess: "handleListFiles"});
 	},
 	
 	handleListFiles: function(inSender, inResponse) {
 		console.log("files came back");
 		
 		for(var i in inResponse.files) {
-			this.files.push({caption: inResponse.files[i].type + "/" + inResponse.files[i].filename.basename(".md"), filename: inResponse.files[i].filename.basename()});
+			this.files.push({caption: inResponse.files[i].filename.basename(".md"), filename: inResponse.files[i].filename.basename()});
 		}
 		
 		console.log(JSON.stringify(inResponse));

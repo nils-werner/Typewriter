@@ -8,8 +8,8 @@ enyo.kind({
 		{kind: "EditorPanel", flex: 1},
 		{kind: "AppMenu", lazy: false, components: [
 			{caption: "Document", components: [
-				{caption: "Create New...", onclick: "doNew"},
-				{caption: "Open", onclick: "doOpen"}
+				{caption: "Create New...", onclick: "sendNew"},
+				{caption: "Open", onclick: "sendOpen"}
 			]},
 			{caption: "Send to", components: [
 				{caption: "Dropbox", onclick: "doDropbox"},
@@ -36,30 +36,44 @@ enyo.kind({
 			onLogin: "handleLoginResult"
 		},
 		{kind: "LoginDialog", onSubmit: "handleLoginData"},
-		
+		{name:"Demotext", kind:"Demotext" },
 	],
 	
-	/* FILE HANDLING */
+	/* NEUE DATEI */
 	
-	doNew: function(inSender, inResponse) {
+	sendNew: function(inSender, inResponse) {
+		enyo.windows.openWindow("index.html", "", {wasLaunchedBy: window.name, action:"doNew"});
+	},
+	
+	doNew: function() {
 		this.$.fileIO.createNew();
 	},
 	
-	doOpen: function(inSender, inEvent) {
-		this.$.fileIO.listFiles();
+	/* DATEI ÖFFNEN */
+	
+	sendOpen: function(inSender, inEvent) {
+		enyo.windows.openWindow("index.html", "", {wasLaunchedBy: window.name, action:"doOpen", filename: "leer.md"});
+	},
+	
+	doOpen: function(inFilename) {
+		this.$.fileIO.readFile(inFilename);
 	},
 	
 	handleOpened: function(inSender, inResponse) {
 		this.$.editorPanel.setContent(inResponse.data);
+		setInterval(enyo.hitch(this, "doSave"),5000);
 	},
 	
+	/* SPEICHERN */
+	
 	doSave: function(inSender, inEvent) {
-		console.log("saving file");
 		this.$.fileIO.saveFile(this.$.editorPanel.getContent());
 	},
 	
 	handleSaved: function(inSender, inResponse) {
 	},
+	
+	/* LOGIN */
 	
 	doLogin: function(inSender, inEvent) {
 		this.$.loginDialog.openAtCenter();
@@ -84,6 +98,29 @@ enyo.kind({
 	},
 	
 	
+	rendered: function() {
+		if(enyo.windowParams) {
+			if(enyo.windowParams.action) {
+				if(enyo.windowParams.action == "doOpen") {
+					console.log("oeffne datei");
+					this.doOpen(enyo.windowParams.filename);
+				}
+				else if(enyo.windowParams.action == "doNew") {
+					console.log("neue datei");
+					this.doNew();
+				}
+				else {
+					// erstes fenster, session wiederherstellen
+					
+				}
+			}
+			else {
+				this.$.editorPanel.setContent(this.$.Demotext.text);
+			}
+		}
+		//setInterval(enyo.hitch(this, "doSave"),5000);
+	},
+	
 	/* BORING EVENTS */
 	sleep: function() {
 		//if(this.position == "down")
@@ -94,10 +131,6 @@ enyo.kind({
 	wakeup: function() {
 		//this.$.top.node.style.height = (enyo.fetchControlSize(this).h - 55 - enyo.keyboard.height) + "px";
 		this.$.taboutscrim.hide();
-	},
-	
-	ready: function() {
-		setInterval(enyo.hitch(this, "doSave"),5000);
 	},
 	
 	doPrint: function() {
