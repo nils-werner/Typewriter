@@ -40,16 +40,6 @@ enyo.kind({
 		{kind: "Scrim", name:"scrim", layoutKind: "VFlexLayout", align:"center", pack:"center", components: [
 			{kind: "SpinnerLarge"}
 		]},
-		{kind: "PopupList",
-			scrim: true,
-			modal: true,
-			dismissWithClick: false,
-			width: "200px",
-			height: "200px",
-			modal: true,
-			name:"fileDialog",
-			onSelect: "handleFileSelected"
-		},
 		{kind: "NewFileDialog", onSubmit: "handleNewFile"}
 	],
 	
@@ -113,7 +103,6 @@ enyo.kind({
 	listFiles: function(sync) {
 		this.files = [];
 		
-		this.$.fileDialog.openAtCenter();
 		this.$.dropbox.call({}, {method:"readdir", onSuccess: "handleListFiles"});
 	},
 	
@@ -121,22 +110,10 @@ enyo.kind({
 		console.log("files came back");
 		
 		for(var i in inResponse.files) {
-			this.files.push({caption: inResponse.files[i].filename.basename(".md"), filename: inResponse.files[i].filename.basename()});
+			this.files.push({caption: inResponse.files[i].basename(".md"), filename: inResponse.files[i].basename()});
 		}
 		
-		console.log(JSON.stringify(inResponse));
-		this.$.fileDialog.setItems(this.files);
-		this.$.fileDialog.itemsChanged();
-	},
-	
-	handleFileSelected: function(inSender, inSelected) {
-		console.log("file selected");
-		this.$.fileDialog.close();
-		this.readFile(this.files[inSelected].filename);
-	},
-	
-	cancelFileSelect: function(inSender, inEvent) {
-		this.$.fileDialog.close();
+		this.doDirRead(this.files);
 	},
 	
 	/*

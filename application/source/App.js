@@ -6,7 +6,7 @@ enyo.kind({
 	},
 	components: [
 		{kind: "EditorPanel", flex: 1},
-		{kind: "AppMenu", lazy: false, components: [
+		{kind: "AppMenu", lazy: false, onclick:"doLoadFiles", components: [
 			{caption: "Document", components: [
 				{caption: "Create New...", onclick: "sendNew"},
 				{caption: "Open", onclick: "sendOpen"}
@@ -33,7 +33,8 @@ enyo.kind({
 		{kind: "FileIO",
 			onOpened: "handleOpened",
 			onSaved: "handleSaved",
-			onLogin: "handleLoginResult"
+			onLogin: "handleLoginResult",
+			onDirRead: "handleLoadFiles"
 		},
 		{kind: "LoginDialog", onSubmit: "handleLoginData"},
 		{name:"Demotext", kind:"Demotext" },
@@ -50,6 +51,14 @@ enyo.kind({
 	},
 	
 	/* DATEI ÖFFNEN */
+	
+	doLoadFiles: function(inSender, inEvent) {
+		this.$.fileIO.listFiles();
+	},
+	
+	handleLoadFiles: function(inSender, inResponse) {
+		console.log(JSON.stringify(inResponse));
+	},
 	
 	sendOpen: function(inSender, inEvent) {
 		enyo.windows.openWindow("index.html", "", {wasLaunchedBy: window.name, action:"doOpen", filename: "leer.md"});
