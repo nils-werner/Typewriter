@@ -102,22 +102,41 @@ enyo.kind({
 	
 	handleStat: function(inSender, inResponse) {
 		console.log(JSON.stringify(inResponse));
-		ltime = Date.parse(inResponse.local.stats.mtime);
-		rtime = Date.parse(inResponse.remote.data.modified);
+		var action = "";
 		
-		if(ltime - rtime > 30000) {
-			console.log("local copy is newer");
-			this.handleResolve(inSender, {action: "push"});
+		if(inResponse.remote.err) {
+			if(inResponse.remote.err.statusCode == 404)
+				action = "push";
 		}
-		else if(rtime - ltime > 30000) {
-			console.log("remote copy is newer");
-			this.handleResolve(inSender, {action: "pull"});
+		else if(inResponse.local.err) {
+			action = "pull";
 		}
 		else {
-			console.log("mergeconflict");
+			ltime = Date.parse(inResponse.local.stats.mtime);
+			rtime = Date.parse(inResponse.remote.data.modified);
+	
+			if(ltime - rtime > 30000) {
+				console.log("local copy is newer");
+				action = "push";
+			}
+			else if(rtime - ltime > 30000) {
+				console.log("remote copy is newer");
+				action = "pull";
+			}
+			else {
+				console.log("mergeconflict");
+				this.$.resolveDialog.openAtCenter();
+			}
+			
+			console.log(ltime + " " + rtime + " " + (ltime-rtime));
+		}
+		
+		if(action == "push" || action == "pull") {
+			this.handleResolve(inSender, {action: action});
+		}
+		else if(action == "merge") {
 			this.$.resolveDialog.openAtCenter();
 		}
-		console.log(ltime + " " + rtime + " " + (ltime-rtime));
 	},
 	
 	handleResolve: function(inSender, inResponse) {
