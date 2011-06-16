@@ -126,20 +126,15 @@ enyo.kind({
 	},
 	
 	
-	rendered: function() {
+	ready: function() {
 		if(enyo.windowParams) {
 			if(enyo.windowParams.action) {
 				if(enyo.windowParams.action == "doOpen") {
 					console.log("oeffne datei");
 					this.doOpen(enyo.windowParams.filename);
 				}
-				else if(enyo.windowParams.action == "doNew") {
-					console.log("neue datei");
-					this.doNew();
-				}
-				else {
+				else if(enyo.windowParams.action != "doNew"){
 					// erstes fenster, session wiederherstellen
-					
 				}
 			}
 			else {
@@ -149,6 +144,17 @@ enyo.kind({
 		//setInterval(enyo.hitch(this, "doSave"),5000);
 		setInterval(enyo.hitch(this, "doLoadFiles"),15000);
 		this.doLoadFiles();
+	},
+	
+	rendered: function() {
+		if(enyo.windowParams) {
+			if(enyo.windowParams.action) {
+				if(enyo.windowParams.action == "doNew") {
+					console.log("neue datei");
+					this.doNew();
+				}
+			}
+		}
 	},
 	
 	/* BORING EVENTS */
