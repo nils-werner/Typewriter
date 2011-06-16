@@ -144,12 +144,13 @@ enyo.kind({
 			}
 			else {
 				var lastfile = enyo.getCookie("lastfile");
-				if(typeof(lastfile) == "undefined")
+				if(typeof(lastfile) == "undefined" || lastfile == "")
 					this.$.editorPanel.setContent(this.$.Demotext.text);
 				else
 					this.doOpen(lastfile);
 			}
 		}
+		console.log(lastfile);
 		//setInterval(enyo.hitch(this, "doSave"),5000);
 		setInterval(enyo.hitch(this, "doLoadFiles"),15000);
 		this.doLoadFiles();

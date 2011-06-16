@@ -7,7 +7,7 @@ enyo.kind({
 		remoteDir: "Typewriter/",
 		localDir: "/media/internal/Typewriter/"
 	},
-	filename: "test.md",
+	filename: "",
 	files: [],
 	ctoken: "xr03hokoazn32zx",
 	csecret: "3ej0el462uohasn",
@@ -55,7 +55,7 @@ enyo.kind({
 	 */
 	
 	saveFile: function(inContent) {
-		if(this.lastContent != inContent) {
+		if(this.lastContent != inContent && this.filename != "") {
 			console.log("saving " + this.filename);
 			this.$.dropbox.call({name: this.filename, content: inContent}, {method:"writefile", onSuccess: "handleSaved"});
 			this.lastContent = inContent;
