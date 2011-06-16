@@ -1,7 +1,7 @@
-var SyncAssistant = function() {
+var SyncFileAssistant = function() {
 }
 
-SyncAssistant.prototype.run = function(future) {
+SyncFileAssistant.prototype.run = function(future) {
 	var fs = IMPORTS.require("fs");
 	var dropbox = new DropboxClient(ctoken, csecret, token, secret);
 	
@@ -15,7 +15,7 @@ SyncAssistant.prototype.run = function(future) {
 	this.fetchLocalFiles();
 }
 
-SyncAssistant.prototype.fetchLocalFiles = function() {
+SyncFileAssistant.prototype.fetchLocalFiles = function() {
 	fs.readdir("/media/internal/Typewriter/", function(err, data) {
 		data.forEach(function(filename) {
 			fs.stat("/media/internal/Typewriter/" + filename.basename(), function(err, stats) {
@@ -32,10 +32,10 @@ SyncAssistant.prototype.fetchLocalFiles = function() {
 	});
 }
 
-SyncAssistant.prototype.fetchRemoteFiles = function() {
+SyncFileAssistant.prototype.fetchRemoteFiles = function() {
 
 }
 
-SyncAssistant.prototype.findSyncCandidates = function() {
+SyncFileAssistant.prototype.findSyncCandidates = function() {
 	files
 }
