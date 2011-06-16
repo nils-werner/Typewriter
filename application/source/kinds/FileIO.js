@@ -153,6 +153,8 @@ enyo.kind({
 	},
 	
 	handleSync: function(inSender, inResponse) {
+		console.log(JSON.stringify(inResponse));
+		
 		if(inResponse.action == "pull")
 			this.readFile(this.filename);
 		else {
