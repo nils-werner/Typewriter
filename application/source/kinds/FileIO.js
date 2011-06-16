@@ -64,7 +64,7 @@ enyo.kind({
 	
 	handleSaved: function(inEvent, inResponse) {
 		if(err) {
-			enyo.windows.addBannerMessage("An error occured while trying to save " + this.filename, "{}");
+			enyo.windows.addBannerMessage("Could not save " + this.filename.basename(".md") + ".", "{}");
 		}
 		
 		this.doSaved({err: inResponse.err});
@@ -91,7 +91,7 @@ enyo.kind({
 		this.lastContent = inResponse.data;
 		
 		if(err) {
-			enyo.windows.addBannerMessage("An error occured while trying to load " + this.filename, "{}");
+			enyo.windows.addBannerMessage("Could not load " + this.filename.basename(".md") + ".", "{}");
 		}
 		
 		this.doOpened({ err: inResponse.err, data: inResponse.data});
@@ -116,6 +116,8 @@ enyo.kind({
 		if(inResponse.remote.err) {
 			if(inResponse.remote.err.statusCode == 404)
 				action = "push";
+			else
+				enyo.windows.addBannerMessage("Dropbox-Stat failed.", "{}");
 		}
 		else if(inResponse.local.err) {
 			action = "pull";
@@ -164,10 +166,15 @@ enyo.kind({
 	handleSync: function(inSender, inResponse) {
 		console.log(JSON.stringify(inResponse));
 		
-		if(inResponse.action == "pull")
-			enyo.windows.addBannerMessage("Document pulled from Dropbox", "{}");
+		if(inResponse.err)
+			var msg = "failed";
 		else
-			enyo.windows.addBannerMessage("Document pushed to Dropbox", "{}");
+			var msg = "finished";
+		
+		if(inResponse.action == "pull")
+			enyo.windows.addBannerMessage("Download from Dropbox " + msg + ".", "{}");
+		else
+			enyo.windows.addBannerMessage("Upload to Dropbox " + msg + ".", "{}");
 		
 		if(inResponse.action == "pull")
 			this.readFile(this.filename);
@@ -201,7 +208,7 @@ enyo.kind({
 	
 	login: function(param) {
 		if(param.username == "" && param.password == "") {
-			enyo.windows.addBannerMessage("Dropbox-Account removed", "{}");
+			enyo.windows.addBannerMessage("Dropbox-Account removed.", "{}");
 			this.token = "";
 			this.secret = "";
 		}
@@ -212,13 +219,16 @@ enyo.kind({
 		console.log(JSON.stringify(inResponse));
 		
 		if(!inResponse.err) {
-			enyo.windows.addBannerMessage("Successfully linked to Dropbox", "{}");
+			enyo.windows.addBannerMessage("Successfully linked to Dropbox.", "{}");
 			
 			this.token = inResponse.token;
 			this.secret = inResponse.secret;
 			
 			enyo.setCookie("token", this.token);
 			enyo.setCookie("secret", this.secret);
+		}
+		else {
+			enyo.windows.addBannerMessage("Could not link with Dropbox.", "{}");
 		}
 		
 		this.doLogin(inResponse);
