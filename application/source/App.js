@@ -17,7 +17,7 @@ enyo.kind({
 				{caption: "Print", name:"print", onclick: "doPrint"}
 			]},
 			{caption: "Help", components: [
-				{caption: "Syntax", onclick: "displayHelp"},
+				{caption: "Syntax", onclick: "doHelp"},
 			]},
 			]
 		},
@@ -104,10 +104,10 @@ enyo.kind({
 		this.$.editorPanel.printDocument();
 	},
 	
-	displayHelp: function(inSender) {
-		if(inSender.name == "markdownHelp")
-			this.$.markdownHelper.openAtCenter();
-		else
-			this.$.typewriterHelper.openAtCenter();
+	doHelp: function(inSender) {
+		var r = new enyo.PalmService();
+		r.service = "palm://com.palm.applicationManager/";
+		r.method = "open";
+		r.call({target: "http://www.typewriterwebos.com/markdown.html"});
 	}
 })
