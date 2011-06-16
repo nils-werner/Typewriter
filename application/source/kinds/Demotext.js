@@ -28,12 +28,14 @@ enyo.kind({
 			"> looking like it's been marked up with tags\n"+
 			"> or formatting instructions.\n"+
 			"\n"+
-			"This document is written in Markdown; you are currently seeing the plaintext version. To get a feel for Markdown's syntax, type some text into the window and *pull up the toolbar*.\n"+
+			"This document is written in Markdown; you are currently seeing the preview. To get a feel for Markdown's syntax, *pull down the toolbar* and have a look.\n"+
 			"\n"+
-			"What's next?\n"+
+			"What next?\n"+
 			"----------\n"+
 			"\n"+
-			"Go right ahead, [clear the editor][clear] and start typing. And don't mind the style, just mind your words. It'll come out alright by itself.\n"+
+			"Go right ahead, create a new document and start typing. And don't mind the style, just mind your words. It'll come out alright by itself.\n"+
+			"\n"+
+			"Once you've done a few lines you can sync the document back and forth with Dropbox so you can continue working with your text wherever you are.\n"+
 			"\n"+
 			"  [john gruber]: http://daringfireball.net/\n"+
 			"  [markdown]: http://daringfireball.net/projects/markdown/\n"+

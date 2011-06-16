@@ -16,7 +16,8 @@ enyo.kind({
 				{caption: "Print", name:"print", onclick: "doPrint"}
 			]},
 			{caption: "Help", components: [
-				{caption: "Syntax", onclick: "doHelp"},
+				{caption: "Syntax", onclick: "doSyntax"},
+				{caption: "FAQ", onclick: "doFAQ"},
 			]},
 			]
 		},
@@ -141,9 +142,14 @@ enyo.kind({
 					console.log("oeffne datei");
 					this.doOpen(enyo.windowParams.filename);
 				}
+				if(enyo.windowParams.action == "doNew") {	// das muss irgendwie in rendered, ohne alles zu zerschmeissen
+					console.log("neue datei");
+					this.doNew();
+				}
 			}
 			else {
-				var lastfile = "" || enyo.getCookie("lastfile") || "";
+				var lastfile = enyo.getCookie("lastfile") || "";
+				var lastfile = "";
 				if(lastfile == "")
 					this.$.editorPanel.setContent(this.$.Demotext.text);
 				else
@@ -156,16 +162,6 @@ enyo.kind({
 		this.doLoadFiles();
 	},
 	
-	rendered: function() {
-		if(enyo.windowParams) {
-			if(enyo.windowParams.action) {
-				if(enyo.windowParams.action == "doNew") {
-					console.log("neue datei");
-					this.doNew();
-				}
-			}
-		}
-	},
 	
 	/* BORING EVENTS */
 	sleep: function() {
@@ -193,5 +189,12 @@ enyo.kind({
 		r.service = "palm://com.palm.applicationManager/";
 		r.method = "open";
 		r.call({target: "http://www.typewriterwebos.com/markdown.html"});
+	},
+	
+	doFAQ: function(inSender) {
+		var r = new enyo.PalmService();
+		r.service = "palm://com.palm.applicationManager/";
+		r.method = "open";
+		r.call({target: "http://www.typewriterwebos.com/faq.html"});
 	}
 })
