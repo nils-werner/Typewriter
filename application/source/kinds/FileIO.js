@@ -80,6 +80,7 @@ enyo.kind({
 	},
 	
 	handleReadFile: function(inSender, inResponse) {
+		console.log(JSON.stringify(inResponse));
 		this.$.spinnerLarge.hide();
 		this.$.scrim.hide();
 		
