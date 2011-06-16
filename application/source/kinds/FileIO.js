@@ -31,7 +31,8 @@ enyo.kind({
 		{kind: "Scrim", name:"scrim", layoutKind: "VFlexLayout", align:"center", pack:"center", components: [
 			{kind: "SpinnerLarge"}
 		]},
-		{kind: "NewFileDialog", onSubmit: "handleNewFile"}
+		{kind: "NewFileDialog", onSubmit: "handleNewFile"},
+		{kind: "ResolveDialog", onSubmit: "handleResolve"}
 	],
 	
 	/*
@@ -87,6 +88,9 @@ enyo.kind({
 	 */
 	 
 	syncFile: function() {
+		this.$.spinnerLarge.show();
+		this.$.scrim.show();
+		
 		this.$.dropbox.call({name: this.filename, ctoken: this.ctoken, csecret: this.csecret, token: this.token, secret: this.secret }, {method:"syncstat", onSuccess: "handleStat"});
 	},
 	
@@ -97,16 +101,35 @@ enyo.kind({
 		
 		if(ltime - rtime > 30000) {
 			console.log("local copy is newer");
+			this.handleResolve(inSender, {action: "push"});
 		}
 		else if(rtime - ltime > 30000) {
 			console.log("remote copy is newer");
+			this.handleResolve(inSender, {action: "pull"});
 		}
 		else {
 			console.log("mergeconflict");
+			this.$.resolveDialog.openAtCenter();
 		}
 		console.log(ltime + " " + rtime + " " + (ltime-rtime));
 	},
 	
+	handleResolve: function(inSender, inResponse) {
+		console.log(inResponse.action);
+		this.$.resolveDialog.close();
+		
+		this.$.spinnerLarge.hide();
+		this.$.scrim.hide();
+		
+		if(inResponse.action != "cancel") {
+			//this.$.dropbox.call({name: this.filename, action: inResponse.action, ctoken: this.ctoken, csecret: this.csecret, token: this.token, secret: this.secret }, {method:"syncfile", onSuccess: "handleSync"});
+		}
+	},
+	
+	handleSync: function(inSender, inResponse) {
+		this.$.spinnerLarge.hide();
+		this.$.scrim.hide();
+	},
 	
 	/*
 	 * FILE LISTING

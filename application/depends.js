@@ -9,6 +9,7 @@ enyo.depends(
 	"source/kinds/FileIO.js",
 	"source/kinds/NewFileDialog.js",
 	"source/kinds/LoginDialog.js",
+	"source/kinds/ResolveDialog.js",
 
 	"source/kinds/HSlidingPane.js",
 	"source/kinds/HSlidingView.js",
