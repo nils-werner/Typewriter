@@ -6,8 +6,8 @@ enyo.kind({
 	},
 	components: [
 		{kind: "EditorPanel", flex: 1},
-		{kind: "AppMenu", lazy: false, onclick:"doLoadFiles", components: [
-			{caption: "Document", components: [
+		{kind: "AppMenu", lazy: false, components: [
+			{caption: "Document", lazy: false, name:"docsMenu", components: [
 				{caption: "Create New...", onclick: "sendNew"},
 				{caption: "Open", onclick: "sendOpen"}
 			]},
@@ -58,6 +58,25 @@ enyo.kind({
 	
 	handleLoadFiles: function(inSender, inResponse) {
 		console.log(JSON.stringify(inResponse));
+		this.$.docsMenu.destroyControls();
+		
+		this.$.docsMenu.createComponent({
+			caption: "Create New...",
+			onclick: "sendNew",
+			owner: this, // this part is important as the owner is the one who listens for the events
+			kind: "AppMenuItem" // you might not need this. Might be that components are automatically turned into AppMenuItems
+		});
+		
+		for(var i = 0; i < inResponse.length; i++) {
+			this.$.docsMenu.createComponent({
+				caption: inResponse[i].caption,
+				onclick: "sendOpen",
+				owner: this, // this part is important as the owner is the one who listens for the events
+				kind: "AppMenuItem" // you might not need this. Might be that components are automatically turned into AppMenuItems
+			});
+		}
+		this.$.docsMenu.render();
+		this.$.appMenu.render();
 	},
 	
 	sendOpen: function(inSender, inEvent) {
@@ -128,6 +147,8 @@ enyo.kind({
 			}
 		}
 		//setInterval(enyo.hitch(this, "doSave"),5000);
+		setInterval(enyo.hitch(this, "doLoadFiles"),15000);
+		this.doLoadFiles();
 	},
 	
 	/* BORING EVENTS */
