@@ -7,7 +7,7 @@ enyo.kind({
 	components: [
 		{kind: "EditorPanel", flex: 1},
 		{kind: "AppMenu", lazy: false, components: [
-			{caption: "Document", lazy: false, name:"docsMenu", components: [
+			{caption: "Documents", lazy: false, name:"docsMenu", components: [
 				{caption: "Create New...", onclick: "sendNew"}
 			]},
 			{caption: "Share", components: [
@@ -143,8 +143,8 @@ enyo.kind({
 				}
 			}
 			else {
-				var lastfile = enyo.getCookie("lastfile");
-				if(typeof(lastfile) == "undefined" || lastfile == "")
+				var lastfile = "" || enyo.getCookie("lastfile") || "";
+				if(lastfile == "")
 					this.$.editorPanel.setContent(this.$.Demotext.text);
 				else
 					this.doOpen(lastfile);

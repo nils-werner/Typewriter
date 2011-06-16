@@ -63,6 +63,10 @@ enyo.kind({
 	},
 	
 	handleSaved: function(inEvent, inResponse) {
+		if(err) {
+			enyo.windows.addBannerMessage("An error occured while trying to save " + this.filename, "{}");
+		}
+		
 		this.doSaved({err: inResponse.err});
 	},
 	
@@ -85,6 +89,10 @@ enyo.kind({
 		this.$.scrim.hide();
 		
 		this.lastContent = inResponse.data;
+		
+		if(err) {
+			enyo.windows.addBannerMessage("An error occured while trying to load " + this.filename, "{}");
+		}
 		
 		this.doOpened({ err: inResponse.err, data: inResponse.data});
 	},
@@ -157,6 +165,11 @@ enyo.kind({
 		console.log(JSON.stringify(inResponse));
 		
 		if(inResponse.action == "pull")
+			enyo.windows.addBannerMessage("Document pulled from Dropbox", "{}");
+		else
+			enyo.windows.addBannerMessage("Document pushed to Dropbox", "{}");
+		
+		if(inResponse.action == "pull")
 			this.readFile(this.filename);
 		else {
 			this.$.spinnerLarge.hide();
@@ -188,6 +201,7 @@ enyo.kind({
 	
 	login: function(param) {
 		if(param.username == "" && param.password == "") {
+			enyo.windows.addBannerMessage("Dropbox-Account removed", "{}");
 			this.token = "";
 			this.secret = "";
 		}
@@ -198,6 +212,8 @@ enyo.kind({
 		console.log(JSON.stringify(inResponse));
 		
 		if(!inResponse.err) {
+			enyo.windows.addBannerMessage("Successfully linked to Dropbox", "{}");
+			
 			this.token = inResponse.token;
 			this.secret = inResponse.secret;
 			
