@@ -8,8 +8,7 @@ enyo.kind({
 		{kind: "EditorPanel", flex: 1},
 		{kind: "AppMenu", lazy: false, components: [
 			{caption: "Document", lazy: false, name:"docsMenu", components: [
-				{caption: "Create New...", onclick: "sendNew"},
-				{caption: "Open", onclick: "sendOpen"}
+				{caption: "Create New...", onclick: "sendNew"}
 			]},
 			{caption: "Share", components: [
 				{caption: "Dropbox", onclick: "doDropbox"},
