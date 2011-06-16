@@ -87,12 +87,24 @@ enyo.kind({
 	 */
 	 
 	syncFile: function() {
-
 		this.$.dropbox.call({name: this.filename, ctoken: this.ctoken, csecret: this.csecret, token: this.token, secret: this.secret }, {method:"syncstat", onSuccess: "handleStat"});
 	},
 	
 	handleStat: function(inSender, inResponse) {
 		console.log(JSON.stringify(inResponse));
+		ltime = Date.parse(inResponse.local.stats.mtime);
+		rtime = Date.parse(inResponse.remote.data.modified);
+		
+		if(ltime - rtime > 30000) {
+			console.log("local copy is newer");
+		}
+		else if(rtime - ltime > 30000) {
+			console.log("remote copy is newer");
+		}
+		else {
+			console.log("mergeconflict");
+		}
+		console.log(ltime + " " + rtime + " " + (ltime-rtime));
 	},
 	
 	
