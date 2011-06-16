@@ -95,9 +95,7 @@ enyo.kind({
 	/* SPEICHERN */
 	
 	doSave: function(inSender, inEvent) {
-		if(this.$.editorPanel.hasChanged()) {
-			this.$.fileIO.saveFile(this.$.editorPanel.getContent());
-		}
+		this.$.fileIO.saveFile(this.$.editorPanel.getContent());
 	},
 	
 	handleSaved: function(inSender, inResponse) {

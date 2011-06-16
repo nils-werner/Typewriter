@@ -97,7 +97,6 @@ enyo.kind({
 	
 	/* PREVIEW HANDLING */
 	synccount: 0,
-	lastText: "",
 	
 	barBeingDragged: false,
 	
@@ -251,14 +250,7 @@ enyo.kind({
 		return this.$.editor.getText();
 	},
 	
-	hasChanged: function() {
-		var result = (this.lastText != this.$.editor.getText());
-		this.lastText = this.$.editor.getText();
-		return result;
-	},
-	
 	setContent: function(inContent) {
 		this.$.editor.setValue(inContent);
-		this.lastText = this.$.editor.getText();
 	}
 });

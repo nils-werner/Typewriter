@@ -11,6 +11,7 @@ enyo.kind({
 	files: [],
 	ctoken: "xr03hokoazn32zx",
 	csecret: "3ej0el462uohasn",
+	lastContent: "",
 	isonline: true,
 	events: {
 		onOpened: "",
@@ -54,8 +55,11 @@ enyo.kind({
 	 */
 	
 	saveFile: function(inContent, sync) {
-		console.log("saving " + this.filename);
-		this.$.dropbox.call({name: this.filename, content: inContent}, {method:"writefile", onSuccess: "handleSaved"});
+		if(this.lastContent != inContent) {
+			console.log("saving " + this.filename);
+			this.$.dropbox.call({name: this.filename, content: inContent}, {method:"writefile", onSuccess: "handleSaved"});
+			this.lastContent = inContent;
+		}
 	},
 	
 	handleSaved: function(inEvent, inResponse) {
@@ -78,6 +82,8 @@ enyo.kind({
 	handleReadFile: function(inSender, inResponse) {
 		this.$.spinnerLarge.hide();
 		this.$.scrim.hide();
+		
+		this.lastContent = inResponse.data;
 		
 		this.doOpened({ err: inResponse.err, data: inResponse.data});
 	},
