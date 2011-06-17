@@ -2,12 +2,12 @@ enyo.kind({
 	name: "ResolveDialog",
 	kind: enyo.ModalDialog,
 	scrim: false,
-	caption: "Mergeconflict",
+	caption: "Dropbox",
 	events: {
 		onSubmit: "",
 	},
 	components: [
-		{content: "Both files have been edited within 30 seconds of each other. <strong>Pushing</strong> will overwrite the file on Dropbox, <strong>Pulling</strong> will overwrite the local file.", className: "smallhint"},
+		{content: "Both files have been edited within 15 minutes of each other, I am not sure wich one is the most recent. <strong>Pushing</strong> will overwrite the file on Dropbox, <strong>Pulling</strong> will overwrite the local file.", className: "smallhint"},
 		{kind:"Spacer", height: "10px"},
 		{kind: "HFlexBox", components: [
 			{kind: "ActivityButton", name: "push", flex: 1, caption: "Push", className: "enyo-button-dark", onclick: "buttonHandler"},

@@ -94,7 +94,7 @@ enyo.kind({
 			enyo.windows.addBannerMessage("Could not load " + this.filename.basename(".md") + ".", "{}");
 		}
 		
-		this.doOpened({ err: inResponse.err, data: inResponse.data});
+		this.doOpened({ err: inResponse.err, data: inResponse.data, filename: inResponse.name});
 	},
 	
 	
@@ -125,12 +125,14 @@ enyo.kind({
 		else {
 			ltime = Date.parse(inResponse.local.stats.mtime);
 			rtime = Date.parse(inResponse.remote.data.modified);
+			
+			var diff = 15*60000;
 	
-			if(ltime - rtime > 30000) {
+			if(ltime - rtime > diff) {
 				console.log("local copy is newer");
 				action = "push";
 			}
-			else if(rtime - ltime > 30000) {
+			else if(rtime - ltime > diff) {
 				console.log("remote copy is newer");
 				action = "pull";
 			}

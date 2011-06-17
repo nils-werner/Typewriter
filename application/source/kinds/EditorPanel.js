@@ -58,9 +58,12 @@ enyo.kind({
 						onmouseup: "sliderreleased",
 						components: [
 						{kind: "GrabButton", className: "HGrabButton"},
-						{kind: "Spacer", flex: 1},
-						{kind: "Image", src:"images/title.png", style:"margin-top: 4px;"},
+						{kind: "Spacer", style:"width: 1px;"},
+						{content: "Typewriter"},
+						//{kind: "Image", src:"images/title.png", style:"margin-top: 4px;"},
 						{kind: "Spacer", flex: 25},
+						{content: "(none)", name:"filename"},
+						{kind: "Spacer", style:"width: 1px;"},
 						{kind: "GrabButton", className: "HGrabButton Right"}
 					]},
 					{kind: "VFlexBox", flex: 1,
@@ -250,7 +253,8 @@ enyo.kind({
 		return this.$.editor.getText();
 	},
 	
-	setContent: function(inContent) {
+	setContent: function(inContent, filename) {
 		this.$.editor.setValue(inContent);
+		this.$.filename.setContent(filename || "(none)");
 	}
 });

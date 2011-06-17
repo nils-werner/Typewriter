@@ -88,7 +88,7 @@ enyo.kind({
 	},
 	
 	handleOpened: function(inSender, inResponse) {
-		this.$.editorPanel.setContent(inResponse.data);
+		this.$.editorPanel.setContent(inResponse.data, inResponse.filename);
 		setInterval(enyo.hitch(this, "doSave"),5000);
 	},
 	
