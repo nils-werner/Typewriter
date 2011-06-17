@@ -47,7 +47,8 @@ enyo.kind({
 	handleNewFile: function(inSender, inResponse) {
 		this.$.newFileDialog.close();
 		this.filename = inResponse.filename + ".md";
-		this.doOpened({ err: null, data: inResponse.filename + "\n" + new String("=").repeat(inResponse.filename.length) + "\n\n"});
+		this.lastContent = "";
+		this.doOpened({ err: null, data: inResponse.filename + "\n" + new String("=").repeat(inResponse.filename.length) + "\n\n", filename: this.filename});
 	},
 	
 	/*
@@ -63,7 +64,9 @@ enyo.kind({
 	},
 	
 	handleSaved: function(inEvent, inResponse) {
-		if(err) {
+		console.log(inResponse.err);
+		
+		if(inResponse.err) {
 			enyo.windows.addBannerMessage("Could not save " + this.filename.basename(".md") + ".", "{}");
 		}
 		
@@ -91,6 +94,8 @@ enyo.kind({
 		
 		if(inResponse.err) {
 			enyo.windows.addBannerMessage("Could not load " + this.filename.basename(".md") + ".", "{}");
+			this.filename = "";
+			enyo.setCookie("lastfile", "");
 		}
 		
 		this.doOpened({ err: inResponse.err, data: inResponse.data, filename: inResponse.name});

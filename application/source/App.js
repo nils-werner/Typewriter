@@ -151,7 +151,7 @@ enyo.kind({
 			else {
 				var lastfile = enyo.getCookie("lastfile") || "";
 				if(lastfile == "")
-					this.$.editorPanel.setContent(this.$.Demotext.text);
+					this.$.editorPanel.setContent(this.$.Demotext.text, "");
 				else
 					this.doOpen(lastfile);
 			}
