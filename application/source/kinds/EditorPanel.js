@@ -255,6 +255,6 @@ enyo.kind({
 	
 	setContent: function(inContent, filename) {
 		this.$.editor.setValue(inContent);
-		this.$.filename.setContent(filename || "");
+		this.$.filename.setContent(filename.basename(".md") || "");
 	}
 });

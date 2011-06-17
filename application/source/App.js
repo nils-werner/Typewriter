@@ -135,7 +135,8 @@ enyo.kind({
 	},
 	
 	
-	ready: function() {
+	rendered: function() {
+		this.$.editorPanel.render();
 		if(enyo.windowParams) {
 			if(enyo.windowParams.action) {
 				if(enyo.windowParams.action == "doOpen") {
@@ -149,7 +150,6 @@ enyo.kind({
 			}
 			else {
 				var lastfile = enyo.getCookie("lastfile") || "";
-				var lastfile = "";
 				if(lastfile == "")
 					this.$.editorPanel.setContent(this.$.Demotext.text);
 				else

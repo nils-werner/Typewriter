@@ -84,13 +84,12 @@ enyo.kind({
 	},
 	
 	handleReadFile: function(inSender, inResponse) {
-		console.log(JSON.stringify(inResponse));
 		this.$.spinnerLarge.hide();
 		this.$.scrim.hide();
 		
 		this.lastContent = inResponse.data;
 		
-		if(err) {
+		if(inResponse.err) {
 			enyo.windows.addBannerMessage("Could not load " + this.filename.basename(".md") + ".", "{}");
 		}
 		
@@ -110,7 +109,6 @@ enyo.kind({
 	},
 	
 	handleStat: function(inSender, inResponse) {
-		console.log(JSON.stringify(inResponse));
 		var action = "";
 		
 		if(inResponse.remote.err) {
@@ -166,7 +164,6 @@ enyo.kind({
 	},
 	
 	handleSync: function(inSender, inResponse) {
-		console.log(JSON.stringify(inResponse));
 		
 		if(inResponse.err)
 			var msg = "failed";
@@ -218,7 +215,6 @@ enyo.kind({
 	},
 	
 	handleToken: function(inSender, inResponse) {
-		console.log(JSON.stringify(inResponse));
 		
 		if(!inResponse.err) {
 			enyo.windows.addBannerMessage("Successfully linked to Dropbox.", "{}");
