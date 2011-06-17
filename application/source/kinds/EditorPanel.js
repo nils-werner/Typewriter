@@ -59,10 +59,10 @@ enyo.kind({
 						components: [
 						{kind: "GrabButton", className: "HGrabButton"},
 						{kind: "Spacer", style:"width: 1px;"},
-						{content: "Typewriter"},
+						{content: "", name:"filename"},
 						//{kind: "Image", src:"images/title.png", style:"margin-top: 4px;"},
 						{kind: "Spacer", flex: 25},
-						{content: "(none)", name:"filename"},
+						//{content: "Typewriter"},
 						{kind: "Spacer", style:"width: 1px;"},
 						{kind: "GrabButton", className: "HGrabButton Right"}
 					]},
@@ -255,6 +255,6 @@ enyo.kind({
 	
 	setContent: function(inContent, filename) {
 		this.$.editor.setValue(inContent);
-		this.$.filename.setContent(filename || "(none)");
+		this.$.filename.setContent(filename || "");
 	}
 });
