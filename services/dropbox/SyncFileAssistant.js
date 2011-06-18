@@ -10,15 +10,15 @@ SyncFileAssistant.prototype.run = function(future) {
 	var fs = IMPORTS.require("fs");
 	var dropbox = new DropboxClient(ctoken, csecret, token, secret);
 	
-	var name = this.controller.args.name;
+	var filename = this.controller.args.filename;
 	var action = this.controller.args.action;
 
 	if(action == "pull") {
-		dropbox.getFile("Typewriter/" + name, function (err, data) { 
-			fs.writeFile("/media/internal/Typewriter/" + name, data, 'utf8', function(err) { future.result = { err: err, action: action }; });
+		dropbox.getFile("Typewriter/" + filename, function (err, data) { 
+			fs.writeFile("/media/internal/Typewriter/" + filename, data, 'utf8', function(err) { future.result = { err: err, action: action, filename: filename }; });
 		});
 	}
 	else if(action == "push") {
-		dropbox.putFile("/media/internal/Typewriter/" + name, "Typewriter/", function (err, data) { future.result = { err: err, action: action }; });
+		dropbox.putFile("/media/internal/Typewriter/" + filename, "Typewriter/", function (err, data) { future.result = { err: err, action: action, filename: filename }; });
 	}
 }

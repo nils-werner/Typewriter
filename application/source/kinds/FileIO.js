@@ -48,7 +48,7 @@ enyo.kind({
 		this.$.newFileDialog.close();
 		this.filename = inResponse.filename + ".md";
 		this.lastContent = "";
-		this.doOpened({ err: null, data: inResponse.filename + "\n" + new String("=").repeat(inResponse.filename.length) + "\n\n", filename: this.filename});
+		this.doOpened({ err: null, content: inResponse.filename + "\n" + new String("=").repeat(inResponse.filename.length) + "\n\n", filename: this.filename});
 	},
 	
 	/*
@@ -58,7 +58,7 @@ enyo.kind({
 	saveFile: function(inContent) {
 		if(this.lastContent != inContent && this.filename != "") {
 			console.log("saving " + this.filename);
-			this.$.dropbox.call({name: this.filename, content: inContent}, {method:"writefile", onSuccess: "handleSaved"});
+			this.$.dropbox.call({filename: this.filename, content: inContent}, {method:"writefile", onSuccess: "handleSaved"});
 			this.lastContent = inContent;
 		}
 	},
@@ -83,14 +83,14 @@ enyo.kind({
 		this.$.scrim.show();
 		
 		this.filename = inName;
-		this.$.dropbox.call({name: this.filename}, {method:"readfile", onSuccess: "handleReadFile"});
+		this.$.dropbox.call({filename: this.filename}, {method:"readfile", onSuccess: "handleReadFile"});
 	},
 	
 	handleReadFile: function(inSender, inResponse) {
 		this.$.spinnerLarge.hide();
 		this.$.scrim.hide();
 		
-		this.lastContent = inResponse.data;
+		this.lastContent = inResponse.content;
 		
 		if(inResponse.err) {
 			enyo.windows.addBannerMessage("Could not load " + this.filename.basename(".md") + ".", "{}");
@@ -98,7 +98,7 @@ enyo.kind({
 			enyo.setCookie("lastfile", "");
 		}
 		
-		this.doOpened({ err: inResponse.err, data: inResponse.data, filename: inResponse.name});
+		this.doOpened({ err: inResponse.err, content: inResponse.content, filename: inResponse.filename});
 	},
 	
 	
@@ -110,7 +110,7 @@ enyo.kind({
 		this.$.spinnerLarge.show();
 		this.$.scrim.show();
 		
-		this.$.dropbox.call({name: this.filename, ctoken: this.ctoken, csecret: this.csecret, token: this.token, secret: this.secret }, {method:"syncstat", onSuccess: "handleStat"});
+		this.$.dropbox.call({filename: this.filename, ctoken: this.ctoken, csecret: this.csecret, token: this.token, secret: this.secret }, {method:"syncstat", onSuccess: "handleStat"});
 	},
 	
 	handleStat: function(inSender, inResponse) {
@@ -127,7 +127,7 @@ enyo.kind({
 		}
 		else {
 			ltime = Date.parse(inResponse.local.stats.mtime);
-			rtime = Date.parse(inResponse.remote.data.modified);
+			rtime = Date.parse(inResponse.remote.stats.modified);
 			
 			var diff = 15*60000;
 	
@@ -160,7 +160,7 @@ enyo.kind({
 		this.$.resolveDialog.close();
 		
 		if(inResponse.action != "cancel") {
-			this.$.dropbox.call({name: this.filename, action: inResponse.action, ctoken: this.ctoken, csecret: this.csecret, token: this.token, secret: this.secret }, {method:"syncfile", onSuccess: "handleSync"});
+			this.$.dropbox.call({filename: this.filename, action: inResponse.action, ctoken: this.ctoken, csecret: this.csecret, token: this.token, secret: this.secret }, {method:"syncfile", onSuccess: "handleSync"});
 		}
 		else {
 			this.$.spinnerLarge.hide();

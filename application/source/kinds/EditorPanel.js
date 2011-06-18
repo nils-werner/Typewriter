@@ -253,8 +253,9 @@ enyo.kind({
 		return this.$.editor.getText();
 	},
 	
-	setContent: function(inContent, filename) {
+	setContent: function(inContent, inFilename) {
+		var inFilename = inFilename || "";
 		this.$.editor.setValue(inContent);
-		this.$.filename.setContent(filename.basename(".md") || "");
+		this.$.filename.setContent(inFilename.basename(".md"));
 	}
 });
