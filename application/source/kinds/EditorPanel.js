@@ -262,5 +262,16 @@ enyo.kind({
 		var inFilename = inFilename || "";
 		this.$.editor.setValue(inContent);
 		this.$.filename.setContent(inFilename.basename(".md"));
+	},
+	
+	setActive: function(inToggle) {
+		if(inToggle == true) {
+			this.$.editorScroller.removeClass("disabled");
+			this.$.editor.setDisabled(false);
+		}
+		else {
+			this.$.editorScroller.addClass("disabled");
+			this.$.editor.setDisabled(true);
+		}
 	}
 });

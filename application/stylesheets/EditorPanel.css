@@ -28,6 +28,10 @@
 	background-color: #ffffff;
 }
 
+.editor-scroller.disabled, .editor-scroller.disabled .editor-input {
+	background-color: #CACACA;
+}
+
 .fake-toolbar {
 	color: #1C1F1F;
 }

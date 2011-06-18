@@ -87,8 +87,13 @@ enyo.kind({
 	},
 	
 	handleOpened: function(inSender, inResponse) {
-		this.$.editorPanel.setContent(inResponse.content, inResponse.filename);
-		setInterval(enyo.hitch(this, "doSave"),5000);
+		if(!inResponse.err) {
+			this.$.editorPanel.setContent(inResponse.content, inResponse.filename);
+			setInterval(enyo.hitch(this, "doSave"),5000);
+		}
+		else {
+			this.$.editorPanel.setActive(false);
+		}
 	},
 	
 	/* SPEICHERN */
