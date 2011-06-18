@@ -210,7 +210,7 @@ enyo.kind({
 	setSchedule: function() {
 		this.scheduleID = setInterval(enyo.bind(this,function() {
 			this.syncViews({name:"schedule"});
-		}), 500);
+		}), 5000);
 	},
 	clearSchedule: function() {
 		clearInterval(this.scheduleID);
