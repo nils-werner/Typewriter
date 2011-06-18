@@ -18,6 +18,7 @@ enyo.kind({
 							autoHorizontal: false,
 							horizontal: false,
 							className: "editor-scroller",
+							onmouseup: "scrollerClicked",
 							components: [
 								{kind: "BasicRichText",
 									name: "editor",
@@ -153,6 +154,10 @@ enyo.kind({
 	/* EDITOR CALLBACKS */
 	editorFocussed: function() {
 		enyo.keyboard.show();
+	},
+	
+	scrollerClicked: function() {
+		this.$.editor.forceFocus();
 	},
 	
 	syncViews: function(inSender, inEvent) {
