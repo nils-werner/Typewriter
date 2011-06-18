@@ -112,10 +112,16 @@ enyo.kind({
 			this.login();
 		}
 		else {
-			this.$.spinnerLarge.show();
-			this.$.scrim.show();
+			if(this.filename == "") {
+				enyo.windows.addBannerMessage("Cannot share Demo-Document with Dropbox.", "{}");
+			}
+			else {
+				this.$.spinnerLarge.show();
+				this.$.scrim.show();
 			
-			this.$.dropbox.call({filename: this.filename, ctoken: this.ctoken, csecret: this.csecret, token: this.token, secret: this.secret }, {method:"syncstat", onSuccess: "handleStat"});
+				this.$.dropbox.call({filename: this.filename, ctoken: this.ctoken, csecret: this.csecret, token: this.token, secret: this.secret }, {method:"syncstat", onSuccess: "handleStat"});
+			}
+			
 		}
 	},
 	
