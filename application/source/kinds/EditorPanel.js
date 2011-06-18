@@ -13,7 +13,7 @@ enyo.kind({
 						{className: "editor-left", flex: 1, overflow: "hidden" },
 						{kind: "BasicScroller",
 							name:"editorScroller",
-							height: "100px",
+							height: "760px",
 							width: "760px",
 							autoHorizontal: false,
 							horizontal: false,
