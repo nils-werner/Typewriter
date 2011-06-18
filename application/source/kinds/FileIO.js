@@ -261,6 +261,7 @@ enyo.kind({
 			
 			this.$.loginDialog.close();
 			
+			this.checkAccess();
 			this.syncFile();
 		}
 		else {
