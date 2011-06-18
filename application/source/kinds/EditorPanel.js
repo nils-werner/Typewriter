@@ -182,7 +182,7 @@ enyo.kind({
 		if(!this.barBeingDragged && (this.$.bottom.slidePosition == 0 || -enyo.fetchControlSize(this).h == this.$.bottom.slidePosition-55)) {
 			if(this.position == "up") {
 				//enyo.keyboard.hide();
-				this.$.editorScroller.setScrollTop(pp * eb);
+				//this.$.editorScroller.setScrollTop(pp * eb); // TODO: das kann sau nervig sein
 			}
 			else {
 				//enyo.keyboard.show();
