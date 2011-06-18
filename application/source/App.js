@@ -165,6 +165,17 @@ enyo.kind({
 		this.$.editorPanel.printDocument();
 	},
 	
+	doEmail: function() {
+		var r = new enyo.PalmService();
+		r.service = "palm://com.palm.applicationManager/";
+		r.method = "open";
+		r.call({id: "com.palm.app.email",
+			params: {
+				text:"See attachment", summary: "Typewriter Document \"" + this.$.fileIO.getFilename().basename(".md") + "\"", attachments: [{fullPath: "file://media/internal/Typewriter/" + this.$.fileIO.getFilename()}]
+			}
+		});
+	},
+	
 	doHelp: function(inSender) {
 		var r = new enyo.PalmService();
 		r.service = "palm://com.palm.applicationManager/";
