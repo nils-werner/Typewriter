@@ -37,7 +37,6 @@ enyo.kind({
 			onLogin: "handleLoginResult",
 			onDirRead: "handleLoadFiles"
 		},
-		{kind: "LoginDialog", onSubmit: "handleLoginData"},
 		{name:"Demotext", kind:"Demotext" },
 	],
 	
@@ -104,36 +103,10 @@ enyo.kind({
 	/* SYNC */
 	
 	doDropbox: function(inSender, inEvent) {
-		if(!this.$.fileIO.isLoggedIn())
-			this.doLogin();
-		else
-			this.$.fileIO.syncFile();
+		this.$.fileIO.syncFile();
 	},
 	
 	/* LOGIN */
-	
-	doLogin: function(inSender, inEvent) {
-		this.$.loginDialog.openAtCenter();
-	},
-	
-	handleLoginData: function(inSender, inResponse) {
-		if(inResponse.username == "" && inResponse.password == "") {// reset gedrueckt
-			this.$.loginDialog.setActive(false);
-			this.$.loginDialog.close();
-		}
-		this.$.fileIO.login({username: inResponse.username, password: inResponse.password});
-	},
-	
-	handleLoginResult: function(inSender, inResponse) {
-		if(!inResponse.err) {
-			this.$.loginDialog.close();
-		}
-		else {
-			console.log("error, please re-login");
-			this.$.loginDialog.setActive(false);
-		}
-	},
-	
 	
 	rendered: function() {
 		this.$.editorPanel.render();

@@ -33,7 +33,8 @@ enyo.kind({
 			{kind: "SpinnerLarge"}
 		]},
 		{kind: "NewFileDialog", onSubmit: "handleNewFile"},
-		{kind: "ResolveDialog", onSubmit: "handleResolve"}
+		{kind: "ResolveDialog", onSubmit: "handleResolve"},
+		{kind: "LoginDialog", onSubmit: "handleLoginForm"}
 	],
 	
 	/*
@@ -107,10 +108,15 @@ enyo.kind({
 	 */
 	 
 	syncFile: function() {
-		this.$.spinnerLarge.show();
-		this.$.scrim.show();
-		
-		this.$.dropbox.call({filename: this.filename, ctoken: this.ctoken, csecret: this.csecret, token: this.token, secret: this.secret }, {method:"syncstat", onSuccess: "handleStat"});
+		if(!this.isLoggedIn()) {
+			this.login();
+		}
+		else {
+			this.$.spinnerLarge.show();
+			this.$.scrim.show();
+			
+			this.$.dropbox.call({filename: this.filename, ctoken: this.ctoken, csecret: this.csecret, token: this.token, secret: this.secret }, {method:"syncstat", onSuccess: "handleStat"});
+		}
 	},
 	
 	handleStat: function(inSender, inResponse) {
@@ -210,17 +216,31 @@ enyo.kind({
 	 * LOGIN
 	 */
 	
-	login: function(param) {
-		if(param.username == "" && param.password == "") {
+	login: function(inSender, inEvent) {
+		this.$.loginDialog.openAtCenter();
+	},
+	
+	handleLoginForm: function(inSender, inResponse) {
+		if(inResponse.username == "" && inResponse.password == "") {// reset gedrueckt
+			this.$.loginDialog.setActive(false);
+			this.$.loginDialog.close();
+			
 			enyo.windows.addBannerMessage("Dropbox-Account removed.", "{}");
+			
 			this.token = "";
 			this.secret = "";
+			
+			enyo.setCookie("token", this.token);
+			enyo.setCookie("secret", this.secret);
 		}
-		this.$.dropbox.call({ctoken: this.ctoken, csecret: this.csecret, email: param.username, password: param.password}, {method:"getaccesstoken", onSuccess: "handleToken"});
+		else {
+			console.log("logging in");
+			this.$.dropbox.call({ctoken: this.ctoken, csecret: this.csecret, email: inResponse.username, password: inResponse.password}, {method:"getaccesstoken", onSuccess: "handleToken"});
+		}
 	},
 	
 	handleToken: function(inSender, inResponse) {
-		
+		console.log("got response");
 		if(!inResponse.err) {
 			enyo.windows.addBannerMessage("Successfully linked to Dropbox.", "{}");
 			
@@ -229,9 +249,14 @@ enyo.kind({
 			
 			enyo.setCookie("token", this.token);
 			enyo.setCookie("secret", this.secret);
+			
+			this.$.loginDialog.close();
+			
+			this.syncFile();
 		}
 		else {
 			enyo.windows.addBannerMessage("Could not link with Dropbox.", "{}");
+			this.$.loginDialog.setActive(false);
 		}
 		
 		this.doLogin(inResponse);
