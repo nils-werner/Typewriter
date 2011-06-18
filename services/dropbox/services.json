@@ -35,6 +35,11 @@
 					"name": "getaccesstoken", 
 					"assistant": "GetAccessTokenAssistant",
 					"public": true
+				},
+				{ 
+					"name": "checkaccess", 
+					"assistant": "CheckAccessAssistant",
+					"public": true
 				}
 			]
 		}

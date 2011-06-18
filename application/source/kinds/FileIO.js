@@ -131,8 +131,11 @@ enyo.kind({
 		if(inResponse.remote.err) {
 			if(inResponse.remote.err.statusCode == 404)
 				action = "push";
-			else
+			else {
 				enyo.windows.addBannerMessage("Dropbox-Stat failed.", "{}");
+				this.$.spinnerLarge.hide();
+				this.$.scrim.hide();
+			}
 		}
 		else if(inResponse.local.err) {
 			action = "pull";
@@ -268,6 +271,25 @@ enyo.kind({
 		this.doLogin(inResponse);
 	},
 	
+	/* CHECK ACCESS, CREATE DIRS */
+	
+	checkAccess: function() {
+		this.$.dropbox.call({ctoken: this.ctoken, csecret: this.csecret, token: this.token, secret: this.secret }, {method:"checkaccess", onSuccess: "handleAccess"});
+	},
+	
+	handleAccess: function(inSender, inResponse) {
+		console.log(JSON.stringify(inResponse));
+		if(inResponse.remote.err && inResponse.remote.err.statusCode == 401) {
+			this.token = "";
+			this.secret = "";
+			
+			enyo.setCookie("token", this.token);
+			enyo.setCookie("secret", this.secret);
+			
+			enyo.windows.addBannerMessage("Dropbox-Account removed.", "{}");
+		}
+	},
+	
 	isLoggedIn: function() {
 		return this.token != "" && this.secret != "";
 	},
@@ -279,5 +301,7 @@ enyo.kind({
 	ready: function() {
 		this.token = enyo.getCookie("token") || "";
 		this.secret = enyo.getCookie("secret") || "";
+		
+		this.checkAccess();
 	}
 })
