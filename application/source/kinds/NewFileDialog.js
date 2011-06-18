@@ -30,5 +30,8 @@ enyo.kind({
 	},
 	resetHandler: function() {
 		this.doSubmit({ filename: "" });
+	},
+	rendered: function() {
+		enyo.keyboard.show();
 	}
 });

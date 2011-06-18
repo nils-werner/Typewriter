@@ -46,5 +46,8 @@ enyo.kind({
 		this.$.login.setActive(inValue);
 		this.$.login.setDisabled(inValue);
 		this.$.reset.setDisabled(inValue);
+	},
+	rendered: function() {
+		enyo.keyboard.show();
 	}
 });
