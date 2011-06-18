@@ -128,10 +128,13 @@ enyo.kind({
 			}
 			else {
 				var lastfile = enyo.getCookie("lastfile") || "";
-				if(lastfile == "")
+				if(lastfile == "") {
 					this.$.editorPanel.setContent(this.$.Demotext.text, "");
-				else
+					this.$.editorPanel.setActive(false);
+				}
+				else {
 					this.doOpen(lastfile);
+				}
 			}
 		}
 		console.log(lastfile);

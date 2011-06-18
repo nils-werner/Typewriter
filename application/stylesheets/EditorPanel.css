@@ -30,6 +30,7 @@
 
 .editor-scroller.disabled, .editor-scroller.disabled .editor-input {
 	background-color: #CACACA;
+	color: #000000;
 }
 
 .fake-toolbar {
