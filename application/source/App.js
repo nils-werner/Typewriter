@@ -171,7 +171,7 @@ enyo.kind({
 		r.method = "open";
 		r.call({id: "com.palm.app.email",
 			params: {
-				text:"See attachment", summary: "Typewriter Document \"" + this.$.fileIO.getFilename().basename(".md") + "\"", attachments: [{fullPath: "file://media/internal/Typewriter/" + this.$.fileIO.getFilename()}]
+				text:"See attachment", summary: "Typewriter Document \"" + this.$.fileIO.getFilename().basename(".md") + "\"", attachments: [{fullPath: "file:///media/internal/Typewriter/" + this.$.fileIO.getFilename()}]
 			}
 		});
 	},
