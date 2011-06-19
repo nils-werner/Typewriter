@@ -108,7 +108,14 @@
 .output-preview h2 ~ p, .output-preview hr ~ p {
 	text-align: left;
 	font-size: 14pt;
+	text-indent: 12px;
 }
+
+.output-preview h2 + p:first-letter{
+	font-size: 30px;
+	padding-right: 1px;
+}
+
 
 .output-preview h1 ~ h2 {
 	margin-top: 60px;
