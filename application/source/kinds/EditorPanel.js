@@ -86,8 +86,7 @@ enyo.kind({
 									{kind: "HtmlContent",
 										name: "preview",
 										className: "output-preview",
-										onLinkClick: "htmlContentLinkClick",
-										onmouseup: "syncViews"
+										onLinkClick: "htmlContentLinkClick"
 									}
 								]
 							},
@@ -129,7 +128,7 @@ enyo.kind({
 
 		//this.generateMarkdown();
 	},
-	htmlContentLinkClick: function(sender, url) {
+	htmlContentLinkClick: function(inSender, url) {
 		var splits = url.split(/#/).slice(-1).pop();
 		switch(splits) {
 			case "clear":
