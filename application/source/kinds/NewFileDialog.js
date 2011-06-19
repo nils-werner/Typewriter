@@ -8,8 +8,7 @@ enyo.kind({
 	components: [
 		{kind:"RowGroup", components: [
 			{kind: "Input", hint: $L("Title"), name:"name", 
-				selectAllOnFocus: true,
-				onkeypress: "keypressHandler"
+				selectAllOnFocus: true
 			}
 		]},
 		{kind:"Spacer", height: "10px"},

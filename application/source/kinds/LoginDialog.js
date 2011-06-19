@@ -14,9 +14,7 @@ enyo.kind({
 				autoWordComplete: false,
 				selectAllOnFocus: true
 			},
-			{kind: "PasswordInput", hint: $L("Password"), name:"password", 
-				onkeypress: "keypressHandler"
-			}
+			{kind: "PasswordInput", hint: $L("Password"), name:"password" }
 		]},
 		{kind:"Spacer", height: "10px"},
 		{content: $L("Typewriter will not save your emailadress or password. You can revoke Typewriter's access to you files at any time via your <a href=\"https://www.dropbox.com/account#applications\">Dropbox account preferences</a>."), className: "smallhint"},
@@ -30,6 +28,7 @@ enyo.kind({
 	keypressHandler: function(inSender, inEvent) {
 		if(inEvent.keyCode == 13) {
 			enyo.keyboard.forceHide();
+			console.log("KEYCOOOOODE");
 			this.buttonHandler();
 		}
 	},
