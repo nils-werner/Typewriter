@@ -131,6 +131,29 @@
 	background-image: none;
 }
 
+h1 {
+	counter-increment: counter-h1;
+	counter-reset: counter-h2;
+}
+
+h2 {
+	counter-increment: counter-h2;
+	counter-reset: counter-h3;
+}
+
+h3 {
+	counter-increment: counter-h3;
+}
+
+h2:before {
+	content: counter(counter-h2) " ";
+	padding-right: 5px;
+}
+h3:before {
+	content: counter(counter-h2) "." counter(counter-h3) " ";
+	padding-right: 5px;
+}
+
 .output-preview hr {
 	border: none;
 	height: 1px;
