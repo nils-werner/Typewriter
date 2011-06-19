@@ -29,9 +29,9 @@
 	background-color: #ffffff;
 }
 
-.editor-scroller.disabled, .editor-scroller.disabled .editor-input {
+.editor-scroller.disabled, .editor-scroller.disabled * {
 	background-color: #CACACA;
-	color: #000000;
+	color: #333;
 }
 
 .fake-toolbar {
