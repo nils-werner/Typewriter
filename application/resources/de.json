@@ -35,7 +35,8 @@
 	
 	"Login":									"Anmelden",
 	"Reset":									"Zurücksetzen",
-	"Typewriter will not save your emailadress or password. You can revoke Typewriter's access to you files at any time via your <a href=\"https://www.dropbox.com/account#applications\">Dropbox account preferences</a>.": "Typewriter wird Ihre Emailadresse oder Ihr Passwort nicht speichern. Sie können jederzeit Typewriter den Zugriff auf Ihre Dateien über Ihre <a href=\"https://www.dropbox.com/account#applications\">Dropbox Kontoeinstellungen</a> zurückziehen.",
+	"Don't have a Dropbox username yet? Create one at <a href=\"https://www.dropbox.com/register\">Dropbox.com</a>.": "Noch keinen Dropbox-Benutzernamen? Erstelle einen auf <a href=\"https://www.dropbox.com/register\">Dropbox.com</a>.",
+	"Typewriter will not save your emailadress or password. You can revoke Typewriter's access to you files at any time via your <a href=\"https://www.dropbox.com/account#applications\">Dropbox account preferences</a>.": "Typewriter wird Ihre Emailadresse oder Ihr Passwort nicht speichern. Sie können jederzeit Typewriter den Zugriff auf Ihre Dateien über Ihre <a href=\"https://www.dropbox.com/account#applications\">Dropbox Kontoeinstellungen</a> entziehen.",
 	
 	"E-Mail Address":							"Emailadresse",
 	"Password":									"Passwort",

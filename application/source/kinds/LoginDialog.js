@@ -17,6 +17,8 @@ enyo.kind({
 			{kind: "PasswordInput", hint: $L("Password"), name:"password" }
 		]},
 		{kind:"Spacer", height: "10px"},
+		{content: $L("Don't have a Dropbox username yet? Create one at <a href=\"https://www.dropbox.com/register\">Dropbox.com</a>."), className:"smallhint"},
+		{kind:"Spacer", height: "20px"},
 		{content: $L("Typewriter will not save your emailadress or password. You can revoke Typewriter's access to you files at any time via your <a href=\"https://www.dropbox.com/account#applications\">Dropbox account preferences</a>."), className: "smallhint"},
 		{kind:"Spacer", height: "20px"},
 		{kind: "HFlexBox", components: [
