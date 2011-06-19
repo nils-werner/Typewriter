@@ -48,5 +48,6 @@ enyo.kind({
 	},
 	rendered: function() {
 		enyo.keyboard.show();
+		this.$.username.forceFocus();
 	}
 });
