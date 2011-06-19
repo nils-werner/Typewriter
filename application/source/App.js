@@ -18,6 +18,7 @@ enyo.kind({
 			{caption: "Help", components: [
 				{caption: "Syntax", onclick: "doSyntax"},
 				{caption: "FAQ", onclick: "doFAQ"},
+				{caption: "Report a Bug", onclick: "doBug"}
 			]},
 			]
 		},
@@ -188,5 +189,12 @@ enyo.kind({
 		r.service = "palm://com.palm.applicationManager/";
 		r.method = "open";
 		r.call({target: "http://www.typewriterwebos.com/faq/"});
+	},
+	
+	doBug: function(inSender) {
+		var r = new enyo.PalmService();
+		r.service = "palm://com.palm.applicationManager/";
+		r.method = "open";
+		r.call({target: "http://www.typewriterwebos.com/report/?version=" + enyo.fetchAppInfo().version});
 	}
 })
