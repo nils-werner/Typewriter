@@ -17,5 +17,7 @@ enyo.depends(
 	"source/utilities/strings.js",
 	"source/showdown/compressed/showdown.js",
 	
-	"$enyo-lib/printdialog/"
+	"$enyo-lib/printdialog/",
+	
+	"stylesheets/LaTeX.css"
 );

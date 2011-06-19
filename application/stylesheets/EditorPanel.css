@@ -18,13 +18,6 @@
 	font-size: 12pt;
 }
 
-.output-preview {
-	font-family: Georgia, serif;
-	padding: 50px;
-	margin: 0px;
-	line-height: 1.5em;
-}
-
 .output-scroller, .editor-scroller {
 	background-color: #ffffff;
 }
@@ -76,129 +69,7 @@
 }
 
 
-.output-preview p, .output-preview ul, .output-preview ol {
-	font-size: 14pt;
-}
 
-.output-preview h1, .output-preview h2, .output-preview h3 {
-	font-weight: normal;
-}
-
-.output-preview h1 {
-	font-size: 55pt;
-	text-align: center;
-	margin-bottom: 30px;
-}
-
-.output-preview h1:not(:first-child) {
-	margin-top: 120px;
-	padding-top: 30px;
-	border-top: 1px solid #8E8E8E;
-}
-
-.output-preview h1 ~ p {
-	text-align: center;
-	font-size: 13pt;
-}
-
-.output-preview h1 + p {
-	font-size: 16pt;
-}
-
-.output-preview h2 ~ p, .output-preview hr ~ p {
-	text-align: left;
-	font-size: 14pt;
-	text-indent: 12px;
-}
-
-.output-preview h2 + p:first-letter{
-	font-size: 30px;
-	padding-right: 1px;
-}
-
-
-.output-preview h1 ~ h2 {
-	margin-top: 60px;
-	padding-top: 80px;
-	background-image: url(../images/h1-border.png);
-	background-repeat: no-repeat;
-	background-position: 50% 0%;
-}
-
-.output-preview h2 ~ h2, .output-preview hr ~ h2 {
-	margin-top: 24px;
-	padding-top: 0px;
-	background-image: none;
-}
-
-h1 {
-	counter-increment: counter-h1;
-	counter-reset: counter-h2;
-}
-
-h2 {
-	counter-increment: counter-h2;
-	counter-reset: counter-h3;
-}
-
-h3 {
-	counter-increment: counter-h3;
-}
-
-h2:before {
-	content: counter(counter-h2) " ";
-	padding-right: 5px;
-}
-h3:before {
-	content: counter(counter-h2) "." counter(counter-h3) " ";
-	padding-right: 5px;
-}
-
-.output-preview hr {
-	border: none;
-	height: 1px;
-	background-image: url(../images/h1-border.png);
-	background-repeat: no-repeat;
-	background-position: 50% 0%;
-}
-
-.output-preview h1 ~ hr {
-	margin-top: 60px;
-	margin-bottom: 80px;
-}
-
-.output-preview h2 ~ hr, .output-preview hr ~ hr {
-	margin-top: 10px;
-	margin-bottom: 10px;
-}
-
-.output-preview blockquote {
-	font-style: italic;
-	margin: 0px;
-	margin-left: 30px;
-	padding: 1px;
-	padding-left: 10px;
-	padding-right: 20px;
-	border-left: 5px solid #d6d6d6;
-	background-color: #e3e3e3;
-}
-
-.output-preview blockquote blockquote {
-	font-style: normal;
-	margin-left: 10px;
-	margin-right: -20px;
-	border-left: 5px solid #c9c9c9;
-	background-color: #d6d6d6;
-}
-
-.output-preview pre {
-	font-family: Courier, monospace;
-	font-size: 80%;
-	white-space: pre-wrap;
-	padding: 10px;
-	border-top: 5px solid #DADADA;
-	background-color: #EAEAEA;
-}
 
 .label {
 	font-weight: 100;
