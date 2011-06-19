@@ -57,7 +57,7 @@ enyo.kind({
 	 */
 	
 	saveFile: function(inContent) {
-		if(this.lastContent != inContent && this.filename != "") {
+		if(this.lastContent != inContent && this.filename != "" && this.filename != ".md") {
 			console.log("saving " + this.filename);
 			this.$.dropbox.call({filename: this.filename, content: inContent}, {method:"writefile", onSuccess: "handleSaved"});
 			this.lastContent = inContent;

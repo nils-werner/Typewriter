@@ -25,7 +25,10 @@ enyo.kind({
 		}
 	},
 	buttonHandler: function() {
-		this.doSubmit({ filename: this.$.name.getValue() });
+		if(this.$.name.getValue() != "")
+			this.doSubmit({ filename: this.$.name.getValue() });
+		else
+			this.$.name.forceFocus();
 	},
 	resetHandler: function() {
 		this.doSubmit({ filename: "" });
