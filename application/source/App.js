@@ -180,13 +180,13 @@ enyo.kind({
 		var r = new enyo.PalmService();
 		r.service = "palm://com.palm.applicationManager/";
 		r.method = "open";
-		r.call({target: "http://www.typewriterwebos.com/markdown.html"});
+		r.call({target: "http://www.typewriterwebos.com/markdown/"});
 	},
 	
 	doFAQ: function(inSender) {
 		var r = new enyo.PalmService();
 		r.service = "palm://com.palm.applicationManager/";
 		r.method = "open";
-		r.call({target: "http://www.typewriterwebos.com/faq.html"});
+		r.call({target: "http://www.typewriterwebos.com/faq/"});
 	}
 })
