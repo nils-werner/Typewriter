@@ -7,18 +7,18 @@ enyo.kind({
 	components: [
 		{kind: "EditorPanel", flex: 1},
 		{kind: "AppMenu", lazy: false, components: [
-			{caption: "Documents", lazy: false, name:"docsMenu", components: [
-				{caption: "Create New...", onclick: "sendNew"}
+			{caption: $L("Documents"), lazy: false, name:"docsMenu", components: [
+				{caption: $L("Create New..."), onclick: "sendNew"}
 			]},
-			{caption: "Share", components: [
-				{caption: "Dropbox", onclick: "doDropbox"},
-				{caption: "Email", onclick: "doEmail"},
-				{caption: "Print", name:"print", onclick: "doPrint"}
+			{caption: $L("Share"), components: [
+				{caption: $L("Dropbox"), onclick: "doDropbox"},
+				{caption: $L("Email"), onclick: "doEmail"},
+				{caption: $L("Print"), name:"print", onclick: "doPrint"}
 			]},
-			{caption: "Help", components: [
-				{caption: "Syntax", onclick: "doSyntax"},
-				{caption: "FAQ", onclick: "doFAQ"},
-				{caption: "Report a Bug", onclick: "doBug"}
+			{caption: $L("Help"), components: [
+				{caption: $L("Syntax"), onclick: "doSyntax"},
+				{caption: $L("FAQ"), onclick: "doFAQ"},
+				{caption: $L("Report a Bug"), onclick: "doBug"}
 			]},
 			]
 		},
@@ -61,7 +61,7 @@ enyo.kind({
 		this.$.docsMenu.destroyControls();
 		
 		this.$.docsMenu.createComponent({
-			caption: "Create New...",
+			caption: $L("Create New..."),
 			onclick: "sendNew",
 			owner: this, // this part is important as the owner is the one who listens for the events
 			kind: "AppMenuItem" // you might not need this. Might be that components are automatically turned into AppMenuItems
@@ -172,29 +172,29 @@ enyo.kind({
 		r.method = "open";
 		r.call({id: "com.palm.app.email",
 			params: {
-				text:"See attachment", summary: "Typewriter Document \"" + this.$.fileIO.getFilename().basename(".md") + "\"", attachments: [{fullPath: "file:///media/internal/Typewriter/" + this.$.fileIO.getFilename()}]
+				text:"See attachment", summary: new enyo.g11n.Template($L("Typewriter Document \"#{name}\"")).evaluate({name: this.$.fileIO.getFilename().basename(".md") }), attachments: [{fullPath: "file:///media/internal/Typewriter/" + this.$.fileIO.getFilename()}]
 			}
 		});
 	},
 	
-	doHelp: function(inSender) {
+	doSyntax: function(inSender) {
 		var r = new enyo.PalmService();
 		r.service = "palm://com.palm.applicationManager/";
 		r.method = "open";
-		r.call({target: "http://www.typewriterwebos.com/markdown/"});
+		r.call({target: "http://www.typewriterwebos.com/markdown/" + enyo.g11n.currentLocale() + "/"});
 	},
 	
 	doFAQ: function(inSender) {
 		var r = new enyo.PalmService();
 		r.service = "palm://com.palm.applicationManager/";
 		r.method = "open";
-		r.call({target: "http://www.typewriterwebos.com/faq/"});
+		r.call({target: "http://www.typewriterwebos.com/faq/" + enyo.g11n.currentLocale() + "/"});
 	},
 	
 	doBug: function(inSender) {
 		var r = new enyo.PalmService();
 		r.service = "palm://com.palm.applicationManager/";
 		r.method = "open";
-		r.call({target: "http://www.typewriterwebos.com/report/?version=" + enyo.fetchAppInfo().version});
+		r.call({target: "http://www.typewriterwebos.com/report/" + enyo.g11n.currentLocale() + "/?version=" + enyo.fetchAppInfo().version});
 	}
 })

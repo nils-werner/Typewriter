@@ -1,21 +1,21 @@
 enyo.kind({
 	name: "NewFileDialog",
 	kind: enyo.ModalDialog,
-	caption: "New Document",
+	caption: $L("New Document"),
 	events: {
 		onSubmit: "",
 	},
 	components: [
 		{kind:"RowGroup", components: [
-			{kind: "Input", hint: "Name", name:"name", 
+			{kind: "Input", hint: $L("Title"), name:"name", 
 				selectAllOnFocus: true,
 				onkeypress: "keypressHandler"
 			}
 		]},
 		{kind:"Spacer", height: "10px"},
 		{kind: "HFlexBox", components: [
-			{kind: "ActivityButton", name: "reset", flex: 1, caption: "Cancel", onclick: "resetHandler"},
-			{kind: "ActivityButton", name:"login", flex: 1, caption: "Create", className: "enyo-button-dark", default: true, onclick: "buttonHandler"}
+			{kind: "ActivityButton", name: "reset", flex: 1, caption: $L("Cancel"), onclick: "resetHandler"},
+			{kind: "ActivityButton", name:"login", flex: 1, caption: $L("Create"), className: "enyo-button-dark", default: true, onclick: "buttonHandler"}
 		]}
 		
 	],

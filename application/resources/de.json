@@ -1,0 +1,47 @@
+{
+	"Documents":								"Dokumente",
+	"Create New...":							"Neu...",
+	
+	"Share":									"Freigeben",
+	"Dropbox":									"Dropbox",
+	"Email":									"Email",
+	"Print":									"Drucken",
+	
+	"Help":										"Hilfe",
+	"Syntax":									"Syntax",
+	"FAQ":										"FAQ",
+	"Report a Bug":								"Bug melden",
+	
+	"Typewriter Document \"#{name}\"":			"Typewriter Dokument \"#{name}\"",
+	
+	"Could not save #{name}":					"Konnte #{name} nicht speichern",
+	"Could not load #{name}":					"Konnte #{name} nicht laden",
+	"Cannot share Demo-Document with Dropbox":	"Kann Demonstrations-Dokument nicht auf Dropbox hochladen",
+	"Dropbox-Stat failed":						"Dropbox-Stat fehlgeschlagen",
+	"Download from Dropbox #{message}":			"Download von Dropbox #{message}",
+	"Upload to Dropbox #{message}":				"Upload zu Dropbox #{message}",
+	"Dropbox-Account unlinked":					"Dropbox-Konto getrennt",
+	"Successfully linked to Dropbox":			"Mit Dropbox-Konto verbunden",
+	"Could not link with Dropbox":				"Konnte nicht mit Dropbox-Konto verbinden",
+	
+	"finished":									"abgeschlossen",
+	"failed":									"fehlgeschlagen",
+	
+	"Both files have been edited within 15 minutes of each other, I am not sure wich one is the most recent. <strong>Pushing</strong> will overwrite the file on Dropbox, <strong>Pulling</strong> will overwrite the local file.": "Beide Dateien wurden innerhalb von 15 Minuten voneinander bearbeitet. Ich bin mir nicht sicher welche die neuere ist. <strong>Upload</strong> wird die Datei auf Dropbox überschreiben, <strong>Download</strong> wird die lokale Datei überschreiben.",
+	
+	"Push":										"Upload",
+	"Pull":										"Download",
+	"Cancel":									"Abbrechen",
+	
+	"Login":									"Anmelden",
+	"Reset":									"Zurücksetzen",
+	"Typewriter will not save your emailadress or password. You can revoke Typewriter's access to you files at any time via your <a href=\"https://www.dropbox.com/account#applications\">Dropbox account preferences</a>.": "Typewriter wird Ihre Emailadresse oder Ihr Passwort nicht speichern. Sie können jederzeit Typewriter den Zugriff auf Ihre Dateien über Ihre <a href=\"https://www.dropbox.com/account#applications\">Dropbox Kontoeinstellungen</a> zurückziehen.",
+	
+	"E-Mail Address":							"Emailadresse",
+	"Password":									"Passwort",
+	
+	"New Document":								"Neues Dokument",
+	"Create":									"Erstellen",
+	"Title":									"Titel"
+}
+

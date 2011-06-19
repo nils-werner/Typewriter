@@ -68,7 +68,7 @@ enyo.kind({
 		console.log(inResponse.err);
 		
 		if(inResponse.err) {
-			enyo.windows.addBannerMessage("Could not save " + this.filename.basename(".md"), "{}");
+			enyo.windows.addBannerMessage(new enyo.g11n.Template($L("Could not save #{name}")).evaluate({name: this.filename.basename(".md") }), "{}");
 		}
 		
 		this.doSaved({err: inResponse.err});
@@ -94,7 +94,7 @@ enyo.kind({
 		this.lastContent = inResponse.content;
 		
 		if(inResponse.err) {
-			enyo.windows.addBannerMessage("Could not load " + this.filename.basename(".md"), "{}");
+			enyo.windows.addBannerMessage(new enyo.g11n.Template($L("Could not load #{name}")).evaluate({name: this.filename.basename(".md") }), "{}");
 			this.filename = "";
 			enyo.setCookie("lastfile", "");
 		}
@@ -113,7 +113,7 @@ enyo.kind({
 		}
 		else {
 			if(this.filename == "") {
-				enyo.windows.addBannerMessage("Cannot share Demo-Document with Dropbox", "{}");
+				enyo.windows.addBannerMessage($L("Cannot share Demo-Document with Dropbox"), "{}");
 			}
 			else {
 				this.$.spinnerLarge.show();
@@ -132,7 +132,7 @@ enyo.kind({
 			if(inResponse.remote.err.statusCode == 404)
 				action = "push";
 			else {
-				enyo.windows.addBannerMessage("Dropbox-Stat failed", "{}");
+				enyo.windows.addBannerMessage($L("Dropbox-Stat failed"), "{}");
 				this.$.spinnerLarge.hide();
 				this.$.scrim.hide();
 			}
@@ -191,9 +191,9 @@ enyo.kind({
 			var msg = "finished";
 		
 		if(inResponse.action == "pull")
-			enyo.windows.addBannerMessage("Download from Dropbox " + msg, "{}");
+			enyo.windows.addBannerMessage(new enyo.g11n.Template($L("Download from Dropbox #{message}")).evaluate({message: $L(msg) }), "{}");
 		else
-			enyo.windows.addBannerMessage("Upload to Dropbox " + msg, "{}");
+			enyo.windows.addBannerMessage(new enyo.g11n.Template($L("Upload to Dropbox #{message}")).evaluate({message: $L(msg) }), "{}");
 		
 		if(inResponse.action == "pull")
 			this.readFile(this.filename);
@@ -234,7 +234,7 @@ enyo.kind({
 			this.$.loginDialog.setActive(false);
 			this.$.loginDialog.close();
 			
-			enyo.windows.addBannerMessage("Dropbox-Account unlinked", "{}");
+			enyo.windows.addBannerMessage($L("Dropbox-Account unlinked"), "{}");
 			
 			this.token = "";
 			this.secret = "";
@@ -251,7 +251,7 @@ enyo.kind({
 	handleToken: function(inSender, inResponse) {
 		console.log("got response");
 		if(!inResponse.err) {
-			enyo.windows.addBannerMessage("Successfully linked to Dropbox", "{}");
+			enyo.windows.addBannerMessage($L("Successfully linked to Dropbox"), "{}");
 			
 			this.token = inResponse.token;
 			this.secret = inResponse.secret;
@@ -265,7 +265,7 @@ enyo.kind({
 			this.syncFile();
 		}
 		else {
-			enyo.windows.addBannerMessage("Could not link with Dropbox", "{}");
+			enyo.windows.addBannerMessage($L("Could not link with Dropbox"), "{}");
 			this.$.loginDialog.setActive(false);
 		}
 		
@@ -287,7 +287,7 @@ enyo.kind({
 			enyo.setCookie("token", this.token);
 			enyo.setCookie("secret", this.secret);
 			
-			enyo.windows.addBannerMessage("Dropbox-Account unlinked", "{}");
+			enyo.windows.addBannerMessage($L("Dropbox-Account unlinked"), "{}");
 		}
 	},
 	

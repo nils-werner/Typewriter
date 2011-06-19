@@ -1,29 +1,29 @@
 enyo.kind({
 	name: "LoginDialog",
 	kind: enyo.ModalDialog,
-	caption: "Login",
+	caption: $L("Login"),
 	events: {
 		onSubmit: "",
 	},
 	components: [
 		{kind:"RowGroup", components: [
-			{kind: "Input", hint: "E-Mail Address", name:"username", 
+			{kind: "Input", hint: $L("E-Mail Address"), name:"username", 
 				spellcheck: false,
 				autocorrect: false,
 				autoCapitalize: "lowercase",
 				autoWordComplete: false,
 				selectAllOnFocus: true
 			},
-			{kind: "PasswordInput", hint: "Password", name:"password", 
+			{kind: "PasswordInput", hint: $L("Password"), name:"password", 
 				onkeypress: "keypressHandler"
 			}
 		]},
 		{kind:"Spacer", height: "10px"},
-		{content: "Typewriter will not save your emailadress or password. You can revoke Typewriter's access to you files at any time via your <a href=\"https://www.dropbox.com/account#applications\">Dropbox account preferences</a>.", className: "smallhint"},
+		{content: $L("Typewriter will not save your emailadress or password. You can revoke Typewriter's access to you files at any time via your <a href=\"https://www.dropbox.com/account#applications\">Dropbox account preferences</a>."), className: "smallhint"},
 		{kind:"Spacer", height: "20px"},
 		{kind: "HFlexBox", components: [
-			{kind: "ActivityButton", name: "reset", flex: 1, caption: "Reset", onclick: "resetHandler"},
-			{kind: "ActivityButton", name:"login", flex: 1, caption: "Login", className: "enyo-button-dark", default: true, onclick: "buttonHandler"}
+			{kind: "ActivityButton", name: "reset", flex: 1, caption: $L("Reset"), onclick: "resetHandler"},
+			{kind: "ActivityButton", name:"login", flex: 1, caption: $L("Login"), className: "enyo-button-dark", default: true, onclick: "buttonHandler"}
 		]}
 		
 	],
