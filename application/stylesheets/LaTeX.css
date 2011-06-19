@@ -13,6 +13,10 @@
 	font-weight: normal;
 }
 
+.output-preview h2, .output-preview h2, .output-preview h3, .output-preview h4, .output-preview h5, .output-preview h6 {
+	font-family: 'Prelude-Bold';
+}
+
 .output-preview h1 {
 	font-size: 55pt;
 	text-align: center;
