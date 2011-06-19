@@ -5,7 +5,9 @@ enyo.kind({
 		filename: "test.md"
 	},
 	components: [
-		{kind: "EditorPanel", flex: 1},
+		{kind: "EditorPanel", flex: 1,
+			onLinkClick: "linkClick"
+		},
 		{kind: "AppMenu", lazy: false, components: [
 			{caption: $L("Documents"), lazy: false, name:"docsMenu", components: [
 				{caption: $L("Create New..."), onclick: "sendNew"}
@@ -110,7 +112,10 @@ enyo.kind({
 		this.$.fileIO.syncFile();
 	},
 	
-	/* LOGIN */
+	linkClick: function(inSender, inUrl, inAnchor) {
+		if(inAnchor == "create")
+			this.sendNew();
+	},
 	
 	rendered: function() {
 		this.$.editorPanel.render();

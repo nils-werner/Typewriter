@@ -3,6 +3,9 @@
 enyo.kind({
 	name: "EditorPanel",
 	kind: enyo.HFlexBox,
+	events: {
+		onLinkClick: ""
+	},
 	components: [
 		{name: "slidingPane", kind: "HSlidingPane", flex: 1, multiViewMinHeight: 0, 
 			onSlideComplete: "barMoved",
@@ -130,6 +133,7 @@ enyo.kind({
 	},
 	htmlContentLinkClick: function(inSender, url) {
 		var splits = url.split(/#/).slice(-1).pop();
+		this.doLinkClick(url, splits);
 		switch(splits) {
 			case "clear":
 				this.$.editor.setValue("");
@@ -139,6 +143,9 @@ enyo.kind({
 				break;
 			case "preview":
 				this.$.slidingPane.selectView(this.$.bottom);
+				return false;
+				break;
+			case "create":
 				return false;
 				break;
 			default:
