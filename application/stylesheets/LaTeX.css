@@ -47,6 +47,12 @@
 .output-preview h2 + p:first-letter{
 	font-size: 30px;
 	padding-right: 1px;
+	font-style: italic;
+	opacity: 0.9;
+}
+
+.output-preview h2 {
+	margin-bottom: 35px;
 }
 
 
@@ -60,6 +66,7 @@
 
 .output-preview h2 ~ h2, .output-preview hr ~ h2 {
 	margin-top: 24px;
+	margin-top: 45px;
 	padding-top: 0px;
 	background-image: none;
 }
