@@ -267,6 +267,7 @@ enyo.kind({
 		var inFilename = inFilename || "";
 		this.$.editor.setValue(inContent);
 		this.$.filename.setContent(inFilename.basename(".md"));
+		this.syncViews({name:"setcontent"});
 	},
 	
 	setActive: function(inToggle) {
