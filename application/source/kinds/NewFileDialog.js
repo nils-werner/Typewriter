@@ -31,6 +31,7 @@ enyo.kind({
 			this.$.name.forceFocus();
 	},
 	resetHandler: function() {
+		window.close();
 		this.doSubmit({ filename: "" });
 	},
 	rendered: function() {
