@@ -20,13 +20,18 @@ enyo.kind({
 							className: "editor-scroller",
 							onmouseup: "scrollerClicked",
 							components: [
-								{kind: "BasicRichText",
+								{kind: "RichText",
 									name: "editor",
 									richContent: true,
 									className: "editor-input",
 									onblur: "syncViews",
 									onfocus: "editorFocussed",
-									onmouseup: "syncViews"
+									onmouseup: "syncViews",
+									hint: "",
+									spellcheck: true,
+									autocorrect: false,
+									autoCapitalize: false,
+									styled: false
 								}
 							]
 						},
