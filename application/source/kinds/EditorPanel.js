@@ -10,7 +10,9 @@ enyo.kind({
 		{name: "slidingPane", kind: "HSlidingPane", flex: 1, multiViewMinHeight: 0, 
 			onSlideComplete: "barMoved",
 			components: [
-			{name: "top", kind:"HSlidingView", 
+			{name: "top",
+				kind:"HSlidingView",
+
 				components: [
 					{kind: "HFlexBox", pack: "center", components: [
 						{className: "editor-left", flex: 1, overflow: "hidden" },
@@ -44,7 +46,14 @@ enyo.kind({
 						{className: "editor-right", flex: 1, overflow: "hidden" }
 					]}
 			]},
-			{name: "bottom", kind:"HSlidingView", height: "100px", fixedHeight: true, pack:"end", style:"overflow: hidden;",
+			{name: "bottom",
+				kind:"HSlidingView",
+				height: "100px",
+				fixedHeight: true,
+				pack:"end",
+				style:"overflow: hidden;",
+
+				
 				applySlideToNode: function(inSlide) {
 					if (inSlide != this.slidePosition && this.index) {
 						inSlide = Math.min(0,inSlide);
