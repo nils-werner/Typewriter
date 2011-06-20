@@ -13,6 +13,7 @@ enyo.depends(
 	"source/kinds/LoginDialog.js",
 	"source/kinds/ResolveDialog.js",
 	"source/kinds/Demotext.js",
+	"source/kinds/DragHint.js",
 	
 	"source/utilities/strings.js",
 	"source/showdown/compressed/showdown.js",

@@ -80,6 +80,7 @@ enyo.kind({
 					]},
 					{kind: "VFlexBox", flex: 1,
 						components: [
+						{kind: "DragHint"},
 						{kind: "HFlexBox", flex: 1, pack: "center", components: [
 							{className: "preview-left", flex: 1, overflow: "hidden" },
 							{kind: "BasicScroller",
@@ -276,6 +277,7 @@ enyo.kind({
 		var inFilename = inFilename || "";
 		this.$.editor.setValue(inContent);
 		this.$.filename.setContent(inFilename.basename(".md"));
+		this.$.dragHint.setVisible(inFilename == "");
 		this.syncViews({name:"setcontent"});
 	},
 	
