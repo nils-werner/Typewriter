@@ -25,7 +25,7 @@ enyo.kind({
 							components: [
 								{kind: "RichText",
 									name: "editor",
-									richContent: true,
+									richContent: false,
 									className: "editor-input",
 									onblur: "syncViews",
 									onfocus: "editorFocussed",
@@ -34,7 +34,10 @@ enyo.kind({
 									spellcheck: true,
 									autocorrect: false,
 									autoCapitalize: false,
-									styled: false
+									styled: false,
+									setValue: function(inValue) {
+										this.$.input.setContent(inValue);
+									}
 								}
 							]
 						},
