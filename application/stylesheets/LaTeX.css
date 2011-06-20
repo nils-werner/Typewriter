@@ -56,19 +56,19 @@
 }
 
 
-.output-preview h2 ~ h2, .output-preview hr ~ h2 {
-	margin-top: 24px;
-	margin-top: 45px;
-	padding-top: 0px;
-	background-image: none;
-}
-
 .output-preview h1 ~ h2 {
 	margin-top: 60px;
 	padding-top: 80px;
 	background-image: url(../images/h1-border.png);
 	background-repeat: no-repeat;
 	background-position: 50% 0%;
+}
+
+.output-preview h2 ~ h2, .output-preview hr ~ h2 {
+	margin-top: 24px;
+	margin-top: 45px;
+	padding-top: 0px;
+	background-image: none;
 }
 
 .output-preview h3 {
