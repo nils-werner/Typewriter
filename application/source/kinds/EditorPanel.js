@@ -247,16 +247,12 @@ enyo.kind({
 	
 	ready: function() {
 		this.position = "down";
-		enyo.keyboard.setManualMode(true);
-		//enyo.keyboard.setResizesWindow(false);
-		enyo.keyboard.show();
-		
 		this.syncViews({name:"startup"});
 	},
 	
 	rendered: function() {
 		this.inherited(arguments);
-		this.adjustSlidingSize();
+		this.resizeHandler(); // war frueher adjustSlidingSize
 		this.setSchedule();
 	},
 

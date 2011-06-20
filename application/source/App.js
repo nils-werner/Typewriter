@@ -6,6 +6,7 @@ enyo.kind({
 	},
 	components: [
 		{kind: "EditorPanel", flex: 1,
+			lazy: false,
 			onLinkClick: "linkClick"
 		},
 		{kind: "AppMenu", lazy: false, components: [
@@ -126,10 +127,15 @@ enyo.kind({
 			this.sendNew();
 	},
 	
+	ready: function() {
+		enyo.keyboard.setManualMode(true);
+	},
+	
 	rendered: function() {
 		this.$.editorPanel.render();
 		if(enyo.windowParams) {
 			if(enyo.windowParams.action) {
+				enyo.keyboard.show();
 				if(enyo.windowParams.action == "doOpen") {
 					console.log("oeffne datei");
 					this.doOpen(enyo.windowParams.filename);
@@ -142,10 +148,12 @@ enyo.kind({
 			else {
 				var lastfile = enyo.getCookie("lastfile") || "";
 				if(lastfile == "") {
+					enyo.keyboard.hide();
 					this.$.editorPanel.setContent(this.$.Demotext.text, "");
 					//this.$.editorPanel.setActive(false);
 				}
 				else {
+					enyo.keyboard.show();
 					this.doOpen(lastfile);
 				}
 			}
