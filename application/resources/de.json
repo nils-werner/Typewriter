@@ -43,6 +43,11 @@
 	
 	"New Document":								"Neues Dokument",
 	"Create":									"Erstellen",
-	"Title":									"Titel"
+	"Title":									"Titel",
+	
+	
+	
+	
+	"welcome": "Typewriter\n==========\n\nWillkommen bei *Typewriter*, einem Markdown Texteditor für das HP TouchPad.\n\nEinfachheit\n-----------\n\nMarkdown lässt Sie ganze Dokumente mittels einem einfachen und leserlichen Format erstellen. Kein Schnickschnack, keine Knöpfe, nur Sie und Ihr Text.\n\nUm ein Dokument anzulegen müssen Sie lediglich\n\n 1. Markdown-Text [in den Editor][editor] eingeben\n 2. Durch [Hochziehen der Werkzeugleiste][preview] das Ergebnis betrachten\n\nMarkdown\n--------\n\nMarkdown ist eine minimalistische Auszeichnungssprache basierend auf den Formatierungsgewohnheiten aus Emails. Das beste daran ist, dass Sie, falls Sie Markdown noch nicht kennen, lediglich ein bis zwei Minuten benötigen um sich mit den Grundlagen vertraut zu machen.\n\n[John Gruber] schreibt auf der [Markdown-Homepage][markdown]:\n\n> Das vorrangige Ziel bei der Erschaffung von Markdown's\n> Syntax war, sie so leserlich wie möglich zu gestalten.\n> Das Ziel war, dass ein Markdown-formatiertes Dokument\n> so wie es ist, als einfacher Text, veröffentlicht werden\n> kann, ohne dabei auszusehen als ob es mit speziellen\n> Anweisungen formatiert wurden.\n\nDieses Dokument ist in Markdown geschrieben; Sie sehen derzeit die Vorschau. Um ein Gefühl für die Markdown-Syntax zu bekommen, *ziehen Sie die Werkzeugleiste herunter* und sehen Sie nach.\n\nUnd jetzt?\n----------\n\nLegen Sie los, probieren Sie es aus und schreiben Sie etwas. Diese Willkommensnachricht ist Ihr Sandkasten, sie können nichts kaputtmachen.\n\nWenn Sie einen Einfall für eine großartige Geschichte haben und auch das, was Sie schreiben, abspeichern wollen, [legen Sie ein neues Dokument an][create].\n\nSie können das Dokument auch mit Dropbox synchronisieren und so von überall aus an Ihrem Text arbeiten oder ihn mittels eines einzigen Klicks mit anderen teilen.\n\n  [john gruber]: http://daringfireball.net/\n  [markdown]: http://daringfireball.net/projects/markdown/\n  [editor]: #editor\n  [preview]: #preview\n  [clear]: #clear\n  [create]: #create"
 }
 
