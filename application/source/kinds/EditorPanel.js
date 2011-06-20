@@ -16,7 +16,7 @@ enyo.kind({
 				components: [
 					{kind: "HFlexBox", pack: "center", components: [
 						{className: "editor-left", flex: 1, overflow: "hidden" },
-						{kind: "Scroller",
+						{kind: "enyoextras.ScrollBarsScroller",
 							name:"editorScroller",
 							height: "760px",
 							width: "760px",
@@ -91,7 +91,7 @@ enyo.kind({
 						components: [
 						{kind: "HFlexBox", flex: 1, pack: "center", components: [
 							{className: "preview-left", flex: 1, overflow: "hidden" },
-							{kind: "Scroller",
+							{kind: "enyoextras.ScrollBarsScroller",
 								name:"previewScroller",
 								width: "760px",
 								autoHorizontal: false,

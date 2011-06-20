@@ -7,6 +7,7 @@ enyo.depends(
 	
 	"source/kinds/HSlidingPane.js",
 	"source/kinds/HSlidingView.js",
+	"source/kinds/ScrollBarsScroller.js",
 	
 	"source/kinds/FileIO.js",
 	"source/kinds/NewFileDialog.js",
