@@ -14,7 +14,8 @@
 }
 
 .output-preview h2, .output-preview h2, .output-preview h3, .output-preview h4, .output-preview h5, .output-preview h6 {
-	font-family: 'Prelude-Bold';
+	font-family: 'Prelude-Bold', 'Prelude';
+	font-weight: bold;
 }
 
 .output-preview h1 {
