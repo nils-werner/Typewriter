@@ -83,7 +83,7 @@ enyo.kind({
       // calculate the scrollbar height, first calculate the percentage of
       // visible height compared to content height.
       var hperc = Math.floor((height / (cheight))*100)/100;
-      var sheight = Math.floor(height * hperc);
+      var sheight = Math.max(Math.floor(height * hperc), 15);
 
       // 10 is for bottom/top padding (5px each)
       this.$.scrollBars.hasNode().style.height = sheight-10+"px";
