@@ -143,7 +143,7 @@ enyo.kind({
 				var lastfile = enyo.getCookie("lastfile") || "";
 				if(lastfile == "") {
 					this.$.editorPanel.setContent(this.$.Demotext.text, "");
-					this.$.editorPanel.setActive(false);
+					//this.$.editorPanel.setActive(false);
 				}
 				else {
 					this.doOpen(lastfile);
