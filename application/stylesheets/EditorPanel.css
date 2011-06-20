@@ -22,7 +22,7 @@
 	background-color: #ffffff;
 }
 
-.editor-scroller.disabled, .editor-scroller.disabled * {
+.editor-scroller.disabled, .editor-scroller.disabled *, .enyo-richtext.enyo-richtext-disabled, .enyo-richtext.enyo-richtext-plaintext.enyo-richtext-disabled {
 	background-color: #CACACA;
 	color: #333;
 }
