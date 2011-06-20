@@ -2,7 +2,7 @@ enyo.kind({
 	name: "DragHint",
 	kind: enyo.Control,
 	components: [
-		{content: "", name:"hint", className: "draghint"}
+		{content: "", name:"hint", className: "draghint disabled"}
 	],
 	setVisible: function(inValue) {
 		if(inValue)

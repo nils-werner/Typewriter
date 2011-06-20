@@ -122,6 +122,9 @@ enyo.kind({
 	/* PREVIEW HANDLING */
 	synccount: 0,
 	
+	hasBeenResized: false,
+	hasBeenSet: false,
+	
 	barBeingDragged: false,
 	
 	sliderclicked: function() {
@@ -262,6 +265,11 @@ enyo.kind({
 		if (v && v.resizeHandler) {
 			v.resizeHandler();
 		}
+		if(this.hasBeenSet && !this.hasBeenSwitched && this.$.filename.getContent() == "") {
+			this.$.slidingPane.selectViewByIndex(1);
+			this.hasBeenSwitched = true;
+		}
+		this.hasBeenResized = true;
 	},
 	adjustSlidingSize: function() {
 		var s = enyo.fetchControlSize(this);
@@ -287,6 +295,13 @@ enyo.kind({
 		this.$.editor.setValue(inContent);
 		this.$.filename.setContent(inFilename.basename(".md"));
 		this.$.dragHint.setVisible(inFilename == "");
+		
+		if(this.hasBeenResized && !this.hasBeenSwitched && inFilename == "") {
+			this.$.slidingPane.selectViewByIndex(1);
+			this.hasBeenSwitched = true;
+		}
+		this.hasBeenSet = true;
+		
 		this.syncViews({name:"setcontent"});
 	},
 	
