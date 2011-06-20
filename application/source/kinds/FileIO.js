@@ -279,7 +279,7 @@ enyo.kind({
 	},
 	
 	handleAccess: function(inSender, inResponse) {
-		console.log(JSON.stringify(inResponse));
+		//console.log(JSON.stringify(inResponse));
 		if(inResponse.remote.err && inResponse.remote.err.statusCode == 401) {
 			this.token = "";
 			this.secret = "";
