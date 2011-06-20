@@ -70,7 +70,6 @@
 
 .draghint {
 	position: absolute;
-	left: 150px;
 	z-index: 1000;
 	width: 300px;
 	height: 97px;

@@ -80,7 +80,6 @@ enyo.kind({
 					]},
 					{kind: "VFlexBox", flex: 1,
 						components: [
-						{kind: "DragHint"},
 						{kind: "HFlexBox", flex: 1, pack: "center", components: [
 							{className: "preview-left", flex: 1, overflow: "hidden" },
 							{kind: "BasicScroller",
@@ -90,6 +89,7 @@ enyo.kind({
 								horizontal: false,
 								className: "output-scroller",
 								components: [
+									{kind: "DragHint"},
 									{kind: "HtmlContent",
 										name: "preview",
 										className: "output-preview",
