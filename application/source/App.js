@@ -80,6 +80,14 @@ enyo.kind({
 	},
 	
 	sendOpen: function(inSender, inEvent) {
+		var windows = enyo.windows.getWindows();
+		
+		for(i in windows) {
+			if(enyo.windows.fetchWindow(windows[i].window.name).rootKind.getFilename() == inSender.caption + ".md") {
+				enyo.windows.activate(undefined, windows[i].window.name);
+				return;
+			}
+		}
 		enyo.windows.openWindow("index.html", "", {wasLaunchedBy: window.name, action:"doOpen", filename: inSender.caption + ".md"});
 	},
 	
@@ -199,5 +207,9 @@ enyo.kind({
 		r.service = "palm://com.palm.applicationManager/";
 		r.method = "open";
 		r.call({target: "http://www.typewriterwebos.com/report/" + enyo.g11n.currentLocale() + "/?version=" + enyo.fetchAppInfo().version});
+	},
+	
+	getFilename: function() {
+		return this.$.fileIO.getFilename();
 	}
 })
