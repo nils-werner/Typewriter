@@ -267,7 +267,7 @@ enyo.kind({
 			v.resizeHandler();
 		}
 		this.hasBeenResized = true;
-		this.bringBarUp();
+		!this.hasBeenSwitched && this.bringBarUp();
 	},
 
 	adjustSlidingSize: function() {
