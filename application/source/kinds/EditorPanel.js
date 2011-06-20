@@ -259,18 +259,17 @@ enyo.kind({
 		this.adjustSlidingSize();
 		this.setSchedule();
 	},
+
 	resizeHandler: function() {
 		this.adjustSlidingSize();
 		var v = this.$.slidingPane.view;
 		if (v && v.resizeHandler) {
 			v.resizeHandler();
 		}
-		if(this.hasBeenSet && !this.hasBeenSwitched && this.$.filename.getContent() == "") {
-			this.$.slidingPane.selectViewByIndex(1);
-			this.hasBeenSwitched = true;
-		}
 		this.hasBeenResized = true;
+		this.bringBarUp();
 	},
+
 	adjustSlidingSize: function() {
 		var s = enyo.fetchControlSize(this);
 		var pcs = enyo.fetchControlSize(this.$.bottom.$.client);
@@ -296,13 +295,17 @@ enyo.kind({
 		this.$.filename.setContent(inFilename.basename(".md"));
 		this.$.dragHint.setVisible(inFilename == "");
 		
-		if(this.hasBeenResized && !this.hasBeenSwitched && inFilename == "") {
+		this.hasBeenSet = true;
+		this.bringBarUp();
+		
+		this.syncViews({name:"setcontent"});
+	},
+	
+	bringBarUp: function() {
+		if(this.hasBeenSet && this.hasBeenResized && !this.hasBeenSwitched && this.$.filename.getContent() == "") {
 			this.$.slidingPane.selectViewByIndex(1);
 			this.hasBeenSwitched = true;
 		}
-		this.hasBeenSet = true;
-		
-		this.syncViews({name:"setcontent"});
 	},
 	
 	setActive: function(inToggle) {
