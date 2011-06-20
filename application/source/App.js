@@ -10,7 +10,7 @@ enyo.kind({
 		},
 		{kind: "AppMenu", lazy: false, components: [
 			{caption: $L("Documents"), lazy: false, name:"docsMenu", components: [
-				{caption: $L("Create New..."), onclick: "sendNew"}
+				{caption: $L("Create New..."), onclick: "sendNew", className: "subtleitem"}
 			]},
 			{caption: $L("Share"), components: [
 				{caption: $L("Dropbox"), onclick: "doDropbox"},
@@ -64,7 +64,8 @@ enyo.kind({
 			caption: $L("Create New..."),
 			onclick: "sendNew",
 			owner: this, // this part is important as the owner is the one who listens for the events
-			kind: "AppMenuItem" // you might not need this. Might be that components are automatically turned into AppMenuItems
+			kind: "AppMenuItem", // you might not need this. Might be that components are automatically turned into AppMenuItems
+			className: "subtleitem"
 		});
 		
 		for(var i = 0; i < inResponse.length; i++) {
