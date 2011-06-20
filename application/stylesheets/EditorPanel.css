@@ -73,7 +73,6 @@
 	z-index: 1000;
 	width: 300px;
 	height: 97px;
-	background-image: url(../images/dragthis.png);
 }
 
 .draghint.disabled {
