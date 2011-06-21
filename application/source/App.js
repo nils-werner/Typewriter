@@ -187,6 +187,8 @@ enyo.kind({
 	},
 	
 	doEmail: function() {
+		if(this.$.fileIO.getFilename() == "")
+			return;
 		var r = new enyo.PalmService();
 		r.service = "palm://com.palm.applicationManager/";
 		r.method = "open";
