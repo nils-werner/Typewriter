@@ -217,7 +217,7 @@ enyo.kind({
 		var r = new enyo.PalmService();
 		r.service = "palm://com.palm.applicationManager/";
 		r.method = "open";
-		r.call({target: "http://www.typewriterwebos.com/report/" + enyo.g11n.currentLocale() + "/?version=" + enyo.fetchAppInfo().version});
+		r.call({target: "http://www.typewriterwebos.com/report/" + enyo.g11n.currentLocale() + "/?version=" + enyo.fetchAppInfo().version + "&id=" + enyo.fetchAppInfo().id});
 	},
 	
 	getFilename: function() {
