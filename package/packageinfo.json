@@ -1,12 +1,12 @@
 {
-	"id": "de.obsessivemedia.webos.typewriter",
+	"id": "de.obsessivemedia.webos.typewriterbeta",
 	"package_format_version": 2,
-	"loc_name": "Typewriter",
+	"loc_name": "Typewriter Beta",
 	"version": "1.0.0",
 	"icon": "icon64.png",
 	"miniicon": "icon32.png",
 	"vendor": "Obsessive Media",
 	"vendorurl": "www.obsessive-media.de",
-	"app": "de.obsessivemedia.webos.typewriter",
-	"services": ["de.obsessivemedia.webos.typewriter.dropbox"]
+	"app": "de.obsessivemedia.webos.typewriterbeta",
+	"services": ["de.obsessivemedia.webos.typewriterbeta.dropbox"]
 }

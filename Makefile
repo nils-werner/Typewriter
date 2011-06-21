@@ -3,7 +3,7 @@
 #
 #
 
-PACKAGE = de.obsessivemedia.webos.typewriter
+PACKAGE = de.obsessivemedia.webos.typewriterbeta
 DEVICE = tcp
 
 .PHONY: web

@@ -1,9 +1,9 @@
 {
-	"id": "de.obsessivemedia.webos.typewriter.dropbox",
+	"id": "de.obsessivemedia.webos.typewriterbeta.dropbox",
 	"description": "Dropbox Service",
 	"services": [
 		{
-			"name": "de.obsessivemedia.webos.typewriter.dropbox",
+			"name": "de.obsessivemedia.webos.typewriterbeta.dropbox",
 			"description": "Dropbox Service",
 			"commands": [
 				{ 

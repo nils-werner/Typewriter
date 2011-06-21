@@ -1,10 +1,10 @@
 {
-	"id": "de.obsessivemedia.webos.typewriter",
+	"id": "de.obsessivemedia.webos.typewriterbeta",
 	"version": "1.0.0",
 	"vendor": "Obsessive Media",
 	"type": "web",
 	"main": "index.html",
-	"title": "Typewriter",
+	"title": "Typewriter Beta",
 	"icon": "images/icon64.png",
 	"splashicon": "images/icon256.png",
 	"uiRevision":2

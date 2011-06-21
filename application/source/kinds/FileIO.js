@@ -25,7 +25,7 @@ enyo.kind({
 		{
 			name: "dropbox",
 			kind: "enyo.PalmService",
-			service: "palm://de.obsessivemedia.webos.typewriter.dropbox/",
+			service: "palm://de.obsessivemedia.webos.typewriterbeta.dropbox/",
 			subscribe: true,
 			timeout: 10000
 		},
