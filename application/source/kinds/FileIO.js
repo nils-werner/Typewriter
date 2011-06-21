@@ -9,8 +9,8 @@ enyo.kind({
 	},
 	filename: "",
 	files: [],
-	ctoken: "xr03hokoazn32zx",
-	csecret: "3ej0el462uohasn",
+	ctoken: "job7vwzo1jhcdcn",
+	csecret: "b1bodocolg7ajbt",
 	lastContent: "",
 	isonline: true,
 	events: {
