@@ -138,7 +138,7 @@ enyo.kind({
 	barMoved: function(event) {
 		if(event.view == this.$.top) {
 			this.position = "down";
-			//enyo.keyboard.show();
+			enyo.keyboard.show();
 		}
 		else {
 			this.position = "up";
