@@ -19,8 +19,6 @@ enyo.kind({
 		{kind:"Spacer", height: "10px"},
 		{content: $L("Don't have a Dropbox username yet? Create one at <a href=\"https://www.dropbox.com/register\">Dropbox.com</a>."), className:"smallhint"},
 		{kind:"Spacer", height: "20px"},
-		{content: $L("Typewriter will not save your emailadress or password. You can revoke Typewriter's access to you files at any time via your <a href=\"https://www.dropbox.com/account#applications\">Dropbox account preferences</a>."), className: "smallhint"},
-		{kind:"Spacer", height: "20px"},
 		{kind: "HFlexBox", components: [
 			{kind: "ActivityButton", name: "reset", flex: 1, caption: $L("Reset"), onclick: "resetHandler"},
 			{kind: "ActivityButton", name:"login", flex: 1, caption: $L("Login"), className: "enyo-button-dark", default: true, onclick: "buttonHandler"}

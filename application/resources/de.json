@@ -27,10 +27,10 @@
 	"finished":									"abgeschlossen",
 	"failed":									"fehlgeschlagen",
 	
-	"Both files have been edited within 15 minutes of each other, I am not sure wich one is the most recent. <strong>Pushing</strong> will overwrite the file on Dropbox, <strong>Pulling</strong> will overwrite the local file.": "Beide Dateien wurden innerhalb von 15 Minuten voneinander bearbeitet. Ich bin mir nicht sicher welche die neuere ist. <strong>Upload</strong> wird die Datei auf Dropbox überschreiben, <strong>Download</strong> wird die lokale Datei überschreiben.",
+	"Both files have been edited within 15 minutes of each other.": "Beide Dateien wurden innerhalb von 15 Minuten voneinander bearbeitet.",
 	
-	"Push":										"Upload",
-	"Pull":										"Download",
+	"Upload":									"Upload",
+	"Download":									"Download",
 	"Cancel":									"Abbrechen",
 	
 	"Login":									"Anmelden",
