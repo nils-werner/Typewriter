@@ -10,5 +10,38 @@
 	"Help":										"Aide",
 	"Syntax":									"Syntaxe",
 	"FAQ":										"FAQ",
-	"Report a Bug":								"Annoncer un Bug"
+	"Report a Bug":								"Annoncer un Bug",
+	
+	"Typewriter Document \"#{name}\"":			"Typewriter document \"#{name}\"",
+	
+	"Could not save #{name}":					"#{name} n'a pas pu sauver",
+	"Could not load #{name}":					"#{name} n'a pas pu ouvrir",
+	"Cannot share Demo-Document with Dropbox":	"Impossible de télécharger pour consigner la démonstration sélection",
+	"Dropbox-Stat failed":						"Dropbox-Stat échoué",
+	"Download from Dropbox #{message}":			"Recevoir de Dropbox #{message}",
+	"Upload to Dropbox #{message}":				"Envoyer à Dropbox #{message}",
+	"Dropbox-Account unlinked":					"Dropbox-compte séparés",
+	"Successfully linked to Dropbox":			"Dropbox-compte connectés",
+	"Could not link with Dropbox":				"Impossible de se connecter avec Dropbox-compte",
+	
+	"finished":									"complètement",
+	"failed":									"échoué",
+	
+	"Both files have been edited within 15 minutes of each other.": "Les deux fichiers ont été édités dans les 15 minutes les uns des autres.",
+	
+	"Upload":									"Envoyer",
+	"Download":									"Recevoir",
+	"Cancel":									"Annuler",
+	
+	"Login":									"Connexion",
+	"Reset":									"Réinitialiser",
+	
+	"Don't have a Dropbox username yet? Create one at <a href=\"https://www.dropbox.com/register\">Dropbox.com</a>.": "Ne pas avoir un Dropbox-compte? Créer un à <a href=\"https://www.dropbox.com/register\">Dropbox.com</a>.",
+	
+	"E-Mail Address":							"Adresse e-mail",
+	"Password":									"Mot de passe",
+	
+	"New Document":								"Nouveau document",
+	"Create":									"Créer",
+	"Title":									"Titre"
 }
