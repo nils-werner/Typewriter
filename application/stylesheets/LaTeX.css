@@ -18,6 +18,16 @@
 	font-weight: bold;
 }
 
+.output-preview h2 {
+	text-indent: -30px;
+	margin-left: 30px;
+}
+
+.output-preview h3 {
+	text-indent: -40px;
+	margin-left: 40px;
+}
+
 .output-preview h1 {
 	font-size: 55pt;
 	text-align: center;
@@ -79,17 +89,17 @@
 
 /* COUNTERS */
 
-h1 {
+.output-preview h1 {
 	counter-increment: counter-h1;
 	counter-reset: counter-h2;
 }
 
-h2 {
+.output-preview h2 {
 	counter-increment: counter-h2;
 	counter-reset: counter-h3;
 }
 
-h3 {
+.output-preview h3 {
 	counter-increment: counter-h3;
 }
 
