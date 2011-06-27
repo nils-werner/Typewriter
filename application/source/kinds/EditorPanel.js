@@ -127,6 +127,8 @@ enyo.kind({
 	
 	barBeingDragged: false,
 	
+	keyboardtimeout: 0,
+	
 	sliderclicked: function() {
 		this.barBeingDragged = true;
 	},
@@ -139,10 +141,13 @@ enyo.kind({
 		if(event.view == this.$.top) {
 			this.position = "down";
 			enyo.keyboard.show();
+			clearTimeout(this.keyboardtimeout);
 		}
 		else {
 			this.position = "up";
-			//enyo.keyboard.hide();
+			this.keyboardtimeout = setTimeout(enyo.bind(this, function() {
+				enyo.keyboard.hide();
+			}), 3000);
 		}
 
 		//this.generateMarkdown();
