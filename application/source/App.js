@@ -170,11 +170,13 @@ enyo.kind({
 		//if(this.position == "down")
 		//	this.$.top.node.style.height = enyo.fetchControlSize(this).h + "px";
 		this.$.taboutscrim.show();
+		this.$.editorPanel.clearSchedule();
 	},
 	
 	wakeup: function() {
 		//this.$.top.node.style.height = (enyo.fetchControlSize(this).h - 55 - enyo.keyboard.height) + "px";
 		this.$.taboutscrim.hide();
+		this.$.editorPanel.setSchedule();
 	},
 	
 	close: function() {
