@@ -181,7 +181,8 @@ enyo.kind({
 	
 	close: function() {
 		this.$.fileIO.saveFile(this.$.editorPanel.getContent());
-		enyo.setCookie("lastfile", this.$.fileIO.getFilename());
+		if(this.$.fileIO.getFilename() != "")
+			enyo.setCookie("lastfile", this.$.fileIO.getFilename());
 	},
 	
 	doPrint: function() {
