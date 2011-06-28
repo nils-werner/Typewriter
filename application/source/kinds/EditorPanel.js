@@ -235,7 +235,7 @@ enyo.kind({
 		
 		var xslt = new Transformation().setXml("<document>" + markdown + "</document>").setXslt("stylesheets/LaTeX.xsl").setCallback(enyo.bind(this, 
 			function(t) {
-				console.log(new XMLSerializer().serializeToString(t.getResult())); this.$.preview.setContent(new XMLSerializer().serializeToString(t.getResult())) 
+				console.log(t.getResult()); this.$.preview.setContent(new XMLSerializer().serializeToString(t.getResult())) 
 			}
 		)).transform();
 	},
