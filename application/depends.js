@@ -1,5 +1,9 @@
 /* Copyright 2009-2011 Hewlett-Packard Development Company, L.P. All rights reserved. */
 enyo.depends(
+	"source/utilities/strings.js",
+	"source/utilities/xslt.js",
+	"source/showdown/compressed/showdown.js",
+	
 	"source/App.js",
 	
 	"source/kinds/EditorPanel.js",
@@ -15,9 +19,6 @@ enyo.depends(
 	"source/kinds/ResolveDialog.js",
 	"source/kinds/Demotext.js",
 	"source/kinds/DragHint.js",
-	
-	"source/utilities/strings.js",
-	"source/showdown/compressed/showdown.js",
 	
 	"$enyo-lib/printdialog/",
 	

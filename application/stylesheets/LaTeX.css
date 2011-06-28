@@ -34,28 +34,32 @@
 	margin-bottom: 30px;
 }
 
-.output-preview h1:not(:first-child) {
-	margin-top: 120px;
-	padding-top: 30px;
-	border-top: 1px solid #8E8E8E;
+.output-preview .pagebreak {
+	margin-left: -50px;
+	margin-right: -50px;
+	margin-top: 50px;
+	padding-top: 180px;
+	background-image: url(../images/pagebreak.png);
+	background-repeat: repeat-x;
 }
 
-.output-preview h1 ~ p {
+.output-preview .afterh1 p, .output-preview .afterh1 ul {
 	text-align: center;
-	font-size: 13pt;
-}
-
-.output-preview h1 + p {
 	font-size: 16pt;
 }
 
-.output-preview h2 ~ p, .output-preview hr ~ p {
-	text-align: left;
-	font-size: 14pt;
-	text-indent: 12px;
+.output-preview .afterh1 p:first-child, .output-preview .afterh1 ul:first-child {
+	font-size: 13pt;
 }
 
-.output-preview h2 + p:first-letter{
+.output-preview .afterh1 p:first-letter {
+	font-size: inherit;
+	padding-right: inherit;
+	font-style: inherit;
+	opacity: inherit;
+}
+
+.output-preview p:first-letter {
 	font-size: 30px;
 	padding-right: 1px;
 	font-style: italic;
@@ -64,18 +68,6 @@
 
 .output-preview h2 {
 	margin-bottom: 35px;
-}
-
-
-.output-preview h1 ~ h2 {
-	margin-top: 60px;
-	padding-top: 80px;
-	background-image: url(../images/h1-border.png);
-	background-repeat: no-repeat;
-	background-position: 50% 0%;
-}
-
-.output-preview h2 ~ h2, .output-preview hr ~ h2 {
 	margin-top: 24px;
 	margin-top: 45px;
 	padding-top: 0px;
@@ -118,18 +110,9 @@ h3:before {
 	background-image: url(../images/h1-border.png);
 	background-repeat: no-repeat;
 	background-position: 50% 0%;
-}
-
-.output-preview h1 ~ hr {
 	margin-top: 60px;
 	margin-bottom: 80px;
 }
-
-.output-preview h2 ~ hr, .output-preview hr ~ hr {
-	margin-top: 10px;
-	margin-bottom: 10px;
-}
-
 .output-preview blockquote {
 	font-style: italic;
 	margin: 0px;
