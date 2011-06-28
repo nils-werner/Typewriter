@@ -120,6 +120,7 @@ enyo.kind({
 	
 	/* PREVIEW HANDLING */
 	synccount: 0,
+	start: new Date(),
 	
 	hasBeenResized: false,
 	hasBeenSet: false,
@@ -127,6 +128,8 @@ enyo.kind({
 	barBeingDragged: false,
 	
 	keyboardtimeout: 0,
+	
+	xslt: new Transformation(),
 	
 	sliderclicked: function() {
 		this.barBeingDragged = true;
@@ -228,16 +231,13 @@ enyo.kind({
 	},
 	
 	makePreview: function() {
+		this.start = new Date();
 		//console.log("generating Markdown");
 		var converter = new Showdown.converter();
 		var value = this.$.editor.getText();
 		var markdown = converter.makeHtml(value);
 		
-		var xslt = new Transformation().setXml("<document>" + markdown + "</document>").setXslt("stylesheets/LaTeX.xsl").setCallback(enyo.bind(this, 
-			function(t) {
-				console.log(t.getResult()); this.$.preview.setContent(new XMLSerializer().serializeToString(t.getResult())) 
-			}
-		)).transform();
+		this.xslt.setXml("<document>" + markdown + "</document>").transform();
 	},
 	
 	setSchedule: function() {
@@ -259,6 +259,12 @@ enyo.kind({
 	rendered: function() {
 		this.inherited(arguments);
 		this.resizeHandler(); // war frueher adjustSlidingSize
+		this.xslt.setXslt("stylesheets/LaTeX.xsl").setCallback(enyo.bind(this, 
+			function(t) {
+				console.log(t.getResult()); this.$.preview.setContent(new XMLSerializer().serializeToString(t.getResult()));
+				console.log(new Date()-this.start);
+			}
+		));
 		this.setSchedule();
 	},
 
