@@ -15,7 +15,7 @@ enyo.kind({
 
 				components: [
 					{kind: "HFlexBox", pack: "center", components: [
-						{className: "editor-left", flex: 1, overflow: "hidden" },
+						{className: "editor-left", flex: 1, overflow: "hidden", onclick: "woodTapped" },
 						{kind: "enyoextras.ScrollBarsScroller",
 							name:"editorScroller",
 							height: "760px",
@@ -42,7 +42,7 @@ enyo.kind({
 								}
 							]
 						},
-						{className: "editor-right", flex: 1, overflow: "hidden" }
+						{className: "editor-right", flex: 1, overflow: "hidden", onclick: "woodTapped" }
 					]}
 			]},
 			{name: "bottom",
@@ -89,7 +89,7 @@ enyo.kind({
 					{kind: "VFlexBox", flex: 1,
 						components: [
 						{kind: "HFlexBox", flex: 1, pack: "center", components: [
-							{className: "preview-left", flex: 1, overflow: "hidden" },
+							{className: "preview-left", flex: 1, overflow: "hidden", onclick: "woodTapped" },
 							{kind: "enyoextras.ScrollBarsScroller",
 								name:"previewScroller",
 								width: "760px",
@@ -105,7 +105,7 @@ enyo.kind({
 									}
 								]
 							},
-							{className: "preview-right", flex: 1, overflow: "hidden" }
+							{className: "preview-right", flex: 1, overflow: "hidden", onclick: "woodTapped" }
 						]}
 					]}
 			]}
@@ -137,6 +137,13 @@ enyo.kind({
 	
 	sliderreleased: function() {
 		this.barBeingDragged = false;
+	},
+	
+	woodTapped: function(inSender, inEvent) {
+		if(inSender.className.match('v') == null) // enthält "v", ist also "preview"
+			this.$.slidingPane.selectViewByIndex(1);
+		else
+			this.$.slidingPane.selectViewByIndex(0);
 	},
 	
 	barMoved: function(event) {
