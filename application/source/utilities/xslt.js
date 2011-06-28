@@ -43,6 +43,8 @@ function Transformation() {
 
 	var callback = function() {};
 	
+	var resultDoc;
+	
 	/**
 	 * Sort of like a fix for Opera who doesn't always get readyStates right.
 	 */
@@ -132,6 +134,16 @@ function Transformation() {
 	}
 	
 	/**
+	 * Returns the result document fragment
+	 *
+	 * @return the result document fragment
+	 */
+	this.getResult = function() {
+		return resultDoc;
+	}
+	
+	
+	/**
 	 * Sets the target element to write the transformed content to and <em>asynchronously</em>
 	 * starts the transformation process.
 	 * <p>
@@ -160,7 +172,7 @@ function Transformation() {
 						xmlDoc = xm.XMLDocument;
 						xsltDoc = xs.XMLDocument;
 						callback(t);
-						document.all[target].innerHTML = xm.transformNode(xs.XMLDocument);
+						if(target) document.all[target].innerHTML = xm.transformNode(xs.XMLDocument);
 					}, 50);
 				}
 			};
@@ -191,7 +203,6 @@ function Transformation() {
 				if (xm.readyState == 4 && xs.readyState == 4 && !transformed) {
 					xmlDoc = xm.responseXML;
 					xsltDoc = xs.responseXML;
-					var resultDoc;
 					var processor = new XSLTProcessor();
 					
 					if (typeof processor.transformDocument == 'function') {
@@ -200,14 +211,14 @@ function Transformation() {
 						processor.transformDocument(xm.responseXML, xs.responseXML, resultDoc, null);
 						var out = new XMLSerializer().serializeToString(resultDoc);
 						callback(t);
-						document.getElementById(target).innerHTML = out;
+						if(target) document.getElementById(target).innerHTML = out;
 					}
 					else {
 						processor.importStylesheet(xs.responseXML);
 						resultDoc = processor.transformToFragment(xm.responseXML, document);
 						callback(t);
-						document.getElementById(target).innerHTML = '';
-						document.getElementById(target).appendChild(resultDoc);
+						if(target) document.getElementById(target).innerHTML = '';
+						if(target) document.getElementById(target).appendChild(resultDoc);
 					}
 					
 					transformed = true;
