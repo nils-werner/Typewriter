@@ -17,6 +17,7 @@ enyo.depends(
 	"source/kinds/DragHint.js",
 	
 	"source/utilities/strings.js",
+	"source/utilities/xslt.js",
 	"source/showdown/compressed/showdown.js",
 	
 	"$enyo-lib/printdialog/",
