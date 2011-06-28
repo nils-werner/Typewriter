@@ -241,11 +241,13 @@ enyo.kind({
 	},
 	
 	setSchedule: function() {
+		console.log("scheduling refresh");
 		this.scheduleID = setInterval(enyo.bind(this,function() {
 			this.syncViews({name:"schedule"});
 		}), 5000);
 	},
 	clearSchedule: function() {
+		console.log("UNscheduling refresh");
 		clearInterval(this.scheduleID);
 	},
 	
@@ -265,7 +267,6 @@ enyo.kind({
 				console.log(new Date()-this.start);
 			}
 		));
-		this.setSchedule();
 	},
 
 	resizeHandler: function() {

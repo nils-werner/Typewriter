@@ -42,6 +42,9 @@ enyo.kind({
 		{name:"Demotext", kind:"Demotext" },
 	],
 	
+	loadfilesinterval: 0,
+	saveinterval: 0,
+	
 	/* NEUE DATEI */
 	
 	sendNew: function(inSender, inResponse) {
@@ -100,11 +103,32 @@ enyo.kind({
 	handleOpened: function(inSender, inResponse) {
 		if(!inResponse.err) {
 			this.$.editorPanel.setContent(inResponse.content, inResponse.filename);
-			setInterval(enyo.hitch(this, "doSave"),5000);
+			this.setSaveInterval();
 		}
 		else {
 			this.$.editorPanel.setActive(false);
 		}
+	},
+	
+	setSaveInterval: function() {
+		console.log("scheduling save");
+		this.saveinterval = setInterval(enyo.hitch(this, "doSave"),5000);
+	},
+	
+	clearSaveInterval: function() {
+		console.log("UNscheduling save");
+		clearInterval(this.saveinterval);
+	},
+	
+	setLoadFilesInterval: function() {
+		console.log("scheduling ls");
+		this.loadfilesinterval = setInterval(enyo.hitch(this, "doLoadFiles"),15000);
+		this.doLoadFiles();
+	},
+	
+	clearLoadFilesInterval: function() {
+		console.log("UNscheduling ls");
+		clearInterval(this.loadfilesinterval);
 	},
 	
 	/* SPEICHERN */
@@ -160,8 +184,6 @@ enyo.kind({
 		}
 		console.log(lastfile);
 		//setInterval(enyo.hitch(this, "doSave"),5000);
-		setInterval(enyo.hitch(this, "doLoadFiles"),15000);
-		this.doLoadFiles();
 	},
 	
 	
@@ -171,12 +193,16 @@ enyo.kind({
 		//	this.$.top.node.style.height = enyo.fetchControlSize(this).h + "px";
 		this.$.taboutscrim.show();
 		this.$.editorPanel.clearSchedule();
+		this.clearSaveInterval();
+		this.clearLoadFilesInterval();
 	},
 	
 	wakeup: function() {
 		//this.$.top.node.style.height = (enyo.fetchControlSize(this).h - 55 - enyo.keyboard.height) + "px";
 		this.$.taboutscrim.hide();
 		this.$.editorPanel.setSchedule();
+		this.setSaveInterval();
+		this.setLoadFilesInterval();
 	},
 	
 	close: function() {
