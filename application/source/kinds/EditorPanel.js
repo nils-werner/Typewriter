@@ -231,7 +231,13 @@ enyo.kind({
 		//console.log("generating Markdown");
 		var converter = new Showdown.converter();
 		var value = this.$.editor.getText();
-		this.$.preview.setContent(converter.makeHtml(value));
+		var markdown = converter.makeHtml(value);
+		
+		var xslt = new Transformation().setXml("<document>" + markdown + "</document>").setXslt("stylesheets/LaTeX.xsl").setCallback(enyo.bind(this, 
+			function(t) {
+				console.log(new XMLSerializer().serializeToString(t.getResult())); this.$.preview.setContent(new XMLSerializer().serializeToString(t.getResult())) 
+			}
+		)).transform();
 	},
 	
 	setSchedule: function() {
