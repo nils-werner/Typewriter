@@ -228,10 +228,12 @@ enyo.kind({
 	},
 	
 	makePreview: function() {
+		var start = new Date();
 		//console.log("generating Markdown");
 		var converter = new Showdown.converter();
 		var value = this.$.editor.getText();
 		this.$.preview.setContent(converter.makeHtml(value));
+		console.log(new Date()-start);
 	},
 	
 	setSchedule: function() {
