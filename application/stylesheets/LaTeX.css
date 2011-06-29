@@ -59,7 +59,7 @@
 	opacity: inherit;
 }
 
-.output-preview p:first-letter {
+.output-preview p.first:first-letter {
 	font-size: 30px;
 	padding-right: 1px;
 	font-style: italic;
