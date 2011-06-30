@@ -24,6 +24,13 @@
 	<xsl:apply-templates select=". | following-sibling::*[not(starts-with(name(),'h')) and preceding-sibling::*[starts-with(name(),'h')][1] = current()]" mode="html" />
 </xsl:template>
 
+<xsl:template match="img" mode="html" priority="1">
+	<img src="{@src}" alt="{@alt}" title="{@title}" />
+	<xsl:if test="@title != ''">
+		<span class="title"><xsl:value-of select="@title	" /></span>
+	</xsl:if>
+</xsl:template>
+
 <xsl:template match="*" mode="html">
 	<xsl:element name="{name()}">
 		<xsl:apply-templates select="* | @* | text()" mode="html"/>

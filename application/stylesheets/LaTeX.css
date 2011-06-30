@@ -140,3 +140,18 @@ h3:before {
 	border-top: 5px solid #DADADA;
 	background-color: #EAEAEA;
 }
+
+img {
+	padding: 8px;
+	border: 1px solid #000000;
+	max-width: 644px;
+	display: block;
+	margin: auto;
+}
+
+span.title {
+	display: block;
+	text-align: center;
+	font-size: 80%;
+	margin-top: -3px;
+}
