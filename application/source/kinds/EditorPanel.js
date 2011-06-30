@@ -32,9 +32,6 @@ enyo.kind({
 									onfocus: "editorFocussed",
 									onmouseup: "syncViews",
 									hint: "",
-									spellcheck: true,
-									autocorrect: false,
-									autoCapitalize: false,
 									styled: false,
 									setValue: function(inValue) {
 										this.$.input.setContent(inValue);
