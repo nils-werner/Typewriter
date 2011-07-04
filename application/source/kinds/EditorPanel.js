@@ -305,7 +305,7 @@ enyo.kind({
 	setContent: function(inContent, inFilename) {
 		var inFilename = inFilename || "";
 		this.$.editor.setValue(inContent);
-		this.$.filename.setContent(inFilename.basename(".markdown"));
+		this.$.filename.setContent(inFilename.basename(".md"));
 		this.$.dragHint.setVisible(inFilename == "");
 		
 		this.hasBeenSet = true;

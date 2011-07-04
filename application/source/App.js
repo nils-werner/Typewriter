@@ -2,7 +2,7 @@ enyo.kind({
 	name: "App",
 	kind: enyo.VFlexBox,
 	published: {
-		filename: "test.markdown"
+		filename: "test.md"
 	},
 	components: [
 		{kind: "EditorPanel", flex: 1,
@@ -88,12 +88,12 @@ enyo.kind({
 		var windows = enyo.windows.getWindows();
 		
 		for(i in windows) {
-			if(enyo.windows.fetchWindow(windows[i].window.name).rootKind.getFilename() == inSender.caption + ".markdown") {
+			if(enyo.windows.fetchWindow(windows[i].window.name).rootKind.getFilename() == inSender.caption + ".md") {
 				enyo.windows.activate(undefined, windows[i].window.name);
 				return;
 			}
 		}
-		enyo.windows.openWindow("index.html", "", {wasLaunchedBy: window.name, action:"doOpen", filename: inSender.caption + ".markdown"});
+		enyo.windows.openWindow("index.html", "", {wasLaunchedBy: window.name, action:"doOpen", filename: inSender.caption + ".md"});
 	},
 	
 	doOpen: function(inFilename) {
@@ -223,7 +223,7 @@ enyo.kind({
 		r.method = "open";
 		r.call({id: "com.palm.app.email",
 			params: {
-				text:"See attachment", summary: new enyo.g11n.Template($L("Typewriter Document \"#{name}\"")).evaluate({name: this.$.fileIO.getFilename().basename(".markdown") }), attachments: [{fullPath: "file:///media/internal/Typewriter/" + this.$.fileIO.getFilename()}]
+				text:"See attachment", summary: new enyo.g11n.Template($L("Typewriter Document \"#{name}\"")).evaluate({name: this.$.fileIO.getFilename().basename(".md") }), attachments: [{fullPath: "file:///media/internal/Typewriter/" + this.$.fileIO.getFilename()}]
 			}
 		});
 	},

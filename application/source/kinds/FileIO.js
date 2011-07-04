@@ -47,7 +47,7 @@ enyo.kind({
 	
 	handleNewFile: function(inSender, inResponse) {
 		this.$.newFileDialog.close();
-		this.filename = inResponse.filename + ".markdown";
+		this.filename = inResponse.filename + ".md";
 		this.lastContent = "";
 		this.doOpened({ err: null, content: inResponse.filename + "\n" + new String("=").repeat(inResponse.filename.length) + "\n\n", filename: this.filename});
 	},
@@ -57,7 +57,7 @@ enyo.kind({
 	 */
 	
 	saveFile: function(inContent) {
-		if(this.lastContent != inContent && this.filename != "" && this.filename != ".markdown") {
+		if(this.lastContent != inContent && this.filename != "" && this.filename != ".md") {
 			console.log("saving " + this.filename);
 			this.$.dropbox.call({filename: this.filename, content: inContent}, {method:"writefile", onSuccess: "handleSaved"});
 			this.lastContent = inContent;
@@ -68,7 +68,7 @@ enyo.kind({
 		console.log(inResponse.err);
 		
 		if(inResponse.err) {
-			enyo.windows.addBannerMessage(new enyo.g11n.Template($L("Could not save #{name}")).evaluate({name: this.filename.basename(".markdown") }), "{}");
+			enyo.windows.addBannerMessage(new enyo.g11n.Template($L("Could not save #{name}")).evaluate({name: this.filename.basename(".md") }), "{}");
 		}
 		
 		this.doSaved({err: inResponse.err});
@@ -94,7 +94,7 @@ enyo.kind({
 		this.lastContent = inResponse.content;
 		
 		if(inResponse.err) {
-			enyo.windows.addBannerMessage(new enyo.g11n.Template($L("Could not load #{name}")).evaluate({name: this.filename.basename(".markdown") }), "{}");
+			enyo.windows.addBannerMessage(new enyo.g11n.Template($L("Could not load #{name}")).evaluate({name: this.filename.basename(".md") }), "{}");
 			this.filename = "";
 			enyo.setCookie("lastfile", "");
 		}
@@ -215,7 +215,7 @@ enyo.kind({
 	
 	handleListFiles: function(inSender, inResponse) {
 		for(var i in inResponse.files) {
-			this.files.push({caption: inResponse.files[i].basename(".markdown"), filename: inResponse.files[i].basename()});
+			this.files.push({caption: inResponse.files[i].basename(".md"), filename: inResponse.files[i].basename()});
 		}
 		
 		this.doDirRead(this.files);
