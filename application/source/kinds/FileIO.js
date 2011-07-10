@@ -47,7 +47,11 @@ enyo.kind({
 	
 	handleNewFile: function(inSender, inResponse) {
 		this.$.newFileDialog.close();
-		this.filename = inResponse.filename + ".md";
+		this.filename = inResponse.filename;
+		
+		this.cleanFilename();
+		
+		this.filename = this.filename + ".md";
 		this.lastContent = "";
 		this.doOpened({ err: null, content: inResponse.filename + "\n" + new String("=").repeat(inResponse.filename.length) + "\n\n", filename: this.filename});
 	},
@@ -289,6 +293,30 @@ enyo.kind({
 			
 			enyo.windows.addBannerMessage($L("Dropbox-Account unlinked"), "{}");
 		}
+	},
+	
+	cleanFilename: function() {
+		// àáäâèéëêìíïîòóöôùúüûñç ÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛÑÇ
+	
+		var accents = "\u00e0\u00e1\u00e4\u00e2\u00e8"
+			+ "\u00e9\u00eb\u00ea\u00ec\u00ed\u00ef"
+			+ "\u00ee\u00f2\u00f3\u00f6\u00f4\u00f9"
+			+ "\u00fa\u00fc\u00fb\u00f1\u00e7"
+			
+			+ "\u00C0\u00C1\u00C4\u00C2\u00C8\u00C9"
+			+ "\u00CB\u00CA\u00CC\u00CD\u00CF\u00CE"
+			+ "\u00D2\u00D3\u00D6\u00D4\u00D9\u00DA"
+			+ "\u00DC\u00DB\u00D1\u00C7";
+	
+		var without = "aaaaeeeeiiiioooouuuunc"
+			+ "AAAAEEEEIIIIOOOOUUUUNC";
+	
+		this.filename = this.filename.replace(/^\s+|\s+$/g, "") // trim leading and trailing spaces		
+			.replace(/[_|\s]+/g, "-") // change all spaces and underscores to a hyphen
+			.replace(new RegExp('[' + accents + ']', 'g'), function (c) { return without.charAt(accents.indexOf(c)); })
+			.replace(/[^a-zA-Z0-9-]+/g, "") // remove all non-alphanumeric characters except the hyphen
+			.replace(/[-]+/g, "-") // replace multiple instances of the hyphen with a single instance
+			.replace(/^-+|-+$/g, ""); // trim leading and trailing hyphens
 	},
 	
 	isLoggedIn: function() {
