@@ -17,12 +17,14 @@ help:
 examples:
 	nautilus /opt/PalmSDK/Current/share/refcode/framework/enyo/1.0/support/
 	
-	
 %.ipk:
 	rm -rf *.ipk
 	palm-package package application services/dropbox
 
 package: %.ipk
+
+usb: DEVICE = usb
+usb: install
 
 clean:
 	rm -rf *.ipk
