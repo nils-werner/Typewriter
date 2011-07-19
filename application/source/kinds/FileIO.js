@@ -296,20 +296,30 @@ enyo.kind({
 	},
 	
 	cleanFilename: function() {
-		// àáäâèéëêìíïîòóöôùúüûñç ÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛÑÇ
+		// èéêëęē®™þýÿùúûüűìíîïİıòóôõöøőœºω§πàáâãäåæªšşßσð†‡łžźżçć©¢nnµ ÈÉÊËĘĒÝŸÙÚÛÜŰÌÍÎÏİIÒÓÔÕÖØŐŒºΩΠÀÁÂÃÄÅÆŠŞΣÐĞŁŽŹŻÇĆÑŃ
 	
-		var accents = "\u00e0\u00e1\u00e4\u00e2\u00e8"
-			+ "\u00e9\u00eb\u00ea\u00ec\u00ed\u00ef"
-			+ "\u00ee\u00f2\u00f3\u00f6\u00f4\u00f9"
-			+ "\u00fa\u00fc\u00fb\u00f1\u00e7"
-			
-			+ "\u00C0\u00C1\u00C4\u00C2\u00C8\u00C9"
-			+ "\u00CB\u00CA\u00CC\u00CD\u00CF\u00CE"
-			+ "\u00D2\u00D3\u00D6\u00D4\u00D9\u00DA"
-			+ "\u00DC\u00DB\u00D1\u00C7";
+		var accents = "\u00E8\u00E9\u00EA\u00EB\u0119\u0113"
+			+ "\u00AE\u2122\u00FE\u00FD\u00FF\u00F9"
+			+ "\u00FA\u00FB\u00FC\u0171\u00EC\u00ED"
+			+ "\u00EE\u00EF\u0130\u0131\u00F2\u00F3"
+			+ "\u00F4\u00F5\u00F6\u00F8\u0151\u0153"
+			+ "\u00BA\u03C9\u00A7\u03C0\u00E0\u00E1"
+			+ "\u00E2\u00E3\u00E4\u00E5\u00E6\u00AA"
+			+ "\u0161\u015F\u00DF\u03C3\u00F0\u2020"
+			+ "\u2021\u0142\u017E\u017A\u017C\u00E7"
+			+ "\u0107\u00A9\u00A2\u006E\u006E\u00B5"
+			+ "\u0020\u00C8\u00C9\u00CA\u00CB\u0118"
+			+ "\u0112\u00DD\u0178\u00D9\u00DA\u00DB"
+			+ "\u00DC\u0170\u00CC\u00CD\u00CE\u00CF"
+			+ "\u0130\u0049\u00D2\u00D3\u00D4\u00D5"
+			+ "\u00D6\u00D8\u0150\u0152\u00BA\u03A9"
+			+ "\u03A0\u00C0\u00C1\u00C2\u00C3\u00C4"
+			+ "\u00C5\u00C6\u0160\u015E\u03A3"
+			+ "\u00D0\u011E\u0141\u017D\u0179\u017B"
+			+ "\u00C7\u0106\u00D1\u0143";
 	
-		var without = "aaaaeeeeiiiioooouuuunc"
-			+ "AAAAEEEEIIIIOOOOUUUUNC";
+		var without = "eeeeeerttyyuuuuuiiiiiiooooooooooppaaaaaaaasssssfflzzzccccnnm"
+			+ "EEEEEEYYUUUUUIIIIIIOOOOOOOOOOPAAAAAAASSSDGJZZZCCNN";
 	
 		this.filename = this.filename.replace(/^\s+|\s+$/g, "") // trim leading and trailing spaces		
 			.replace(/[_|\s]+/g, "-") // change all spaces and underscores to a hyphen
