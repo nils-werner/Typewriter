@@ -316,10 +316,10 @@ enyo.kind({
 			+ "\u03A0\u00C0\u00C1\u00C2\u00C3\u00C4"
 			+ "\u00C5\u00C6\u0160\u015E\u03A3"
 			+ "\u00D0\u011E\u0141\u017D\u0179\u017B"
-			+ "\u00C7\u0106\u00D1\u0143";
+			+ "\u00C7\u0106\u00D1\u0143\u039C";
 	
 		var without = "eeeeeerttyyuuuuuiiiiiiooooooooooppaaaaaaaasssssfflzzzccccnnm"
-			+ "EEEEEEYYUUUUUIIIIIIOOOOOOOOOOPAAAAAAASSSDGJZZZCCNN";
+			+ "EEEEEEYYUUUUUIIIIIIOOOOOOOOOOPAAAAAAASSSDGJZZZCCNNM";
 	
 		this.filename = this.filename.replace(/^\s+|\s+$/g, "") // trim leading and trailing spaces		
 			.replace(/[_|\s]+/g, "-") // change all spaces and underscores to a hyphen
