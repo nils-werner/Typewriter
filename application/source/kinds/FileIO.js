@@ -29,7 +29,7 @@ enyo.kind({
 			subscribe: true,
 			timeout: 10000
 		},
-		{kind: "Scrim", name:"scrim", layoutKind: "VFlexLayout", align:"center", pack:"center", components: [
+		{kind: "Scrim", name:"scrim", layoutKind: "VFlexLayout", align:"center", pack:"center", animateShowing: false, components: [
 			{kind: "SpinnerLarge"}
 		]},
 		{kind: "NewFileDialog", onSubmit: "handleNewFile"},
