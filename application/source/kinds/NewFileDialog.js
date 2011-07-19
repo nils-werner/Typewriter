@@ -11,6 +11,7 @@ enyo.kind({
 				selectAllOnFocus: true
 			}
 		]},
+		{content: $L("The filename will be changed to not contain any special characters."), className: "smallhint"},
 		{kind:"Spacer", height: "10px"},
 		{kind: "HFlexBox", components: [
 			{kind: "ActivityButton", name: "reset", flex: 1, caption: $L("Cancel"), onclick: "resetHandler"},

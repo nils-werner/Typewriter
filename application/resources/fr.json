@@ -43,5 +43,7 @@
 	
 	"New Document":								"Nouveau document",
 	"Create":									"Créer",
-	"Title":									"Titre"
+	"Title":									"Titre",
+	
+	"The filename will be changed to not contain any special characters.": "Le nom de fichier sera modifiée pour ne pas contenir de caractères spéciaux."
 }
