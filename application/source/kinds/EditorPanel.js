@@ -216,7 +216,7 @@ enyo.kind({
 			previewpos = renderedselectionButton.offsetTop;
 		}
 		
-		if(selectionButton && renderedselectionButton) {
+		if(selectionButton && renderedselectionButton && this.position == "down") {
 			console.log(this.$.editorScroller.scrollTop + " " + this.$.previewScroller.scrollTop + " " + editorpos + " " + previewpos);
 			var finalpos = this.$.editorScroller.scrollTop - editorpos + previewpos + 55;
 			console.log(finalpos);
