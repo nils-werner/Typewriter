@@ -188,38 +188,6 @@ enyo.kind({
 	},
 	
 	syncViews: function(inSender, inEvent) {
-
-		var eb = this.$.editorScroller.getBoundaries().bottom;
-		var et = this.$.editorScroller.getBoundaries().top;
-		var ec = this.$.editorScroller.scrollTop;
-		var ep = eb!=0 ? ec/eb : 0;
-		ep = Math.max(0,ep);
-		ep = Math.min(1,ep);
-		
-		if(this.position == "up")
-			var pb = this.$.previewScroller.getBoundaries().bottom;
-		else // weirdly enough the preview box appears to be bigger if the bar is down. we'll simply substract the height added here.
-			var pb = this.$.previewScroller.getBoundaries().bottom - enyo.fetchControlSize(this).h+55;
-		var pt = this.$.previewScroller.getBoundaries().top;
-		var pc = this.$.previewScroller.scrollTop;
-		var pp = pb!=0 ? pc/pb : 0;
-		pp = Math.max(0,pp);
-		pp = Math.min(1,pp);
-		
-		if(!this.barBeingDragged && (this.$.bottom.slidePosition == 0 || -enyo.fetchControlSize(this).h == this.$.bottom.slidePosition-55)) {
-			if(this.position == "up") {
-				//enyo.keyboard.hide();
-				//this.$.editorScroller.setScrollTop(pp * eb); // TODO: das kann sau nervig sein
-			}
-			else {
-				//enyo.keyboard.show();
-				this.$.previewScroller.setScrollTop(ep * pb);
-				//this.$.editor.forceFocus(); // buggy with on screen keyboard
-			}
-		}
-		
-		//console.log(pp + " " + ep);
-		
 		if(this.synccount == 0 || inSender.name != "schedule") {
 			this.makePreview();
 		}
