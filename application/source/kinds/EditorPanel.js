@@ -228,16 +228,17 @@ enyo.kind({
 	},
 	
 	makePreview: function() {
-		var oldselectionButton = document.getElementById("selection");
-		if(oldselectionButton) {
-			oldselectionButton.parentNode.removeChild(oldselectionButton);
-		}
-		var selectionButton = document.createElement('span');
-		selectionButton.setAttribute('id', 'selection');
-		selectionButton.innerHTML = "BARRRR";
 		var selection = this.$.editor.getSelection();
-		
 		if(selection) {
+			var oldselectionButton = document.getElementById("selection");
+			if(oldselectionButton) {
+				oldselectionButton.parentNode.removeChild(oldselectionButton);
+			}
+			
+			var selectionButton = document.createElement('span');
+			selectionButton.setAttribute('id', 'selection');
+			selectionButton.innerHTML = "BARRRR";
+		
 			var range = selection.getRangeAt(0);
 			var newRange = document.createRange();
 			newRange.setStart(selection.focusNode, range.endOffset);
