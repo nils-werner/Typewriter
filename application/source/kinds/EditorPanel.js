@@ -197,7 +197,7 @@ enyo.kind({
 			var selectionButton = document.createElement('span');
 			selectionButton.setAttribute('id', 'selection');
 			
-			var textnode = document.createTextNode("<span id='renderedselection'>04c1d67d13f0b713047dc00a7652cd0e</span>");
+			var textnode = document.createTextNode("<span id='renderedselection' />");
 			selectionButton.appendChild(textnode);
 		
 			var range = selection.getRangeAt(0);
@@ -289,8 +289,10 @@ enyo.kind({
 	},
 	
 	getContent: function() {
-		return this.$.editor.getText();
+		return this.$.editor.getText().replace(/\<span\ id=\'renderedselection\'\ \/\>/g, "");
 	},
+	
+	
 	
 	setContent: function(inContent, inFilename) {
 		var inFilename = inFilename || "";
