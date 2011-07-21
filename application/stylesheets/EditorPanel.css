@@ -95,3 +95,9 @@
 .subtleitem * {
 	font-style: italic;
 }
+
+#selection, #renderedselection {
+	position: absolute;
+	opacity: 0.0;
+	z-index: -1000;
+}
