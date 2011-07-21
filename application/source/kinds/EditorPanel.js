@@ -116,7 +116,6 @@ enyo.kind({
 	],
 	
 	/* PREVIEW HANDLING */
-	synccount: 0,
 	start: new Date(),
 	
 	hasBeenResized: false,
@@ -188,14 +187,6 @@ enyo.kind({
 	},
 	
 	syncViews: function(inSender, inEvent) {
-		if(this.synccount == 0 || inSender.name != "schedule") {
-			this.makePreview();
-		}
-		this.synccount++;
-		this.synccount = this.synccount % 3;
-	},
-	
-	makePreview: function() {
 		var selection = this.$.editor.getSelection();
 		if(selection) {
 			var oldselectionButton = document.getElementById("selection");
@@ -246,7 +237,7 @@ enyo.kind({
 		console.log("scheduling refresh");
 		this.scheduleID = setInterval(enyo.bind(this,function() {
 			this.syncViews({name:"schedule"});
-		}), 5000);
+		}), 1000);
 	},
 	clearSchedule: function() {
 		console.log("UNscheduling refresh");
