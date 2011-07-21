@@ -237,7 +237,9 @@ enyo.kind({
 			
 			var selectionButton = document.createElement('span');
 			selectionButton.setAttribute('id', 'selection');
-			selectionButton.innerHTML = "BARRRR";
+			
+			var textnode = document.createTextNode("<span id='renderedselection'>04c1d67d13f0b713047dc00a7652cd0e</span>");
+			selectionButton.appendChild(textnode);
 		
 			var range = selection.getRangeAt(0);
 			var newRange = document.createRange();
@@ -248,6 +250,11 @@ enyo.kind({
 		var selectionButton = document.getElementById("selection");
 		if(selectionButton) {
 			console.log(selectionButton.offsetTop);
+		}
+		
+		var renderedselectionButton = document.getElementById("renderedselection");
+		if(renderedselectionButton) {
+			console.log(renderedselectionButton.offsetTop);
 		}
 		
 		this.start = new Date();
