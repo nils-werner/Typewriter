@@ -1,7 +1,7 @@
 /* Copybottom 2009-2011 Hewlett-Packard Development Company, L.P. All bottoms reserved. */
 /**
 A view that slides back and forth and is designed to be a part of a
-<a href="#enyo.HSlidingPane">SlidingPane</a>.
+<a href="#enyo.HSlidingPane">HSlidingPane</a>.
 
 HSlidingView objects have a "dragAnywhere" property, whose default value is true. This allows
 the user to drag the view from any point inside the panel that is not already a
@@ -54,12 +54,6 @@ enyo.kind({
 		this.layout = new enyo.HFlexLayout();
 		this.edgeDraggingChanged();
 		this.minHeightChanged();
-	},
-	// Add slide position to control offset calculation
-	calcControlOffset: function(inControl) {
-		var o = this.inherited(arguments);
-		o.top += this.slidePosition;
-		return o;
 	},
 	layoutKindChanged: function() {
 		this.$.client.setLayoutKind(this.layoutKind);
@@ -119,6 +113,7 @@ enyo.kind({
 			this.pane.stopAnimation();
 			if (this.showing) {
 				this.inherited(arguments);
+				this.pane.validateViewSizes();
 				this.applySlideToNode(this.calcSlideHidden());
 			}
 			this.overSliding = true;
@@ -141,8 +136,8 @@ enyo.kind({
 		return 0;
 	},
 	calcSlideMin: function() {
-		var x = -this.getTopOffset();
-		return this.peekHeight + x;
+		var x = this.getTopOffset();
+		return this.peekHeight - x;
 	},
 	calcSlideMax: function() {
 		var c = this.getPreviousSibling();
@@ -243,8 +238,19 @@ enyo.kind({
 		e.sliding = this;
 	},
 	isDraggableEvent: function(inEvent) {
-		var c = inEvent.dispatchTarget;
-		return c && c.slidingHandler || this.dragAnywhere;
+		return this.findSlidingHandler(inEvent.dispatchTarget) || this.dragAnywhere;
+	},
+	findSlidingHandler: function(inControl) {
+		var c = inControl;
+		while (c && c.isDescendantOf(this)) {
+			if (c.slidingHandler === false) {
+				return;
+			}
+			if (c.slidingHandler) {
+				return c;
+			}
+			c = c.parent;
+		}
 	},
 	canDrag: function(inDelta) {
 		this.dragMin = this.calcSlideMin();
@@ -270,6 +276,7 @@ enyo.kind({
 	},
 	beginDrag: function(e, inDx) {
 		this.validateSlideBefore();
+		this.lastDragDx = e.dy;
 		this.dragStart = this.slidePosition - inDx;
 	},
 	isMovingToSelect: function() {
@@ -281,12 +288,19 @@ enyo.kind({
 		if (this.pendingDragMove || (x0 == this.slidePosition)) {
 			return;
 		}
-		var x = Math.max(this.dragMin, Math.min(x0, this.overSliding ? 1e9 : this.dragMax));
 		this.shouldDragSelect = x0 < this.slidePosition;
 		// if out of bounds, return boundary info
 		if ((x0 < this.dragMin) || (x0 > this.dragMax && !this.overSliding) || (x0 < this.dragMax && this.overSliding)) {
 			return {select: this.getDragSelect()};
 		} else {
+			// based on HI request, add extra "friction" to drag when overSliding.
+			if (this.overSliding && !this.dismissible) {
+				// diminimish the user's drag to 1/4 strength
+				var ldy = this.lastDragDx || 0;
+				x0 = (e.dy - ldy) / 4 + this.slidePosition;
+			}
+			this.lastDragDx =  e.dy;
+			var x = Math.max(this.dragMin, Math.min(x0, this.overSliding ? 1e9 : this.dragMax));
 			this.pendingDragMove = this._drag(x);
 		}
 	},
@@ -328,6 +342,7 @@ enyo.kind({
 			// apply fast-like
 			if (this.$.client.hasNode()) {
 				this.$.client.domStyles.height = this.$.client.node.style.height = w;
+				this.broadcastToControls("resize");
 				this.doResize(w);
 			}
 		}
@@ -337,12 +352,13 @@ enyo.kind({
 		if (this.hasNode() && this.$.client.hasNode()) {
 			var pw = this.parent.getBounds().height;
 			var l = this.getTopOffset();
-			w = Math.max(0, Math.min(pw, pw - l - (this.slidePosition||0)));
+			var s = Math.min(this.slidePosition || 0, 0);
+			w = Math.max(0, Math.min(pw, pw - l - s));
 		}
 		return w;
 	},
 	clickHandler: function(inSender, inEvent) {
-		if (inEvent.dispatchTarget.slidingHandler) {
+		if (this.findSlidingHandler(inEvent.dispatchTarget)) {
 			this.toggleSelected();
 		}
 		this.doClick(inEvent);

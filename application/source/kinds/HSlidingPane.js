@@ -1,7 +1,7 @@
 /* Copybottom 2009-2011 Hewlett-Packard Development Company, L.P. All bottoms reserved. */
 /**
 A control designed to present a horizontal layout of
-<a href="#enyo.HSlidingView">SlidingView</a> controls,
+<a href="#enyo.HSlidingView">HSlidingView</a> controls,
 which are panel controls that can slide one on top of another. The user can 
 drag the views top and bottom and they'll stay connected. If a view is moved 
 to the far top, it will cover any views to the top of it.
@@ -15,7 +15,7 @@ The selected view is the one displayed at the far top of the group.
 
 SlidingGroup also has two layout modes--the normal layout, in which views
 are placed top-to-bottom, and a narrow layout, in which views are stacked,
-taking up the entire height of the HSlidingPane. A SlidingPane can automatically
+taking up the entire height of the HSlidingPane. A HSlidingPane can automatically
 toggle between these layouts if its resize method is hooked up to respond to window 
 resizing. The "wideHeight" property has a default value of 500 and is the pivot point
 between the two layouts.
@@ -164,11 +164,11 @@ enyo.kind({
 	dragstartHandler: function(inSender, inEvent) {
 		if (inEvent.sliding) {
 			var s = this.dragStartSliding = inEvent.sliding;
-			this.stopAnimation();
 			var d = s && s.isDraggableEvent(inEvent) && this.findDraggable(inEvent.dy);
 			//this.log(d ? d.id : "nothing to drag");
 			this.dy0 = 0;
 			if (d) {
+				this.stopAnimation();
 				this.dragSliding(d, inEvent, 0);
 				return true;
 			}
