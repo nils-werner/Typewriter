@@ -25,7 +25,7 @@ enyo.kind({
 			]},
 			]
 		},
-		{kind: "Scrim", name:"taboutscrim", layoutKind: "VFlexLayout", align:"center", pack:"center", style:"background-color: transparent; opacity: 1;", animateShowing: false, components: [
+		{kind: "Scrim", name:"taboutscrim", layoutKind: "VFlexLayout", align:"center", pack:"center", style:"background-color: transparent; opacity: 1;", components: [
 			{kind: "Image", src:"images/icon256.png", style: "opacity: 0.0;"}
 		]},
 		{kind: enyo.ApplicationEvents, 
