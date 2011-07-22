@@ -197,7 +197,7 @@ enyo.kind({
 			var selectionButton = document.createElement('span');
 			selectionButton.setAttribute('id', 'selection');
 			
-			var textnode = document.createTextNode("<span id='renderedselection' />");
+			var textnode = document.createTextNode("<span id='renderedselection'>meh</span>");
 			selectionButton.appendChild(textnode);
 		
 			var range = selection.getRangeAt(0);

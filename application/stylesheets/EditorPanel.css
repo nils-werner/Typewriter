@@ -98,6 +98,13 @@
 
 #selection, #renderedselection {
 	position: absolute;
-	opacity: 0.0;
+	color: rgba(0,0,0,0);
 	z-index: -1000;
+}
+
+#renderedselection {
+	line-height: inherit;
+	background-image: url(../images/cursor.gif);
+	opacity: 0.3;
+	background-repeat: repeat-y;
 }
