@@ -21,7 +21,7 @@ The onResize event is fired when this occurs.
 */
 enyo.kind({
 	name: "enyo.HSlidingView",
-	kind: enyo.SlidingView,
+	kind: enyo.Control,
 	className: "enyo-sliding-view",
 	layoutKind: "VFlexLayout",
 	events: {
@@ -330,7 +330,7 @@ enyo.kind({
 	minHeightChanged: function() {
 		this.$.client.applyStyle("min-height", this.minHeight || null);
 	},
-	applySize: function(inSuggestFit) {
+	applySize: function(inSuggestFit, inStopResizePropagation) {
 		var w;
 		if (inSuggestFit && !this.fixedHeight) {
 			w = this.calcFitHeight();
@@ -342,8 +342,10 @@ enyo.kind({
 			// apply fast-like
 			if (this.$.client.hasNode()) {
 				this.$.client.domStyles.height = this.$.client.node.style.height = w;
-				this.broadcastToControls("resize");
-				this.doResize(w);
+				if (!inStopResizePropagation) {
+					this.doResize(w);
+					this.broadcastToControls("resize");
+				}
 			}
 		}
 	},
@@ -358,10 +360,12 @@ enyo.kind({
 		return w;
 	},
 	clickHandler: function(inSender, inEvent) {
+		var r;
 		if (this.findSlidingHandler(inEvent.dispatchTarget)) {
 			this.toggleSelected();
+			r = true;
 		}
-		this.doClick(inEvent);
+		return this.doClick(inEvent) || r;
 	},
 	setShadowShowing: function(inShow) {
 		this.$.shadow.setShowing(inShow);

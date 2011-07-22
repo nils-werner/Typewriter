@@ -31,7 +31,7 @@ Here's an example:
 */
 enyo.kind({
 	name: "enyo.HSlidingPane",
-	kind: enyo.SlidingPane,
+	kind: enyo.Pane,
 	published: {
 		multiView: true,
 		multiViewMinHeight: 500,
@@ -238,17 +238,17 @@ enyo.kind({
 	// event handler for resize; if we're the root component, we'll automatically resize
 	resizeHandler: function() {
 		if (this.getBounds().width) {
-			this.resize();
+			this.resize(true);
 			this.inherited(arguments);
 		}
 	},
 	// if we're not the root component, this method can be hooked to a resizeHandler
-	resize: function() {
+	resize: function(inStopPropagation) {
 		// if no layout change, make sure to validate to ensure proper sizing
 		// otherwise apply layout change
 		var multiView = this.multiViewMinHeight > 0 && window.innerHeight > this.multiViewMinHeight;
 		this.setMultiView(multiView);
-		this.validateViews();
+		this.validateViews(inStopPropagation);
 	},
 	//* @protected
 	multiViewChanged: function(inLastMultiView) {
@@ -291,10 +291,14 @@ enyo.kind({
 			inSliding.applyStyle("height", s.height);
 		}
 	},
-	validateViews: function() {
+	validateViews: function(inStopResizePropagation) {
 		this.validateViewPositions();
 		this.resetOverSliding();
-		enyo.job(this.id + ":resize", enyo.bind(this, "validateViewSizes"), 10);
+		if (inStopResizePropagation) {
+			this.validateViewSizes(inStopResizePropagation);
+		} else {
+			enyo.job(this.id + ":resize", enyo.bind(this, "validateViewSizes", inStopResizePropagation), 10);
+		}
 	},
 	validateViewPositions: function() {
 		var s = this.view && this.view.getFirstSibling() || this.view;
@@ -302,10 +306,10 @@ enyo.kind({
 			s.validateSlide();
 		}
 	},
-	validateViewSizes: function() {
+	validateViewSizes: function(inStopResizePropagation) {
 		var s = this.view && this.view.getLastShowingSibling();
 		for (var i=0, v; v=this.views[i]; i++) {
-			v.applySize(v == s);
+			v.applySize(v == s, inStopResizePropagation);
 		}
 	},
 	resetOverSliding: function() {
