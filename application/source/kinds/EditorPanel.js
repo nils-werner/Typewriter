@@ -154,6 +154,19 @@ enyo.kind({
 	barMoved: function(event) {
 		if(event.view == this.$.top) {
 			this.position = "down";
+			
+			console.log(this.rangeEndOffset);
+			
+			if(this.rangeEndOffset) {
+				this.$.editor.forceFocus(function() {
+					var range = this.$.editor.getSelection().getRangeAt(this.rangeEndOffset);
+					
+					//console.log(this.$.invisEditor.$.input.node.childNodes[0]);
+					
+					range.setStart(this.$.editor.$.input.node.childNodes[0], this.rangeEndOffset);
+					range.setEnd(this.$.editor.$.input.node.childNodes[0], this.rangeEndOffset);
+				}.bind(this));
+			}
 		}
 		else {
 			this.position = "up";
