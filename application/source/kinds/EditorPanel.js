@@ -240,7 +240,7 @@ enyo.kind({
 		
 		if(selectionButton && renderedselectionButton && this.position == "down") {
 			//console.log(this.$.editorScroller.scrollTop + " " + this.$.previewScroller.scrollTop + " " + editorpos + " " + previewpos);
-			var finalpos = this.$.editorScroller.scrollTop - editorpos + previewpos + 30;
+			var finalpos = this.$.editorScroller.scrollTop - editorpos + previewpos + 55;
 			//console.log(finalpos);
 			if(finalpos >= 0)
 				this.$.previewScroller.setScrollTop(finalpos);
@@ -260,6 +260,9 @@ enyo.kind({
 			- Vor dem > eines Zitates
 			- In der Referenzen-Liste
 		*/
+		value = value.replace(/\-\<span\ id=\'renderedselection\'\>meh\<\/span\>\-/g, "--");
+		value = value.replace(/=\<span\ id=\'renderedselection\'\>meh\<\/span\>=/g, "==");
+		value = value.replace(/\n\<span\ id=\'renderedselection\'\>meh\<\/span\>\n/g, "\n\n");
 		var markdown = converter.makeHtml(value);
 		
 		this.xslt.setXml("<document>" + markdown + "</document>").transform();
