@@ -31,7 +31,17 @@ enyo.kind({
 									onblur: "syncViews",
 									onfocus: "editorFocussed",
 									onmouseup: "syncViews",
+									onkeypress: "editorKeypressed",
 									hint: "",
+									styled: false,
+									setValue: function(inValue) {
+										this.$.input.setContent(inValue);
+									}
+								},
+								{kind: "RichText",
+									name: "invisEditor",
+									richContent: false,
+									className: "editor-invisible",
 									styled: false,
 									setValue: function(inValue) {
 										this.$.input.setContent(inValue);
@@ -186,7 +196,19 @@ enyo.kind({
 		enyo.keyboard.show();
 	},
 	
+	editorKeypressed: function(inSender, inEvent) {
+		console.log(inEvent.keyCode);
+		if(inEvent.keyCode == 46) {
+			var oldselectionButton = document.getElementById("selection");
+			if(oldselectionButton) {
+				oldselectionButton.parentNode.removeChild(oldselectionButton);
+			}
+		}
+	},
+	
 	syncViews: function(inSender, inEvent) {
+		this.$.invisEditor.setValue(this.$.editor.getText());
+	
 		var selection = this.$.editor.getSelection();
 		if(selection) {
 			var oldselectionButton = document.getElementById("selection");
@@ -202,7 +224,9 @@ enyo.kind({
 		
 			var range = selection.getRangeAt(0);
 			var newRange = document.createRange();
-			newRange.setStart(selection.focusNode, range.endOffset);
+			console.log(selection.focusNode);
+			console.log(this.$.invisEditor.$.input.node.childNodes[0]);
+			newRange.setStart(this.$.invisEditor.$.input.node.childNodes[0], range.endOffset);
 			newRange.insertNode(selectionButton);
 		}
 		
@@ -292,7 +316,7 @@ enyo.kind({
 	},
 	
 	getContent: function() {
-		return this.$.editor.getText().replace(/\<span\ id=\'renderedselection\'\ \/\>/g, "");
+		return this.$.editor.getText().replace(/\<span\ id=\'renderedselection\'\>meh\<\/span\>/g, "");
 	},
 	
 	
