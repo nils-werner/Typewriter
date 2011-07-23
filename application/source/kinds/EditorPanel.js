@@ -254,9 +254,7 @@ enyo.kind({
 		//console.log("generating Markdown");
 		var converter = new Showdown.converter();
 		var value = this.$.invisEditor.getText();
-		value = value.replace(/\-\<span\ id=\'renderedselection\'\>meh\<\/span\>\-/g, "--");
-		value = value.replace(/=\<span\ id=\'renderedselection\'\>meh\<\/span\>=/g, "==");
-		value = value.replace(/\n\<span\ id=\'renderedselection\'\>meh\<\/span\>\n/g, "\n\n");
+		value = value.replace(/([\W ])\<span\ id=\'renderedselection\'\>meh\<\/span\>([\W ])/g, "$1$2");
 		var markdown = converter.makeHtml(value);
 		
 		this.xslt.setXml("<document>" + markdown + "</document>").transform();
