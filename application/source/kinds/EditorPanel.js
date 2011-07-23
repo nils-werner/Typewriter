@@ -31,7 +31,6 @@ enyo.kind({
 									onblur: "syncViews",
 									onfocus: "editorFocussed",
 									onmouseup: "syncViews",
-									onkeypress: "editorKeypressed",
 									hint: "",
 									styled: false,
 									setValue: function(inValue) {
@@ -194,16 +193,6 @@ enyo.kind({
 	/* EDITOR CALLBACKS */
 	editorFocussed: function() {
 		enyo.keyboard.show();
-	},
-	
-	editorKeypressed: function(inSender, inEvent) {
-		console.log(inEvent.keyCode);
-		if(inEvent.keyCode == 46) {
-			var oldselectionButton = document.getElementById("selection");
-			if(oldselectionButton) {
-				oldselectionButton.parentNode.removeChild(oldselectionButton);
-			}
-		}
 	},
 	
 	syncViews: function(inSender, inEvent) {
