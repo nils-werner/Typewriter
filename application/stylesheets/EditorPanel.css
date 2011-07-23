@@ -9,13 +9,18 @@
 	line-height: 1.2em;
 }
 
-.editor-input, .markdownHelper {
+.editor-input, .editor-invisible, .markdownHelper {
 	font-family: Courier, monospace;
 	white-space: pre-wrap;
 }
 
 .editor-invisible {
-	display: none;
+	position: absolute;
+	opacity: 0.0;
+	height: 1px;
+	padding: 0px;
+	margin: 0px;
+	overflow: scroll;
 }
 
 .markdownHelper {

@@ -232,7 +232,9 @@ enyo.kind({
 		
 		var selectionButton = document.getElementById("selection");
 		if(selectionButton) {
+			console.log(selectionButton);
 			editorpos = selectionButton.offsetTop;
+			console.log(editorpos);
 		}
 		
 		var renderedselectionButton = document.getElementById("renderedselection");
@@ -241,8 +243,8 @@ enyo.kind({
 		}
 		
 		if(selectionButton && renderedselectionButton && this.position == "down") {
-			//console.log(this.$.editorScroller.scrollTop + " " + this.$.previewScroller.scrollTop + " " + editorpos + " " + previewpos);
-			var finalpos = this.$.editorScroller.scrollTop - editorpos + previewpos + 55;
+			console.log(this.$.editorScroller.scrollTop + " " + this.$.previewScroller.scrollTop + " " + editorpos + " " + previewpos);
+			var finalpos = this.$.editorScroller.scrollTop - editorpos + previewpos + 30;
 			//console.log(finalpos);
 			if(finalpos >= 0)
 				this.$.previewScroller.setScrollTop(finalpos);
