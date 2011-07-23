@@ -127,6 +127,8 @@ enyo.kind({
 	/* PREVIEW HANDLING */
 	start: new Date(),
 	
+	rangeEndOffset: undefined,
+	
 	hasBeenResized: false,
 	hasBeenSet: false,
 	
@@ -205,25 +207,30 @@ enyo.kind({
 				oldselectionButton.parentNode.removeChild(oldselectionButton);
 			}
 			
+			//console.log(selection.focusNode);
+			
+			var range = selection.getRangeAt(0);
+			this.rangeEndOffset = range.endOffset;
+		}
+		
+		if(this.rangeEndOffset) {
+			var newRange = document.createRange();
+			
 			var selectionButton = document.createElement('span');
 			selectionButton.setAttribute('id', 'selection');
 			
 			var textnode = document.createTextNode("<span id='renderedselection'>meh</span>");
 			selectionButton.appendChild(textnode);
-		
-			var range = selection.getRangeAt(0);
-			var newRange = document.createRange();
-			//console.log(selection.focusNode);
+			
 			//console.log(this.$.invisEditor.$.input.node.childNodes[0]);
-			newRange.setStart(this.$.invisEditor.$.input.node.childNodes[0], range.endOffset);
+			
+			newRange.setStart(this.$.invisEditor.$.input.node.childNodes[0], this.rangeEndOffset);
 			newRange.insertNode(selectionButton);
 		}
 		
 		var selectionButton = document.getElementById("selection");
 		if(selectionButton) {
-			console.log(selectionButton);
 			editorpos = selectionButton.offsetTop;
-			console.log(editorpos);
 		}
 		
 		var renderedselectionButton = document.getElementById("renderedselection");
@@ -232,7 +239,7 @@ enyo.kind({
 		}
 		
 		if(selectionButton && renderedselectionButton && this.position == "down") {
-			console.log(this.$.editorScroller.scrollTop + " " + this.$.previewScroller.scrollTop + " " + editorpos + " " + previewpos);
+			//console.log(this.$.editorScroller.scrollTop + " " + this.$.previewScroller.scrollTop + " " + editorpos + " " + previewpos);
 			var finalpos = this.$.editorScroller.scrollTop - editorpos + previewpos + 30;
 			//console.log(finalpos);
 			if(finalpos >= 0)
@@ -243,7 +250,7 @@ enyo.kind({
 		//console.log("generating Markdown");
 		var converter = new Showdown.converter();
 		var value = this.$.invisEditor.getText();
-		value = value.replace(/([\W ])\<span\ id=\'renderedselection\'\>meh\<\/span\>([\W ])/g, "$1$2");
+		value = value.replace(/([^\w ])\<span\ id=\'renderedselection\'\>meh\<\/span\>([^\w ])/g, "$1$2");
 		var markdown = converter.makeHtml(value);
 		
 		this.xslt.setXml("<document>" + markdown + "</document>").transform();
