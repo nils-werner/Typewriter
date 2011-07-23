@@ -1,7 +1,7 @@
 /* Copyright 2009-2011 Hewlett-Packard Development Company, L.P. All rights reserved. */
 /*Your CSS here*/
 
-.editor-input {
+.editor-input, .editor-invisible {
 	background-color: #ffffff;
 	padding: 30px;
 	margin: 0px;

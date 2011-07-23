@@ -224,8 +224,8 @@ enyo.kind({
 		
 			var range = selection.getRangeAt(0);
 			var newRange = document.createRange();
-			console.log(selection.focusNode);
-			console.log(this.$.invisEditor.$.input.node.childNodes[0]);
+			//console.log(selection.focusNode);
+			//console.log(this.$.invisEditor.$.input.node.childNodes[0]);
 			newRange.setStart(this.$.invisEditor.$.input.node.childNodes[0], range.endOffset);
 			newRange.insertNode(selectionButton);
 		}
