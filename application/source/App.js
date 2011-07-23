@@ -111,23 +111,23 @@ enyo.kind({
 	},
 	
 	setSaveInterval: function() {
-		console.log("scheduling save");
+		//console.log("scheduling save");
 		this.saveinterval = setInterval(enyo.hitch(this, "doSave"),5000);
 	},
 	
 	clearSaveInterval: function() {
-		console.log("UNscheduling save");
+		//console.log("UNscheduling save");
 		clearInterval(this.saveinterval);
 	},
 	
 	setLoadFilesInterval: function() {
-		console.log("scheduling ls");
+		//console.log("scheduling ls");
 		this.loadfilesinterval = setInterval(enyo.hitch(this, "doLoadFiles"),15000);
 		this.doLoadFiles();
 	},
 	
 	clearLoadFilesInterval: function() {
-		console.log("UNscheduling ls");
+		//console.log("UNscheduling ls");
 		clearInterval(this.loadfilesinterval);
 	},
 	
@@ -161,11 +161,11 @@ enyo.kind({
 			if(enyo.windowParams.action) {
 				enyo.keyboard.show();
 				if(enyo.windowParams.action == "doOpen") {
-					console.log("oeffne datei");
+					//console.log("oeffne datei");
 					this.doOpen(enyo.windowParams.filename);
 				}
 				if(enyo.windowParams.action == "doNew") {	// das muss irgendwie in rendered, ohne alles zu zerschmeissen
-					console.log("neue datei");
+					//console.log("neue datei");
 					this.doNew();
 				}
 			}
@@ -182,7 +182,7 @@ enyo.kind({
 				}
 			}
 		}
-		console.log(lastfile);
+		//console.log(lastfile);
 		//setInterval(enyo.hitch(this, "doSave"),5000);
 	},
 	

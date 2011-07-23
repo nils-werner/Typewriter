@@ -217,9 +217,9 @@ enyo.kind({
 		}
 		
 		if(selectionButton && renderedselectionButton && this.position == "down") {
-			console.log(this.$.editorScroller.scrollTop + " " + this.$.previewScroller.scrollTop + " " + editorpos + " " + previewpos);
+			//console.log(this.$.editorScroller.scrollTop + " " + this.$.previewScroller.scrollTop + " " + editorpos + " " + previewpos);
 			var finalpos = this.$.editorScroller.scrollTop - editorpos + previewpos + 55;
-			console.log(finalpos);
+			//console.log(finalpos);
 			if(finalpos >= 0)
 				this.$.previewScroller.setScrollTop(finalpos);
 		}
@@ -227,20 +227,23 @@ enyo.kind({
 		this.start = new Date();
 		//console.log("generating Markdown");
 		var converter = new Showdown.converter();
-		var value = this.$.editor.getText();
+		var value = this.$.invisEditor.getText();
+		value = value.replace(/\-\<span\ id=\'renderedselection\'\>meh\<\/span\>\-/g, "--");
+		value = value.replace(/=\<span\ id=\'renderedselection\'\>meh\<\/span\>=/g, "==");
+		value = value.replace(/\n\<span\ id=\'renderedselection\'\>meh\<\/span\>\n/g, "\n\n");
 		var markdown = converter.makeHtml(value);
 		
 		this.xslt.setXml("<document>" + markdown + "</document>").transform();
 	},
 	
 	setSchedule: function() {
-		console.log("scheduling refresh");
+		//console.log("scheduling refresh");
 		this.scheduleID = setInterval(enyo.bind(this,function() {
 			this.syncViews({name:"schedule"});
 		}), 1000);
 	},
 	clearSchedule: function() {
-		console.log("UNscheduling refresh");
+		//console.log("UNscheduling refresh");
 		clearInterval(this.scheduleID);
 	},
 	
@@ -250,9 +253,9 @@ enyo.kind({
 		this.position = "down";
 		this.xslt.setXslt("stylesheets/LaTeX.xsl").setCallback(enyo.bind(this, 
 			function(t) {
-				console.log(t.getResult());
+				//console.log(t.getResult());
 				this.$.preview.setContent(new XMLSerializer().serializeToString(t.getResult()));
-				console.log(new Date()-this.start);
+				//console.log(new Date()-this.start);
 			}
 		));
 		this.syncViews({name:"startup"});
