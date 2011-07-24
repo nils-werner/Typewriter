@@ -250,7 +250,16 @@ enyo.kind({
 		//console.log("generating Markdown");
 		var converter = new Showdown.converter();
 		var value = this.$.invisEditor.getText();
-		value = value.replace(/([^\w ])\<span\ id=\'renderedselection\'\>meh\<\/span\>([^\w ])/g, "$1$2");
+		//value = value.replace(/([^\w ])\<span\ id=\'renderedselection\'\>meh\<\/span\>([^\w ])/g, "$1$2");
+		/* Element entfernen wenn:
+			
+			- In #, - oder = von Titeln
+			- Zwischen zwei Absätzen/Listen
+			- Am Anfang einer Liste
+			- Im Alias/Adressteil eines Links
+			- Vor dem > eines Zitates
+			- In der Referenzen-Liste
+		*/
 		var markdown = converter.makeHtml(value);
 		
 		this.xslt.setXml("<document>" + markdown + "</document>").transform();
