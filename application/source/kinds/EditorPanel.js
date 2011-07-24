@@ -312,7 +312,7 @@ enyo.kind({
 	},
 	
 	getContent: function() {
-		return this.$.editor.getText().replace(/\<span\ id=\'renderedselection\'\>meh\<\/span\>/g, "");
+		return this.$.editor.getText();
 	},
 	
 	
