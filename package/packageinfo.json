@@ -2,7 +2,7 @@
 	"id": "de.obsessivemedia.webos.typewriterbeta",
 	"package_format_version": 2,
 	"loc_name": "Typewriter Beta",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"icon": "icon64.png",
 	"miniicon": "icon32.png",
 	"vendor": "Obsessive Media",
