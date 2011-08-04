@@ -239,6 +239,10 @@ function Transformation() {
 				xs.responseXML = new DOMParser().parseFromString(xslt, "text/xml");
 				change();
 			}
+			else if (typeof(xsltDoc) != 'undefined') {
+				xs.responseXML = xsltDoc;
+				change();
+			}
 			else {
 				xs = new XMLHttpRequest();
 				xs.onreadystatechange = change;
