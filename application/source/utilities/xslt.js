@@ -33,22 +33,17 @@
  */
 function Transformation() {
 
-	var xml;
-	
-	var xmlDoc;
-	
-	var xslt;
-	
-	var xsltDoc;
-
-	var callback = function() {};
-	
-	var resultDoc;
+	this.xml = undefined;
+	this.xmlDoc = undefined;
+	this.xslt = undefined;
+	this.xsltDoc = undefined;
+	this.callback = function() {};
+	this.resultDoc = undefined;
 	
 	/**
 	 * Sort of like a fix for Opera who doesn't always get readyStates right.
 	 */
-	var transformed = false;
+	this.transformed = false;
 		
 	/**
 	 * Returns the URL of the XML document.
@@ -57,7 +52,7 @@ function Transformation() {
 	 * @type String
 	 */
 	this.getXml = function() {
-		return xml;
+		return this.xml;
 	}
 	
 	/**
@@ -66,7 +61,7 @@ function Transformation() {
 	 * @return the XML document
 	 */
 	this.getXmlDocument = function() {
-		return xmlDoc
+		return this.xmlDoc;
 	}
 	
 	/**
@@ -77,7 +72,7 @@ function Transformation() {
 	 * @type Transformation
 	 */
 	this.setXml = function(x) {
-		xml = x;
+		this.xml = x;
 		return this;
 	}
 	
@@ -88,7 +83,7 @@ function Transformation() {
 	 * @type String
 	 */
 	this.getXslt = function() {
-		return xslt;
+		return this.xslt;
 	}
 	
 	/**
@@ -97,7 +92,7 @@ function Transformation() {
 	 * @return the XSLT document
 	 */
 	this.getXsltDocument = function() {
-		return xsltDoc;
+		return this.xsltDoc;
 	}
 	
 	/**
@@ -108,7 +103,7 @@ function Transformation() {
 	 * @type Transformation
 	 */
 	this.setXslt = function(x) {
-		xslt = x;
+		this.xslt = x;
 		return this;
 	}
 	
@@ -118,7 +113,7 @@ function Transformation() {
 	 * @return the callback function
 	 */
 	this.getCallback = function() {
-		return callback;
+		return this.callback;
 	}
 	
 	/**
@@ -129,7 +124,7 @@ function Transformation() {
 	 * @type Transformation
 	 */
 	this.setCallback = function(c) {
-		callback = c;
+		this.callback = c;
 		return this;
 	}
 	
@@ -139,7 +134,7 @@ function Transformation() {
 	 * @return the result document fragment
 	 */
 	this.getResult = function() {
-		return resultDoc;
+		return this.resultDoc;
 	}
 	
 	
@@ -169,9 +164,9 @@ function Transformation() {
 				var c = 'complete';
 				if (xm.readyState == c && xs.readyState == c) {
 					window.setTimeout(function() {
-						xmlDoc = xm.XMLDocument;
-						xsltDoc = xs.XMLDocument;
-						callback(t);
+						this.xmlDoc = xm.XMLDocument;
+						this.xsltDoc = xs.XMLDocument;
+						this.callback(t);
 						if(target) document.all[target].innerHTML = xm.transformNode(xs.XMLDocument);
 					}, 50);
 				}
@@ -179,11 +174,11 @@ function Transformation() {
 			
 			var xm = document.createElement('xml');
 			xm.onreadystatechange = change;
-			xm[str.test(xml) ? "innerHTML" : "src"] = xml;
+			xm[str.test(this.xml) ? "innerHTML" : "src"] = this.xml;
 			
 			var xs = document.createElement('xml');
 			xs.onreadystatechange = change;
-			xs[str.test(xslt) ? "innerHTML" : "src"] = xslt;
+			xs[str.test(this.xslt) ? "innerHTML" : "src"] = this.xslt;
 			
 			with (document.body) {
 				insertBefore(xm);
@@ -201,52 +196,52 @@ function Transformation() {
 			};
 			var change = function() {
 				if (xm.readyState == 4 && xs.readyState == 4 && !transformed) {
-					xmlDoc = xm.responseXML;
-					xsltDoc = xs.responseXML;
+					this.xmlDoc = xm.responseXML;
+					this.xsltDoc = xs.responseXML;
 					var processor = new XSLTProcessor();
 					
 					if (typeof processor.transformDocument == 'function') {
 						// obsolete Mozilla interface
-						resultDoc = document.implementation.createDocument("", "", null);
-						processor.transformDocument(xm.responseXML, xs.responseXML, resultDoc, null);
-						var out = new XMLSerializer().serializeToString(resultDoc);
-						callback(t);
+						this.resultDoc = document.implementation.createDocument("", "", null);
+						processor.transformDocument(xm.responseXML, xs.responseXML, this.resultDoc, null);
+						var out = new XMLSerializer().serializeToString(this.resultDoc);
+						this.callback(t);
 						if(target) document.getElementById(target).innerHTML = out;
 					}
 					else {
 						processor.importStylesheet(xs.responseXML);
-						resultDoc = processor.transformToFragment(xm.responseXML, document);
-						callback(t);
+						this.resultDoc = processor.transformToFragment(xm.responseXML, document);
+						this.callback(t);
 						if(target) document.getElementById(target).innerHTML = '';
-						if(target) document.getElementById(target).appendChild(resultDoc);
+						if(target) document.getElementById(target).appendChild(this.resultDoc);
 					}
 					
 					transformed = true;
 				}
 			};
 
-			if (str.test(xml)) {
-				xm.responseXML = new DOMParser().parseFromString(xml, "text/xml");
+			if (str.test(this.xml)) {
+				xm.responseXML = new DOMParser().parseFromString(this.xml, "text/xml");
 			}
 			else {
 				xm = new XMLHttpRequest();
 				xm.onreadystatechange = change;
-				xm.open("GET", xml);
+				xm.open("GET", this.xml);
 				xm.send(null);
 			}
 
-			if (str.test(xslt)) {
-				xs.responseXML = new DOMParser().parseFromString(xslt, "text/xml");
+			if (str.test(this.xslt)) {
+				xs.responseXML = new DOMParser().parseFromString(this.xslt, "text/xml");
 				change();
 			}
-			else if (typeof(xsltDoc) != 'undefined') {
-				xs.responseXML = xsltDoc;
+			else if (typeof(this.xsltDoc) != 'undefined') {
+				xs.responseXML = this.xsltDoc;
 				change();
 			}
 			else {
 				xs = new XMLHttpRequest();
 				xs.onreadystatechange = change;
-				xs.open("GET", xslt);
+				xs.open("GET", this.xslt);
 				xs.send(null);
 			}
 		}
