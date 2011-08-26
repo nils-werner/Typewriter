@@ -173,11 +173,11 @@ function Transformation() {
 			};
 			
 			var xm = document.createElement('xml');
-			xm.onreadystatechange = change;
+			xm.onreadystatechange = change.bind(this);
 			xm[str.test(this.xml) ? "innerHTML" : "src"] = this.xml;
 			
 			var xs = document.createElement('xml');
-			xs.onreadystatechange = change;
+			xs.onreadystatechange = change.bind(this);
 			xs[str.test(this.xslt) ? "innerHTML" : "src"] = this.xslt;
 			
 			with (document.body) {
@@ -225,7 +225,7 @@ function Transformation() {
 			}
 			else {
 				xm = new XMLHttpRequest();
-				xm.onreadystatechange = change;
+				xm.onreadystatechange = change.bind(this);
 				xm.open("GET", this.xml);
 				xm.send(null);
 			}
@@ -240,7 +240,7 @@ function Transformation() {
 			}
 			else {
 				xs = new XMLHttpRequest();
-				xs.onreadystatechange = change;
+				xs.onreadystatechange = change.bind(this);
 				xs.open("GET", this.xslt);
 				xs.send(null);
 			}
