@@ -12,6 +12,7 @@ enyo.kind({
 	ctoken: "job7vwzo1jhcdcn",
 	csecret: "b1bodocolg7ajbt",
 	lastContent: "",
+	validfile: false,
 	isonline: true,
 	events: {
 		onOpened: "",
@@ -54,6 +55,7 @@ enyo.kind({
 		this.filename = this.filename + ".md";
 		this.lastContent = "";
 		this.doOpened({ err: null, content: inResponse.filename + "\n" + new String("=").repeat(inResponse.filename.length) + "\n\n", filename: this.filename});
+		this.validfile = true;
 	},
 	
 	/*
@@ -61,7 +63,7 @@ enyo.kind({
 	 */
 	
 	saveFile: function(inContent) {
-		if(this.lastContent != inContent && this.filename != "" && this.filename != ".md") {
+		if(this.validfile && this.lastContent != inContent && this.filename != "" && this.filename != ".md") {
 			console.log("saving " + this.filename);
 			this.$.dropbox.call({filename: this.filename, content: inContent}, {method:"writefile", onResponse: "handleSaved"});
 			this.lastContent = inContent;
@@ -84,6 +86,7 @@ enyo.kind({
 	 */
 	
 	readFile: function(inName) {
+		this.validfile = false;
 		this.$.spinnerLarge.show();
 		this.$.scrim.show();
 		
@@ -93,7 +96,6 @@ enyo.kind({
 	
 	handleReadFile: function(inSender, inResponse) {
 		this.$.spinnerLarge.hide();
-		this.$.scrim.hide();
 		
 		this.lastContent = inResponse.content;
 		
@@ -101,6 +103,11 @@ enyo.kind({
 			enyo.windows.addBannerMessage(new enyo.g11n.Template($L("Could not load #{name}")).evaluate({name: this.filename.basename(".md") }), "{}");
 			this.filename = "";
 			enyo.setCookie("lastfile", "");
+			this.validfile = false;
+		}
+		else {
+			this.$.scrim.hide();
+			this.validfile = true;
 		}
 		
 		this.doOpened({ err: inResponse.err, content: inResponse.content, filename: inResponse.filename});
