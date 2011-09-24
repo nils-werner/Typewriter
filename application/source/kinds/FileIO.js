@@ -99,7 +99,7 @@ enyo.kind({
 		
 		this.lastContent = inResponse.content;
 		
-		if(inResponse.err) {
+		if(inResponse.err || inResponse.content == "") {
 			enyo.windows.addBannerMessage(new enyo.g11n.Template($L("Could not load #{name}")).evaluate({name: this.filename.basename(".md") }), "{}");
 			this.filename = "";
 			enyo.setCookie("lastfile", "");
