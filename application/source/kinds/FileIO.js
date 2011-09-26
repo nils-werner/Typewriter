@@ -12,6 +12,7 @@ enyo.kind({
 	ctoken: "job7vwzo1jhcdcn",
 	csecret: "b1bodocolg7ajbt",
 	lastContent: "",
+	validfile: false,
 	isonline: true,
 	events: {
 		onOpened: "",
@@ -54,6 +55,7 @@ enyo.kind({
 		this.filename = this.filename + ".md";
 		this.lastContent = "";
 		this.doOpened({ err: null, content: inResponse.filename + "\n" + new String("=").repeat(inResponse.filename.length) + "\n\n", filename: this.filename});
+		this.validfile = true;
 	},
 	
 	/*
@@ -61,9 +63,9 @@ enyo.kind({
 	 */
 	
 	saveFile: function(inContent) {
-		if(this.lastContent != inContent && this.filename != "" && this.filename != ".md") {
+		if(this.validfile && this.lastContent != inContent && this.filename != "" && this.filename != ".md") {
 			console.log("saving " + this.filename);
-			this.$.dropbox.call({filename: this.filename, content: inContent}, {method:"writefile", onSuccess: "handleSaved"});
+			this.$.dropbox.call({filename: this.filename, content: inContent}, {method:"writefile", onResponse: "handleSaved"});
 			this.lastContent = inContent;
 		}
 	},
@@ -84,23 +86,28 @@ enyo.kind({
 	 */
 	
 	readFile: function(inName) {
+		this.validfile = false;
 		this.$.spinnerLarge.show();
 		this.$.scrim.show();
 		
 		this.filename = inName;
-		this.$.dropbox.call({filename: this.filename}, {method:"readfile", onSuccess: "handleReadFile"});
+		this.$.dropbox.call({filename: this.filename}, {method:"readfile", onResponse: "handleReadFile"});
 	},
 	
 	handleReadFile: function(inSender, inResponse) {
 		this.$.spinnerLarge.hide();
-		this.$.scrim.hide();
 		
 		this.lastContent = inResponse.content;
 		
-		if(inResponse.err) {
+		if(inResponse.err || inResponse.content == "") {
 			enyo.windows.addBannerMessage(new enyo.g11n.Template($L("Could not load #{name}")).evaluate({name: this.filename.basename(".md") }), "{}");
 			this.filename = "";
 			enyo.setCookie("lastfile", "");
+			this.validfile = false;
+		}
+		else {
+			this.$.scrim.hide();
+			this.validfile = true;
 		}
 		
 		this.doOpened({ err: inResponse.err, content: inResponse.content, filename: inResponse.filename});
@@ -123,7 +130,7 @@ enyo.kind({
 				this.$.spinnerLarge.show();
 				this.$.scrim.show();
 			
-				this.$.dropbox.call({filename: this.filename, ctoken: this.ctoken, csecret: this.csecret, token: this.token, secret: this.secret }, {method:"syncstat", onSuccess: "handleStat"});
+				this.$.dropbox.call({filename: this.filename, ctoken: this.ctoken, csecret: this.csecret, token: this.token, secret: this.secret }, {method:"syncstat", onResponse: "handleStat"});
 			}
 			
 		}
@@ -179,7 +186,7 @@ enyo.kind({
 		this.$.resolveDialog.close();
 		
 		if(inResponse.action != "cancel") {
-			this.$.dropbox.call({filename: this.filename, action: inResponse.action, ctoken: this.ctoken, csecret: this.csecret, token: this.token, secret: this.secret }, {method:"syncfile", onSuccess: "handleSync"});
+			this.$.dropbox.call({filename: this.filename, action: inResponse.action, ctoken: this.ctoken, csecret: this.csecret, token: this.token, secret: this.secret }, {method:"syncfile", onResponse: "handleSync"});
 		}
 		else {
 			this.$.spinnerLarge.hide();
@@ -214,7 +221,7 @@ enyo.kind({
 	listFiles: function() {
 		this.files = [];
 		
-		this.$.dropbox.call({}, {method:"readdir", onSuccess: "handleListFiles"});
+		this.$.dropbox.call({}, {method:"readdir", onResponse: "handleListFiles"});
 	},
 	
 	handleListFiles: function(inSender, inResponse) {
@@ -248,7 +255,7 @@ enyo.kind({
 		}
 		else {
 			console.log("logging in");
-			this.$.dropbox.call({ctoken: this.ctoken, csecret: this.csecret, email: inResponse.username, password: inResponse.password}, {method:"getaccesstoken", onSuccess: "handleToken"});
+			this.$.dropbox.call({ctoken: this.ctoken, csecret: this.csecret, email: inResponse.username, password: inResponse.password}, {method:"getaccesstoken", onResponse: "handleToken"});
 		}
 	},
 	
@@ -279,7 +286,7 @@ enyo.kind({
 	/* CHECK ACCESS, CREATE DIRS */
 	
 	checkAccess: function() {
-		this.$.dropbox.call({ctoken: this.ctoken, csecret: this.csecret, token: this.token, secret: this.secret }, {method:"checkaccess", onSuccess: "handleAccess"});
+		this.$.dropbox.call({ctoken: this.ctoken, csecret: this.csecret, token: this.token, secret: this.secret }, {method:"checkaccess", onResponse: "handleAccess"});
 	},
 	
 	handleAccess: function(inSender, inResponse) {
