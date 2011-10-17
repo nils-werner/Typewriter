@@ -260,8 +260,9 @@ enyo.kind({
 		this.resizeHandler(); // war frueher adjustSlidingSize
 		this.xslt.setXslt("stylesheets/LaTeX.xsl").setCallback(enyo.bind(this, 
 			function(t) {
-				console.log(t.getResult()); this.$.preview.setContent(new XMLSerializer().serializeToString(t.getResult()));
-				console.log(new Date()-this.start);
+				//console.log(t.getResult());
+				this.$.preview.setContent(new XMLSerializer().serializeToString(t.getResult()));
+				//console.log(new Date()-this.start);
 			}
 		));
 	},
