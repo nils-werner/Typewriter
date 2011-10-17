@@ -285,8 +285,8 @@ enyo.kind({
 		this.$.editorScroller.node.style.height = (s.h - 55 - kh) + "px";
 		
 		this.$.top.node.style.height = (s.h - 55 - kh) + "px";
-		this.$.bottom.node.style.height = (s.h - kh) + "px";
-		this.$.bottom.setPeekHeight(s.h - pcs.h);
+		//this.$.bottom.node.style.height = (s.h - kh) + "px";
+		//this.$.bottom.setPeekHeight(s.h - pcs.h);
 		
 		if(this.position == "up")
 			this.$.bottom.slidePosition = this.$.bottom.lastSlidePosition = -(enyo.fetchControlSize(this.$.bottom).h-56);
