@@ -32,6 +32,12 @@ web:
 help:
 	chromium-browser --disable-web-security --allow-file-access-from-files /opt/PalmSDK/Current/share/documentation/api/index.html &> /dev/null &
 	
+debug:
+	palm-log -d $(DEVICE) --system-log-level info
+	
+production:
+	palm-log -d $(DEVICE) --system-log-level error
+	
 examples:
 	nautilus /opt/PalmSDK/Current/share/samplecode/enyo/
 	
