@@ -252,19 +252,19 @@ enyo.kind({
 	
 	ready: function() {
 		this.position = "down";
+		this.xslt.setXslt("stylesheets/LaTeX.xsl").setCallback(enyo.bind(this, 
+			function(t) {
+				console.log(t.getResult());
+				this.$.preview.setContent(new XMLSerializer().serializeToString(t.getResult()));
+				console.log(new Date()-this.start);
+			}
+		));
 		this.syncViews({name:"startup"});
 	},
 	
 	rendered: function() {
 		this.inherited(arguments);
 		this.resizeHandler(); // war frueher adjustSlidingSize
-		this.xslt.setXslt("stylesheets/LaTeX.xsl").setCallback(enyo.bind(this, 
-			function(t) {
-				//console.log(t.getResult());
-				this.$.preview.setContent(new XMLSerializer().serializeToString(t.getResult()));
-				//console.log(new Date()-this.start);
-			}
-		));
 	},
 
 	resizeHandler: function() {
