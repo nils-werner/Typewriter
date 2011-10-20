@@ -1,6 +1,6 @@
 {
 	"id": "de.obsessivemedia.webos.typewriterbeta",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"vendor": "Obsessive Media",
 	"type": "web",
 	"main": "index.html",
