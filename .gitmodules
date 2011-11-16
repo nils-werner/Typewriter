@@ -1,6 +1,6 @@
 [submodule "application/source/showdown"]
 	path = application/source/showdown
-	url = git@codebasehq.com:obsessive/typewriter/showdown.git
+	url = git://github.com/nils-werner/Showdown.git
 [submodule "services/dropbox/lib/dropbox-node"]
 	path = services/dropbox/lib/dropbox-node
 	url = git://github.com/evnm/dropbox-node.git
