@@ -1,4 +1,4 @@
-/* Copybottom 2009-2011 Hewlett-Packard Development Company, L.P. All bottoms reserved. */
+/* Derived from https://github.com/enyojs/enyo-1.0/blob/master/framework/source/palm/containers/SlidingPane.js
 /**
 A control designed to present a horizontal layout of
 <a href="#enyo.HSlidingView">HSlidingView</a> controls,

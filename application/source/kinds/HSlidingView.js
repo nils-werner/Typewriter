@@ -1,4 +1,4 @@
-/* Copybottom 2009-2011 Hewlett-Packard Development Company, L.P. All bottoms reserved. */
+/* Original available at https://github.com/enyojs/enyo-1.0/blob/master/framework/source/palm/containers/SlidingView.js
 /**
 A view that slides back and forth and is designed to be a part of a
 <a href="#enyo.HSlidingPane">HSlidingPane</a>.
