@@ -4,30 +4,30 @@
 	
 	"Share":									"Partage",
 	"Dropbox":									"Dropbox",
-	"Email":									"Émail",
-	"Print":									"Imprime",
+	"Email":									"Email",
+	"Print":									"Imprimer",
 	
 	"Help":										"Aide",
 	"Syntax":									"Syntaxe",
 	"FAQ":										"FAQ",
-	"Report a Bug":								"Annoncer un Bug",
+	"Report a Bug":								"Rapporter un Bug",
 	
-	"Typewriter Document \"#{name}\"":			"Typewriter document \"#{name}\"",
+	"Typewriter Document \"#{name}\"":			"Document Typewriter \"#{name}\"",
 	
-	"Could not save #{name}":					"#{name} n'a pas pu sauver",
-	"Could not load #{name}":					"#{name} n'a pas pu ouvrir",
-	"Cannot share Demo-Document with Dropbox":	"Impossible de télécharger pour consigner la démonstration sélection",
+	"Could not save #{name}":					"Impossible de sauver #{name}",
+	"Could not load #{name}":					"Impossible d'ouvrir #{name}",
+	"Cannot share Demo-Document with Dropbox":	"Impossible de partager le document de démonstration sur Dropbox",
 	"Dropbox-Stat failed":						"Dropbox-Stat échoué",
-	"Download from Dropbox #{message}":			"Recevoir de Dropbox #{message}",
-	"Upload to Dropbox #{message}":				"Envoyer à Dropbox #{message}",
-	"Dropbox-Account unlinked":					"Dropbox-compte séparés",
-	"Successfully linked to Dropbox":			"Dropbox-compte connectés",
-	"Could not link with Dropbox":				"Impossible de se connecter avec Dropbox-compte",
+	"Download from Dropbox #{message}":			"Téléchargement de Dropbox #{message}",
+	"Upload to Dropbox #{message}":				"Envoi à Dropbox #{message}",
+	"Dropbox-Account unlinked":					"Compte Dropbox déconnecté",
+	"Successfully linked to Dropbox":			"Compte Dropbox connecté",
+	"Could not link with Dropbox":				"Impossible de se connecter à Dropbox",
 	
-	"finished":									"complètement",
+	"finished":									"terminé",
 	"failed":									"échoué",
 	
-	"Both files have been edited within 15 minutes of each other.": "Les deux fichiers ont été édités dans les 15 minutes les uns des autres.",
+	"Both files have been edited within 15 minutes of each other.": "Les deux fichiers ont été édités dans une intervalle de 15 minutes.",
 	
 	"Upload":									"Envoyer",
 	"Download":									"Recevoir",
@@ -36,7 +36,7 @@
 	"Login":									"Se connecter",
 	"Reset":									"Réinitialiser",
 	
-	"Don't have a Dropbox username yet? Create one at <a href=\"https://www.dropbox.com/register\">Dropbox.com</a>.": "Ne pas avoir un Dropbox-compte? Créer un à <a href=\"https://www.dropbox.com/register\">Dropbox.com</a>.",
+	"Don't have a Dropbox username yet? Create one at <a href=\"https://www.dropbox.com/register\">Dropbox.com</a>.": "Vous n'avez pas de compte Dropbox? Créez-en un sur <a href=\"https://www.dropbox.com/register\">Dropbox.com</a>.",
 	
 	"E-Mail Address":							"Adresse e-mail",
 	"Password":									"Mot de passe",
@@ -45,5 +45,5 @@
 	"Create":									"Créer",
 	"Title":									"Titre",
 	
-	"The filename will be changed to not contain any special characters.": "Le nom de fichier sera modifiée pour ne pas contenir de caractères spéciaux."
+	"The filename will be changed to not contain any special characters.": "Le nom du fichier sera modifié pour ne pas contenir de caractères spéciaux."
 }
