@@ -7,3 +7,6 @@
 [submodule "services/dropbox/lib/oauth-node"]
 	path = services/dropbox/lib/oauth-node
 	url = git://github.com/ciaranj/node-oauth.git
+[submodule "enyo"]
+	path = enyo
+	url = git://github.com/enyojs/enyo-1.0.git
