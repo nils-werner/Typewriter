@@ -1,26 +1,26 @@
 /* Copyright 2009-2011 Hewlett-Packard Development Company, L.P. All rights reserved. */
 enyo.depends(
-	"source/utilities/strings.js",
-	"source/utilities/xslt.js",
-	"source/showdown/compressed/showdown.js",
+	"http://demo.typewriterwebos.com/application/source/utilities/strings.js",
+	"http://demo.typewriterwebos.com/application/source/utilities/xslt.js",
+	"http://demo.typewriterwebos.com/application/source/showdown/compressed/showdown.js",
 	
-	"source/App.js",
+	"http://demo.typewriterwebos.com/application/source/App.js",
 	
-	"source/kinds/EditorPanel.js",
-	"stylesheets/EditorPanel.css",
+	"http://demo.typewriterwebos.com/application/source/kinds/EditorPanel.js",
+	"http://demo.typewriterwebos.com/application/stylesheets/EditorPanel.css",
 	
-	"source/kinds/HSlidingPane.js",
-	"source/kinds/HSlidingView.js",
-	"source/kinds/ScrollBarsScroller.js",
+	"http://demo.typewriterwebos.com/application/source/kinds/HSlidingPane.js",
+	"http://demo.typewriterwebos.com/application/source/kinds/HSlidingView.js",
+	"http://demo.typewriterwebos.com/application/source/kinds/ScrollBarsScroller.js",
 	
-	"source/kinds/FileIO.js",
-	"source/kinds/NewFileDialog.js",
-	"source/kinds/LoginDialog.js",
-	"source/kinds/ResolveDialog.js",
-	"source/kinds/Demotext.js",
-	"source/kinds/DragHint.js",
+	"http://demo.typewriterwebos.com/application/source/kinds/FileIO.js",
+	"http://demo.typewriterwebos.com/application/source/kinds/NewFileDialog.js",
+	"http://demo.typewriterwebos.com/application/source/kinds/LoginDialog.js",
+	"http://demo.typewriterwebos.com/application/source/kinds/ResolveDialog.js",
+	"http://demo.typewriterwebos.com/application/source/kinds/Demotext.js",
+	"http://demo.typewriterwebos.com/application/source/kinds/DragHint.js",
 	
-	"$enyo-lib/printdialog/",
+	"/printdialog/",
 	
-	"stylesheets/LaTeX.css"
+	"http://demo.typewriterwebos.com/application/stylesheets/LaTeX.css"
 );
